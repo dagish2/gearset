@@ -1,0 +1,40 @@
+<aura:component controller="AssignCaseToUserController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName">
+	<aura:attribute name="utility" type="Object" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sObjectRecord" type="Map" />
+    <aura:attribute name="loggedInUser" type="Object" />
+    <aura:attribute name="relatedUsers" type="List" default="[]"  />
+    <aura:attribute name="selectedUserId" type="String" />
+    <aura:attribute name="errors" type="Object" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="isProfileAllowed" type="boolean" default="false" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <!--<lightning:workspaceAPI aura:id="workspace" />-->
+    
+    <div class="slds-align_absolute-center">
+        <c:EnziButton type="brand" label="Assign To Me" click="{!c.assignToMe}" />
+        <c:EnziButton type="brand" label="Assign To Other" click="{!c.getRelatedUsers}" />
+    </div>
+    
+    <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+        <c:EnziModal aura:id="SelectUserModal" header="Select User" show="false">        
+            <c:EnziModalContainer >
+                <div style="height: 6rem;">        
+                    <div class="slds-size--1-of-1" style="padding:5px">
+                        <c:EnziField type="reference" name="user" label="User" icon="standard:user" value="{!v.selectedUserId}" required="true" options="{!v.relatedUsers}" labelField="Name" valueField="Id" errors="{!v.errors}"></c:EnziField>
+                    </div>  
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <div class="slds-text-align--right">
+                    <c:EnziButton label="Cancel" type="destructive" leftIcon="utility:close" click="{!c.closeSelectUserModal}"></c:EnziButton>
+                    <c:EnziButton label="Assign To User" type="brand" leftIcon="utility:reassign" click="{!c.assignCaseToUser}" disabled="{!(!v.valid)}"></c:EnziButton>
+                </div>
+            </c:EnziModalFooter>            
+        </c:EnziModal>
+    </c:EnziFormValidator>    
+</aura:component>

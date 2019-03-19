@@ -1,0 +1,29 @@
+<aura:component >
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="allowDelete" type="Boolean" default="true"/>
+    <aura:attribute name="delete" type="Object"/>
+    <aura:attribute name="index" type="Object"/>
+    <aura:attribute name="collapsed" type="Boolean" default="true"/>
+    <li class="slds-item" role="treeitem">
+        <div class="slds-tree__item">
+            <div class="slds-grid slds-nowrap">
+                <div class="slds-size--4-of-5">
+                    <button class="slds-button slds-button--icon slds-m-right--x-small" title="Toggle" onclick="{!c.toggle}">
+                        <lightning:icon iconName="{!'utility:chevron'+(v.collapsed?'right':'down')}" size="xx-small"/>
+                        <span class="slds-assistive-text">Toggle</span>
+                    </button>
+                    <a role="presentation" class="slds-truncate" title="{!v.label}" onclick="{!c.toggle}">{!v.label}</a>
+                </div>
+                <div class="slds-size--1-of-5" style="{!'padding-top:8px;display:'+(v.allowDelete?'inline-block':'none')}">
+                    <button class="slds-button slds-button--icon slds-m-right--x-small slds-float--right" title="Delete" onclick="{!v.delete}" id="{!'delete:'+v.index}">
+                        <lightning:icon iconName="utility:close" size="xx-small"/>
+                        <span class="slds-assistive-text">Toggle</span>
+                    </button>    
+                </div>
+            </div>                 
+        </div>
+        <div class="{!'slds-is-'+(v.collapsed?'collapsed':'expanded')}">
+            {!v.body}
+        </div>
+    </li>
+</aura:component>

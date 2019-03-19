@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>WeLive Tour Reminder (Morning - Day of Tour)</name>
+    <style>freeForm</style>
+    <subject>Please confirm your tour at WeLive today</subject>
+    <textOnly>Hi {!Tour_Outcome__c.Tour_With__c},
+
+Looking forward to showing you around today at {!Tour_Outcome__c.Start_Time__c}! Please check in at the front desk of {!Tour_Outcome__c.Location_Address__c} and a team member will meet you in the lobby.
+
+Should you be running behind schedule or unable to make your tour, please reply to this email and let me know, or give us a call at 888-977-4184.
+
+Best,
+&lt;LEAD OWNER FIRST NAME&gt;</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

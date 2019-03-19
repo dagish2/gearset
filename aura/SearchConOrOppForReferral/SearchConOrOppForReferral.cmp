@@ -1,0 +1,66 @@
+<aura:component controller="RetroactiveReferralController">
+    <aura:attribute name="contactRec" type="Object" />
+    <aura:attribute name="opportunityRec" type="Object" />
+    <aura:attribute name="keyword" type="String" default=""/>
+    <aura:attribute name="selectedRows" type="List" default="[]"/>
+    <aura:attribute name="selectedContactRows" type="List" default="[]"/>
+    <aura:attribute name="selectedOpportunityRows" type="List" default="[]"/>
+    <aura:attribute name="opportunities" type="List" default="[]" />
+    <aura:attribute name="contacts" type="List" default="[]" />
+    <aura:attribute name="opportunityColumns" type="List" default="[]" />
+    <aura:attribute name="contactColumns" type="List" default="[]" />
+    <aura:attribute name="useOpportunity" type="object" />
+    <aura:attribute name="close" type="object" />
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="oppRecordId" type="String"/>
+    <aura:attribute name="options" type="List" default="[{'label': 'Contact', 'value': 'Contact'},{'label': 'Opportunity', 'value': 'Opportunity'}]"/>
+    <aura:attribute name="value" type="String" default="Contact"/>
+    <aura:attribute name="utils" type="Object" />
+    <aura:attribute name="showTable" type="boolean" default="false" />
+    <aura:attribute name="retrictedStages" type="List" default="[]"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.selectedContactRows}" action="{!c.contactRowchange}"/>
+    <aura:handler name="change" value="{!v.selectedOpportunityRows}" action="{!c.opportunityRowchange}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+   <div class="whitebackground slds-grid slds-grid--vertical slds-nowrap slds-m-left_x-small slds-m-right_x-small slds-m-bottom_x-small" >
+        <div class="slds-grid slds-wrap" role="main" > 
+            <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+                <div id="searchSection" class="slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 ">
+                    <c:EnziSection label="Search Using Contact / Opportunity" expanded="true" showBorder="true" showTooltip="true" tooltipText="Search Contact or Opportunity">
+                        <div class="slds-grid slds-wrap slds-m-around_small">
+                            <div id="radioBtn" class="slds-size_1-of-1 slds-m-top_xx-small slds-p-horizontal--small slds-small-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12">
+                                <lightning:radioGroup name="radioGroup" label="" options="{! v.options }" value="{! v.value }" type="radio" onchange="{!c.onchange}"/>
+                            </div>
+                            <div id="searchField" class="slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3">
+                                <c:WeField type="text" placeholder="{!'Search '+v.value}" label="" value="{!v.keyword}" errors="{!v.errors}"/>
+                            </div>
+                            <div id="searchBtn" class="slds-size_1-of-1 slds-p-horizontal--small slds-small-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3">
+                                <c:EnziButton id="searchBtn" label="{!'Search '+v.value}" leftIcon="utility:search" type="brand" click="{!c.search}" disabled="{!v.keyword.length gt 2 ? false: true}" ></c:EnziButton>
+                            </div>
+                        </div>
+                    </c:EnziSection>
+                </div>
+            </c:EnziFormValidator>
+        </div>
+    </div>
+    <div id="searchOppDataTable" class="{!'background datatable-margin slds-scrollable slds-p-around_x-small slds-m-left_x-small slds-m-right_x-small slds-m-bottom_x-small ' + (and(v.opportunityColumns.length gt 0, and(v.value == 'Opportunity', v.showTable))? '': 'slds-hide')}">
+        <c:WeTable showSelect="true" maxRowSelection="1" meta="{!v.opportunityColumns}" data="{!v.opportunities}" selectedRows="{!v.selectedOpportunityRows}" searchFields="['Name','Account.Name','Primary_Member__r.Name']"/>
+    </div>
+    <div id="searchConDataTable" class="{!'background datatable-margin slds-scrollable slds-p-around_x-small slds-m-left_x-small slds-m-right_x-small slds-m-bottom_x-small ' + (and(v.contactColumns.length gt 0, and(v.value == 'Contact', v.showTable))? '': 'slds-hide')}">
+        <c:WeTable showSelect="true" maxRowSelection="1" meta="{!v.contactColumns}" data="{!v.contacts}" selectedRows="{!v.selectedContactRows}" searchFields="['Name','Email']"/>
+    </div>
+    <div id="searchFooter" class="{!'slds-modal__footer '+(v.showTable?'':'slds-hide')}">
+        <div id="opportunityFooter" class="{!and(v.value == 'Opportunity', v.showTable)?'':'slds-hide'}">
+            <c:EnziButton label="Close" leftIcon="utility:close" type="destructive" click="{! empty(v.close)? c.close: v.close}"></c:EnziButton>
+            <c:EnziButton label="Use this Opportunity" type="brand" leftIcon="utility:save" click="{!empty(v.useOpportunity)? c.useOpportunity: v.useOpportunity}" disabled="{!empty(v.opportunityRec.Id)}"></c:EnziButton>
+        </div>
+        <div id="contactFooter" class="{!and(v.value == 'Contact', v.showTable)?'':'slds-hide'}">
+        	<c:EnziButton label="Close" leftIcon="utility:close" type="destructive" click="{! empty(v.close)? c.close: v.close}"></c:EnziButton>
+            <c:EnziButton label="Search Related Opportunities" type="brand" leftIcon="utility:search" click="{!c.selectOpportunity}" disabled="{!empty(v.contactRec.Id)}"></c:EnziButton>
+        </div>
+        
+    </div>
+</aura:component>

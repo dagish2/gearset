@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>AMS-Labs</fullName>
+        <default>false</default>
+        <label>AMS-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>AMS-Metropool</fullName>
+        <default>false</default>
+        <label>AMS-Metropool</label>
+    </customValue>
+    <customValue>
+        <fullName>AMS-Weteringschans</fullName>
+        <default>false</default>
+        <label>AMS-Weteringschans</label>
+    </customValue>
+    <customValue>
+        <fullName>ATL-Buckhead</fullName>
+        <default>false</default>
+        <label>ATL-Buckhead</label>
+    </customValue>
+    <customValue>
+        <fullName>AUS-Congress</fullName>
+        <default>false</default>
+        <label>AUS-Congress</label>
+    </customValue>
+    <customValue>
+        <fullName>AUS-Labs</fullName>
+        <default>false</default>
+        <label>AUS-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>AUS-University Park</fullName>
+        <default>false</default>
+        <label>AUS-University Park</label>
+    </customValue>
+    <customValue>
+        <fullName>BEV-Be&apos;er Sheva</fullName>
+        <default>false</default>
+        <label>BEV-Be&apos;er Sheva</label>
+    </customValue>
+    <customValue>
+        <fullName>BKN-Brooklyn Heights</fullName>
+        <default>false</default>
+        <label>BKN-Brooklyn Heights</label>
+    </customValue>
+    <customValue>
+        <fullName>BKN-Dumbo Heights (Prospect)</fullName>
+        <default>false</default>
+        <label>BKN-Dumbo Heights (Prospect)</label>
+    </customValue>
+    <customValue>
+        <fullName>BKN-Dumbo Heights (Sands)</fullName>
+        <default>false</default>
+        <label>BKN-Dumbo Heights (Sands)</label>
+    </customValue>
+    <customValue>
+        <fullName>BKN-South Williamsburg</fullName>
+        <default>false</default>
+        <label>BKN-South Williamsburg</label>
+    </customValue>
+    <customValue>
+        <fullName>BKN-Williamsburg</fullName>
+        <default>false</default>
+        <label>BKN-Williamsburg</label>
+    </customValue>
+    <customValue>
+        <fullName>BL-Hackescher Markt</fullName>
+        <default>false</default>
+        <label>BL-Hackescher Markt</label>
+    </customValue>
+    <customValue>
+        <fullName>BL-Sony Center</fullName>
+        <default>false</default>
+        <label>BL-Sony Center</label>
+    </customValue>
+    <customValue>
+        <fullName>BOS-Fort Point</fullName>
+        <default>false</default>
+        <label>BOS-Fort Point</label>
+    </customValue>
+    <customValue>
+        <fullName>BOS-Labs</fullName>
+        <default>false</default>
+        <label>BOS-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>BOS-South Station</fullName>
+        <default>false</default>
+        <label>BOS-South Station</label>
+    </customValue>
+    <customValue>
+        <fullName>CHI-Fulton Market</fullName>
+        <default>false</default>
+        <label>CHI-Fulton Market</label>
+    </customValue>
+    <customValue>
+        <fullName>CHI-Grant Park</fullName>
+        <default>false</default>
+        <label>CHI-Grant Park</label>
+    </customValue>
+    <customValue>
+        <fullName>CHI-Kinzie</fullName>
+        <default>false</default>
+        <label>CHI-Kinzie</label>
+    </customValue>
+    <customValue>
+        <fullName>CHI-Labs</fullName>
+        <default>false</default>
+        <label>CHI-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>CHI-River North</fullName>
+        <default>false</default>
+        <label>CHI-River North</label>
+    </customValue>
+    <customValue>
+        <fullName>CHI-West Loop</fullName>
+        <default>false</default>
+        <label>CHI-West Loop</label>
+    </customValue>
+    <customValue>
+        <fullName>DC-Chinatown</fullName>
+        <default>false</default>
+        <label>DC-Chinatown</label>
+    </customValue>
+    <customValue>
+        <fullName>DC-Crystal City</fullName>
+        <default>false</default>
+        <label>DC-Crystal City</label>
+    </customValue>
+    <customValue>
+        <fullName>DC-Dupont Circle</fullName>
+        <default>false</default>
+        <label>DC-Dupont Circle</label>
+    </customValue>
+    <customValue>
+        <fullName>DC-K Street</fullName>
+        <default>false</default>
+        <label>DC-K Street</label>
+    </customValue>
+    <customValue>
+        <fullName>DC-Labs</fullName>
+        <default>false</default>
+        <label>DC-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>DC-Wonder Bread Factory</fullName>
+        <default>false</default>
+        <label>DC-Wonder Bread Factory</label>
+    </customValue>
+    <customValue>
+        <fullName>DEN-LoHi</fullName>
+        <default>false</default>
+        <label>DEN-LoHi</label>
+    </customValue>
+    <customValue>
+        <fullName>DEN-Union Station</fullName>
+        <default>false</default>
+        <label>DEN-Union Station</label>
+    </customValue>
+    <customValue>
+        <fullName>ISR-Labs</fullName>
+        <default>false</default>
+        <label>ISR-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>LA-Culver City</fullName>
+        <default>false</default>
+        <label>LA-Culver City</label>
+    </customValue>
+    <customValue>
+        <fullName>LA-Fine Arts</fullName>
+        <default>false</default>
+        <label>LA-Fine Arts</label>
+    </customValue>
+    <customValue>
+        <fullName>LA-Gas Tower</fullName>
+        <default>false</default>
+        <label>LA-Gas Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>LA-Hollywood</fullName>
+        <default>false</default>
+        <label>LA-Hollywood</label>
+    </customValue>
+    <customValue>
+        <fullName>LA-Labs</fullName>
+        <default>false</default>
+        <label>LA-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>LA-Pasadena</fullName>
+        <default>false</default>
+        <label>LA-Pasadena</label>
+    </customValue>
+    <customValue>
+        <fullName>LA-Promenade</fullName>
+        <default>false</default>
+        <label>LA-Promenade</label>
+    </customValue>
+    <customValue>
+        <fullName>LA-Santa Monica</fullName>
+        <default>false</default>
+        <label>LA-Santa Monica</label>
+    </customValue>
+    <customValue>
+        <fullName>LA-Spectrum Center</fullName>
+        <default>false</default>
+        <label>LA-Spectrum Center</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-Aldgate Tower</fullName>
+        <default>false</default>
+        <label>LON-Aldgate Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-Chancery Lane</fullName>
+        <default>false</default>
+        <label>LON-Chancery Lane</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-Devonshire</fullName>
+        <default>false</default>
+        <label>LON-Devonshire</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-East London</fullName>
+        <default>false</default>
+        <label>LON-East London</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-Labs</fullName>
+        <default>false</default>
+        <label>LON-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-Moorgate</fullName>
+        <default>false</default>
+        <label>LON-Moorgate</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-Paddington</fullName>
+        <default>false</default>
+        <label>LON-Paddington</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-Soho London</fullName>
+        <default>false</default>
+        <label>LON-Soho London</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-Soho - Sheraton House</fullName>
+        <default>false</default>
+        <label>LON-Soho - Sheraton House</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-South Bank</fullName>
+        <default>false</default>
+        <label>LON-South Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>LON-Spitalfields</fullName>
+        <default>false</default>
+        <label>LON-Spitalfields</label>
+    </customValue>
+    <customValue>
+        <fullName>MIA-Labs</fullName>
+        <default>false</default>
+        <label>MIA-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>MIA-Lincoln Road</fullName>
+        <default>false</default>
+        <label>MIA-Lincoln Road</label>
+    </customValue>
+    <customValue>
+        <fullName>MIA-South of Fifth</fullName>
+        <default>false</default>
+        <label>MIA-South of Fifth</label>
+    </customValue>
+    <customValue>
+        <fullName>MTL-Place Ville Marie</fullName>
+        <default>false</default>
+        <label>MTL-Place Ville Marie</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-300 Park</fullName>
+        <default>false</default>
+        <label>NYC-300 Park</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-42 Street</fullName>
+        <default>false</default>
+        <label>NYC-42 Street</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-5th Ave</fullName>
+        <default>false</default>
+        <label>NYC-5th Ave</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Bryant Park</fullName>
+        <default>false</default>
+        <label>NYC-Bryant Park</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Charging Bull</fullName>
+        <default>false</default>
+        <label>NYC-Charging Bull</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Chelsea</fullName>
+        <default>false</default>
+        <label>NYC-Chelsea</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-City Hall</fullName>
+        <default>false</default>
+        <label>NYC-City Hall</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Empire State</fullName>
+        <default>false</default>
+        <label>NYC-Empire State</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-FiDi</fullName>
+        <default>false</default>
+        <label>NYC-FiDi</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Fulton Center</fullName>
+        <default>false</default>
+        <label>NYC-Fulton Center</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Gramercy</fullName>
+        <default>false</default>
+        <label>NYC-Gramercy</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Grand Central</fullName>
+        <default>false</default>
+        <label>NYC-Grand Central</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Harlem</fullName>
+        <default>false</default>
+        <label>NYC-Harlem</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Irving Place</fullName>
+        <default>false</default>
+        <label>NYC-Irving Place</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-John St.</fullName>
+        <default>false</default>
+        <label>NYC-John St.</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Labs</fullName>
+        <default>false</default>
+        <label>NYC-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Madison</fullName>
+        <default>false</default>
+        <label>NYC-Madison</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Meatpacking</fullName>
+        <default>false</default>
+        <label>NYC-Meatpacking</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-NoMad</fullName>
+        <default>false</default>
+        <label>NYC-NoMad</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Park South</fullName>
+        <default>false</default>
+        <label>NYC-Park South</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Penn Station</fullName>
+        <default>false</default>
+        <label>NYC-Penn Station</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Soho</fullName>
+        <default>false</default>
+        <label>NYC-Soho</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-SoHo South</fullName>
+        <default>false</default>
+        <label>NYC-SoHo South</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Soho West</fullName>
+        <default>false</default>
+        <label>NYC-Soho West</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Times Square</fullName>
+        <default>false</default>
+        <label>NYC-Times Square</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-Wall Street</fullName>
+        <default>false</default>
+        <label>NYC-Wall Street</label>
+    </customValue>
+    <customValue>
+        <fullName>NYC-West Broadway</fullName>
+        <default>false</default>
+        <label>NYC-West Broadway</label>
+    </customValue>
+    <customValue>
+        <fullName>PHI-Northern Liberties</fullName>
+        <default>false</default>
+        <label>PHI-Northern Liberties</label>
+    </customValue>
+    <customValue>
+        <fullName>POR-Custom House</fullName>
+        <default>false</default>
+        <label>POR-Custom House</label>
+    </customValue>
+    <customValue>
+        <fullName>QNS-Studio Square</fullName>
+        <default>false</default>
+        <label>QNS-Studio Square</label>
+    </customValue>
+    <customValue>
+        <fullName>SEA-Holyoke Building</fullName>
+        <default>false</default>
+        <label>SEA-Holyoke Building</label>
+    </customValue>
+    <customValue>
+        <fullName>SEA-Labs</fullName>
+        <default>false</default>
+        <label>SEA-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>SEA-South Lake Union</fullName>
+        <default>false</default>
+        <label>SEA-South Lake Union</label>
+    </customValue>
+    <customValue>
+        <fullName>SEA-Westlake Tower</fullName>
+        <default>false</default>
+        <label>SEA-Westlake Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>SF-Berkeley</fullName>
+        <default>false</default>
+        <label>SF-Berkeley</label>
+    </customValue>
+    <customValue>
+        <fullName>SF-California St.</fullName>
+        <default>false</default>
+        <label>SF-California St.</label>
+    </customValue>
+    <customValue>
+        <fullName>SF-Civic Center</fullName>
+        <default>false</default>
+        <label>SF-Civic Center</label>
+    </customValue>
+    <customValue>
+        <fullName>SF-Golden Gate</fullName>
+        <default>false</default>
+        <label>SF-Golden Gate</label>
+    </customValue>
+    <customValue>
+        <fullName>SF-Labs</fullName>
+        <default>false</default>
+        <label>SF-Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>SF-Mid Market</fullName>
+        <default>false</default>
+        <label>SF-Mid Market</label>
+    </customValue>
+    <customValue>
+        <fullName>SF-SOMA</fullName>
+        <default>false</default>
+        <label>SF-SOMA</label>
+    </customValue>
+    <customValue>
+        <fullName>SF-Transbay</fullName>
+        <default>false</default>
+        <label>SF-Transbay</label>
+    </customValue>
+    <customValue>
+        <fullName>SHA-Yanping</fullName>
+        <default>false</default>
+        <label>SHA-Yanping</label>
+    </customValue>
+    <customValue>
+        <fullName>SJ-Valley Towers</fullName>
+        <default>false</default>
+        <label>SJ-Valley Towers</label>
+    </customValue>
+    <customValue>
+        <fullName>TLV-Dubnov</fullName>
+        <default>false</default>
+        <label>TLV-Dubnov</label>
+    </customValue>
+    <customValue>
+        <fullName>TLV-Herzilya</fullName>
+        <default>false</default>
+        <label>TLV-Herzilya</label>
+    </customValue>
+    <customValue>
+        <fullName>TLV-Ibn Gabirol</fullName>
+        <default>false</default>
+        <label>TLV-Ibn Gabirol</label>
+    </customValue>
+    <customValue>
+        <fullName>TLV-Sarona</fullName>
+        <default>false</default>
+        <label>TLV-Sarona</label>
+    </customValue>
+    <description>This is the list of Buildings which should be used  in all different objects like Lead, Opportunity and Task</description>
+    <masterLabel>Buildings</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

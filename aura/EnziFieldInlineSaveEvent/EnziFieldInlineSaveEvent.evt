@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="This event is any inline save is occured">
+	<aura:attribute name="sObjectName" type="String"/>
+    <aura:attribute name="onSuccess" type="Object"/>
+</aura:event>

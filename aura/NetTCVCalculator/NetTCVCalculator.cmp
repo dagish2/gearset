@@ -1,0 +1,64 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <force:recordData aura:id="recordData" 
+          recordId="{!v.recordId}"
+          mode="EDIT"
+          targetRecord ="{!v.record}"
+          targetFields ="{!v.simpleRecord}"
+          recordUpdated="{!c.recordUpdated}"
+          fields="Id, Amount, Gross_Amount__c, Probability, Gross_TCV__c, Gross_TCV_Formula__c, Net_TCV_Unweighted_Formula__c, Net_TCV_Weighted_Formula__c, Remaining_Term_TCV__c, Remaining_Quantity_TCV__c, Remaining_Price_TCV__c" />
+    
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="record" type="Object" />
+    <aura:attribute name="simpleRecord" type="Object" />
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="curGross" type="Decimal" default="{!v.simpleRecord.Gross_TCV_Formula__c}"/>
+    <aura:attribute name="deskMonths" type="Integer" default ="{!v.simpleRecord.Remaining_Term_TCV__c}"/>
+    <aura:attribute name="numOfDesks" type="Integer" default ="{!v.simpleRecord.Remaining_Quantity_TCV__c}"/>
+    <aura:attribute name="avgPrice" type="Decimal" default ="{!v.simpleRecord.Remaining_Price_TCV__c}"/>    
+    <aura:attribute name="netTcvUnweighted" type="Decimal" default="{!(v.simpleRecord.Gross_TCV_Formula__c) - (v.deskMonths * v.numOfDesks * v.avgPrice)}"/>
+    <aura:attribute name="netTcvWeighted" type="Decimal" default="{!v.netTcvUnweighted * (v.simpleRecord.Probability / 100)}"/>
+    
+    <lightning:card iconName="standard:calibration" title="Net TCV Calculator">
+        <p class="slds-p-horizontal--small">
+        <div>
+            For cases of transfer and/or commitment, please enter the terms of the original deal and the months remaining on the original contract (if any).
+        </div>
+            <br></br>
+        
+        <lightning:input aura:id="curNetTCVUnWeighted" type="number" value="{!v.simpleRecord.Net_TCV_Unweighted_Formula__c}" label="Current Net TCV Unweighted" disabled="true" formatter="currency"/>
+        <lightning:input aura:id="curNetTCVWeighted" type="number" value="{!v.simpleRecord.Net_TCV_Weighted_Formula__c}" label="Current Net TCV Weighted" disabled="true" formatter="currency"/>
+        <lightning:input aura:id="Gross_TCV_Formula__c" type="number" value="{!v.simpleRecord.Gross_TCV_Formula__c}" label="Current Gross" disabled="true" formatter="currency"/>
+            
+        <div class="tooltipContainer" >   
+            <label class="slds-form-element__label">No. of Desks</label>
+            <lightning:helptext content="No. of desks from the original deal" class="customIcon"/>
+        </div>
+        <lightning:input type="number" name="NoOfDesks" label="No. of Desks" value="{!v.numOfDesks}" variant="label-hidden" min="0" required="true"/>
+            
+        <div class="tooltipContainer" >   
+            <label class="slds-form-element__label">Avg Price per Desk</label>
+            <lightning:helptext content="Avg desks price from original deal" class="customIcon"/>
+        </div>
+        <lightning:input type="number" name="avgPrice" label="Avg Price per Desk" value="{!v.avgPrice}" variant="label-hidden" formatter="currency" min="0" required="true"/>
+            
+        <div class="tooltipContainer" >   
+            <label class="slds-form-element__label">Remaining Months</label>
+            <lightning:helptext content="Remaining no. of months on current commitment. ONLY enter if current commitment must be ended early, to close new deal" class="customIcon"/>
+        </div>
+        <lightning:input type="number" name="Months Remaining" label="Remaining Months" value="{!v.deskMonths}" variant="label-hidden" min="0" required="true"/>
+            
+        <lightning:input aura:id="NetTCVUnWeighted" type="number" value="{!v.netTcvUnweighted}" 
+                         label="Calculated unweighted Net TCV (Gross - (Desks * Months * Price))" disabled="true" formatter="currency"/>
+        
+        <lightning:input aura:id="NetTCVWeighted" type="number" value="{!v.netTcvWeighted}" 
+                         label="Calculated weighted Net TCV (unweighted Net TCV * Opportunity probability)" disabled="true" formatter="currency"/>
+        
+        <br></br>
+       	<lightning:button label="Save TCV" variant="brand" onclick="{!c.handleSaveRecord}" />
+            
+        </p>
+    </lightning:card>
+    
+</aura:component>

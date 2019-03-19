@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Invitación a Tour WeWork México</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>Invitación a Tour MX</name>
+    <style>formalLetter</style>
+    <subject>Invitación a Tour WeWork México</subject>
+    <textOnly>Hola {!Journey__c.First_Name__c},
+Soy Pablo del equipo de WeWork para Ciudad de México. WeWork provee espacios de trabajo para empresas de todos los tamaños. En nuestras más de 90 ubicaciones en todo el mundo, alojamos desde pymes hasta divisiones de grandes empresas como Bacardi, Facebook y muchas más. Con nuestras membresías obtienes:
+
+Espacio Físico, nuestras opciones incluyen oficinas privadas para 1 persona o equipos de hasta 100 personas, espacio de coworking y 1000m2 de áreas comunes, a lo cual tendrás acceso 24/7.
+Todo Incluido, desde internet ultra rápido, la limpieza de tu oficina, impresiones, hasta el café, la CERVEZA y mucho más.
+Flexibilidad, nuestros contratos son mensuales y puedes tener la plena confianza de crecer o disminuir tu equipo en WeWork sin el estrés asociado a buscar espacio para ellos.
+
+
+
+Queremos invitarte a un tour en nuestros edificios para que puedas conocer todo lo que ofrecemos y decirte como podemos hacer crecer tu negocio.
+
+Estamos de 9.00 am a 5.30 pm de Lunes a Viernes, solo confirma el dia y la hora y programamos la visita.
+
+Esperamos tu respuesta.
+Gracias,
+
+{!Journey__c.OwnerFirstName}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

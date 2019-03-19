@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Waitlist Confirmation2</name>
+    <style>none</style>
+    <subject>WeWork Waitlist Confirmation</subject>
+    <textOnly>www.wework.com 
+
+http://facebook.com/wework 
+
+http://twitter.com/wework 
+
+http://instagram.com/wework 
+
+http://www.pinterest.com/wework 
+
+Hi there!
+
+Please confirm that you want to be added to the Waitlist for WeWork Buildings.
+
+Confirm: https://welcome.wework.com/forms/waitlistconfirmation.php?oppId={!Opportunity.Id}
+
+VALERIE BATISTA 
+Director of Sales 
+joinus@wework.com 
+855.593.9675</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

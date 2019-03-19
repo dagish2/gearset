@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Office Space</fullName>
+        <default>true</default>
+        <label>Office Space</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Network Membership</fullName>
+        <default>false</default>
+        <label>Network Membership</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Premium Network Membership</fullName>
+        <default>false</default>
+        <label>Premium Network Membership</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Health Insurance</fullName>
+        <default>false</default>
+        <label>Health Insurance</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeWork Labs</fullName>
+        <default>false</default>
+        <label>WeWork Labs</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Commons</fullName>
+        <default>false</default>
+        <label>Commons</label>
+    </standardValue>
+</StandardValueSet>

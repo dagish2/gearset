@@ -1,0 +1,21 @@
+.THIS td:last-child {overflow: visible !important;}
+.THIS #tour-table-view > div [data-field="Assigned_Host__r.Name"] > div{ max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+.THIS #tour-table-view div [data-field="New_Tour_Notes__c"] > div{ max-width: 240px; overflow: hidden; text-overflow: ellipsis; }
+.THIS #tour-table-view td div[data-field="Primary_Member_Email__c"] { max-width: 140px; text-overflow: ellipsis; overflow: hidden; text-align: justify; }
+.THIS #tour-table-view td div[data-field="Primary_Member__r.Name"] > div { max-width: 140px; text-overflow: ellipsis; overflow: hidden; text-align: justify; }
+.THIS #tour-table-view div[data-field="Company_Name__c"]{ max-width: 130px; overflow: hidden !important;text-overflow: ellipsis !important;text-align: justify; }
+.THIS td[data-label="Actions"]{padding-left:10px; padding-top:0px; padding-bottom:0px; padding-right:0px !important;}
+.THIS #tour-table-view {overflow: -webkit-paged-y;}
+.THIS #InstantTourModal {padding-top : 5px !important;padding-bottom : 0px !important;}
+.THIS #tour-table-view > div [data-field="Detailed Info"] > div {width:0px !Important;}
+.THIS #tour-table-view > div [data-field="Info"] > div {width:0px !Important;}
+
+@media(max-width: 1023px){
+    .THIS #tour-table-view > div [data-field="New_Tour_Notes__c"] > div{ max-width: 350px; overflow: hidden; text-overflow: ellipsis; float: right; text-align: justify; }
+    .THIS #tour-table-view > div [data-field="Assigned_Host__r.Name"] > div{ max-width: 350px; overflow: hidden; text-overflow: ellipsis; float: right; text-align: justify; }
+    .THIS #tour-table-view div[data-field="Company_Name__c"] { max-width: 350px; overflow: hidden !important; text-overflow: ellipsis !important; float: right !important; text-align: justify !important; }
+    .THIS #tour-table-view td > div[data-field="Primary_Member_Email__c"] { max-width: 240px; text-overflow: ellipsis; overflow: hidden; float: right; text-align: justify; }
+    .THIS #tour-table-view td div[data-field="Primary_Member__r.Name"] > div { max-width: 240px; text-overflow: ellipsis; overflow: hidden; float: left; text-align: justify; }
+    .THIS td[data-label="Actions"]::before { padding-left: 2px; padding-top: 12px; text-align:right; }
+    .THIS td[data-label="Info"]::before {text-align:left;left:0;}
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AllowedProfilesToManageCases</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AllowedProfilesToManageCases</shortDescription>
+        <value>;WeWork System Administrator;WeWork Enterprise Solutions;Real Estate Advisory;</value>
+    </labels>
+    <labels>
+        <fullName>ClientSolutionsCaseURLForOtherThanPxWe</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ClientSolutionsCaseURLForOtherThanPxWeOpportunityType</shortDescription>
+        <value>https://airtable.com/shrcWcFKsyWsLDJ4w?prefill_Salesforce%20Opportunity%20Link=</value>
+    </labels>
+    <labels>
+        <fullName>ClientSolutionsCaseURLForPxWe</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ClientSolutionsCaseURLForPxWeOpportunityType</shortDescription>
+        <value>https://airtable.com/shrkgTWJC8E1J3Lju?prefill_Salesforce%20Opportunity%20Link=</value>
+    </labels>
+    <labels>
+        <fullName>ContentURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ContentURL</shortDescription>
+        <value>https://c.na93.content.force.com</value>
+    </labels>
+    <labels>
+        <fullName>URL</fullName>
+        <categories>url</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>URL</shortDescription>
+        <value>https://wework.my.salesforce.com</value>
+    </labels>
+</CustomLabels>

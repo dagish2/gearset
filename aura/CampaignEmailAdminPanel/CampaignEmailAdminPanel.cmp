@@ -1,0 +1,120 @@
+<aura:component controller="CampaignEmailAdminController" implements="force:lightningQuickAction">
+    <aura:attribute name="campaignId" type="String"/>
+    <aura:attribute name="show" type="Boolean" default="true"/>
+    <aura:attribute name="campIdFound" type="Boolean" default="false"/>
+    <aura:attribute name="existingCampaign" type="Boolean" default="false"/>
+    <aura:attribute name="firstRefresh" type="Boolean" default="true"/>
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="previousSelected" type="Object"/>
+    <aura:attribute name="counter" type="Integer"/>
+    <aura:attribute name="types" type="List" default="[]"/>
+    <aura:attribute name="emails" type="List" default="[]"/>
+    <aura:attribute name="emailsToCompaire" type="List" default="[]"/> 
+    <aura:attribute name="emailsToDelete" type="List" default="[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="makeSaveActive" type="Boolean" default="true"/>
+    <aura:attribute name="isRevertToOldValue" type="Boolean" default="false"/>
+    <aura:handler name="change" value="{!v.record.Building__c}" action="{!c.buildingChange}"/>
+    <aura:handler name="change" value="{!v.record.Name}" action="{!c.enableSaveButton}"/>
+    <aura:handler name="change" value="{!v.record.Campaign_Cadence__c}" action="{!c.fetchExsistingRecord}"/>
+    <aura:handler name="change" value="{!v.record.Type}" action="{!c.fetchExsistingRecord}"/>
+    <aura:handler name="change" value="{!v.record.Campaign_Target__c}" action="{!c.fetchExsistingRecord}"/>
+    <aura:handler name="change" value="{!v.record.Campaign_Audience__c}" action="{!c.fetchExsistingRecord}"/>
+    <style>
+    	body{
+        	overflow-x:hidden;
+        }
+    </style>
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="validations" type="Object"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+   
+    <div >
+		 <div class="{!'slds-align--absolute-center '+(v.show?'slds-hide':'')}" style="padding:100px">
+             <c:EnziCircularProgress value="{!v.counter}" size="2" start="10" end="0"></c:EnziCircularProgress>
+        </div>
+        <div class="{!'slds-text-heading--medium slds-text-align--center '+(v.show?'slds-hide':'')}">Page is closing in 10 seconds. <a onclick="{!c.close}">Close Now!</a></div>
+        <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}" aura:id="campaignForm">
+            <div style="{!'display:'+(v.show?'block':'none')}">
+                <div class="stage-container slds-grid">
+                    <section class="stage slds-grid slds-grid--vertical slds-nowrap" style="padding:20px">
+                        
+                            <c:EnziSection label="Campaign Setup Panel">
+                                <div class="stage-main slds-grid slds-wrap" role="main" style="width:100%">
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="Name" value="{!v.record.Name}" errors="{!v.errors}" validations="{!v.validations}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField type="picklist" label="Type" name="Type" options="{!v.types}" value="{!v.record.Type}" errors="{!v.errors}" validations="{!v.validations}" required="true" disabled="{!v.campIdFound}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="Campaign_Cadence__c" value="{!v.record.Campaign_Cadence__c}" errors="{!v.errors}" validations="{!v.validations}" required="true" disabled="{!v.campIdFound}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="Campaign_Target__c" value="{!v.record.Campaign_Target__c}" errors="{!v.errors}" validations="{!v.validations}" required="true" disabled="{!v.campIdFound}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="Campaign_Audience__c" value="{!v.record.Campaign_Audience__c}" controllingValue="{!v.record.Campaign_Target__c}" isDependent="true" errors="{!v.errors}" validations="{!v.validations}" required="true" disabled="{!v.campIdFound}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="Building__c" value="{!v.record.Building__c}" errors="{!v.errors}" validations="{!v.validations}" disabled="{!v.existingCampaign}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="Email_Address__c" value="{!v.record.Email_Address__c}" errors="{!v.errors}" validations="{!v.validations}" disabled="true"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="City__c" value="{!v.record.City__c}" errors="{!v.errors}" validations="{!v.validations}" disabled="true"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="State__c" value="{!v.record.State__c}" errors="{!v.errors}" validations="{!v.validations}" disabled="true"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="Email_Sendout_Start_Date__c" value="{!v.record.Email_Sendout_Start_Date__c}" errors="{!v.errors}" validations="{!v.validations}" lowerBound="{!v.record.Email_Sendout_End_Date__c}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="Email_Sendout_End_Date__c" value="{!v.record.Email_Sendout_End_Date__c}" errors="{!v.errors}" validations="{!v.validations}" upperBound="{!v.record.Email_Sendout_Start_Date__c}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                        <c:EnziField sObjectName="Campaign" fieldName="Description" value="{!v.record.Description}" errors="{!v.errors}" validations="{!v.validations}"></c:EnziField>
+                                    </div>
+                                </div>
+                            </c:EnziSection>
+                        <c:EnziSection label="Email Contents">
+                            <div class="stage-main slds-grid slds-wrap" role="main" style="width:100%">
+                                <lightning:tabset >
+                                    <aura:iteration items="{!v.emails}" var="email" indexVar="index">
+                                        <lightning:tab tabindex="{!index+1}" label="{!'Email '+(index+1)}">
+                                            <div class="stage-main slds-grid slds-wrap" role="main">
+                                                <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                                    <c:EnziField type="string" name="{!'EmailTemplateName:'+index}" label="Email Template Name" list="{!v.emails}" index="{!index}" value="{!email.Default_Email_Template__c}" length="80" required="true" validations="{!v.validations}" errors="{!v.errors}"></c:EnziField>
+                                                	<c:EnziListBinder list="{!v.emails}" index="{!index}" field="Default_Email_Template__c" value="{!email.Default_Email_Template__c}"></c:EnziListBinder>
+                                                </div>
+                                                <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                                    <c:EnziField type="string" name="{!'SubjectLine:'+index}" label="Subject Line" value="{!email.Subject_Line__c}" length="80" required="true" validations="{!v.validations}" errors="{!v.errors}"></c:EnziField>
+                                                	<c:EnziListBinder list="{!v.emails}" index="{!index}" field="Subject_Line__c" value="{!email.Subject_Line__c}"></c:EnziListBinder>
+                                                </div>
+                                                <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:10px">
+                                                    <c:EnziField type="picklist" name="{!'Sequence:'+index}" label="Sequence" value="{!email.Sequence__c}" options="{!email.sequence}" change="{!c.sequenceChange}" required="true" validations="{!v.validations}" errors="{!v.errors}"></c:EnziField>
+                                                	<c:EnziListBinder list="{!v.emails}" index="{!index}" field="Sequence__c" value="{!email.Sequence__c}"></c:EnziListBinder>
+                                                </div>
+                                                <div class="slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1" style="padding:10px">
+                                                    <c:EnziField type="richtextarea" name="{!'EmailBody:'+index}" label="Email Body" value="{!email.Dynamic_Email_Content__c}" required="true" sObjectName="Campaign_Email_Content__c" validations="{!v.validations}" errors="{!v.errors}"></c:EnziField>
+                                                	<c:EnziListBinder list="{!v.emails}" index="{!index}" field="Dynamic_Email_Content__c" value="{!email.Dynamic_Email_Content__c}"></c:EnziListBinder>
+                                                </div>
+                                            </div>
+                                    	</lightning:tab>
+                                    </aura:iteration>
+                                </lightning:tabset>
+                            </div>	
+                        </c:EnziSection>
+                    </section>
+                </div>
+                <div class="slds-modal__footer" style="text-align:center;box-shadow:none">
+                    <c:EnziButton label="Save" type="brand" click="{!c.saveForm}" disabled="{!v.makeSaveActive}"></c:EnziButton>
+                    <c:EnziButton label="Close" type="neutral" click="{!c.cancel}"></c:EnziButton>
+                </div>
+            </div>
+        </c:EnziFormValidator>
+    </div>
+</aura:component>

@@ -1,0 +1,55 @@
+<aura:component>
+    <aura:attribute name="HeaderIconName" type="String" default="" />
+    <aura:attribute name="headerText" type="String" default="Header Text to be added" />
+    <aura:attribute name="size" type="String" default="small" />
+    <aura:attribute name="name" type="String" default="popover" />
+    <aura:attribute name="show" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="onclose" type="Object" default="" />
+    <aura:attribute name="showMe" type="Boolean" default="false" />
+    <aura:attribute name="dataForPopover" type="List" default="[]" />
+    <aura:attribute name="icon" type="String" default="utility:chevronright"/>
+    <aura:attribute name="containerId" type="String" default="{!'popover_'+ v.name}" />
+    <aura:attribute name="showData" type="Boolean" default="false" />
+    
+    <aura:attribute name="recordsData" type="List"/>
+    <aura:attribute name="onFocus" type="Object" />
+    <style>
+        #popover_test_data > div > div:nth-child(3) > div > div {height:60px;}
+        #popover_test > div [data-label="New_Tour__c"]> div:nth-child(3) > div > div {height:60px;}
+    </style>
+    <button class="slds-button slds-button_icon slds-button_icon-large" onclick="{!c.openPopup}" title="More Info" >
+        <lightning:icon size="xx-small" iconName="{!v.icon}" alternativeText="More Info" />
+        <span class="slds-assistive-text">More Info</span>
+    </button>
+    <section id="popover_test" aria-describedby="dialog-body-id-31" aria-labelledby="dialog-heading-id-31" class="{!'popover_test slds-popover slds-popover_panel slds-popover_'+v.size + (v.show ? ' ': ' slds-hide')}" role="dialog">
+        <span id="{!v.containerId + '-body'}" style="text-decoration:none;color:black;">
+            <div class="slds-popover__body slds-grid slds-wrap" style="margin-bottom:25px;">
+                
+                <aura:iteration items="{!v.recordsData}" var="record" indexVar="index">
+                    <aura:iteration items="{!v.dataForPopover}" var="data">
+                        <div class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 slds-p-bottom_x-small">
+                            <dl>
+                                <dt>
+                                    <p class="slds-popover_panel__label slds-truncate" title="{!data.header}"><b>{!data.header}</b></p>
+                                </dt>
+                                <dd>
+                                    <aura:iteration items="{!data.metadata}" var="field">
+                                        <p title="{!field.label}">
+                                            <span id="popover_notes-data" data-field="{!field.name}">
+                                                <aura:If  isTrue="{!not(empty(field.label))}">
+                                                    <b>{!field.label} : </b>
+                                                </aura:If>
+                                                <c:EnziDynamicBinder list="{!v.recordsData}" index="{!index}" obj="{!record}"  col="{!v.dataForPopover?(v.dataForPopover.length==0?field.apiName:field.name):field.apiName}" type="{!field.type}" isNameField="{!field.nameField}" field="{!field}"></c:EnziDynamicBinder>
+                                            </span>
+                                        </p>
+                                    </aura:iteration>
+                                </dd>
+                            </dl>
+                        </div>
+                    </aura:iteration>
+                </aura:iteration>
+            </div>
+        </span>
+    </section>
+</aura:component>

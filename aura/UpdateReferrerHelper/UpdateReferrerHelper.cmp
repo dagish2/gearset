@@ -1,0 +1,31 @@
+<aura:component controller="RetroactiveReferralController">
+    <aura:attribute name="referralTypeVal" type="String"/>
+    <aura:attribute name="ContactRecordType" type="String"/>
+    <aura:attribute name="AccountRecordType" type="String"/>
+    <aura:attribute name="APIUser" type="String"/>
+    <aura:attribute name="utils" type="object" />
+    <aura:attribute name="apiSetting" type="Map"/>
+    
+    <c:EnziUtils aura:id="utils" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:method name="saveBillAcc" action="{!c.saveBillAcc}">
+        <aura:attribute name="contact" type="object"/>
+        <aura:attribute name="billingAccount" type="object"/>
+        <aura:attribute name="onsuccess" type="object"/>
+    </aura:method>
+    
+    <aura:method name="saveReferrer" action="{!c.saveReferrer}">
+        <aura:attribute name="contact" type="object"/>
+        <aura:attribute name="onsuccess" type="object"/>
+    </aura:method>
+    <aura:method name="saveOpportunity" action="{!c.saveOpportunity}">
+        <aura:attribute name="recordId" type="String"/>
+        <aura:attribute name="referrer" type="object"/>
+        <aura:attribute name="billAccId" type="String"/>
+        <aura:attribute name="parentAccId" type="String"/>
+        <aura:attribute name="oppReferralType" type="String"/>
+        <aura:attribute name="onsuccess" type="object"/>
+    </aura:method>
+	
+</aura:component>

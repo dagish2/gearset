@@ -1,0 +1,100 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" controller="WeworkEngine">
+    <script src="/support/console/28.0/integration.js" type="text/javascript"></script>
+   	<script src="/soap/ajax/28.0/connection.js" type="text/javascript"></script>
+	<script src="/soap/ajax/28.0/apex.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+    <div style="visibility:hidden">START_OF_SESSION_ID_FOR_LIGHTNING{!$Api.Session_ID}END_OF_SESSION_ID_FOR_LIGHTNING</div>
+    <script>
+ 		function REQUIRESCRIPT(url){
+ 			var flag = true;
+            for(var sc in document.querySelectorAll("script")){
+                if(document.querySelectorAll("script")[sc].src==((url.indexOf("https:")==-1)?(location.origin+url):url)){
+                    flag=false
+                }
+            }
+            if(flag){
+                var a = document.createElement("script");
+                a.src=url;
+                a.type="text/javascript";
+                document.querySelectorAll("head")[0].appendChild(a);
+                parent.document.querySelectorAll("head")[0].appendChild(a);
+                a.onload = function(){
+                    return '';
+                }
+            }
+            else
+                return '';
+        }
+    
+    	function parse(expression){
+            expression = expression.substring(2,expression.length-1);
+            return eval(expression);
+        }
+    
+    	function parseExpression(data){
+    		var originalData = data;
+            var arrExpression = [];
+            while(data.indexOf("{"+"!")!=-1){
+                var start;
+                var end;
+                for (var i = 0; i < data.length; i++) {
+                    if (data.charAt(i) == "{" && data.charAt(i + 1) == "!") {
+                        start = i;
+                    }
+                    if (start != undefined && data.charAt(i) == "}") {
+                        end = i;
+                        arrExpression.push(data.substring(start, end+1));
+                        data = data.substring(0, start) + data.substring(start + 2, end) + data.substring(end + 1, data.length);
+                        start = undefined;
+                        end = undefined;
+                        break;
+                    }
+                }
+            }
+            document.write('execute javascript'+arrExpression+'\n');
+            for(var exp in arrExpression){
+                if(exp!="remove")
+                	originalData = originalData.replace(arrExpression[exp],parse(arrExpression[exp]));
+            }
+            return originalData;
+        }
+    	
+    	function executeJavascript(code){
+			var parsedData = parseExpression(code);
+	        setTimeout(function(){
+               document.write(parsedData);
+               eval(parsedData);
+               window.close();
+	        },1000);
+        }
+    
+        function executeUrl	(url){
+       		var parsedData = parseExpression(url);
+            window.open(parsedData,'_blank');
+            window.close();
+        }
+        if("{!$User.UITheme}"=="Theme4t"){
+	    	sforce.one = {};
+  			sforce.one.navigateToURL = function(url){
+  				parent.location.assign(url);
+  			}
+        }
+        sforce.connection.sessionId='{!GETSESSIONID()}';
+    	var recordId = "{!$CurrentPage.parameters.recordId}";
+        var actionId = "{!$CurrentPage.parameters.actionId}";
+    	window['Journey__c'] = sforce.connection.query("Select Id,Name,Status__c,Outreach_Stage__c From Journey__c Where Id='"+recordId+"'").records;
+    	var action = sforce.apex.execute("LightningComponentController","getAction",{"actionId":actionId});
+    	var action = sforce.connection.query("Select Id,Name,PageOrSobjectType,Url,LinkType,OpenType,DisplayType from WebLink Where Id='"+actionId+"'").records;       
+    	switch(action.LinkType){
+            case "javascript":
+                executeJavascript(action.Url);
+                document.write('execute javascript\n');
+                break;
+            case "url":
+                executeUrl(action.Url);
+                document.write('execute url\n');
+                break;
+        }
+    </script>
+</apex:page>

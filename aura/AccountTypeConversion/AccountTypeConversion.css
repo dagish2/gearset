@@ -1,0 +1,19 @@
+.THIS .slds-modal__container {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 100rem;
+    min-width: 20rem;
+}
+.THIS .slds-spinner_container {
+    margin-top: 46px;
+    margin-bottom: 46px;
+}
+.THIS .button-align-right {
+    text-align: right;
+}
+.THIS .form-element {
+    padding-left: 15px;
+}
+.THIS .slds-modal__container {
+    max-width: 60rem;
+}

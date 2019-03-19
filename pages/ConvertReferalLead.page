@@ -1,0 +1,6 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" title="Convert Referal">    
+    <head>
+        <title>Convert Referal</title>
+    </head>
+	<c:LightningResource component="ConvertBrokerLead_Lead_Action" parameters="recordId={!$CurrentPage.parameters.recordId};isFromConvertLeadPage=true"></c:LightningResource>
+</apex:page>

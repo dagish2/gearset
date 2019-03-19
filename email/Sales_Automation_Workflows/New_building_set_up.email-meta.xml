@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>New building set-up</name>
+    <style>freeForm</style>
+    <subject>{!Building__c.Name} was added to Salesforce</subject>
+    <textOnly>Hello,
+
+
+A new building was created in Salesforce.
+
+* {!Building__c.Name}
+
+* {!Building__c.Link}
+
+
+
+Please follow the steps below to make sure the building is set up properly in Salesforce:
+
+
+
+Start with adding the building to the following object fields:
+
+
+
+Building Interest- opp / (Picklist)
+Locations Interested- opp / Picklist (Multi-Select)
+Locations Interested- lead / Picklist (Multi-Select)
+Location Interested- contact / Pickist (Multi-Select)
+Locations Interested- journey / Pickist (Multi-Select)
+Interested Buildings -tour / Pickist (Multi-Select)
+Interested building- tour summary / picklist (multi-Select)
+
+
+Next, add the building to following JSON scripts
+Restart logic
+Splash event journeys
+
+Next, add the building to following mappings
+Region
+Territory
+Cluster
+
+Then make sure the building&apos;s country is in the role hierarchy structure
+Role Hierarchy
+
+If the building&apos;s country is not set up,
+Please create a jira for a new market and add it to the next sprint.
+Details should include
+Roles
+Currency
+Update market picklists
+General country lead assignment
+
+Last but not least, make sure that following values are included in the lead assignment logic
+
+{!Building__c.City__c},
+{!Building__c.State__c}
+{!Building_Market__c.Market__c}
+
+Best,
+
+Product operations</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

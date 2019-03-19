@@ -1,0 +1,65 @@
+<aura:component >
+    <aura:attribute name="leadId" type="String" />
+    <aura:attribute name="journeyId" type="String" />
+    <aura:attribute name="entity" type="Map" default="{}" />
+    <aura:attribute name="metaFields" type="List" default="[]" />
+    <aura:attribute name="records" type="List" default="[]" />
+    <aura:attribute name="pageName" type="String"/>
+    <aura:attribute name="selectedRecord" type="String" />
+    <aura:attribute name="OrgRecord" type="object" />
+    <aura:attribute name="selectedAction" type="String" />
+    <aura:attribute name="processingCompleted" type="Boolean"/>
+    <aura:attribute name="instructions" type="object"/>
+    <aura:attribute name="showAccountSelector" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />    
+    <aura:handler name="change" value="{!v.leadId}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.journeyId}" action="{!c.doInit}" />     
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>    
+    <c:EnziModal aura:id="salesAccountSelectorModal" header="Account Selector" show="{!v.showAccountSelector}" isLarge="true">
+        <c:EnziModalContainer >
+            <c:EnziHeader sObjectName="Lead" pageName="{!v.entity.name}" iconName="standard:lead"></c:EnziHeader>
+            <c:EnziSection expanded="true" disableToggle="false" label="Instructions" showTooltip="true" tooltipText="Information of Lead"> 
+                <div class=" slds-wrap slds-grid slds-gutters slds-p-horizontal_small slds-scrollable_y" style="margin-left:10px;"> 
+                    <ul style="{! 'padding:10px;list-style-type :'+ ( v.instructions.listStyleType)+';color:'+(v.instructions.color) +';font-size:'+(v.instructions.fontSize)}">
+                        <aura:iteration items="{!v.instructions.instructions}" var="item">
+                            <li>{!item}</li>
+                        </aura:iteration>
+                    </ul>                
+                </div>
+                <ul class="slds-grid slds-page-header__detail-row" style="background-color: lavender;margin:0px">
+                    <li class="slds-page-header__detail-block" style="width:25%">
+                        <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Name"><b>Name</b></p>
+                        <p class="slds-text-body_regular slds-truncate">
+                            <ui:outputURL value="{!'/'+(v.leadId)}" label="{!v.entity.name}" target="_blank"/>
+                        </p>                    
+                    </li>
+                    <li class="slds-page-header__detail-block" style="width:25%">
+                        <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Email"><b>Email</b></p>
+                        <p class="slds-text-body_regular slds-truncate">{!v.entity.email}</p>
+                    </li>
+                    <li class="slds-page-header__detail-block" style="width:25%">
+                        <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Company"><b>Company</b></p>
+                        <p class="slds-text-body_regular slds-truncate">{!v.entity.company}</p>
+                    </li>
+                    <li class="slds-page-header__detail-block" style="width:25%">
+                        <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Phone"><b>Phone</b></p>
+                        <p class="slds-text-body_regular slds-truncate">{!v.entity.phone}</p>
+                    </li>
+                    <li class="slds-page-header__detail-block" style="width:25%">
+                        <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Organization"><b>Organization</b></p>
+                        <p class="slds-text-body_regular slds-truncate">                         
+                            <ui:outputURL value="{!'/'+(v.OrgRecord.Id)}" label="{!v.OrgRecord.Name}" target="_blank"/>
+                        </p>                    
+                    </li>
+                </ul>                 
+            </c:EnziSection>
+            <div class="">
+                <c:EnziDataTable describedFields="{!v.metaFields}"  setBorder="true" records="{!v.records}" showMultiselect="false" showPagination="true"></c:EnziDataTable>
+            </div> 
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+            <c:EnziButton type="brand" label="Convert to Parent Org" click="{!c.convertToOrg}"></c:EnziButton>
+            <c:EnziButton type="brand" label="Use Selected Account" disabled="{!empty(v.selectedRecord)}" click="{!c.useSelected}"></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

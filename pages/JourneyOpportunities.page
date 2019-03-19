@@ -1,0 +1,25 @@
+<apex:page controller="WeworkEngine" standardStylesheets="false" sidebar="false" showHeader="false" cache="false">
+	<c:GlobalResources local="{!$CurrentPage.parameters.local}"
+                       vendor_css=""
+                       vendor_js="jquery/moment.min.js,jquery/xdate.js,angu-complete/angucomplete-ie8.js,angu-complete/angular-touch.min.js,angu-complete/angucomplete-ie8.css"
+                       application_js="error-manager.js,salesforce.js,common-controls.js,journeyOpportunitiesController.js,journeyOpportunity.js"
+                       application_css="applicationCSS.css,journeyOpportunitiesCSS.css" />
+    <apex:includescript value="/support/console/32.0/integration.js" />
+    <script type="text/javascript">
+        sforce.console.setTabTitle('Journey Opportunities');
+    </script>
+    <head>
+    	<meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    	<title>Journey Opportunities</title>    	
+    </head>
+    <body>
+        <div id="spinnerContainer"></div>
+        <div ng-app="journeyOpportunitiesApp" ng-controller="journeyOpportunitiesController">
+            <div class="container-fluid">
+                 <journey-opportunities></journey-opportunities>
+            </div>            
+        </div>
+    </body> 
+</apex:page>

@@ -1,0 +1,39 @@
+<aura:component controller="LogACallController"> 
+	<aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="record" type="Map" default="{}" />    
+    <aura:attribute name="errors" type="List" default="[]" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="relatedJourneys" type="List" default="[]" />
+    <aura:attribute name="leftAVoicemail" type="Boolean" default="false" />
+    <aura:attribute name="allowedLogACall" type="Boolean" default="false" />
+    <aura:attribute name="callComments" type="String" />
+    <aura:attribute name="utility" type="Object" />
+    
+    <aura:attribute name="logACall" type="Aura.action" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:EnziUtils aura:id="utils" />
+    
+    <c:EnziModal aura:id="EnziLogACallModal" header="Log A Call">
+        <c:EnziModalContainer>
+            <c:EnziHeader sObjectName="Journey" pageName="{!v.record.Name}" iconName="custom:custom20" />
+            <div class="column region-main main-row">
+                <div class="tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" >
+                    <c:WeFormValidator errors="{!v.errors}" valid="{!v.valid}"></c:WeFormValidator>            
+                    <div class=" slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-top_x-small" >
+                        <c:WeField name="OutreachStage" sObjectName="Journey__c" fieldName="Outreach_Stage__c" label="Outreach Stage" errors="{!v.errors}" readonly="true" validate="true" required="true"  value="{!v.record.Outreach_Stage__c}"/>
+                    </div>
+                    <div class=" slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-top_x-small" >
+                        <c:WeField name="LeftAVoiceCall" type="checkbox" label="Left A Voicemail" errors="{!v.errors}" validate="true" value="{!v.leftAVoicemail}"/>
+                    </div> 
+                    <div class=" slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-top_x-small" >
+                        <c:WeField name="Comments" type="textarea" label="Description" errors="{!v.errors}" validate="true" value="{!v.callComments}"/>
+                    </div>                
+                </div>
+            </div>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter>
+            <c:EnziButton label="Cancel" type="destructive" leftIcon="utility:close" click="{!c.cancel}" />
+            <c:EnziButton label="Save" type="brand" click="{!c.saveCallLog}" leftIcon="utility:save" disabled="{! not(and(v.valid, v.allowedLogACall))}" />
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

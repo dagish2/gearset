@@ -1,0 +1,25 @@
+<apex:page controller="WeworkEngine" standardstylesheets="false" extensions="InboundCallController" sidebar="false" showheader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}" vendor_css="fontawesome/css/font-awesome.min.css" vendor_js="jquery/moment.min.js,jquery/xdate.js,angular/angular-sanitize.js,textAngular/textAngular-rangy.min.js,textAngular/textAngular-1.1.1.min.js"
+                       application_js="error-manager.js,salesforce.js,common-controls.js,autocomplete.js,exportReservable.js"
+                       application_css="exportReservable.css,controlsFactory.css,inboundCall.css,autocomplete.css" />
+    <apex:includescript value="/support/console/25.0/integration.js" />
+    <script type="text/javascript">
+        sforce.console.setTabTitle('Export Reservable');
+        Visualforce.remoting.timeout = 120000;
+    </script>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Export Reservable</title>
+    </head>
+    <body>
+        <div id="spinnerContainer"></div>
+        <div id="wrapper" class="scroll-window" ng-app="exportReservableApp" ng-controller="exportReservableCtrl">
+            <div class="container-fluid" style="margin-top: 25px">
+                <export-reservable>
+                </export-reservable>
+            </div>
+        </div>
+    </body>
+</apex:page>

@@ -1,0 +1,77 @@
+<apex:page standardController="Deal__c" extensions="DealsController" recordSetVar="selecteddeals" showHeader="false" standardStylesheets="false" renderAs="pdf" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <style>
+                td {
+                vertical-align: top;
+                border: solid 1px #cccccc;
+                }
+                th {
+                text-align: left;
+                border: solid 1px #cccccc;
+                }
+                @page {
+                size:landscape;
+                }
+                body {
+                font-family: sans-serif;
+                font-size: 10px;
+                }
+                table {
+                border: solid 1px #cccccc;
+                }
+                label {
+                font-weight: bold;
+                }
+                thead {display: table-header-group;}
+                .col-number{ width: 0.2in; }
+                .col-deal{ width: 1in; }
+                .col-status{ width: 1in; }
+                .col-team{ width: 1.5in; }
+                .col-notes{ width: 5in;}
+            </style>
+        </head>
+        <body>
+            <table cellspacing="0" >
+                <thead>
+                    <tr>
+                        <th class="col-number">No.</th>
+                        <th class="col-deal">Deal</th>
+                        <th class="col-status">Status</th>
+                        <th class="col-team">Team</th>
+                        <th class="col-notes">Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:variable value="1" var="num"/>
+                    <apex:repeat value="{!Deals}" var="deal">
+                        <tr>
+                            <td class="col-number" >{!num}. <apex:variable var="num" value="{!VALUE(num) + 1}"/></td>
+                            <td class="col-deal" ><label>Deal Name :</label><br />{!deal.Name}<br /><br />
+                                <label>Counter Party :</label><br />{!deal.Counter_Party__c}<br /><br />
+                                <label>Group :</label><br />{!deal.Group__c}</td>
+                            <td class="col-status"><label>Gate : </label><br />{!deal.Phase__c}<br /><br />
+                                <label>Priority :</label><br />{!deal.Priority__c}<br /><br />
+                                <label>Status : </label><br />{!deal.Status__c}<br /><br />
+                                <label>Next Deadline : </label><br /><apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!deal.Timing__c}" /> </apex:outputText><br /><br />
+                                <label>Percent Complete : </label>{!deal.Percent_Value__c}<apex:outputText value="{!IF(deal.Percent_Value__c != null, '%', 'NA')}"></apex:outputText><br /><br /><br />
+                            </td>
+                            <td class="col-team">
+                                <apex:outputText escape="false" value="{!deal.Team__c}"></apex:outputText><br /><br />
+                                <b>Approvers:</b><br />
+                                {!deal.Approver_1__r.Name}<apex:outputLabel value="," rendered="{!deal.Approver_1__r != null && deal.Approver_2__r != null}"></apex:outputLabel><br />
+                                {!deal.Approver_2__r.Name}<apex:outputLabel value="," rendered="{!deal.Approver_2__r != null && deal.Approver_3__r != null}"></apex:outputLabel><br />
+                                {!deal.Approver_3__r.Name}<apex:outputLabel value="," rendered="{!deal.Approver_3__r != null && deal.Approver_4__r != null}"></apex:outputLabel><br />
+                                {!deal.Approver_4__r.Name}<apex:outputLabel value="," rendered="{!deal.Approver_4__r != null && deal.Approver_5__r != null}"></apex:outputLabel><br />
+                                {!deal.Approver_5__r.Name}<apex:outputLabel value="," rendered="{!deal.Approver_5__r != null && deal.Approver_6__r != null}"></apex:outputLabel><br />
+                                {!deal.Approver_6__r.Name}<br />
+                            </td>
+                            <td class="col-notes"><apex:outputText escape="false" value="{!deal.Notes__c}"></apex:outputText> </td>
+                        </tr>
+                        <tr><td colspan="5"><br /><br /><br /><br /><br /><br /><br /></td></tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </body>
+    </html>
+</apex:page>

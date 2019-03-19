@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>Account_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Opportunity__r.Account.Type)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BIID__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <description>Unique Id to avoid duplicates building ID 18 + Lead ID 18</description>
+        <externalId>true</externalId>
+        <label>BIID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Building__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Building</label>
+        <referenceTo>Building__c</referenceTo>
+        <relationshipLabel>Building Interest</relationshipLabel>
+        <relationshipName>Building_Interest</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Level_Tour_Outcome__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT( Opportunity__r.Interest_Level_Tour_Outcome__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Interest Level/Tour Outcome</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Lead</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Building Interest</relationshipLabel>
+        <relationshipName>Building_Interest</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Member_Qualification__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Opportunity__r.Account.Member_Qualification__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Member Qualification</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_desks_Reference__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Office_Type_Notes__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Number of desks Reference</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Office_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Office Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Shared Desk</fullName>
+                    <default>false</default>
+                    <label>Shared Desk</label>
+                </value>
+                <value>
+                    <fullName>Daily Desk</fullName>
+                    <default>false</default>
+                    <label>Daily Desk</label>
+                </value>
+                <value>
+                    <fullName>Hot desk</fullName>
+                    <default>false</default>
+                    <label>Hot desk</label>
+                </value>
+                <value>
+                    <fullName>Dedicated Desk</fullName>
+                    <default>false</default>
+                    <label>Dedicated Desk</label>
+                </value>
+                <value>
+                    <fullName>Private 1 Person</fullName>
+                    <default>false</default>
+                    <label>Private 1 Person</label>
+                </value>
+                <value>
+                    <fullName>Private 2 Person</fullName>
+                    <default>false</default>
+                    <label>Private 2 Person</label>
+                </value>
+                <value>
+                    <fullName>Private 3 Person</fullName>
+                    <default>false</default>
+                    <label>Private 3 Person</label>
+                </value>
+                <value>
+                    <fullName>Private 4 Person</fullName>
+                    <default>false</default>
+                    <label>Private 4 Person</label>
+                </value>
+                <value>
+                    <fullName>Private 5 Person</fullName>
+                    <default>false</default>
+                    <label>Private 5 Person</label>
+                </value>
+                <value>
+                    <fullName>Private 6 Person</fullName>
+                    <default>false</default>
+                    <label>Private 6 Person</label>
+                </value>
+                <value>
+                    <fullName>Private 8 Person</fullName>
+                    <default>false</default>
+                    <label>Private 8 Person</label>
+                </value>
+                <value>
+                    <fullName>Private 10 Person</fullName>
+                    <default>false</default>
+                    <label>Private 10 Person</label>
+                </value>
+                <value>
+                    <fullName>Lounge Membership</fullName>
+                    <default>false</default>
+                    <label>Lounge Membership</label>
+                </value>
+                <value>
+                    <fullName>Private 10 Person+</fullName>
+                    <default>false</default>
+                    <label>Private 10 Person+</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Stage__c</fullName>
+        <externalId>false</externalId>
+        <formula>text( Opportunity__r.StageName )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunity Stage</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Building Interest</relationshipLabel>
+        <relationshipName>Building_Interest</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Priority__c</fullName>
+        <externalId>false</externalId>
+        <label>Priority</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>true</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Start_Date_Needed__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Start_Date_Needed__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start Date Needed</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Wait_List_date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Wait_List_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Wait List Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Building Interest</label>
+    <nameField>
+        <displayFormat>BI-{0000}</displayFormat>
+        <label>BI #</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Building Interest</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Building__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Opportunity__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Opportunity_Stage__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Priority__c</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>Building__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Opportunity__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Interest_Level_Tour_Outcome__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Account_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Priority__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Start_Date_Needed__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Building__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Opportunity_Stage__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_All_Building</fullName>
+        <columns>NAME</columns>
+        <columns>Wait_List_date__c</columns>
+        <columns>Building__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <label>Wait List - All Buildings</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_BOS_Fort_Point</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>BOS-Fort Point</value>
+        </filters>
+        <label>Wait List - BOS-Fort Point</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_BOS_South_Station</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>BOS-South Station</value>
+        </filters>
+        <label>Wait List - BOS-South Station</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_CHI_West_Loop</fullName>
+        <columns>NAME</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>CHI-West Loop</value>
+        </filters>
+        <label>Waiti List - CHI-West Loop</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_DC_Chinatown</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>DC-Chinatown</value>
+        </filters>
+        <label>Wait List - DC-Chinatown</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_LA_Hollywood</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>LA-Hollywood</value>
+        </filters>
+        <label>Wait List - LA-Hollywood</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_NYC_ChargingBull</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>NYC-Charging Bull</value>
+        </filters>
+        <label>Wait List - NYC-Charging Bull</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_NYC_Empirestate</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>NYC-Empire State</value>
+        </filters>
+        <label>Wait List - NYC-Empire State</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_NYC_Fulton_Center</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <columns>Office_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>NYC-Fulton Center</value>
+        </filters>
+        <label>Wait List - NYC-Fulton Center</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_NYC_Madison</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>NYC-Madison</value>
+        </filters>
+        <label>Wait List - NYC-Madison</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_NYC_Meatpacking</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <columns>Office_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>NYC-Meatpacking</value>
+        </filters>
+        <label>Wait List - NYC-Meatpacking</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_NYC_SoHo_West</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>NYC-SoHo West</value>
+        </filters>
+        <label>Wait List - NYC-SoHo West</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_NYC_Soho</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>NYC-SoHo</value>
+        </filters>
+        <label>Wait List - NYC Soho</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_SF_Golden_Gate</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>SF-Golden Gate</value>
+        </filters>
+        <label>Wait List - SF-Golden Gate</label>
+    </listViews>
+    <listViews>
+        <fullName>Wait_List_SF_SoMa</fullName>
+        <columns>Wait_List_date__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Number_of_desks_Reference__c</columns>
+        <columns>Member_Qualification__c</columns>
+        <columns>Account_Type__c</columns>
+        <columns>Start_Date_Needed__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Opportunity_Stage__c</field>
+            <operation>equals</operation>
+            <value>Wait List</value>
+        </filters>
+        <filters>
+            <field>Building__c</field>
+            <operation>equals</operation>
+            <value>SF-SoMa</value>
+        </filters>
+        <label>Wait List - SF-SoMa</label>
+    </listViews>
+</CustomObject>

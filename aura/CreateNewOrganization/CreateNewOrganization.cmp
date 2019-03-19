@@ -1,0 +1,105 @@
+<aura:component controller="NewOrganizationController">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="instructions" type="List"/>
+    <aura:attribute name="mapInstructions" type="Map"/>
+    <aura:attribute name="tabName" type="String" default="CreateNewOrganization"/>
+    <aura:attribute name="accountRec" type="Account" />
+    <aura:attribute name="contactRec" type="Contact" />
+    <aura:attribute name="billingAccountRec" type="Object" />
+    <aura:attribute name="canCreateOrg" type="Boolean" default="false"/>
+    <aura:attribute name="existingContact" type="Object" />
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="close" type="Object"/>
+    <aura:attribute name="canCreateEnterpriseOrg" type="Boolean" default="false"/>
+    <aura:attribute name="mapDisabled" type="map" default="{}"/>
+    <aura:attribute name="previous" type="object"/>
+    <aura:attribute name="isInLightningConsole" type="Boolean" default="true"/>
+    <aura:attribute name="isFromConfirmationModal" type="Boolean" default="false"/>
+    <aura:attribute name="errors1" type="Object"/>
+    <aura:attribute name="valid1" type="Boolean"/>
+    <aura:attribute name="showCloseButton" type="Boolean" default="true"/>
+    <aura:attribute name="selectedOrg" type="Object" />
+    <aura:attribute name="leadRec" type="Map" />
+    
+    <aura:attribute name="method" type="Aura.action" />
+    <aura:attribute name="useCreatedAccount" type="Aura.action" />
+    <aura:attribute name="isNewAccountCreated" type="Boolean" default="false" /> 
+    <aura:attribute name="isFromConverBrokerFunctionality" type="Boolean" /> 
+    <aura:attribute name="redirectIdAfterRequestNewOrg" type="String" /> 
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.accountRec.Number_of_Full_Time_Employees__c}" action="{!c.checkNumberOfFullTimeEmployee}"/>
+    
+    <lightning:workspaceAPI aura:id="workspace"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:html tag="style">
+        .slds-rise-from-ground{
+        z-index: 10000 !important;
+        }
+    </aura:html>
+    <div id="createNewOrgContent" class="slds-grid slds-wrap slds-grid--pull-padded slds-p-bottom_small" role="main"> 
+        <c:EnziFormValidator errors="{! v.errors}" valid="{! v.valid}">
+            <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                <c:EnziField name="Account" sObjectName="Account" fieldName="Name" label="Account Name" value="{! v.accountRec.Name}" errors="{! v.errors}" required="true" helpText="Enter name of the new Organization you want to create" />
+            </div>
+            <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                <c:EnziField name="Number_of_Full_Time_Employees__c" sObjectName="Account" fieldName="Number_of_Full_Time_Employees__c" value="{! v.accountRec.Number_of_Full_Time_Employees__c}" min="1" required="true" errors="{! v.errors}" helpText="Enter Number of Full Time Employees of the new Organization" change="{!c.checkNumberOfFullTimeEmployee}"/>
+            </div>
+            <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                <c:EnziField name="Website" label="Website" sObjectName="Account" fieldName="Website" value="{! v.accountRec.Website}" required="false" errors="{! v.errors}" helpText="Enter the website of the Organization" />
+            </div>
+            <div class="{!'slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 '+(v.canCreateEnterpriseOrg ? 'slds-hide': '')}">
+                <c:EnziField name="InterestedNumberOfDesks" min="1" sObjectName="Account" fieldName="Interested_in_Number_of_Desks__c" label="Interested in Number of Desk" value="{! v.accountRec.Interested_in_Number_of_Desks__c}" required="{! not(v.canCreateEnterpriseOrg)}" errors="{! v.errors}" helpText="Enter the value of Interested in Number of Desk"/>
+            </div>
+            <div class="{!'slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 '+(v.canCreateEnterpriseOrg ? 'slds-hide': '')}">
+                <c:EnziField name="Email" sObjectName="Contact" fieldName="Email" label="Email" value="{! v.contactRec.Email}" errors="{! v.errors}" required="{! not(v.canCreateEnterpriseOrg)}" change="{!c.searchContact}" defaultDisabled="false" helpText="Enter email of the contact which will be associated with new Organization" />
+            </div>
+            <div class="{!'slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 '+(v.canCreateEnterpriseOrg ? 'slds-hide': '')}">
+                <c:EnziField name="FirstName" sObjectName="Contact" fieldName="FirstName" label="First Name" value="{! v.contactRec.FirstName}" errors="{! v.errors}" required="{! not(v.canCreateEnterpriseOrg)}" defaultDisabled="true" disabled="{!v.mapDisabled.FirstName}" helpText="Enter First Name of the contact which will be associated with new Organization" />
+            </div>
+            <div class="{!'slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 '+(v.canCreateEnterpriseOrg ? 'slds-hide': '')}">
+                <c:EnziField name="LastName" sObjectName="Contact" fieldName="LastName" label="Last Name" value="{! v.contactRec.LastName}" errors="{! v.errors}" required="{! not(v.canCreateEnterpriseOrg)}" defaultDisabled="true" disabled="{!v.mapDisabled.LastName}" helpText="Enter Last Name of the contact which will be associated with new Organization" />
+            </div>
+            <div class="{!'slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 '+(v.canCreateEnterpriseOrg ? 'slds-hide': '')}">
+                <c:EnziField name="Phone" type="phone" label="Phone" value="{! v.contactRec.Phone}" errors="{! v.errors}" required="false" defaultDisabled="true" disabled="{!v.mapDisabled.Phone}" helpText="Enter Phone of the contact which will be associated with new Organization" />
+            </div>
+            <div class="{!'slds-p-horizontal--small slds-size--1-of-1 '+(v.canCreateEnterpriseOrg ? 'slds-medium-size--1-of-2 slds-large-size--1-of-2': 'slds-medium-size--1-of-1 slds-large-size--1-of-1')}">
+                <c:EnziField name="Notes" label="Notes" sObjectName="Account" fieldName="Description" value="{! v.accountRec.Description}" required="false" errors="{! v.errors}" helpText="Enter the additional information and details about the new Organization" />
+            </div>
+        </c:EnziFormValidator>
+    </div>        
+    <div class="slds-modal__footer" >
+        <c:EnziButton label="{! not(empty(v.previous)) ? (v.previous.label ? v.previous.label : 'Previous') : 'Previous'}" type="neutral" click="{!v.previous.click ? v.previous.click : v.previous}" show="{! empty(v.previous) ? false : true}" ></c:EnziButton>
+        <c:EnziButton label="Request New Organization" type="brand" leftIcon="utility:save" click="{!c.requestNewOrg}" disabled="{! or(not(v.canCreateOrg),not(v.valid))}" show="{! v.canCreateEnterpriseOrg ? false : (v.accountRec.Number_of_Full_Time_Employees__c ge 1000 ? true: false)}" ></c:EnziButton>
+        <c:EnziButton label="Create New Organization" type="brand" leftIcon="utility:save" click="{!c.createNewOrg}" disabled="{! v.canCreateEnterpriseOrg ? not(v.valid) : or(not(v.canCreateOrg),not(v.valid))}" show="{! v.canCreateEnterpriseOrg ? true : (v.accountRec.Number_of_Full_Time_Employees__c ge 1000 ? false: true)}" ></c:EnziButton>
+        <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{!empty(v.close) ? c.close : v.close }" show="{!v.showCloseButton}"></c:EnziButton>
+    </div>
+    <c:EnziModal aura:id="confirmation" header="Confirmation" isLarge="false" show="false">
+        <c:EnziModalContainer >
+            <c:EnziFormValidator errors="{! v.errors1}" valid="{! v.valid1}">
+                <c:WeInstructions instructions="['No website was entered. Having a Website can help us provide you with more insight regarding the account.','If there is website, please provide one below. Otherwise, please proceed and create a new organization account.']" />
+                <div class="slds-p-horizontal_medium slds-size--1-of-1 slds-medium-size--9-of-12 slds-large-size--9-of-12">
+                    <c:EnziField name="Website" label="Website" sObjectName="Account" fieldName="Website" value="{! v.accountRec.Website}" required="false" errors="{! v.errors1}" helpText="Enter the website of the Organization" />
+                </div>
+            </c:EnziFormValidator>
+        </c:EnziModalContainer>            
+        <c:EnziModalFooter >
+            <c:EnziButton label="Back" type="neutral" click="{! c.closeModal}"></c:EnziButton>
+            <c:EnziButton label="Request New Organization" type="brand" leftIcon="utility:save" click="{!c.requestNewOrg}" disabled="{!not(v.valid1)}" show="{! v.canCreateEnterpriseOrg ? false : (v.accountRec.Number_of_Full_Time_Employees__c ge 1000 ? true: false)}" ></c:EnziButton>
+            <c:EnziButton label="Create New Organization" type="brand" leftIcon="utility:save" click="{!c.createNewOrg}" disabled="{!not(v.valid1)}" show="{! v.canCreateEnterpriseOrg ? true : (v.accountRec.Number_of_Full_Time_Employees__c ge 1000 ? false: true)}" ></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+    <!-- Modal on close -->
+    <c:EnziModal aura:id="close" header="Close" isLarge="false" show="false">
+        <c:EnziModalContainer >
+            <c:EnziFormValidator errors="{! v.errors1}" valid="{! v.valid1}">
+                <c:WeInstructions instructions="['No website was entered. Having a Website can help us provide you with more insight regarding the account.','If there is website, please provide one below. Otherwise, please proceed and create a new organization account.']" />
+            </c:EnziFormValidator>
+        </c:EnziModalContainer>            
+        <c:EnziModalFooter >
+            <c:EnziButton label="Yes" leftIcon="utility:close" type="destructive" click="{! c.closeModal}"></c:EnziButton>
+            <c:EnziButton label="No" leftIcon="utility:close" type="destructive" click="{! c.closeModal}"></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

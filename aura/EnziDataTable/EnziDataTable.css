@@ -1,0 +1,11 @@
+@media (max-width: 47em){
+    .THIS .mobileCenter{
+        text-align:center !important;
+    }
+    .THIS td:last-child {
+        overflow: visible !important;
+    }    
+}
+.THIS .visibleItem{
+    overflow: visible !important;
+}

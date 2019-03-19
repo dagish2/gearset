@@ -1,0 +1,52 @@
+<aura:component >
+    <aura:attribute name="key" type="String" />
+    <aura:attribute name="keyLadder" type="String" default="{!v.key}" />
+    <aura:attribute name="parentIndex" type="Object" />
+    <aura:attribute name="parentData" type="Object" />
+	<aura:attribute name="data" type="Object" />
+    <aura:attribute name="originalData" type="Object" default="{!v.data}" />
+    <aura:attribute name="parentDelimeter" type="String" />
+    <aura:attribute name="childs" type="List" />
+    <aura:attribute name="mode" type="String" default="edit" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.data}" action="{!c.doInit}"/>
+    <aura:handler name="dropdownEvent" event="c:EnziDropdownEvent" action="{!c.manageDropdown}"/>
+    <aura:if isTrue="{!v.mode=='edit'}">
+        <c:EnziDropdown size="xx-small" position="right">
+            <c:EnziDropdownItem label="Add - String" id="parent:string:add" click="{!c.manageParent}"></c:EnziDropdownItem>
+            <c:EnziDropdownItem label="Add - Object" id="parent:object:add" click="{!c.manageParent}"></c:EnziDropdownItem>
+            <c:EnziDropdownItem label="Add - Array" id="parent:array:add" click="{!c.manageParent}"></c:EnziDropdownItem>
+            <aura:if isTrue="{!v.parentData}">
+                <c:EnziDropdownItem label="Clone" id="parent:any:clone" click="{!c.manageParent}"></c:EnziDropdownItem>
+                <c:EnziDropdownItem label="Remove" id="parent:any:remove" click="{!c.manageParent}"></c:EnziDropdownItem>
+            </aura:if>
+        </c:EnziDropdown>
+    </aura:if>
+    <div style="display:inline-block;">
+        <span id="parentKey" ondblclick="{!c.editParent}">{!v.key}</span>
+        <input class="slds-hide" id="parentValue" onblur="{!c.saveParent}" value="{!v.key}"></input>
+    </div>
+    :&nbsp;{!v.parentDelimeter}
+    <div style="padding-left:30px">
+        <aura:iteration items="{!v.childs}" var="child" indexVar="index">
+            <aura:if isTrue="{!child.type=='object' || child.type=='array'}">
+                <c:EnziJsonEditor originalData="{!v.originalData}" keyLadder="{!v.keyLadder+':'+child.key}" key="{!child.key}" data="{!child.value}" parentData="{!v.data}" parentIndex="{!index}"></c:EnziJsonEditor>
+                <aura:set attribute="else">
+                     <div>
+                         <aura:if isTrue="{!v.mode=='edit'}">
+                             <c:EnziDropdown size="xx-small" position="right">
+                                 <c:EnziDropdownItem label="Clone" id="{!index+':clone'}" click="{!c.manageChild}"></c:EnziDropdownItem>
+                                 <c:EnziDropdownItem label="Remove" id="{!index+':remove'}" click="{!c.manageChild}"></c:EnziDropdownItem>
+                             </c:EnziDropdown>
+                         </aura:if>
+                         <span id="{!'childkey-'+index}" ondblclick="{!c.editChild}">{!child.key}</span>
+                         <input class="slds-hide" id="{!'childinputkey-'+index}" onblur="{!c.saveData}" value="{!child.key}"></input>
+                         :&nbsp;
+                         <span class="{!child.type}" id="{!'childvalue-'+index}" ondblclick="{!c.editChild}">{!child.value}</span>
+                         <input class="slds-hide" id="{!'childinputvalue-'+index}" onblur="{!c.saveData}" value="{!child.value}"></input>
+                    </div>
+                </aura:set>
+            </aura:if> 
+        </aura:iteration>
+    </div>
+</aura:component>

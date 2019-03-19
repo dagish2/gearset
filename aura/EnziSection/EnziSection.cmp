@@ -1,0 +1,37 @@
+<aura:component >
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="show" type="Boolean" default="true"/>
+    <aura:attribute name="type" type="String" default="collapsable"/>
+    <aura:attribute name="expanded" type="Boolean" default="true"/>
+    <aura:attribute name="disableToggle" type="Boolean" default="false"/>
+    <aura:attribute name="showBorder" type="Boolean" default="false" />
+    <aura:attribute name="showTooltip" type="Boolean" default="false" /> 
+    <aura:attribute name="tooltipText" type="String" />
+    <aura:if isTrue="{!v.type=='collapsable'}">
+        <div class="{!'slds-section '+(v.show?'':'slds-hide ')+(v.expanded?'slds-is-open ':'')}" style="{! (v.showBorder ? 'border: 1px solid #d9dbdd;border-radius:3px;' :'')}">
+            <h3 class="slds-section__title" style="background-color: #f9f9fa">
+                <button class="slds-button slds-section__title-action" onclick="{!c.toggle}" style="{! (v.disableToggle ? 'pointer-events:none':'')}">
+                    <lightning:icon iconName="{!'utility:'+(v.expanded?'chevrondown':'chevronright')}" size="x-small"></lightning:icon>&nbsp;&nbsp;{!v.label}
+                </button>
+                <aura:if isTrue="{!v.showTooltip}">
+                    <lightning:helptext content="{!v.tooltipText}" />
+                </aura:if>
+            </h3>
+            <div class="slds-section__content">
+                {!v.body}
+            </div>
+        </div>
+         
+        <aura:set attribute="else">
+            <fieldset class="{!'slds-box slds-theme--default slds-container '+(v.show?'':'slds-hide')}" style="margin-top:-10px;margin-bottom:20px">
+                <legend class="slds-text-heading--medium slds-p-vertical--medium">{!v.label}</legend>
+                <div class="slds-section" style="{! 'margin-top: -20px;' +(v.showBorder ? 'border: 1px solid #d9dbdd;border-radius:3px;' :'')}">
+                    <div class="stage-main slds-grid slds-wrap" role="main">
+                        {!v.body}
+                    </div>
+                </div>
+            </fieldset> 
+        </aura:set>
+   
+   </aura:if> 
+</aura:component>

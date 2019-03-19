@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>General email for WeWork Legal team</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>WeWork Legal Approval Process</name>
+    <style>none</style>
+    <subject>WeWork Legal Approval Request</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

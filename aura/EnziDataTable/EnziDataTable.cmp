@@ -1,0 +1,199 @@
+<aura:component >
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="query" type="String" />
+    <aura:attribute name="fields" type="List" />
+    <aura:attribute name="searchFields" type="List" />
+    <aura:attribute name="records" type="List" />
+    <aura:attribute name="describedFields" type="List" />
+    <aura:attribute name="filteredRecords" type="List" />
+    <aura:attribute name="icon" type="String" />
+    <aura:attribute name="caption" type="String" />
+    <aura:attribute name="keyField" type="String" />
+    <aura:attribute name="actions" type="List" default="[]" />
+    <aura:attribute name="alternateText" type="String"/>
+    <aura:attribute name="keyword" type="String" />
+    <aura:attribute name="setBorder" type="boolean" default="false"/>
+    <aura:attribute name="pageSizes" type="List" default="[5,10,20,50,100]" />
+    <aura:attribute name="pageSize" type="Integer" default="5" />
+    <aura:attribute name="currentPage" type="Integer" default="1" />
+    <aura:attribute name="totalRecords" type="Integer"/>
+    <aura:attribute name="pages" type="List"/>
+    <aura:attribute name="sortBy" type="String"/>
+    <aura:attribute name="sortOrder" type="String"/>
+    <aura:attribute name="selectedRecords" type="List" default="[]"/>
+    <aura:attribute name="showSearch" type="Boolean" default="true" />
+    <aura:attribute name="showSearchLarge" type="Boolean" default="true"/>
+    <aura:attribute name="showPagination" type="Boolean" default="true" />
+    <aura:attribute name="showMultiselect" type="Boolean" default="true" />
+    <aura:attribute name="hideCheckAll" type="Boolean" default="false" />
+    <aura:attribute name="showCaptionTooltip" type="Boolean" default="false" />
+    <aura:attribute name="captionTooltipText" type="String" default="{!v.caption}" />
+    <aura:attribute name="placeholder" type="String" />
+    <aura:attribute name="doneRendering" type="Boolean" default="false" />
+    <aura:attribute name="selectAll" type="Boolean" default="false" />
+    <aura:attribute name="visibleItems" type="Boolean" default="false" />
+    <aura:attribute name="highlight" type="String"/>
+    <aura:attribute name="tourDatetimeSort" type="String"/>
+    <aura:attribute name="sortByOrgBillName" type="String"/>
+    
+    <aura:attribute name="searchLarge" type="Boolean" default="false" />
+    <aura:attribute name="isCustomSearch" type="boolean" default= "false"/>   
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.records}" action="{!c.dataChangHandler}"/>
+    <aura:handler name="change" value="{!v.describedFields}" action="{!c.dataChanged}"/>
+    <aura:handler name="change" value="{!v.query}" action="{!c.dataChanged}"/>
+    <aura:handler name="change" value="{!v.filteredRecords}" action="{!c.highlightRow}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+        .leftIcon {
+        position: absolute;
+        top: 9px;
+        left: 12px;
+        }
+        #enzi-data-table-container::-webkit-scrollbar{
+        height:4px;
+        width:4px;
+        } 
+        #enzi-data-table-container::-webkit-scrollbar-track{
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+        }
+        #enzi-data-table-container::-webkit-scrollbar-thumb{
+        background: -webkit-linear-gradient(top, #c3c3d2 1%,#c3c3d2 100%);
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+        }
+        .hightlight-row{
+        background: #e6e8ed !important;
+        }
+        .strike-through{
+        text-decoration: line-through;
+        color: gray;
+        }
+        .hightlight-row:hover > td{
+        background: #eaeaea !important;
+        }
+        .slds-table--bordered{
+        border-left: 1px solid rgb(217, 219, 221);
+        }
+        lightning-primitive-bubble{
+        z-index: 10000 !important;
+        }
+    </style>
+    <div class="slds-grid slds-wrap" style="width:100%;">
+        <aura:if isTrue="{!!empty(v.caption)}">
+            <div class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2" style="padding:5px;color:#54698d;" role="group">
+                <aura:if isTrue="{!v.actions.length==0}">
+                    <span class="slds-icon_container slds-text-heading_small slds-p-left_small" title="{! v.alternateText?v.alternateText:''}">
+                        <lightning:icon size="x-small" iconName="{!v.icon}"></lightning:icon>&nbsp;&nbsp;
+                        <h3 style="font-size:15px;">
+                            {!v.caption}
+                            <aura:if isTrue="{!v.showCaptionTooltip}">
+                                &nbsp;&nbsp;<lightning:helptext content="{!v.captionTooltipText}" style="position: relative;bottom: 7px;" />
+                            </aura:if>
+                        </h3>
+                    </span>
+                    <aura:set attribute="else">
+                        <div class="slds-button-group" role="group">
+                            <aura:iteration items="{!v.actions}" var="action">
+                                <button class="slds-button slds-button_neutral" onclick="{!action.action}">{!action.label}</button>
+                            </aura:iteration>
+                        </div>
+                    </aura:set>
+                </aura:if>            
+            </div>
+        </aura:if>
+        <div id="searchBar" class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--5-of-5" style="padding:1px;line-height: 30px;">
+            <div class="slds-grid slds-wrap slds-float--left">
+                <div class="{!'slds-size--8-of-10 '+(v.showSearch?'':'slds-hide')}" style="padding-right:1px;" >
+                    <div class="slds-form-element">
+                        <div id="SearchBoxSize" class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left-right">
+                            <lightning:icon class="leftIcon" iconName="utility:search" size="xx-small"/>
+                            <input type="search" class="slds-input" placeholder="{!(v.placeholder) ? v.placeholder : 'Search...'}" onkeyup="{!c.search}" value="{!v.keyword}" />
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <div class="slds-grid slds-wrap slds-float--right">
+                <p id="pagination" class="{!v.showPagination?'':'slds-hide'}" style="color: #6b6d70;margin:auto;">&nbsp;Records Per Page&nbsp;</p>
+                <div class="{!'slds-size--'+(v.showSearch?'2':'10')+'-of-10 '+(v.showPagination?'':'slds-hide')}" style="margin-top:2px;">
+                    <select class="slds-select" onchange="{!c.pageSizeChanges}">
+                        <aura:iteration items="{!v.pageSizes}" var="size">
+                            <option selected="{!size==v.pageSize?'selected':''}">{!size}</option>
+                        </aura:iteration>
+                    </select>
+                </div>               
+            </div>
+        </div>
+        <div class="{!'slds-size--1-of-1 slds-scrollable slds-grow '+(v.visibleItems?'visibleItem':'visibleScroll')}" style="padding:5px 0px;" id="enzi-data-table-container">
+            <table class="{!'slds-scrollable slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal '+(v.setBorder?'slds-table_col-bordered':'')}">
+                <thead>
+                    <tr class="slds-text-title--caps ">
+                        <th class="{!'slds-cell-shrink '+(v.showMultiselect?'':'slds-hide')}" scope="col" style="display: table-column;">
+                            <label class="{!'slds-checkbox '+(v.hideCheckAll ?'slds-hide':'')}">
+                                <input id="selectAll" type="checkbox" class="slds-assistive-text " name="options" onclick="{!c.selectAll}"/>
+                                <span class="slds-checkbox--faux checkboxBorder"></span>
+                                <span class="slds-assistive-text">Select All</span>
+                            </label>
+                        </th>
+                        <aura:iteration items="{!v.describedFields}" var="field">
+                            <th class="{!'slds-is-sortable '+(field.shrink=='true'?'slds-cell-shrink':'')}" scope="col" style="{!'padding:1px;'+(v.setBorder?'border: 1px solid rgb(217, 219, 221)':'')}" data-field="{!field.apiName?field.apiName:field.name}" data-type="{!field.type}" data-sort="{!field.sort}" onclick="{!c.sortByName}">
+                                <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset" tabindex="0">
+                                    <span class="slds-assistive-text">Sort </span>
+                                    <div class="" title="{!(field.title?field.title:field.label)}">
+                                        <aura:unescapedHtml value="{!field.label}"/>
+                                    </div>
+                                    <div class="slds-icon_container" style="{!'visibility:'+(v.sortBy==(field.apiName?field.apiName:field.name)?'visible':'hidden')}">
+                                        <lightning:icon iconName="{!'utility:'+(v.sortOrder=='asc'?'arrowup':'arrowdown')}" size="xx-small"></lightning:icon>
+                                    </div>
+                                    <span class="slds-assistive-text" aria-live="assertive" aria-atomic="true"></span>
+                                    <div class="{!'slds-icon_container ' +(field.showtooltip=='true' ? '':'slds-hide')}" >
+                                        <lightning:helptext id="helpText11" content="{!field.tooltiptext}" /> 
+                                    </div>
+                                </a>
+                            </th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.filteredRecords}" var="record" indexVar="index">
+                        <tr class="{!'slds-hint-parent '+(record.selected?'slds-is-selected':'')}" data-index="{!index}">
+                            <td class="slds-cell-shrink " data-label="Select Row" style="{!(v.showMultiselect?'':'display:none;')}">
+                                <label class="slds-checkbox ">
+                                    <input type="checkbox" class="slds-assistive-text " name="options" onclick="{!c.selectRow}" id="{!'checkbox:'+index}" checked="{!record.selected}"/>
+                                    <span class="slds-checkbox--faux checkboxBorder"></span>
+                                    <span class="slds-assistive-text">Select Row</span>
+                                </label>
+                            </td>
+                            <aura:iteration items="{!v.describedFields}" var="field">
+                                <td data-label="{!(field.title?field.title:field.label)}" style="{!v.setBorder?'border: 1px solid rgb(217, 219, 221);':''}">
+                                    <div class="" data-field="{!field.name}">
+                                        <c:EnziDynamicBinder list="{!v.filteredRecords}" index="{!index}" obj="{!record}" col="{!v.records?(v.records.length==0?field.apiName:field.name):field.apiName}" type="{!field.type}" isNameField="{!field.nameField}" field="{!field}"></c:EnziDynamicBinder>
+                                    </div>
+                                </td>
+                            </aura:iteration>
+                        </tr>
+                    </aura:iteration>
+                    <tr class = "slds-hint-parent" style = "{!'display:'+(v.filteredRecords.length==0?'contents':'none')}">
+                        <td data-label = "Select Row" colspan = "{!v.describedFields.length+1}" style = "{!(v.setBorder ? 'border: 1px solid rgb(217, 219, 221);' : '')}">
+                            <span style = "font-weight:bold;">No records to display.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="{!'slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 mobileCenter '+(v.showPagination?(v.filteredRecords.length==0?'slds-hide':''):'slds-hide')}" style="padding:5px">
+            Showing {!((v.currentPage * v.pageSize)-v.pageSize)+1}-{!((v.currentPage * v.pageSize)-v.pageSize)+v.filteredRecords.length} of {!v.totalRecords} records...
+        </div>
+        <div class="{!'slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 mobileCenter '+(v.showPagination?(v.filteredRecords.length==0?'slds-hide':''):'slds-hide')}" style="padding:5px;text-align:right;padding-right: 0px;">
+            <button class="slds-button slds-button--neutral" style="{!'height:32px;transform:scaleX(-1);'+(v.currentPage==1?'background-color: #e4e0e0;cursor:not-allowed;':'')}" onclick="{!c.first}" disabled="{!v.currentPage==1?'disabled':''}"><lightning:icon iconName="utility:breadcrumbs" size="x-small" /></button>
+            <button class="slds-button slds-button--neutral" style="{!'height:32px;'+(v.currentPage==1?'background-color: #e4e0e0;cursor:not-allowed;':'')}" onclick="{!c.prev}" disabled="{!v.currentPage==1?'disabled':''}"><lightning:icon iconName="utility:left" size="x-small"/></button>
+            <select class="slds-select" style="width: 50px;height: 32px;margin: 0px 4px;" onchange="{!c.pageChanged}">
+                <aura:iteration items="{!v.pages}" var="page">
+                    <option selected="{!page==v.currentPage?'selected':''}">{!page}</option>
+                </aura:iteration>
+            </select>
+            <button class="slds-button slds-button--neutral" style="{!'height:32px;'+((v.pages.length>0?v.currentPage:0)==v.pages.length?'background-color: #e4e0e0;cursor:not-allowed;':'')}" onclick="{!c.next}" disabled="{!(v.pages.length>0?v.currentPage:0)==v.pages.length?'disabled':''}"><lightning:icon iconName="utility:right" size="x-small"/></button>
+            <button class="slds-button slds-button--neutral" style="{!'height:32px;'+((v.pages.length>0?v.currentPage:0)==v.pages.length?'background-color: #e4e0e0;cursor:not-allowed;':'')}" onclick="{!c.last}" disabled="{!(v.pages.length>0?v.currentPage:0)==v.pages.length?'disabled':''}"><lightning:icon iconName="utility:breadcrumbs" size="x-small"/></button>
+        </div>
+    </div>
+</aura:component>

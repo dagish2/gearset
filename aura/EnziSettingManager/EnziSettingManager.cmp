@@ -1,0 +1,274 @@
+<aura:component >
+	<aura:attribute name="settingId" type="List" default="[]" />
+    <aura:attribute name="currentSetting" type="Object" />
+    <aura:attribute name="oldSetting" type="Map" default="{}" />
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="oldData" type="Object" />
+    <aura:attribute name="currentHistory" type="List" default="[]" />
+    <aura:attribute name="actions" type="List"/>
+    <aura:attribute name="showActions" type="boolean" default="false"/>
+    <aura:attribute name="screenHeight" type="Integer"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.data}" action="{!c.dataChanged}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:EnziHeader sObjectName="Setting" pageName="Setting Manager" iconName="custom:custom67" actions="{!v.actions}" showActions="{!v.showActions}"></c:EnziHeader>
+    <style>
+        .leftIcon {
+        position: absolute;
+        top: 5px;
+        left: 16px;
+        }
+        .slds-scope .slds-button--success {
+        color:white;
+        }        
+    </style> 
+    <aura:if isTrue="{!!empty(v.settingId)}">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-p-horizontal_small slds-size_1-of-1">
+                <aura:if isTrue="{!v.currentSetting!=undefined}">
+                    <lightning:tabset >
+                        <lightning:tab >
+                            <aura:set attribute="label">
+                                Details
+                            </aura:set>
+                            <div class="slds-grid slds-wrap" style="padding:10px;padding-top:0px">
+                                <div class="slds-size_1-of-2" style="padding-right:5px">
+                                    <c:EnziField sObjectName="Setting__c" fieldName="Name" value="{!v.currentSetting.Name}"></c:EnziField>
+                                </div>
+                                <div class="slds-size_1-of-2" style="padding-left:5px">
+                                    <c:EnziField sObjectName="Setting__c" fieldName="Type__c" value="{!v.currentSetting.Type__c}" disabled="true" defaultDisabled="true"></c:EnziField>
+                                </div>
+                                <aura:if isTrue="{!v.currentSetting.Type__c=='Field Mappings'}">
+                                    <div class="slds-size_1-of-2" style="padding-right:5px">
+                                        <c:EnziField sObjectName="Setting__c" fieldName="Source_Object__c" value="{!v.currentSetting.Source_Object__c}" disabled="true" defaultDisabled="true"></c:EnziField>
+                                    </div>
+                                    <div class="slds-size_1-of-2" style="padding-left:5px">
+                                        <c:EnziField sObjectName="Setting__c" fieldName="Destination_Object__c" value="{!v.currentSetting.Destination_Object__c}" disabled="true" defaultDisabled="true"></c:EnziField>
+                                    </div>
+                                </aura:if>
+                                <div class="slds-size_1-of-1">
+                                    <c:EnziField sObjectName="Setting__c" fieldName="Description__c" value="{!v.currentSetting.Description__c}"></c:EnziField>
+                                </div>
+                                <div class="slds-size_1-of-2" style="padding-top:5px">
+                                    Created By
+                                    <a href="{!'/'+v.currentSetting.CreatedBy.Id}">{!v.currentSetting.CreatedBy.Name}</a>&nbsp; <ui:outputDateTime value="{!v.currentSetting.CreatedDate}" format="MM/DD/YYYY hh:mm a"></ui:outputDateTime>
+                                </div>
+                                <div class="slds-size_1-of-2" style="text-align:right;padding-top:5px">
+                                    Last Modified By
+                                    <a href="{!'/'+v.currentSetting.LastModifiedBy.Id}">{!v.currentSetting.LastModifiedBy.Name}</a>&nbsp;<ui:outputDateTime value="{!v.currentSetting.LastModifiedDate}" format="MM/DD/YYYY hh:mm a"></ui:outputDateTime>
+                                </div>
+                            </div>
+                            <c:SettingManagerFooter settingId="{!v.settingId}" save="{!c.saveInfo}" discard="{!c.cancel}"></c:SettingManagerFooter>
+                        </lightning:tab>
+                        <aura:if isTrue="{!and(v.oldSetting.Type__c!='Field Mappings',and(v.oldSetting.Name!='User/Queue Journey Creation',and(v.oldSetting.Name!='Lead:Lead and Lead Source Details',v.oldSetting.Name!='TriggerSettings')))}">
+                            <lightning:tab >
+                                <aura:set attribute="label">
+                                    Data
+                                </aura:set>
+                                <div style="{!'height:'+(v.screenHeight-220)+'px;overflow-y:auto'}">
+                                    <c:EnziJsonEditor data="{!v.data}" key="{!v.currentSetting.Name}"></c:EnziJsonEditor>
+                                    <c:SettingManagerFooter settingId="{!v.settingId}" save="{!c.saveData}" discard="{!c.revertData}"></c:SettingManagerFooter>                            
+                                </div>
+                            </lightning:tab>
+                        </aura:if>
+                        <aura:if isTrue="{!v.oldSetting.Name=='TriggerSettings'}">
+                            <lightning:tab >
+                                <aura:set attribute="label">
+                                    Trigger Settings
+                                </aura:set>
+                                <c:TriggerSettings settingId="{!v.currentSetting.Id}" settingData="{!v.currentSetting.Data__c}" refreshActivities="{!c.refreshActivities}" screenHeight="{!v.screenHeight}"></c:TriggerSettings>
+                            </lightning:tab>
+                        </aura:if>
+                        <aura:if isTrue="{!v.oldSetting.Name=='User/Queue Journey Creation'}">
+                            <lightning:tab >
+                                <aura:set attribute="label">
+                                    User/Queue Journey Creation
+                                </aura:set>
+                                <c:GenerateJourney settingId="{!v.currentSetting.Id}" refreshActivities="{!c.refreshActivities}"></c:GenerateJourney>
+                            </lightning:tab>
+                        </aura:if>
+                        <aura:if isTrue="{!v.oldSetting.Name=='Lead:Lead and Lead Source Details'}">
+                            <lightning:tab >
+                                <aura:set attribute="label">
+                                    Lead and Lead Source Details
+                                </aura:set>
+                                <c:GenerateJourneyLeadSourceOrDetails settingId="{!v.currentSetting.Id}" refreshActivities="{!c.refreshActivities}"></c:GenerateJourneyLeadSourceOrDetails>
+                            </lightning:tab>
+                        </aura:if>
+                        <aura:if isTrue="{!v.oldSetting.Type__c=='Field Mappings'}">
+                            <lightning:tab >
+                                <aura:set attribute="label">
+                                    Field Mappings
+                                </aura:set>
+                                <c:EnziFieldMappings settingId="{!v.currentSetting.Id}" refreshActivities="{!c.refreshActivities}"></c:EnziFieldMappings>
+                            </lightning:tab>
+                        </aura:if>
+                        <lightning:tab >
+                            <aura:set attribute="label">
+                                Activities
+                            </aura:set>
+                            <aura:if isTrue="{!v.currentHistory.length!=0}">
+                                <div style="{!'height:'+(v.screenHeight-160)+'px;overflow-y:auto'}">
+                                    <aura:iteration items="{!v.currentHistory}" var="history">
+                                        <div class="slds-feed" style="margin:0px;max-width:100%">
+                                            <ul class="slds-feed__list">
+                                                <li class="slds-feed__item" style="padding-bottom:0px">
+                                                    <article class="slds-post">
+                                                        <header class="slds-post__header slds-media">
+                                                            <div class="slds-media__figure">
+                                                                <a href="javascript:void(0);" class="slds-avatar slds-avatar_circle slds-avatar_large">
+                                                                    <img alt="{!history.User__r.Name}" src="{!history.User__r.SmallPhotoUrl}" title="{!history.User__r.Name}" style="height:100%"/>
+                                                                </a>
+                                                            </div>
+                                                            <div class="slds-media__body">
+                                                                <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                                                    <p>
+                                                                        <a href="{!'/'+history.User__c}" title="{!history.User__r.Name}">{!history.User__r.Name}</a>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="slds-text-body_small">
+                                                                    <a href="javascript:void(0);"  class="slds-text-link_reset"><ui:outputDatetime value="{!history.CreatedDate}"></ui:outputDatetime></a>
+                                                                </p>
+                                                            </div>
+                                                        </header>
+                                                        <div class="slds-post__content slds-text-longform" style="border-bottom: 1px solid;border-color: gainsboro;margin-bottom:0px">
+                                                            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                                                <thead>
+                                                                    <tr class="slds-text-title_caps">
+                                                                        <th scope="col" style="width:4%">
+                                                                            <div class="slds-truncate" title="Index"></div>
+                                                                        </th>
+                                                                        <th scope="col" style="width:60%">
+                                                                            <div class="slds-truncate" title="Path">Path</div>
+                                                                        </th>
+                                                                        <th scope="col">
+                                                                            <div class="slds-truncate" title="Message">Message</div>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <aura:iteration items="{!history.activities}" var="activity" indexVar="index">
+                                                                        <tr>
+                                                                            <td data-label="Sr.No.">
+                                                                                <div class="slds-truncate">#{!index+1}</div>
+                                                                            </td>
+                                                                            <td data-label="Path">
+                                                                                <div class="slds-truncate">{!activity.path}</div>
+                                                                            </td>
+                                                                            <td data-label="Message">
+                                                                                <div class="slds-truncate">{!activity.msg}&nbsp;{!activity.type=='string'?activity.data:''}</div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </aura:iteration>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </article>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </aura:iteration>
+                                </div>
+                                <aura:set attribute="else">
+                                    <article class="slds-card">
+                                        <div class="slds-card__body slds-p-around_small" style="width:auto;letter-spacing:2px;">
+                                            <span>
+                                                <lightning:icon size="small" iconName="utility:info_alt"></lightning:icon>
+                                                &nbsp;&nbsp;No History in last 30 days !
+                                            </span>
+                                        </div>
+                                    </article>
+                                </aura:set>
+                            </aura:if> 
+                        </lightning:tab>
+                        <!--<aura:if isTrue="{!and(v.oldSetting.Type__c!='Field Mappings',and(v.oldSetting.Name!='User/Queue Journey Creation',and(v.oldSetting.Name!='Lead:Lead and Lead Source Details',v.oldSetting.Name!='TriggerSettings')))}">
+                            <lightning:tab >
+                                <aura:set attribute="label">
+                                    Wrapper
+                                </aura:set>
+                                <c:EnziJsonWrapper JSONObj="{!v.currentSetting.Data__c}" className="{!v.currentSetting.Name}"></c:EnziJsonWrapper>
+                            </lightning:tab>
+                        </aura:if>-->
+                    </lightning:tabset>
+                    <aura:set attribute="else">
+                        <article class="slds-card" style="margin-top:4px">
+                            <div class="slds-card__header slds-grid">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-standard-contact" title="description of icon when needed">
+                                            <lightning:icon iconName="custom:custom67"></lightning:icon>
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <h2>
+                                            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                                                <span class="slds-text-heading_small">No setting is selected.</span>
+                                            </a>
+                                        </h2>
+                                    </div>
+                                </header>
+                            </div>
+                            <div class="slds-card__body"></div>
+                            <footer class="slds-card__footer"></footer>
+                        </article>
+                    </aura:set>
+                </aura:if> 
+            </div>
+        </div>
+        <aura:set attribute="else">
+            <aura:if isTrue="{!not(v.settingId)}">
+                <div class="slds-card" style="width: 50%;margin: auto;margin-top: 20px;">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container" title="sync icon">
+                                    <!--<lightning:icon iconName="utility:sync"/>-->
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2>
+                                    <span class="slds-text-heading_small">Override all settings from pre-prod to current instance</span>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner slds-m-around_medium">
+                        <ul style="list-style-type:disc">
+                            <li>Sync all setting from pre-prod instance will override all the settings into current instance.</li>
+                            <li>It updates data for existing settings and insert new setting if setting does not exist on current instance.</li>
+                            <li>Do if you really need to override all the settings from pre-prod.</li>
+                            <li>This can not be undone.</li>
+                        </ul>
+                    </div>
+                    <footer class="slds-card__footer slds-align_absolute-center">
+                        <c:EnziButton id="syncAllSetting"
+                                      label="Start Sync"
+                                      type="brand"
+                                      leftIcon="utility:sync"
+                                      click="{!c.syncAllData}">
+                        </c:EnziButton>
+                    </footer>
+                </div>
+                <aura:set attribute="else">
+                    <div class="slds-card" style="width: 50%;margin: auto;margin-top: 20px;">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container" title="sync icon">
+                                        <!--<lightning:icon iconName="utility:sync"/>-->
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2>
+                                        <span class="slds-text-heading_small">No setting is selected.</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                    </div>
+                </aura:set>
+            </aura:if>
+        </aura:set>
+    </aura:if>
+</aura:component>

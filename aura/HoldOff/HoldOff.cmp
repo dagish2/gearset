@@ -1,0 +1,16 @@
+<aura:component controller="HoldReservableController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" >
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="sourcePage" type="String" default="salesforce_reservable_hold"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <div aura:id="div2" class="slds-grid slds-wrap" >
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-text-heading_medium" style="border-bottom: 1px solid #ccc6c6;padding-bottom: 8px;">
+            <span>Are you sure you want to release this hold?</span>
+        </div>
+        <div class="slds-p-top_large slds-align_absolute-center slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+            <c:EnziModalFooter >
+                <c:EnziButton label="Save" type="brand" click="{!c.doInit}" leftIcon="utility:save"></c:EnziButton>
+                <c:EnziButton label="Cancel" type="destructive" click="{!c.closePopUp}" leftIcon="utility:close"></c:EnziButton>
+            </c:EnziModalFooter>
+        </div>
+    </div>
+</aura:component>

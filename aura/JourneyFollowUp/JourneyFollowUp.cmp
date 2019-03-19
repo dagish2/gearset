@@ -1,0 +1,35 @@
+<aura:component >
+    <aura:attribute name="journeyId" type="List" />
+    <aura:attribute name="userCurrentTime" type="List" />
+    <aura:attribute name="journeyName" type="String" />
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="currentDate" type="Object" />   
+    
+    <aura:attribute name="objFollowup" type="Map" default="{}" />   
+    <aura:attribute name="errors" type="List" default="[]" />
+    <aura:attribute name="valid" type="Boolean" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:EnziUtils aura:id="utils"/>  
+    <c:EnziHeader sObjectName="Journey" pageName="{!v.journeyName}" iconName="custom:custom20" />
+    <aura:handler name="change" value="{!v.objFollowup.followUpAfter}" action="{!c.generateFollowupDate}" />   
+    <div style="padding:20px">
+        <title>Journey Follow Up Page></title>
+        <c:WeFormValidator errors="{!v.errors}" valid="{!v.valid}"></c:WeFormValidator>
+            <div class=" slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-top_x-small" >
+                <c:WeField type="select" name="FollowUpAfter" label="Follow-Up After" options="{!v.options}" errors="{!v.errors}" validate="true"  value="{!v.objFollowup.followUpAfter}" /> 
+            </div>
+            <div class=" slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-top_x-small" >
+                <c:WeField sObjectName="Journey__c" fieldName="NMD_Next_Contact_Date__c" min="{!v.currentDate}" label="Next Follow-Up On?" errors="{!v.errors}" validate="true" required="true"  value="{!v.objFollowup.followupOn}"/>
+            </div>
+            
+            <div class=" slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-top_x-small" >
+                <c:WeField type="textarea" label="Notes/Comments" errors="{!v.errors}" validate="true" value="{!v.objFollowup.comments}"/>
+            </div>
+            <div class="slds-text-align--center slds-p-top_medium" role="main" style="width:100%">
+                <c:EnziButton label="Save" type="brand" click="{!c.save}" disabled="{!(!v.valid)}"></c:EnziButton>
+                <c:EnziButton label="Close" type="neutral" click="{!c.cancel}"></c:EnziButton>
+            </div>
+        
+    </div>     
+</aura:component>

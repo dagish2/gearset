@@ -1,0 +1,17 @@
+<apex:page standardController="Account">
+  <head>
+      <apex:includeScript value="{!URLFOR($Resource.weworkresource,'/vendor_js/jquery/jquery.js')}"/>
+      <script>
+          
+          $(function() {
+              console.log('Donot Call ');
+              //console.log('Selected Task :::  ' + selectedTask );
+          });
+      </script>
+  </head>
+  <h1>Do Not Call</h1>
+    <div class="">
+      <label>Are you sure want to complete this task and do not want to call this contact again</label>
+      <button>Yes</button><button>No</button>
+    </div>
+</apex:page>

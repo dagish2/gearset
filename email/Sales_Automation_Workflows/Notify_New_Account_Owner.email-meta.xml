@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notify New Account Owner they have an account in their name</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Notify New Account Owner</name>
+    <style>freeForm</style>
+    <subject>{!Account.Name} has been assigned to you</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

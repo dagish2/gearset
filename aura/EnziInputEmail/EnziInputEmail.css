@@ -1,0 +1,13 @@
+.THIS .defaultDisabled .viewField{
+	border-left:0px;
+    border-top:0px;
+    border-right:0px;
+    border-radius:0px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.THIS .viewField{
+    background-color:rgb(233, 234, 236)
+}

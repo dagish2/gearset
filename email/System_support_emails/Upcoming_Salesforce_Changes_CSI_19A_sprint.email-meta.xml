@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User announcements update for CSI 19A release- Commitment terms</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes CSI 19A sprint</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Update to commitments</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+This week&apos;s release includes bug fixes and performance improvements.
+In addition, this release contains changes to contract commitment terms
+
+Commitment terms
+Commitment terms will now be updated on your opportunities from member agreements.  Commitment terms can be found in the Member Success section of your opportunities.
+
+If you have any questions or concerns, please reach out to salesforcesupport@wework.com
+
+Warmly,
+Susie</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

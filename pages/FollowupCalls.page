@@ -1,0 +1,101 @@
+<apex:page controller="WeworkEngine" standardStylesheets="false" sidebar="false" showHeader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}"  Vendor_CSS="" Vendor_JS="jquery/xdate.js" Application_JS="error-manager.js,followup-calls.js" Application_CSS="" />
+    <apex:remoteObjects >
+        <apex:remoteObjectModel name="Task" jsShorthand="followupCall" fields="Id,Subject,Status,ActivityDate,WhatId">
+        </apex:remoteObjectModel>
+        <apex:remoteObjectModel name="Journey__c" jsShorthand="journey" fields="Id,NMD_Next_Contact_Date__c">
+        </apex:remoteObjectModel>
+    </apex:remoteObjects>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>Followup Calls</title>
+        <style>
+            .divider {
+                height: 10px;
+                width: 50%;
+            }
+            #field-comment{
+                resize: vertical;
+            }
+            #next-folowup-date {
+                cursor: pointer;
+                background-color: white;
+                background: white url(../images/calendar.png) left no-repeat;
+                background-position-x: 97%;
+                background-position: 97%;
+            }
+            label{
+                margin-bottom: 0px;
+                margin-top: 5px;
+            }
+            .btn{
+                width: 85px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper" ng-app="followupcallApp" ng-controller="followupcallAppController" ng-cloak="true">
+            <div id="page-content-wrapper" >
+                <div class="row divider"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="main-container" ng-cloak="">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12"><i class="fa fa-plane fa-2x" aria-hidden="true"></i><label class="field-lbl ng-cloak" ng-cloak="true">&nbsp;{{journey.Name}}</label></div>
+                                </div>
+                                <div class="row divider"></div>
+                                <div class="row">
+                                    <div class="col-md-2"><label class="field-lbl">Follow-Up After</label></div>
+                                    <div class="col-md-3"><select class="form-control" ng-model="followupAfter" ng-options="option as option for option in followupOptions" ng-change="showNextFollowupDate()"></select></div>
+                                    <div class="col-md-2"><label class="field-lbl">Next Follow-Up On?</label></div>
+                                    <div class="col-md-3"><input type="text" id="next-folowup-date" class="form-control" ng-model="nextFollowupDate" readonly="true"/></div>
+                                </div>
+                                <div class="row"><label></label></div>
+                                <div class="row">
+                                    <div class="col-md-2"><label class="field-lbl">Summary/Comments</label></div>
+                                    <div class="col-md-10"><textarea id="field-comment" ng-model="comment" class="form-control" maxlength="255"></textarea></div>
+                                </div>
+                                <div class="row divider"></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button Id="view-save" class="btn btn-primary" ng-click="saveFollowup()" ng-disabled="nextFollowupDate==undefined">Save <i class="fa fa-spinner fa-spin" ng-show="isSaveInProgress"></i></button>
+                                        <button Id="view-cancel" class="btn btn-primary" ng-click="cancelFollowup()">Close</button>
+                                        <!--<button Id="view-cancel" class="btn btn-primary" ng-click="openDonotCall()">Unqualify</button>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+    //function init(){
+    //       var windowWidth = 400;
+    //var windowHeight = 200;
+    //var xPos = (screen.width/2) - (windowWidth/2);
+    //var yPos = (screen.height/2) - (windowHeight/2);
+    //window.open("https://c.cs45.visual.force.com/apex/FollowupCalls","POPUP","width=" 
+    //+ windowWidth+",height="+windowHeight +",left="+xPos+",top="+yPos);
+        //}
+        
+        
+        $(function() {
+            $( "#next-folowup-date" ).datepicker({ dateFormat: "mm/dd/yy",             
+                                                changeYear: true,
+                                                constrainInput: true,
+                                                changeMonth: true,
+                                                gotoCurrent: true,
+                                              });
+        });        
+        $(window).unload(function(){
+            parent.window.opener.refreshJourneyDetails();
+        });    
+    </script>
+</apex:page>

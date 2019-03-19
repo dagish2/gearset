@@ -1,0 +1,71 @@
+<!-- header -->
+<table bgcolor="#24272a" border="0" cellpadding="0" cellspacing="0" width="720">
+	<tbody>
+		<tr>
+			<td>
+				<a href="http://www.wework.com"><img alt="WeWork" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwk/37722/4854/wework_header01.jpg" style="display:block;" width="130" /></a></td>
+			<td>
+				<img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwf/37722/4850/wework_header02.jpg" style="display:block;" width="463" /></td>
+			<td pardot-region="facebook">
+				<a href="https://www.facebook.com/WeWork"><img alt="" border="0" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwp/37722/4856/wework_header03.jpg" style="display:block;" width="29" /></a></td>
+			<td pardot-region="twitter">
+				<a href="https://twitter.com/wework"><img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwm/37722/4858/wework_header04.jpg" style="display:block;" width="27" /></a></td>
+			<td pardot-region="instagram">
+				<a href="http://instagram.com/wework"><img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwr/37722/4860/wework_header05.jpg" style="display:block;" width="27" /></a></td>
+			<td pardot-region="pinterest">
+				<a href="http://www.pinterest.com/pinterest/"><img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwy/37722/4864/wework_header06.jpg" style="display:block;" width="28" /></a></td>
+			<td>
+				<img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rww/37722/4866/wework_header07.jpg" style="display:block;" width="16" /></td>
+		</tr>
+	</tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="margin-top:15px" width="720">
+	<tbody>
+		<tr>
+			<td height="314" style="width:70px;">
+				<span id="cke_bm_230S" style="display: none;">&nbsp;</span><span id="cke_bm_231S" style="display: none;">&nbsp;</span></td>
+			<td pardot-region="main-text">
+				
+<p style="font-size:14px;"><span style="background-color: rgb(255, 255, 255); font-family: Helvetica, sans-serif;">Hi {!Tour_Outcome__c.Tour_With__c},</span> </p>
+
+<p style="font-size:14px; font-family: Helvetica, sans-serif"><span style="background-color: rgb(255, 255, 255);">Thanks for your interest in WeWork, the platform for creators. </span></p> <p style="font-size:14px; font-family: Helvetica, sans-serif"><span style="background-color: rgb(255, 255, 255);">We're thrilled that you're thinking about becoming a member and look forward to showing you around.</span></p>
+
+<p style="font-size:14px; font-family: Helvetica, sans-serif"><span style="background-color: rgb(255, 255, 255);">You're all set for a tour at {!Tour_Outcome__c.Building_No_City__c} on {!Tour_Outcome__c.Tour_Date__c} at {!Tour_Outcome__c.Start_Time__c}! You can find us at {!Tour_Outcome__c.Location_Address__c}. When you arrive at the building, please {!Tour_Outcome__c.Location_Special_Instructions__c}.</span></p>
+
+<p style="font-size:14px; font-family: Helvetica, sans-serif"><span style="background-color: rgb(255, 255, 255);"> See you soon!</span> </p>
+
+<p style="font-size:14px;"><span style="font-family: Helvetica, sans-serif; background-color: rgb(255, 255, 255);">The WeWork Team </span></p> 
+
+<p style="font-size:14px;"><span style="font-family: Helvetica, sans-serif; background-color: rgb(255, 255, 255);">  
+<a href="mailto:joinus@wework.com?Subject=" target="_top">
+joinus@wework.com</a> <br />
+{!Tour_Outcome__c.Location_Phone_Number__c} </span></p>
+<br>
+
+<hr><br>
+				
+<p style="font-size:14px;"><span style="background-color: rgb(255, 255, 255); font-family: Helvetica, sans-serif;">Salut {!Tour_Outcome__c.Tour_With__c},</span> </p>
+
+<p style="font-size:14px; font-family: Helvetica, sans-serif"><span style="background-color: rgb(255, 255, 255);">Merci pour l'intérêt porté à WeWork, la plateforme de créateurs</span>.</p> <p style="font-size:14px; font-family: Helvetica, sans-serif"><span style="background-color: rgb(255, 255, 255);">Nous sommes ravis que vous considérez devenir membre et nous avons hâte de vous rencontrer.</span></p>
+
+<p style="font-size:14px; font-family: Helvetica, sans-serif"><span style="background-color: rgb(255, 255, 255);">Nous sommes prêts à vous faire visiter notre bureau de {!Tour_Outcome__c.Building_No_City__c} le {!Tour_Outcome__c.Tour_Date__c} au {!Tour_Outcome__c.Start_Time__c}! Vous nous trouverez à {!Tour_Outcome__c.Location_Address__c}. Quand vous arriver, {!Tour_Outcome__c.Location_Special_Instructions_French_Canadian__c}.</span></p>
+
+<p style="font-size:14px; font-family: Helvetica, sans-serif"><span style="background-color: rgb(255, 255, 255);"> À bientôt!  </span></p>
+
+<p style="font-size:14px;"><span style="font-family: Helvetica, sans-serif; background-color: rgb(255, 255, 255);">L'équipe WeWork</span></p> 
+
+<p style="font-size:14px;"><span style="font-family: Helvetica, sans-serif; background-color: rgb(255, 255, 255);">  
+<a href="mailto:joinus@wework.com?Subject=" target="_top">
+joinus@wework.com</a> <br />
+{!Tour_Outcome__c.Location_Phone_Number__c} </span></p>
+		  </td>
+			<td style="width:70px;">
+				<p>&nbsp;
+			  </p>
+				<p>&nbsp;
+			  </p>
+			</td>
+	  </tr>
+	</tbody>
+</table>
+<p>

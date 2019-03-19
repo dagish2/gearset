@@ -1,0 +1,6 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">  
+    <head>
+        <title>Change Opportunity Referral Status</title> 
+    </head>
+    <c:LightningResource component="OpportunityReferralStatusChange" parameters="opportunity_id={!$CurrentPage.parameters.opportunity_id};referral_status={!$CurrentPage.parameters.referral_status};approved_userid={!$CurrentPage.parameters.approved_userid};"></c:LightningResource>
+</apex:page>

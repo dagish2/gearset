@@ -1,0 +1,6 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" title="Manage Tours">    
+    <head>
+        <title>Book Tour</title>
+    </head>
+	<c:LightningResource component="ManageTours" parameters="leadId={!$CurrentPage.parameters.leadId};accountId={!$CurrentPage.parameters.accountId};contactId={!$CurrentPage.parameters.contactId};journeyId={!$CurrentPage.parameters.journeyId};opportunityId={!$CurrentPage.parameters.opportunityId};opportunityRoleId={!$CurrentPage.parameters.opportunityRoleId};buildingId={!$CurrentPage.parameters.buildingId};productLine={!$CurrentPage.parameters.productLine};urlData={!$CurrentPage.parameters.url_Data}"></c:LightningResource>
+</apex:page>

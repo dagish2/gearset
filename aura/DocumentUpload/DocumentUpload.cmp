@@ -1,0 +1,83 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="contentDocumentId" type="Id" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="parentRecord" type="Map" />
+    <aura:attribute name="result" type="List" />
+    <aura:attribute name="allowMultipleFiles" type="Boolean" default="true" />
+    <aura:attribute name="allowedFileTypes" type="String" default="*" />
+    <aura:attribute name="documentFiles" type="List" default="[]" />
+    <aura:attribute name="documentFilesColumns" type="List" default="[]" />
+	<aura:attribute name="allowUpload" type="Boolean" default="true" />
+    <aura:attribute name="allowNewDocument" type="Boolean" default="true" />
+    <aura:attribute name="newDocument" type="Map" />
+    <aura:attribute name="errors" type="Object" />
+    <aura:attribute name="valid" type="Boolean" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <aura:handler name="change" value="{!v.result}" action="{!c.createDontentDocumentLinks}"/> 
+	<c:EnziUtils aura:id="utils" />
+    <style>
+        .slds-scope .slds-modal__container {
+        	padding: 0px !important;
+        }
+        .slds-scope .slds-modal__header {
+        	padding: 5px !important;
+        }
+        .slds-scope .slds-modal__footer{
+        	padding: 5px !important;
+        }
+        .slds-text-heading--medium {
+            font-size: 1rem !important;
+            line-height: 1.25 !important;
+        }
+        .slds-scope .slds-table_bordered, .slds-scope .slds-table--bordered{
+        	border-right: 1px solid rgb(217, 219, 221);	
+        }
+    </style>
+    
+    <div class="slds-grid slds-wrap slds-grid_pull-padded" style="padding: 5px;">
+        <aura:renderIf isTrue="{!v.allowUpload}">
+            <div class="slds-p-horizontal_small slds-size_1-of-1" ondragover="{!c.onDragOver}" ondragleave="{!c.onDragLeave}" ondrop="{!c.onDrop}">
+                <c:EnziFileUpload aura:id="FileUpload" label="{!v.label}" allowMultipleFiles="{!v.allowMultipleFiles}" allowedFileTypes="{!v.allowedFileTypes}" parentId="{!v.recordId}" resultFiles="{!v.result}" contentDocumentId="{!v.contentDocumentId}" />            
+            </div>
+            <div class="slds-p-horizontal_small slds-size_1-of-1">
+                <c:EnziButton label="Finalize Document" type="brand" click="{!c.finalizeDocument}" disabled="{! or(v.parentRecord.Is_Finalized__c, empty(v.documentFiles))}" />
+            </div>
+            <aura:set attribute="else">			
+                <div class="slds-col slds-p-horizontal_medium slds-size_1-of-1">                    
+                    <c:EnziButton label="Finalize Document" type="brand" click="{!c.finalizeDocument}" disabled="{! or(v.parentRecord.Is_Finalized__c, empty(v.documentFiles))}" />
+                    <aura:if isTrue="{!v.allowNewDocument}">
+                        <c:EnziButton label="New Document" type="brand" click="{!c.newDocument}" />
+                    </aura:if>
+                </div>
+            </aura:set>
+        </aura:renderIf> 
+        <div class="slds-grid slds-wrap slds-m-around_medium" style="width:100%;margin-right:1rem; margin-left:1rem;">            
+            <c:EnziDataTable caption="{!v.parentRecord.Type__c=='Versioned'?'Versions':'Files'}" setBorder="true" icon="standard:file" describedFields="{!v.documentFilesColumns}" records="{!v.documentFiles}" showMultiselect="false"></c:EnziDataTable>
+        </div>
+    </div>
+    <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+        <c:EnziModal aura:id="NewDocumentModal" header="New Document" isLarge="true" show="false">        
+            <c:EnziModalContainer >
+                <div class="slds-grid slds-wrap slds-grid--pull-padded" role="main" style="width:100%">
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                        <c:EnziField sObjectName="Document__c" fieldName="Name" value="{!v.newDocument.Name}" required="true" errors="{!v.errors}" />
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                        <c:EnziField sObjectName="Document__c" fieldName="Type__c" value="{!v.newDocument.Type__c}" errors="{!v.errors}" />
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                        <c:EnziField sObjectName="Document__c" fieldName="Extensions_Allowed__c" value="{!v.newDocument.Extensions_Allowed__c}" errors="{!v.errors}" />
+                    </div>                    
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <div class="slds-text-align--center">
+                    <c:EnziButton label="Save" leftIcon="utility:save" type="brand" click="{!c.saveNewDocument}" disabled="{!(!v.valid)}"></c:EnziButton>
+                    <c:EnziButton id="NewDocumentModal" label="Cancel" leftIcon="utility:close" type="destructive" click="{!c.closeModal}"></c:EnziButton>
+                </div>
+            </c:EnziModalFooter>
+        </c:EnziModal>
+    </c:EnziFormValidator>
+</aura:component>

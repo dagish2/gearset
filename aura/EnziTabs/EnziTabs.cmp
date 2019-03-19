@@ -1,0 +1,42 @@
+<aura:component >
+    <aura:attribute name="tabHeaders" type="List" default="[]" />
+    <aura:attribute name="activeTab" type="String" />
+    <aura:attribute name="showScroll" type="Boolean" />
+    <aura:attribute name="type" type="String" default="default" />
+    <aura:handler event="c:EnziTabsChangeEvent" action="{!c.rerenderTabs}"/>
+    <aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>
+    <div class="slds-tabs--default">
+        <ul class="tabContainer">
+            <li style="width:18px;display: inline-flex;">
+                <button class="{!'slds-button slds-button--icon leftSlider '+(v.showScroll?'':'slds-hide')}" title="settings" style="padding: 10px 0px;">
+                    <lightning:icon iconName="utility:chevronleft" size="x-small"></lightning:icon>
+                    <span class="slds-assistive-text">Settings</span>
+                </button>
+            </li>
+            <li style="width: calc(100% - 36px);display: inline-flex;">
+                <ul class="{!'slds-tabs--'+v.type+'__nav'}" role="tablist" style="{!'overflow:hidden;display: -webkit-inline-box;'+(v.showScroll?'margin-left: 0px;margin-right: 0px;;width:100%':'')}">
+                    <aura:iteration items="{!v.tabHeaders}" var="tab" indexVar="index">
+                        <li class="{!'slds-tabs--'+v.type+'__item slds-grid slds-grid--vertical-align-center'}" role="presentation" onclick="{!c.getTab}" id="{!tab.id+'$!!$header'}" title="{!tab.label}" style="padding:0px;margin-right:15px">
+                            <a href="javascript:void(0);" class="{!'slds-tabs--'+v.type+'__link slds-p-horizontal--xx-small'}" role="tab" title="Tab Item 1" aria-selected="true" tabindex="0" id="subtab-tabitem-01" aria-controls="subtab-tabpanel-01">
+                                <span class="slds-truncate" title="{!tab}">{!tab.label}</span>
+                            </a>
+                            <div class="slds-col--bump-left slds-p-left--none slds-p-right--none" style="{!'display:'+(tab.allowDelete?'inline-block':'none')}">
+                                <button class="slds-button slds-button--icon-container slds-button--icon-x-small" title="delete" onclick="{!tab.delete}" id="{!tab.id}">
+                                    <lightning:icon iconName="utility:close" size="xx-small"/>
+                                    <span class="slds-assistive-text">Close {!tab.label}</span>
+                                </button>
+                            </div>
+                        </li>
+                    </aura:iteration>
+                </ul>
+            </li>
+            <li style="width:18px;display: inline-flex;">
+                <button class="{!'slds-button slds-button--icon rightSlider '+(v.showScroll?'':'slds-hide')}" title="settings" style="padding: 10px 0px;">
+                    <lightning:icon iconName="utility:chevronright" size="x-small"></lightning:icon>
+                    <span class="slds-assistive-text">Settings</span>
+                </button>
+            </li>
+        </ul>
+        {!v.body}
+    </div>
+</aura:component>

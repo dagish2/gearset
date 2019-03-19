@@ -1,0 +1,128 @@
+<aura:component controller="BuildingSelectorController">
+    <aura:attribute name="utils" type="Object"/>
+    <aura:attribute name="objSetting" type="Object"/>
+    <aura:attribute name="mapOfMarket" type="Object" />
+    <aura:attribute name="lstSelectedMarkets" type="List" />
+    <aura:attribute name="lstOfAllMarkets" type="List" />
+    <aura:attribute name="mapSelectedMarkets" type="Object" />
+    <aura:attribute name="settingId" type="String"/>
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="selectedMarketId" type="String"/>
+    <aura:attribute name="marketId" type="String"/>
+    <aura:attribute name="relatedUser" type="Object"/>
+    <aura:attribute name="objMarket" type="Object"/>
+    <aura:attribute name="lstDataFields" type="List" default="[]" />
+    <aura:attribute name="lstColumns" type="List" default="[{'label':'Name','apiName':'Name'}]" />
+    <aura:attribute name="lstUserColumns" type="List" default="[{'label':'Name','apiName':'Name'},{'label':'Email','apiName':'Email'}]" />
+    <aura:attribute name="selectedUserId" type="String"/>
+    <aura:attribute name="keyword" type="String"/>
+    <aura:attribute name="object" type="String" default="Group"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.objMarket}" action="{!c.setHeaderFields}" />
+    <aura:handler name="change" value="{!v.marketId}" action="{!c.searchAndAddMarket}" />
+    <aura:handler name="change" value="{!v.selectedUserId}" action="{!c.setUserId}" />
+    <c:EnziUtils aura:id="utils">  </c:EnziUtils>
+    
+    <div id="123"></div>
+    <c:LightningCSS /> 
+    <section class="sidebar" style="background-color: white;">
+        <div>
+            <c:WeField type="reference" sObjectName="Market__c" labelField="Name" valueField="Id" label="Portfolio" value="{!v.marketId}" options="{!v.options}"  />
+        </div>
+        <div class="sidebarLower slds-scrollable_y">
+            <nav>
+                <ul class="slds-list_vertical slds-has-block-links slds-is-selected slds-is-active">
+                    <aura:iteration items="{!v.lstOfAllMarkets}" var="item" indexVar="index"> 
+                        <li id="{!item.Id}" class="{!'list__item '+((v.selectedMarketId==item.Id) ? 'slds-color__background_gray-5':'')}" style="cursor: pointer;" onclick="{! c.getRelatedDetails }">
+                            <span>
+                                <span class="slds-media slds-media--center">
+                                    <span class="slds-media__body">{!item.Name}</span>
+                                    <span class="slds-media__figure--reverse">
+                                        <aura:if isTrue="{!item.selected}">
+                                            <lightning:dynamicIcon type="ellie" alternativeText="Ellie intelligence"/>
+                                            <aura:set attribute="else">
+                                                <lightning:icon iconName="utility:warning" size="x-small" />
+                                            </aura:set>
+                                        </aura:if>
+                                    </span>
+                                </span>
+                            </span>
+                        </li>
+                    </aura:iteration>
+                </ul>
+            </nav>
+        </div>
+    </section>
+    
+    <section style="margin-bottom: 25px;">
+        <div class="slds-modal__container">
+            <aura:if isTrue="{!v.selectedMarketId}">
+                <header class="slds-modal__header">
+                    <h2 id="id-of-modalheader-h2" class="slds-text-heading_medium">Add Assignment</h2>
+                    <p class="slds-m-top_x-small">{!v.currentUser.Name}</p>
+                </header>
+                <div class="slds-grid slds-grow modalbody">
+                    <div class="slds-grid slds-grid_vertical" style="width: 100%;">
+                        <div class="slds-box" style="margin: 25px;margin-top: 14px;padding: 0rem;">
+                            <c:PageHeader title="Market" iconName="standard:location" sObjectName="{!v.objMarket.Name}" pageName="{!v.objMarket.Portfolio_Sales_Manager__r.Name}" dataFields="{!v.lstDataFields}" />
+                        </div>
+                        
+                        <div class="slds-box content">
+                            <div><c:WeUserQueue keyword="{!v.keyword}" object="Group" value="{!v.selectedUserId}" /></div>
+                            <div class="slds-box" style="margin-top: 40px;margin-bottom: 30px;padding: 0;">
+                                <aura:if isTrue="{!v.relatedUser}">
+                                    <table aria-multiselectable="true" class="slds-table slds-no-row-hover slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+                                        <thead>
+                                            <tr class="slds-line-height_reset">
+                                                <aura:iteration items="{! (v.object=='Group' ? v.lstColumns : v.lstUserColumns)}" var="item">
+                                                    <th aria-label="Product Code" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                                                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span class="slds-truncate" title="Product Code">{!item.label}</span>
+                                                            </div>
+                                                        </a>
+                                                    </th>
+                                                </aura:iteration>
+                                                <th aria-label="Product Code" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr aria-selected="false" class="slds-hint-parent">
+                                                <aura:iteration items="{!(v.object=='Group' ? v.lstColumns : v.lstUserColumns)}" var="item">
+                                                    <th scope="row"> 
+                                                        <div class="slds-truncate"><c:EnziDynamicBinder obj="{!v.relatedUser}" col="{!item.apiName}" isNameField="{!item.apiName=='Name'}" /></div>
+                                                    </th>
+                                                </aura:iteration>
+                                                <th scope="row" style="padding-left: 0px;"> 
+                                                    <div class="slds-truncate"><lightning:button label="Remove" iconName="action:remove" onclick="{! c.removeUser }"/></div>
+                                                </th>
+                                            </tr>
+                                       </tbody>
+                                    </table>
+                                    <aura:set attribute="else">
+                                        <div class="slds-align_absolute-center slds-p-around_small" style="background: white;"><lightning:badge label="Please select User/Queue to Add"/></div>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button label="Cancel" iconName="utility:close" title="Cancel" onclick="{! c.cancel }"/>
+                    <lightning:button variant="brand" label="Save" iconName="utility:save" title="Save" onclick="{! c.saveSetting }" />
+                </footer>
+                
+                <aura:set attribute="else">
+                    <div class="slds-align_absolute-center">
+                        <div class="empty-state-container slds-text-align_center">
+                            <img src="/projRes/ui-home-private/emptyStates/noEvents.svg" />
+                            <div class="empty-state-message slds-m-top_medium">Please select Portfolio in left panel to add assignment.</div>
+                        </div>
+                    </div>
+                </aura:set>
+            </aura:if> 
+        </div>
+    </section>
+</aura:component>

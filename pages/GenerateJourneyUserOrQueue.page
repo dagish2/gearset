@@ -1,0 +1,26 @@
+<apex:page controller="WeworkEngine" standardstylesheets="false"
+           sidebar="false" showheader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}"
+                       vendor_css=""
+                       vendor_js="angu-complete/angucomplete-ie8.js,angu-complete/angular-touch.min.js,angu-complete/angucomplete-ie8.css"
+                       application_js="error-manager.js,salesforce.js,common-controls.js,generateJourneySettings.js"
+                       application_css="applicationCSS.css,generateJourneySettings.css" />
+    <!-- <apex:includeScript value="/support/console/25.0/integration.js"/>
+    <script type="text/javascript">
+        sforce.console.setTabTitle('Reference Override');
+    </script> -->
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Generate Journey - User or Queue</title>
+    </head>
+    <body>
+        <div id="spinnerContainer"></div>
+        <div id="wrapper" ng-app="generateJourneyApp" ng-controller="generateJourneyCtrl">
+            <div class="container-fluid">
+                <generate-journey></generate-journey>
+            </div>
+        </div>
+    </body>
+</apex:page>

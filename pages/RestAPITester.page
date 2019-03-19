@@ -1,0 +1,129 @@
+<apex:page standardstylesheets="false" sidebar="false" showheader="false" cache="false" controller="WeworkEngine">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}" vendor_css="" vendor_js="" application_js="apiTestController.js, " application_css="" />
+    <head>
+        <title>REST API Tester</title>
+        <script src="/soap/ajax/10.0/connection.js"></script>
+        <script src="/soap/ajax/10.0/apex.js"></script>
+        <apex:variable value="" var="" rendered="{!$CurrentPage.parameters.local == 'true'}">
+            <link href="https://localhost/we-work/vendor_css/jsonviewer/jquery.json-viewer.css" type="text/css" rel="stylesheet" />
+            <script lang="javascript" src="https://localhost/we-work/vendor_css/jsonviewer/jquery.json-viewer.js"></script>
+            <script lang="javascript" src="https://localhost/we-work/vendor_css/bootstrap/js/ui-bootstrap-tpls.js"></script>
+        </apex:variable>
+        <apex:variable value="" var="" rendered="{!$CurrentPage.parameters.local != 'true'}">
+            <apex:stylesheet value="{!URLFOR($Resource.vendor_css,'/jsonviewer/jquery.json-viewer.css')}" />
+            <apex:includescript value="{!URLFOR($Resource.vendor_css,'/jsonviewer/jquery.json-viewer.js')}" />
+            <apex:includescript value="{!URLFOR($Resource.vendor_css,'/bootstrap/js/ui-bootstrap-tpls.js')}" />
+        </apex:variable>
+        <script>
+            window.sessionId = '{!$Api.Session_ID}';
+            window.currentURL = location.protocol+'//'+'{!currentSandboxPath}';
+            currentURL = currentURL.replace('visual.force', 'my.salesforce');
+            currentURL = currentURL.replace('--c.na43.', '.');
+        </script>
+        <style>
+            .field-lbl {
+                display: block;
+                font-weight: bold;
+            }
+
+            #container-block {
+                margin-top: 60px;
+            }
+
+            textarea {
+                resize: vertical;
+            }
+
+            pre#json-renderer {
+                border: 1px solid #aaa;
+                padding: 0.5em 1.5em;
+            }
+
+            @media (min-width: 1200px) #container-block,.container {
+                width: auto;
+            }
+
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Do Not Remove this div from this lightning components gets session id -->
+        <div>START_OF_SESSION_ID_FOR_LIGHTNING{!$Api.Session_ID}END_OF_SESSION_ID_FOR_LIGHTNING</div>
+        <div id="wrapper" ng-app="restapiTesterApp" ng-controller="restapiTesterAppController">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">REST API Tester</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="container" id="container-block">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="field-lbl">Method Type</label>
+                        <select class="form-control" ng-model="methodType" ng-options="option as option for option in methodTypeOption" ng-change="actionOnMethodTypeChange()"></select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="field-lbl">Service URL</label>
+                        <!-- <input type="text" class="form-control" ng-model="serviceURL" /> -->
+                        <select class="form-control" ng-model="serviceURL" ng-options="option as option for option in allEndPoints" ng-change="actionOnServiceChange()"></select>
+                    </div>
+                </div>
+                <div class="row" ng-show="methodType == 'GET' && (isCustomURL == false || isCustomURL == undefined)">
+                    <div class="col-lg-12">
+                        <label class="field-lbl">Extra Parameters</label>
+                        <input type="text" class="form-control" ng-model="extraParameter" />
+                    </div>
+                </div>
+                <div class="row" ng-show="isCustomURL">
+                    <div class="col-lg-12">
+                        <label class="field-lbl">Custom Service URL</label>
+                        <input type="text" class="form-control" ng-model="customSericeURL" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label class="field-lbl">Request Header</label>
+                        <uib-tabset id="active1" active="active1">
+                            <uib-tab index="$index + 1" ng-repeat="tab in headerTabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+                                <textarea ng-if="tab.elemId=='header-row'" class="form-control" id="{{tab.elemId}}" rows="2" ng-model="tab.content" ng-model-options="{ debounce: 2000 }"></textarea>
+                                <pre ng-if="tab.elemId=='header-json'" id="{{tab.elemId}}">{{tab.content}}</pre>
+                            </uib-tab>
+                            <button style="position: relative;display: block; padding: 12px 10px;cursor: default;background-color: #fff;border: 1px solid #ddd;border-bottom-color: transparent; color: black; border-radius: 5px 5px 0px 0px;" ng-click="toggle('active1')"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                        </uib-tabset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label class="field-lbl">Payload/Body/Input</label>
+                        <uib-tabset id="active2" active="active2">
+                            <uib-tab index="$index + 1" ng-repeat="tab in payloadTabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+                                <textarea ng-if="tab.elemId=='payload-row'" class="form-control" id="{{tab.elemId}}" rows="4" ng-model="tab.content" ng-model-options="{ debounce: 2000 }"></textarea>
+                                <pre ng-if="tab.elemId=='payload-json'" id="{{tab.elemId}}">{{tab.content}}</pre>
+                            </uib-tab>
+                            <button style="position: relative;display: block; padding: 12px 10px;cursor: default;background-color: #fff;border: 1px solid #ddd;border-bottom-color: transparent; color: black; border-radius: 5px 5px 0px 0px;" ng-click="toggle('active2')"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                        </uib-tabset>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="field-lbl"></label>
+                    <div class="col-lg-2">
+                        <button class="btn btn-primary" ng-click="sendRequest()">Send <i class="fa fa-spinner fa-spin" ng-show="isProcessing"></i></button>
+                        <button class="btn btn-primary" onclick="window.close()">Close</button>
+                    </div>
+                </div>
+                <div class="row" ng-show="showResult">
+                    <div class="col-lg-12">
+                        <label class="field-lbl">Response Output</label>
+                        <uib-tabset active="active3">
+                            <uib-tab index="$index + 1" ng-repeat="tab in resultTabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+                                <pre ng-if="tab.elemId=='result-row'" id="{{tab.elemId}}">{{tab.content}}</pre>
+                                <pre ng-if="tab.elemId=='result-json'" id="{{tab.elemId}}">{{tab.content}}</pre>
+                            </uib-tab>
+                        </uib-tabset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</apex:page>

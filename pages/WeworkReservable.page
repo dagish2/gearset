@@ -1,0 +1,201 @@
+<apex:page controller="WeworkEngine" standardStylesheets="false" sidebar="false" showHeader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}"  Vendor_CSS="" Vendor_JS="jquery/xdate.js," Application_JS="ng-tags-input.min.js,angucomplete.js,pageController.js" Application_CSS="angucomplete.css,simple-sidebar.css,pagestyle.css,ng-tags-input.bootstrap.min.css,ng-tags-input.min.css" />
+    <apex:remoteObjects >
+        <apex:remoteObjectModel name="Reservable_View__c" jsShorthand="ReservableView" fields="Id,Available_From__c,City__c,Minimum_Capacity__c,Maximum_Capacity__c,Minimum_Price_Range__c,Maximum_Price_Range__c,Show_Records__c,Unit_Type__c,Only_for_me__c">
+        </apex:remoteObjectModel>
+    </apex:remoteObjects>
+
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>WeWork</title>
+    </head>
+    <body>
+        <div id="wrapper" ng-app="reservableApp" ng-controller="reservableAppController"> <!--ng-app="demoApp" ng-controller="demoAppController" -->
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand" Id="comp-logo">
+                        <a href="/" target="#" id="wework-logo">WeWork</a>
+                    </li>
+                    <!--<li id="soho" ng-click="showContents('soho')">
+                        <a href="#"><div class="tbl-row"><i class="fa fa-home fa-2x tbl-cell"></i><span class="tbl-cell">  Soho </span> </div></a>
+                    </li>-->
+                    <div class="enzi-separator"></div>
+                    <li id="occupancy" class="bs-callout" ng-click="showContents('occupancy')">
+                        <a href="#"><div class="tbl-row"><i class="fa fa-pie-chart fa-2x tbl-cell"></i><span class="tbl-cell">  Availability &amp; Occupancy</span></div></a>
+                    </li>
+                    <div class="enzi-separator"></div>
+                    <!--<li id="companies" ng-click="showContents('companies')">
+                        <a href="#"><div class="tbl-row"><i class="fa fa-sun-o fa-2x tbl-cell"></i><span>  Companies</span></div></a>
+                    </li>-->
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+            <!-- Page Content -->
+            <div id="page-content-wrapper" >
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
+                <div class="row divider"></div>
+                <div class="container-fluid" ng-show="contentType == 'occupancy'">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="main-container">
+                                <div class="row" ng-show="allPresetView.length > 0">
+                                    <div class="col-md-12" Id="preset-block">
+                                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 required"><label class="field-lbl">Available From</label><input id="avail-from" type="text" class="form-control" ng-model="currentFilter.availFrom" min="0000-00-00" required="true" readonly="true"></input></div>
+                                    <div class="col-md-3 required"><label class="field-lbl">City</label><select class="form-control" ng-model="currentFilter.preferedCity" ng-options="City as City for City in Cities" ng-change="filterBuilding(currentFilter.preferedCity)"></select></div>
+                                    <div class="col-md-3"><label class="field-lbl">Capacity</label>
+                                        <!-- <input type="number" min="0" class="form-control" ng-model="capacity"></input> -->
+                                        <div class="row">
+                                            <div class="col-md-6"><input type="number" class="form-control " placeholder="min" min="{{currentFilter.capacityRange.range.min}}" max="{{currentFilter.capacityRange.range.max}}" ng-model="currentFilter.capacityRange.minCapacity" ng-model-options="{ debounce: 1000 }"/></div>
+                                            <div class="col-md-6"><input type="number" class="form-control " placeholder="max" min="{{currentFilter.capacityRange.range.min}}" max="{{currentFilter.capacityRange.range.max}}" ng-model="currentFilter.capacityRange.maxCapacity" ng-model-options="{ debounce: 1000 }"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"><label class="field-lbl">Show</label><select class="form-control" ng-model="currentFilter.spacePreferance" ng-options="option as option for option in availabilityOption" required="true"></select></div>
+                                </div>
+                                <div class="row divider"></div>
+                                <div class="row">
+                                    <div class="col-md-3"><label class="field-lbl">Price Range</label>
+                                        <div class="row">
+                                            <div class="col-md-6"><input type="number" class="form-control min-val" placeholder="min" min="{{currentFilter.priceRange.range.min}}" max="{{currentFilter.priceRange.range.max}}" ng-model="currentFilter.priceRange.minPrice" ng-model-options="{ debounce: 1000 }"/></div>
+                                            <div class="col-md-6"><input type="number" class="form-control max-val" placeholder="max" min="{{currentFilter.priceRange.range.min}}" max="{{currentFilter.priceRange.range.max}}" ng-model="currentFilter.priceRange.maxPrice" ng-model-options="{ debounce: 1000 }"/></div>
+                                        </div>
+                                        <!-- <enz-rangeslider></enz-rangeslider> -->
+                                        <!-- <enz-rangeslider min="priceRange.range.min" max="priceRange.range.max" min-range="priceRange.minPrice" max-range="priceRange.maxPrice"></enz-rangeslider> -->
+                                        <!-- <div range-slider="test" min="priceRange.range.min" max="priceRange.range.max" model-min="priceRange.minPrice" model-max="priceRange.maxPrice" filter="currency:'$'" step="10"></div> -->
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="field-lbl">Unit Type</label>
+                                        <tags-input ng-model="currentFilter.unitTypeSelected" add-from-autocomplete-only="true" replace-spaces-with-dashes="false" placeholder="Add a Unit">
+                                            <auto-complete source="loadUnitType($query)" debounce-delay="0" min-length="0" display-property="" load-on-empty="true" load-on-focus="true" load-on-down-arrow="true"></auto-complete>
+                                        </tags-input>
+                                    </div>
+                                    <div class="col-md-3"><label class="field-lbl">Include Pending Contract</label><select class="form-control" ng-model="currentFilter.includePendingContract" ng-options="option as option for option in pendingContractOption" required="false"></select></div>
+                                </div>
+                                <div class="row divider"></div>
+                                <div class="row">
+                                    <!-- <div class="col-md-4"><label class="field-lbl">Building</label><select class="form-control" ng-model="building" ng-options="BuildingName as BuildingName for BuildingName in BuildingNames"></select></div> -->
+                                    <div class="col-md-12">
+                                        <label class="field-lbl">Building</label>
+                                        <tags-input ng-model="currentFilter.buildingSelected" add-from-autocomplete-only="true" replace-spaces-with-dashes="false" placeholder="Add a Building">
+                                            <auto-complete source="loadBuildings($query)" debounce-delay="0" min-length="0" load-on-empty="true" load-on-focus="true" load-on-down-arrow="true"></auto-complete>
+                                        </tags-input>
+                                    </div>
+                                </div>
+                                <div class="row divider"></div>
+                                <!--
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="field-lbl">Amenities</label>
+                                        <tags-input ng-model="Amenities" add-from-autocomplete-only="true" replace-spaces-with-dashes="false" placeholder="Add a Amenities">
+                                            <auto-complete source="loadAmenities($query)" max-results-to-show="30" debounce-delay="0" min-length="0" display-property="" load-on-empty="true" load-on-focus="true" load-on-down-arrow="true"></auto-complete>
+                                        </tags-input>
+                                    </div>
+                                </div>
+                                -->
+                                <div class="row divider"></div>
+                                <div class="row">
+                                    <!--<div class="col-md-12"><center><button class="btn btn-primary" ng-click="showAllRecord()">View</button></center></div> -->
+                                </div>
+                                <div class="row divider"></div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <button Id="view-save" class="btn btn-primary" data-toggle="modal" ng-click="onSaveAction()" ng-show="currentFilter.Id" ng-disabled="currentFilter.availFrom == undefined || currentFilter.preferedCity == undefined">Save <i class="fa fa-spinner fa-spin" ng-show="isSaveInProgress"></i></button>
+                                        <button Id="view-saveas" class="btn btn-primary" ng-click="onSaveAsAction()" ng-disabled="currentFilter.availFrom == undefined || currentFilter.preferedCity == undefined">Save As <i class="fa fa-spinner fa-spin"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row divider"></div>
+                                <div Id="enzi-tbl-block" ng-show="isProcessing == false"></div>
+                                <div class="row process-icon" ng-show="isProcessing == true">
+                                    <i class="fa fa-spinner fa-spin fa-3x"></i>
+                                </div>
+                                <div class="row divider"></div>
+                                <div class="row">
+                                    <div class="col-md-3"><button Id="update-cache" class="btn btn-primary" ng-click="updateCache()">Update Cache</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="container-fluid" ng-show="contentType == 'soho'">
+                        <div class="row">
+                            Soho
+                        </div>
+                    </div>
+                     <div class="container-fluid" ng-show="contentType == 'companies'">
+                        <div class="row">
+                            Companies
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+            <!-- Modal Popup -->
+            <div class="modal fade" id="viewNameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <button type="button" class="close" 
+                               data-dismiss="modal">
+                                   <span aria-hidden="true">&times;</span>
+                                   <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                
+                            </h4>
+                        </div>
+                    
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label  class="col-sm-12" for="view-name">View Name</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="view-name" ng-model="viewName" placeholder="View Name"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-0 col-sm-12">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" ng-model="onlyForMe"/>Only for me
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="insertView()" data-dismiss="modal">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+        <script>
+           window.currentLoggedInUser = '{!$User.Id}';
+           $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+           });
+            $(function() {
+                $( "#avail-from" ).datepicker({ dateFormat: "yy-mm-dd",             
+                                                changeYear: true,
+                                                constrainInput: true,
+                                                changeMonth: true,
+                                                gotoCurrent: true,
+                                              });
+            });
+            
+        </script>
+    </body>
+</apex:page>

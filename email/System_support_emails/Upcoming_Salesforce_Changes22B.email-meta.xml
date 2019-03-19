@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Maintenance and account selector update release</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes22B</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Changes Account selector and Account / Opportunity</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+This week&apos;s release includes bug fixes and performance improvements. In addition, this release contains an enhancement to our Account Selector Page and Account  / Opportunity Record Types.
+
+Account Selector Page - Create Account Buttons
+
+There has been a new button added to the Account Selector Page labeled &quot;Create Account and Don&apos;t Merge&quot;
+This button allows NMD users to bypass the Account Auto Merge logic after the record has been created
+For non-NMD users this logic is disabled and the buttons are identical in function. Either button can used to bypass the Account Selector Page and create a new Account
+
+Account / Opportunity Record Type Changes (Sales Reps Only)
+
+Sales users will no longer be prompted with a selection page to select a Record Type when creating a new Account or Opportunity
+Instead, the Account or Opportunity Record Type will automatically update to the proper segment based on the &quot;Number of Full-Time Employees&quot; field value entered by the user (or based on the Unomy full-time employee count if the FTE field is left blank)
+
+
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+Yours Truly,
+Susie Romero</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

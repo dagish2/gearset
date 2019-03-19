@@ -1,0 +1,7 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader" >
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+	<aura:handler name="init" value="{! this}" action="{! c.doInit}" />
+    <div aura:id="RequestNewOrganization">
+        {! v.body}
+    </div>
+</aura:component>

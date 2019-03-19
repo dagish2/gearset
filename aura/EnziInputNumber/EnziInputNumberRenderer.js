@@ -1,0 +1,11 @@
+({
+    afterRender:function(component){
+        component.getElement().addEventListener('keypress',function(evt){
+            if(!component.get("v.allowDecimal")){
+                if(evt.key=="."){
+                    evt.preventDefault();
+                }
+            }
+        })
+    }
+})

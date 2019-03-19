@@ -1,0 +1,68 @@
+<aura:component >
+    <aura:attribute name="retroContact" type="Object" />
+    <aura:attribute name="primaryRetroContact" type="Object" />
+    <aura:attribute name="existingRetroEmail" type="String" />
+    <aura:attribute name="mapDisabledForContactInRetro" type="map" default="{}" />
+    <aura:attribute name="mapDisabledForPrimaryRetroContact" type="map" default="{}"/>
+    
+    <aura:attribute name="primaryContact" type="Object" />
+    <aura:attribute name="contact" type="Object" />
+    <aura:attribute name="existingEmail" type="String"/>
+    <aura:attribute name="mapDisabledForPrimaryContact" type="map" default="{}"/>
+    <aura:attribute name="mapDisabled" type="map" default="{}"/>
+    
+    <aura:attribute name="referralObj" type="object" /> 
+    <aura:attribute name="accountObj" type="Object"/>
+    <aura:attribute name="refObj" type="Object"/>
+    <aura:attribute name="accountRetroObj" type="Object"/>
+    <aura:attribute name="opportunityData" type="Object"/>
+    <aura:attribute name="disabledBill" type="Boolean" default="false" />
+    
+    <aura:method name="retroReferrerSearch" action="{!c.retroReferrerSearch}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+    <aura:method name="retroCreateNewReferrer" action="{!c.retroCreateNewReferrer}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+    <aura:method name="confidentionalReferrerSearch" action="{!c.confidentionalReferrerSearch}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+    <aura:method name="confidentionalCreateNewBillAcc" action="{!c.confidentionalCreateNewBillAcc}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+    <aura:method name="confidentionalCreateNewReferrer" action="{!c.confidentionalCreateNewReferrer}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+	<aura:method name="onRetroActive" action="{!c.onRetroActive}">
+    </aura:method>
+    <aura:method name="onConfidentionalActive" action="{!c.onConfidentionalActive}">
+    </aura:method>
+    <aura:method name="reset" action="{!c.reset}">
+        <aura:attribute name="reset" type="String"/>
+        <aura:attribute name="email" type="String"/>
+    </aura:method>
+    <aura:method name="resetRetroContact" action="{!c.resetRetroContact}">
+        <aura:attribute name="email" type="String"/>
+    </aura:method>
+    <aura:method name="resetPrimaryRetroContact" action="{!c.resetPrimaryRetroContact}">
+        <aura:attribute name="email" type="String"/>
+    </aura:method>
+    <aura:method name="resetPrimaryContact" action="{!c.resetPrimaryContact}">
+        <aura:attribute name="email" type="String"/>
+    </aura:method>
+    <aura:method name="createRetroContact" action="{!c.createRetroContact}">
+    </aura:method>
+    <aura:method name="createRetroBillAcc" action="{!c.createRetroBillAcc}">
+    </aura:method>
+    <aura:method name="gotoSearchReferrer" action="{!c.gotoSearchReferrer}">
+    </aura:method>
+    <aura:method name="gotoConfidentionalReferrer" action="{!c.gotoConfidentionalReferrer}">
+    </aura:method>
+    <aura:method name="resetConfidentialContact" action="{!c.resetConfidentialContact}">
+        <aura:attribute name="email" type="String"/>
+    </aura:method>
+    <aura:method name="createConfidentialContact" action="{!c.createConfidentialContact}">
+    </aura:method>
+    <aura:method name="createConfidentialBillAcc" action="{!c.createConfidentialBillAcc}">
+    </aura:method>
+</aura:component>

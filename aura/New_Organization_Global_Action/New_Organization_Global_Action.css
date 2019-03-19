@@ -1,0 +1,6 @@
+.THIS div.panel.slds-docked-composer.slds-is-open {
+    display:none !important;
+}
+.THIS div.dockingPanelOverflow.slds-docked_container.forceDockingPanelOverflow.pop{
+    display:none !important;
+}

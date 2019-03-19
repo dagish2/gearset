@@ -1,0 +1,171 @@
+<apex:page controller="JourneyBulkEmailController" standardStylesheets="false" sidebar="false" showHeader="false" cache="false">
+    <apex:includescript value="/support/console/31.0/integration.js" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
+    
+    <head>
+        <title></title>
+        <script>
+            sforce.console.setTabTitle('Send Bulk Emails');
+            $( function() {
+                $( "#menu" ).menu();
+            } );
+        </script>
+        <style>
+           body{
+                background-color: #f3f3f3;
+           }
+           .email_Button{
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-color: #0070d2;
+                background-color: #0070d2;
+                color: #fff;
+                margin: 0 5px 0px 0;
+                background-image: none;
+                border: 1px solid #e0e5ee;
+                padding: 7px 10px;
+                border-radius: 4px;
+                font-family: 'SalesforceSans-Regular',Helvetica,Arial,sans-serif;
+                font-size: 12.5px;
+                font-weight: normal;
+           }
+           .email_Button:hover {
+                background-color: #005fb2;
+                cursor: pointer;
+            }
+            a:-webkit-any-link{
+                text-decoration : none !important;
+            }
+            .subMenu{
+                max-height: 250px !important;
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+            }
+          .ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
+        </style>
+        <script>
+        
+            function manageCss(){
+                setTimeout(function(){
+                    $("#MyMenuMenu").css("cssText", "width: 30% !important;color: #FFF;border: solid 1px; border-color: rgb(232, 223, 223);box-shadow: 2px 2px 4px #727272 !important; font-weight: normal;font-size: 13.5px;font-family: 'SalesforceSans-Regular',Helvetica,Arial,sans-serif;text-decoration: none !important;padding: 0.5px 0.5px;position: absolute;");
+                    $("#menu").css("cssText", "border: 0px solid #c5c5c5 !important;");
+                    $(a).css("cssText", "text-decoration : none !important;"); 
+                }, 50);
+            }
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+            var lstJourney = getParameterByName('lstJourney');
+            var emailTempletIdToUse = null;
+            function sendEmail(){
+                debugger;
+                Visualforce.remoting.Manager.invokeAction('JourneyBulkEmailController.sendEmail',emailTempletIdToUse,lstJourney, function (result, event) {
+                   if (result != null) {
+                         $("#success").dialog("open");
+                   }
+                   else{
+                         $("#failed").dialog("open");
+                   }
+               }, { escape: false });
+            }
+            function fetchEmail(emailTempletId){
+                debugger;
+                emailTempletIdToUse = emailTempletId;
+                Visualforce.remoting.Manager.invokeAction('JourneyBulkEmailController.fetchEmailTemplate',emailTempletId, function (result, event) {
+                   if (result != null) {
+                        if(result.HtmlValue != undefined){
+                            $('#EmailTemplate #htmlEmailTemplate p' ).empty();
+                            $('#EmailTemplate #htmlEmailTemplate p').append("<br/>");
+                            $('#EmailTemplate #htmlEmailTemplate p').append("Subject :: "+result.Subject);
+                            $('#EmailTemplate #htmlEmailTemplate p').append("<br/><br/>");
+                            $('#EmailTemplate #htmlEmailTemplate p').append(result.HtmlValue);
+                            $("#EmailTemplate").css("cssText", "display : block;");
+                            $("#htmlEmailTemplate").css("cssText", "display : block;");
+                            $("#bodyEmailTemplate").css("cssText", "display : none;");
+                        }
+                        else if(result.Body != undefined){
+                            $('#EmailTemplate #bodyEmailTemplate p' ).empty();
+                            $('#EmailTemplate #bodyEmailTemplate p').append("<br/>");
+                            $('#EmailTemplate #bodyEmailTemplate p').append("Subject :: "+result.Subject);
+                            $('#EmailTemplate #bodyEmailTemplate p').append("<br/><br/>");
+                            $('#EmailTemplate #bodyEmailTemplate p').append("<br/>");
+                            $('#EmailTemplate #bodyEmailTemplate p').append(result.Body);
+                            $("#EmailTemplate").css("cssText", "display : block;");
+                            $("#bodyEmailTemplate").css("cssText", "display : block;");
+                            $("#htmlEmailTemplate").css("cssText", "display : none;");
+                        }
+                        $("#EmailTemplate").css("cssText", "margin-left: 13% !important;");  
+                   }
+                   
+               }, { escape: false });
+            }
+            $(function() {
+                $("#success").dialog({
+                    autoOpen: false,
+                    modal: true
+                });
+                 $("#failed").dialog({
+                    autoOpen: false,
+                    modal: true
+                });
+            });
+        </script>
+    </head>
+    <apex:pageblock mode="detail" id="journeyDetails">
+        <div class="menuButton" id="MyMenu">
+           <div class="menuButtonButton" id="MyMenuButton"><span id="menuLabel" class="email_Button" tabindex="0" style="margin-top: 4.1% !important;" onclick="manageCss(); return false;">Select Email Template   &#9660;</span></div>
+           <div class="menuButtonMenu" id="MyMenuMenu" style="display:none; width:30% !important" >
+               <ul id="menu">
+                   <apex:repeat value="{!mapEmailTemplate}" var="folderName" id="theRepeat">
+                       <li>
+                           <div>
+                               <apex:outputlink title="{!folderName}" value="#">
+                                   <apex:outputtext value="{!folderName}"></apex:outputtext>
+                               </apex:outputlink>
+                           </div>
+                           <ul id="sub-menu" class="subMenu" style="border: solid 1px; border-color: rgb(232, 223, 223);width: 70% !important;border: 0px solid #c5c5c5 !important;box-shadow: 0 2px 4px #727272 !important; font-weight: normal;font-size: 13.5px;font-family: 'SalesforceSans-Regular',Helvetica,Arial,sans-serif;text-decoration: none !important;padding: 1px 1px;">
+                               <apex:repeat value="{!mapEmailTemplate[folderName]}" var="emailTemplate" id="theRepeat">
+                                   <li>
+                                       <div>
+                                           <apex:outputlink title="{!emailTemplate.Name}" onclick="fetchEmail('{!emailTemplate.Id}'); return false;"> 
+                                               <apex:outputtext value="{!emailTemplate.Name}"></apex:outputtext>
+                                           </apex:outputlink>
+                                       </div>
+                                   </li>
+                               </apex:repeat>
+                           </ul>
+                       </li>
+                   </apex:repeat>
+               </ul>
+           </div>
+       </div>
+       <script type="text/javascript">
+          new MenuButton('MyMenu', false);
+       </script>
+       <div id="EmailTemplate" style="margin-top: 15%;display:none;">
+            <div id="htmlEmailTemplate">
+                <p style="margin-right: 31%;left: 10%;border-style: groove;width: 700px !important;  font-style: italic;  height: 300px; overflow: scroll;"></p>
+            </div>
+            <div id="bodyEmailTemplate">
+                <p style="margin-right: 31%;left: 10%;border-style: groove;width: 700px !important;  font-style: italic; height: 300px; overflow: scroll;"></p>
+            </div>
+            <span id="menuLabel" class="email_Button send_email_Button" onclick="sendEmail();" tabindex="0" style="margin-top: 12px;">Send Bulk Emails</span>
+       </div>
+       <div id="success" title="Send Email Status">
+          Emails Send Successfully.
+        </div>
+        <div id="failed" title="Send Email Status">
+          Email Sending Failed.
+        </div>
+    </apex:pageblock>
+</apex:page>

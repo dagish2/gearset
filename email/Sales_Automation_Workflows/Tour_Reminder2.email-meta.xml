@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Tour Reminder2</name>
+    <style>none</style>
+    <subject>We look forward to seeing you soon</subject>
+    <textOnly>www.wework.com 
+
+http://facebook.com/wework 
+
+http://twitter.com/wework 
+
+http://instagram.com/wework 
+
+http://www.pinterest.com/wework 
+
+Hi {!Tour_Outcome__c.Tour_With__c},
+
+Just wanted to remind you about your tour scheduled for {!Tour_Outcome__c.Tour_Date__c} at {!Tour_Outcome__c.Building_No_City__c} at {!Tour_Outcome__c.Start_Time__c}. We can’t wait to meet you and learn more about what you do.
+
+When you arrive at {!Tour_Outcome__c.Location_Address__c}, please {!Tour_Outcome__c.Location_Special_Instructions__c}
+
+If you have any questions, call us at 855-5-WeWork.
+
+See you soon!
+
+VALERIE BATISTA 
+Director of Sales 
+joinus@wework.com
+855.593.9675
+
+Can’t make it? You can reschedule for a more convenient time.
+ 
+https://welcome.wework.com/forms/modifytour.php?tourId={!Tour_Outcome__c.Id}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

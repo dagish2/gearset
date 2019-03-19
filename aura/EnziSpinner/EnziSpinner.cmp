@@ -1,0 +1,15 @@
+<aura:component >
+    <aura:attribute name="show" type="Boolean"/>
+    <aura:attribute name="isFixed" type="Boolean"/>
+   	<aura:attribute name="size" type="String" default="medium"/>
+    <aura:attribute name="id" type="String"/>
+    <aura:method name="showProcessing" action="{!c.showProcessing}"/>
+    <aura:method name="hideProcessing" action="{!c.hideProcessing}"/>
+	<div id="{!v.id+'spinner'}" class="{!'slds-spinner_container '+(v.isFixed?'slds-is-fixed':'')}" style="{!'display:'+(v.show?'block':'none')}">
+        <div role="status" class="{!'slds-spinner slds-spinner--'+v.size+' slds-spinner--brand'}">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </div>
+</aura:component>

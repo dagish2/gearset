@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sends an email when an Opportunity is created by someone who is not the Account Owner</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Opportunity Created Not By Account Owner</name>
+    <style>freeForm</style>
+    <subject>An Opportunity for {!Opportunity.Account} has been created by {!Opportunity.OwnerFullName}</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,100 @@
+<aura:component >
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="fields" type="List" />
+    <aura:attribute name="defaultValues" type="Object" />
+    <aura:attribute name="mode" type="String" />
+    <aura:attribute name="record" type="Object" />
+    <aura:attribute name="errors" type="Object" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="useLayout" type="Boolean" />
+    <aura:attribute name="header" type="String" />
+    <aura:attribute name="tableData" type="List" />
+    <aura:attribute name="setRecordType" type="Boolean" />
+    <aura:attribute name="recordTypes" type="Object" />
+    <aura:attribute name="layout" type="Object" />
+    <aura:attribute name="rawLayout" type="Object" />
+    <aura:attribute name="showModal" type="Boolean" />
+    <aura:attribute name="show" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:registerEvent name="formSave" type="c:EnziFormSaveEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.mode}" action="{!c.doInit}"/>
+    <aura:handler event="c:EnziFieldInlineSaveEvent" action="{!c.saveInline}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:if isTrue="{!v.showModal}">
+        <c:EnziModal aura:id="enziFormModal" header="{!v.header}" isLarge="{!v.useLayout}" show="{!v.show}">
+            <c:EnziModalContainer >
+                <div style="{!'display:'+(v.setRecordType?'block':'none')}">
+                    <div class="slds-size--1-of-1" style="padding:10px">
+                        <c:EnziField type="picklist" name="recordType" label="Record Type" value="{!v.record.RecordTypeId}" options="{!v.recordTypes}" labelField="Name" valueField="Id"></c:EnziField>
+                    </div>
+                </div>
+                <div style="{!'display:'+(v.setRecordType?'none':'block')}">
+                    <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+                        <aura:if isTrue="{!v.useLayout}">
+                            <aura:iteration items="{!(v.mode=='view'?v.layout.detailLayoutSections:v.layout.editLayoutSections)}" var="section">
+                                <c:EnziSection label="{!section.heading}">
+                                    <aura:iteration items="{!section.layoutRows}" var="row">
+                                        <aura:iteration items="{!row.layoutItems}" var="item">
+                                            <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px;display:inline-grid">
+                                                {!item.enziComponent}
+                                            </div>
+                                        </aura:iteration>
+                                    </aura:iteration>
+                                </c:EnziSection>
+                            </aura:iteration>
+                            <aura:set attribute="else">
+                                <aura:iteration items="{!v.body}" var="component">
+                                    <div class="slds-size--1-of-1" style="padding:10px">
+                                        {!component}
+                                    </div>
+                                </aura:iteration>
+                            </aura:set>
+                        </aura:if> 
+                    </c:EnziFormValidator>
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <div style="{!'display:'+(v.setRecordType?'block':'none')}">
+                    <c:EnziButton label="Save and Next" type="brand" disabled="{!(!v.record.RecordTypeId)}" click="{!c.saveNext}"></c:EnziButton>
+                    <c:EnziButton label="Cancel" type="brand" click="{!c.cancel}"></c:EnziButton>
+                </div>
+                <div style="{!'display:'+(v.setRecordType?'none':'block')}">
+                    <c:EnziButton label="Save" type="brand" click="{!c.save}" show="{!(v.mode!='view')}" disabled="{!(!v.valid)}"></c:EnziButton>
+                    <c:EnziButton label="Cancel" type="brand" click="{!c.cancel}"></c:EnziButton>
+                </div>
+            </c:EnziModalFooter>
+        </c:EnziModal>
+        <aura:set attribute="else">
+            <div style="{!'display:'+(v.setRecordType?'block':'none')}">
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="picklist" name="recordType" label="Record Type" value="{!v.record.RecordTypeId}" options="{!v.recordTypes}" labelField="Name" valueField="Id"></c:EnziField>
+                </div>
+            </div>
+            <div style="{!'display:'+(v.setRecordType?'none':'block')}">
+                <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+                    <aura:if isTrue="{!v.useLayout}">
+                        <aura:iteration items="{!(v.mode=='view'?v.layout.detailLayoutSections:v.layout.editLayoutSections)}" var="section">
+                            <c:EnziSection label="{!section.heading}">
+                                <aura:iteration items="{!section.layoutRows}" var="row">
+                                    <aura:iteration items="{!row.layoutItems}" var="item">
+                                        <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px;display:inline-grid">
+                                            {!item.enziComponent}
+                                        </div>
+                                    </aura:iteration>
+                                </aura:iteration>
+                            </c:EnziSection>
+                        </aura:iteration>
+                        <aura:set attribute="else">
+                            <aura:iteration items="{!v.body}" var="component">
+                                <div class="slds-size--1-of-1" style="padding:10px">
+                                    {!component}
+                                </div>
+                            </aura:iteration>
+                        </aura:set>
+                    </aura:if> 
+                </c:EnziFormValidator>
+            </div>
+        </aura:set>
+    </aura:if> 
+</aura:component>

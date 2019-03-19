@@ -1,0 +1,332 @@
+<messaging:emailTemplate subject="New Exception In the Apex Debug Log" recipientType="User" relatedToType="Apex_Debug_Log__c">
+    <messaging:htmlemailbody >
+        <style type="text/css">
+            html {
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+            }
+
+            body {
+                background-color: #ffffff;
+                margin: 0;
+                padding: 0;
+            }
+
+            a {
+                color: #F04823;
+                text-decoration: none;
+            }
+
+            img {
+                border: none;
+            }
+
+            .ReadMsgBody {
+                width: 100%;
+            }
+
+            .ExternalClass {
+                width: 100%;
+            }
+
+            .appleLinksBlue a {
+                color: #F04823;
+                text-decoration: none;
+            }
+
+            .appleLinksGray a {
+                color: #F04823;
+                text-decoration: none;
+            }
+
+            .ExternalClass * {
+                line-height: 100%;
+            }
+
+            .spacer {
+                display: block !important;
+                min-width: 330px !important;
+            }
+
+            .spacer {
+                display: block !important;
+                min-width: 600px !important;
+            }
+
+            p {
+                margin-bottom: 1em;
+            }
+
+            #reservableTable {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100% !important;
+            }
+
+            @media only screen and (max-width: 600px) {
+
+                /************************************ MAIN *************************************/
+                body {
+                    background-color: #ffffff;
+                    -webkit-text-size-adjust: 100%;
+                    -ms-text-size-adjust: 100%;
+                }
+
+                *[class].remove {
+                    display: none !important;
+                    width: 0 !important;
+                    height: 0 !important;
+                }
+
+                *[class].stack {
+                    display: block !important;
+                }
+
+
+                /************************************ WIDTH RESIZERS *************************************/
+
+                *[class].w-resize100 {
+                    width: 100% !important;
+                }
+
+                *[class].w-resize90 {
+                    width: 90% !important;
+                    margin: 0 auto !important;
+                }
+
+                *[class].w-resize80 {
+                    width: 80% !important;
+                    margin: 0 auto !important;
+                }
+
+                *[class].w-resize60 {
+                    width: 60% !important;
+                    margin: 0 auto !important;
+                }
+
+                *[class].w-resize10 {
+                    width: 10px !important;
+                }
+
+                /************************************ HEIGHT RESIZERS *************************************/
+
+                *[class].h-resize0 {
+                    height: 0px !important;
+                }
+
+                *[class].h-resize20 {
+                    height: 20px !important;
+                }
+
+                *[class].h-resize30 {
+                    height: 30px !important;
+                }
+
+                *[class].h-resize100 {
+                    height: 100px !important;
+                }
+
+                *[class].h-resize120 {
+                    height: 120px !important;
+                }
+
+                *[class].h-resize180 {
+                    height: 180px !important;
+                }
+                /************************************ TEXT *************************************/
+
+                *[class].text-center {
+                    text-align: center !important;
+                }
+
+                *[class].text15 {
+                    font-size: 15px !important;
+                }
+
+                *[class].footer-links a {
+                    display: block !important;
+                    margin: 0 0 20px 0 !important;
+                }
+
+
+                /************************************ IMAGE RESIZERS *************************************/
+
+                *[class].image-resize img {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+
+                *[class].hero-image img {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+
+                *[class].social-full img {
+                    width: 40px !important;
+                    height: auto !important;
+                }
+
+                /************************************ CTA *************************************/
+
+                *[class].cta1 {
+                    margin: 0 auto !important;
+                }
+
+                *[class].cta2 {
+                    margin: 0 auto !important;
+                }
+
+                *[class].cta1 td {
+                    background-color: #ffffff !important;
+                    border: 2px solid #b41f29 !important;
+                }
+
+
+                *[class].pad20 {
+                    padding: 0 0 20px 0 !important;
+                }
+            }
+
+            @media only screen and (max-width: 420px) {
+
+                *[class].hero-image, *[class].hero-image a, *[class].hero-image img {
+                    display: none !important;
+                }
+
+                *[class].hero-swap, *[class].hero-swap a, *[class].hero-swap img {
+                    width: 100% !important;
+                    height: auto !important;
+                    max-height: none !important;
+                    line-height: auto !important;
+                    display: block !important;
+                    margin: 0 auto !important;
+                }
+            }
+
+            @media only screen and (max-width: 380px) {
+
+                *[class].image-resize340 img {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+            }
+        </style>
+        <div bgcolor="#ffffff" class="HEADER" style="background-color:#ffffff">
+            <table align="left" border="0" cellpadding="0" cellspacing="0" class="w-resize90" style="background-color:#ffffff;" width="100%">
+                <tbody>
+                    <tr>
+                        <td align="center" class="stack w-resize100" valign="top" width="100%">
+                            <div class="narrow-module">
+                                <table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" class="w-resize100" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td bgcolor="#ffffff">
+                                                <table border="0" cellpadding="0" cellspacing="0" class="w-resize90" width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="center" class="stack w-resize100" valign="top" width="100%">
+                                                                <div>
+                                                                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="w-resize100" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td bgcolor="#ffffff">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" class="w-resize100" width="100%">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td align="center" class="stack w-resize100" valign="top" width="100%">
+                                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td bgcolor="#ffffff" height="30" style="font-size:0;line-height:0"> </td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td align="left" class="w-resize100 text15" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;color:#222222;line-height:20px;letter-spacing:0.025em">
+                                                                                                                    <p>Hey,</p>
+                                                                                                                    <p>A New exception has occured for :<b> {!relatedTo.Apex_Class__c}</b></p>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td align="left" class="w-resize100" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;color:#404040;line-height:18px;letter-spacing:0.05em">
+                                                                                                                    <h3>Exception Information: </h3>
+                                                                                                                    <table style="font-size: 14px; width: 100%; max-width: 100%; margin-bottom: 20px; background-color: transparent; border-spacing: 0; border-collapse: collapse; border-radius: 10px; border: 1px solid #ddd;">
+                                                                                                                        <tbody>
+                                                                                                                            <tr style="border-color: inherit; line-height: normal; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;"><b>Apex Debug Log Name :</b></td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;">
+                                                                                                                                <!--<a href="{!$Label.URL}/{!relatedTo.Id}">{!relatedTo.Name}</a>-->
+                                                                                                                                <apex:outputLink value="{!LEFT($CurrentPage.URL,FIND('/',$CurrentPage.URL,9))+relatedto.Id}">{!relatedTo.Name}</apex:outputLink>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: normal; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;"><b>Method :</b></td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;">{!relatedTo.Method__c}</td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: normal; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;"><b>Status :</b></td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;"> {!relatedTo.Status__c}</td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: normal; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;"><b>Message :</b></td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;"> {!relatedTo.Message__c}</td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: normal; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;"><b>Stack Trace :</b></td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;">  {!relatedTo.Stack_Trace__c}</td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: normal; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;"><b>Login User ProfileId :</b></td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;">  {!relatedTo.Login_User_ProfileId__c}</td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: normal; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;"><b>Login UserId :</b></td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;">  {!relatedTo.Login_UserId__c}</td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: normal; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;"><b>Record Id :</b></td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;">  {!relatedTo.Record_Id__c}</td>
+                                                                                                                            </tr>
+
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                    <br />                                                                                                                    
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td height="30" style="font-size:0;line-height:0"> </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="body-divider" style="background-color:#ffffff">
+                                <table align="center" border="0" cellpadding="0" cellspacing="0" class="w-resize100" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td height="20" style="font-size:0;line-height:0"> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </messaging:htmlemailbody>
+</messaging:emailtemplate>

@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>E - Prospect</fullName>
+        <default>false</default>
+        <label>E - Prospect</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>1</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>D - Qualified</fullName>
+        <default>false</default>
+        <label>D - Qualified</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>10</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>C - Proposal Sent</fullName>
+        <default>false</default>
+        <label>C - Proposal Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>50</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>B - Membership Agreement Sent</fullName>
+        <default>false</default>
+        <label>B - Membership Agreement Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Forecast</forecastCategory>
+        <probability>80</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>A</fullName>
+        <default>false</default>
+        <label>A</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>100</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Reached Out</fullName>
+        <default>false</default>
+        <label>Reached Out</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>10</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>In Progress</fullName>
+        <default>false</default>
+        <label>In Progress</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>50</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Paused</fullName>
+        <default>false</default>
+        <label>Paused</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>30</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Agreement Sent</fullName>
+        <default>false</default>
+        <label>Agreement Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>70</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Agreement Signed</fullName>
+        <default>false</default>
+        <label>Agreement Signed</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>90</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Live</fullName>
+        <default>false</default>
+        <label>Live</label>
+        <closed>true</closed>
+        <forecastCategory>Closed</forecastCategory>
+        <probability>100</probability>
+        <won>true</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Interested</fullName>
+        <default>false</default>
+        <label>Interested</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>10</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>New</fullName>
+        <default>false</default>
+        <label>New</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>10</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Sent to Provider</fullName>
+        <default>false</default>
+        <label>Sent to Provider</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>60</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Inquiry</fullName>
+        <default>false</default>
+        <label>Inquiry</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>10</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>In Discussion</fullName>
+        <default>false</default>
+        <description>This means after initial inquiry we are in discussion with the customer.</description>
+        <label>In Discussion</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>30</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Proposal Sent</fullName>
+        <default>false</default>
+        <description>Proposal Sent to the client</description>
+        <label>Proposal Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>50</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Negotiation</fullName>
+        <default>false</default>
+        <description>Once proposal is sent we are now in negotiation with the client.</description>
+        <label>Negotiation</label>
+        <closed>false</closed>
+        <forecastCategory>BestCase</forecastCategory>
+        <probability>70</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Internal Sign Off</fullName>
+        <default>false</default>
+        <description>Client has committed the negotiations, we now need to get it approved internally.</description>
+        <label>Internal Sign Off</label>
+        <closed>false</closed>
+        <forecastCategory>Forecast</forecastCategory>
+        <probability>90</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Tour Scheduled</fullName>
+        <default>false</default>
+        <label>Tour Scheduled</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>10</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Tour Complete</fullName>
+        <default>false</default>
+        <label>Tour Complete</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>20</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Office Hold</fullName>
+        <default>false</default>
+        <label>Office Hold</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>80</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Wait List</fullName>
+        <default>false</default>
+        <label>Wait List</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>50</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Contract Sent</fullName>
+        <default>false</default>
+        <label>Contract Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>90</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Contract Signed</fullName>
+        <default>false</default>
+        <label>Contract Signed</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>95</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Contract Voided</fullName>
+        <default>false</default>
+        <label>Contract Voided</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>75</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Inquiry</fullName>
+        <default>false</default>
+        <label>Event Inquiry</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>10</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Space Tour Scheduled</fullName>
+        <default>false</default>
+        <label>Event Space Tour Scheduled</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>50</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Space Tour Complete</fullName>
+        <default>false</default>
+        <label>Event Space Tour Complete</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>75</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Contract Sent</fullName>
+        <default>false</default>
+        <label>Event Contract Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>90</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Booked</fullName>
+        <default>false</default>
+        <label>Event Booked</label>
+        <closed>true</closed>
+        <forecastCategory>Closed</forecastCategory>
+        <probability>100</probability>
+        <won>true</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Closed Lost</fullName>
+        <default>false</default>
+        <label>Event Closed Lost</label>
+        <closed>true</closed>
+        <forecastCategory>Omitted</forecastCategory>
+        <probability>0</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Lounge Info Sent</fullName>
+        <default>false</default>
+        <label>Lounge Info Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>15</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Contract/CC Auth Sent</fullName>
+        <default>false</default>
+        <label>Event Contract/CC Auth Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>50</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Contract SIgned</fullName>
+        <default>false</default>
+        <label>Event Contract SIgned</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>80</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event CC Auth Signed</fullName>
+        <default>false</default>
+        <label>Event CC Auth Signed</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>85</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Deposit Paid</fullName>
+        <default>false</default>
+        <label>Event Deposit Paid</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>90</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Booked/Date Confirmed</fullName>
+        <default>false</default>
+        <label>Event Booked/Date Confirmed</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>85</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Brief Sent</fullName>
+        <default>false</default>
+        <label>Event Brief Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>75</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Set Up Detail Discussed</fullName>
+        <default>false</default>
+        <label>Event Set Up Detail Discussed</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>90</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Paid in Full</fullName>
+        <default>false</default>
+        <label>Event Paid in Full</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>99</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Completed</fullName>
+        <default>false</default>
+        <label>Event Completed</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>100</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Qualifying</fullName>
+        <color>#0B6FCE</color>
+        <default>false</default>
+        <label>Qualifying</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>0</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Selling</fullName>
+        <color>#6633FF</color>
+        <default>false</default>
+        <label>Selling</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>10</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Negotiating</fullName>
+        <color>#FF6600</color>
+        <default>false</default>
+        <label>Negotiating</label>
+        <closed>false</closed>
+        <forecastCategory>BestCase</forecastCategory>
+        <probability>50</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Closing</fullName>
+        <color>#57F17C</color>
+        <default>false</default>
+        <label>Closing</label>
+        <closed>false</closed>
+        <forecastCategory>Forecast</forecastCategory>
+        <probability>75</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed Won</fullName>
+        <color>#006600</color>
+        <default>false</default>
+        <label>Closed Won</label>
+        <closed>true</closed>
+        <forecastCategory>Closed</forecastCategory>
+        <probability>100</probability>
+        <won>true</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed Lost</fullName>
+        <default>false</default>
+        <label>Closed Lost</label>
+        <closed>true</closed>
+        <forecastCategory>Omitted</forecastCategory>
+        <probability>0</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
+        <fullName>Merged</fullName>
+        <default>false</default>
+        <description>This stage get assigned to opportunity when opportunity merge to primary opportunity</description>
+        <label>Merged</label>
+        <closed>false</closed>
+        <forecastCategory>Omitted</forecastCategory>
+        <probability>0</probability>
+        <won>false</won>
+    </standardValue>
+</StandardValueSet>

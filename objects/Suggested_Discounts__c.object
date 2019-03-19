@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>A12M__c</fullName>
+        <description>This is the "aggressive" case for a12 months commitment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the "aggressive" case for a12 months commitment</inlineHelpText>
+        <label>A12M</label>
+        <precision>7</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>A24M__c</fullName>
+        <description>This is the "aggressive" case for a 24 months commitment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the "aggressive" case for a 24 months commitment</inlineHelpText>
+        <label>A24M</label>
+        <precision>7</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>A6M__c</fullName>
+        <description>This is the "aggressive" case for a 6 months commitment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the "aggressive" case for a 6 months commitment</inlineHelpText>
+        <label>A6M</label>
+        <precision>7</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Aggressive__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(NOT(ISBLANK(A6M__c)),TEXT(A6M__c*100)&amp;"%(6M) ","")&amp;IF(NOT(ISBLANK(A12M__c)),TEXT(A12M__c*100)&amp;"%(12M) ","")&amp;IF(NOT(ISBLANK(A24M__c)),TEXT(A24M__c*100)&amp;"%(24M) ","")</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Aggressive</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>C12M__c</fullName>
+        <description>This is the "conservative" case for a 12 months commitment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the "conservative" case for a 12 months commitment</inlineHelpText>
+        <label>C12M</label>
+        <precision>7</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>C24M__c</fullName>
+        <description>This is the "conservative" case for a 24 months commitment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the "conservative" case for a 24 months commitment</inlineHelpText>
+        <label>C24M</label>
+        <precision>7</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>C6M__c</fullName>
+        <description>This is the "conservative" case for a 6 months commitment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the "conservative" case for a 6 months commitment</inlineHelpText>
+        <label>C6M</label>
+        <precision>7</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Conservative__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(NOT(ISBLANK(C6M__c)),TEXT(C6M__c*100)&amp;"%(6M) ","")&amp;IF(NOT(ISBLANK(C12M__c)),TEXT(C12M__c*100)&amp;"%(12M) ","")&amp;IF(NOT(ISBLANK(C24M__c)),TEXT(C24M__c*100)&amp;"%(24M) ","")</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Conservative</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Location_Name__c</fullName>
+        <description>Captures the name of the building</description>
+        <externalId>false</externalId>
+        <formula>Location__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Location Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Location_UUID__c</fullName>
+        <description>This field contains the UUID of building stored in the external system.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This field contains the UUID of building stored in the external system.</inlineHelpText>
+        <label>Location UUID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>The above field contains the lookup of the building.</description>
+        <externalId>false</externalId>
+        <label>Location</label>
+        <referenceTo>Building__c</referenceTo>
+        <relationshipLabel>Suggested Discounts</relationshipLabel>
+        <relationshipName>Suggested_Discounts</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Max_Desks__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(FIND("&lt;",SKU__c)&lt;&gt;0,VALUE(TRIM(RIGHT(TRIM(LEFT(SKU__c,FIND("desks",LOWER(SKU__c))-1)),LEN(TRIM(LEFT(SKU__c,FIND("desks",LOWER(SKU__c))-1)))-1))),IF(FIND("&gt;",SKU__c)&lt;&gt;0,NULL,IF(FIND("-",SKU__c)&lt;&gt;0,VALUE(TRIM(RIGHT(TRIM(LEFT(SKU__c,FIND("desks",LOWER(SKU__c))-1)),LEN(TRIM(LEFT(SKU__c,FIND("desks",LOWER(SKU__c))-1)))-FIND("-",TRIM(LEFT(SKU__c,FIND("desks",LOWER(SKU__c))-1)))))),VALUE(TRIM(LEFT(SKU__c,FIND(" ",SKU__c)-1))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Max Desks</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Min_Desks__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(FIND("&lt;",SKU__c)&lt;&gt;0,NULL,IF(FIND("&gt;",SKU__c)&lt;&gt;0,VALUE(TRIM(RIGHT(TRIM(LEFT(SKU__c,FIND("desks",LOWER(SKU__c))-1)),LEN(TRIM(LEFT(SKU__c,FIND("desks",LOWER(SKU__c))-1)))-1))),IF(FIND("-",SKU__c)&lt;&gt;0,VALUE(TRIM(LEFT(SKU__c,FIND("-",SKU__c)-1))),VALUE(TRIM(LEFT(SKU__c,FIND(" ",SKU__c)-1))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Min Desks</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SA12M__c</fullName>
+        <description>This is the "super aggressive" case for a 12 months commitment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the "super aggressive" case for a 12 months commitment</inlineHelpText>
+        <label>SA12M</label>
+        <precision>7</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>SA24M__c</fullName>
+        <description>This is the "super aggressive" case for a 24 months commitment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the "super aggressive" case for a 24 months commitment</inlineHelpText>
+        <label>SA24M</label>
+        <precision>7</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>SA6M__c</fullName>
+        <description>This is the "super aggressive" case for a 6 months commitment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the "super aggressive" case for a 6 months commitment</inlineHelpText>
+        <label>SA6M</label>
+        <precision>7</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>SKU__c</fullName>
+        <externalId>false</externalId>
+        <label>SKU</label>
+        <length>20</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Super_Aggressive__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(NOT(ISBLANK(SA6M__c)),TEXT(SA6M__c*100)&amp;"%(6M) ","")&amp;IF(NOT(ISBLANK(SA12M__c)),TEXT(SA12M__c*100)&amp;"%(12M) ","")&amp;IF(NOT(ISBLANK(SA24M__c)),TEXT(SA24M__c*100)&amp;"%(24M) ","")</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Super Aggressive</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UUID__c</fullName>
+        <description>UUID to store external Id</description>
+        <externalId>true</externalId>
+        <label>UUID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Suggested Discounts</label>
+    <nameField>
+        <displayFormat>SD-{0000}</displayFormat>
+        <label>Suggested Discounts Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Suggested Discounts</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Location__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>C6M__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>C12M__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>A6M__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>A12M__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>SA6M__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>SA12M__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Location__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>C6M__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>C12M__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>A6M__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>A12M__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>SA6M__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>SA12M__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Location__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>C6M__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>C12M__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>A6M__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>A12M__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>SA6M__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>SA12M__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Location__c</searchFilterFields>
+        <searchFilterFields>C6M__c</searchFilterFields>
+        <searchFilterFields>C12M__c</searchFilterFields>
+        <searchFilterFields>A6M__c</searchFilterFields>
+        <searchFilterFields>A12M__c</searchFilterFields>
+        <searchFilterFields>SA6M__c</searchFilterFields>
+        <searchFilterFields>SA12M__c</searchFilterFields>
+        <searchResultsAdditionalFields>Location__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>C6M__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>C12M__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>A6M__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>A12M__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>SA6M__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>SA12M__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Max_Desks__c</columns>
+        <columns>Min_Desks__c</columns>
+        <columns>SKU__c</columns>
+        <columns>Location__c</columns>
+        <columns>A6M__c</columns>
+        <columns>C6M__c</columns>
+        <columns>SA6M__c</columns>
+        <columns>A12M__c</columns>
+        <columns>C12M__c</columns>
+        <columns>SA12M__c</columns>
+        <columns>A24M__c</columns>
+        <columns>C24M__c</columns>
+        <columns>SA24M__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+</CustomObject>

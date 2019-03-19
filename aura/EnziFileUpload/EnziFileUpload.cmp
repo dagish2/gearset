@@ -1,0 +1,116 @@
+<aura:component implements="lightning:actionOverride,force:hasRecordId,force:hasSObjectName,flexipage:availableForAllPageTypes">   
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="contentDocumentId" type="Id" />
+    <aura:attribute name="apiSessionId" type="String" />
+    <aura:attribute name="endPointUrl" type="String" />
+    <aura:attribute name="userId" type="Id" />
+    <aura:attribute name="parentId" type="Id" />
+    <aura:attribute name="label" type="String" default="File(s)" />
+    <aura:attribute name="allowMultipleFiles" type="Boolean" default="true" />
+    <aura:attribute name="allowedFileTypes" type="String" default="" />
+    <aura:attribute name="progress" type="Integer" default="0" />
+    <aura:attribute name="files" type="List" />
+    <aura:attribute name="filesXHR" type="List" />
+    <aura:attribute name="filesMap" type="Map" />
+    <aura:attribute name="resultFiles" type="List" />
+    <aura:attribute name="isCancelAll" type="Boolean" default="false" />
+    <aura:attribute name="attachFilesToParent" type="Boolean" default="true" />
+    <aura:method name="onDragOver" action="{!c.onDragOver}"/>
+    <aura:method name="onDragLeave" action="{!c.onDragLeave}"/>    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <c:EnziUtils aura:id="utils" />
+
+    <div class="slds-grid slds-grid_pull-padded-medium">
+        <div class="slds-col slds-p-horizontal_medium slds-align_absolute-center">
+            <div class="slds-form-element" style="width: 100%;">
+                <span class="slds-form-element__label" id="file-selector-primary-label">Upload {!v.label}</span>
+                <div class="slds-form-element__control" style="width: inherit;">
+                    <div class="slds-file-selector slds-file-selector_files" style="width: inherit;">
+                        <div aura:id="dropzone" class="slds-file-selector__dropzone slds-align_absolute-center" ondragover="{!c.onDragOver}" ondragleave="{!c.onDragLeave}" ondrop="{!c.onDrop}" style="width: inherit; margin: 10px;">
+                            <input aura:id="enzi-file-input" id="file-upload-input-01" type="file" multiple="{!v.allowMultipleFiles}" accept="{!v.allowedFileTypes}" class="slds-file-selector__input slds-assistive-text"  aria-labelledby="file-selector-primary-label file-selector-secondary-label" onchange="{!c.upload}" />
+                            <label class="slds-file-selector__body" for="file-upload-input-01" id="file-selector-secondary-label">
+                                <span class="slds-file-selector__button slds-button slds-button_neutral">
+                                    <lightning:icon iconName="utility:upload" size="xx-small" />&nbsp;
+                                    Upload {!v.label}
+                                </span>
+                                <span class="slds-file-selector__text slds-medium-show">or Drop {!v.label}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <c:EnziModal aura:id="FileUploadProgress" header="Upload Files" isLarge="false" show="false">
+        <c:EnziModalContainer >
+            <aura:iteration items="{!v.files}" var="file" indexVar="index">                
+                <div class="slds-table--bordered" style="margin-top: -1px">
+                    <div class="slds-grid slds-grid--vertical-align-center slds-p-around--small forceContentSingleFileUploader" data-aura-class="forceContentSingleFileUploader" style="padding: 5px;">
+                        <div class="slds-col--padded slds-size_5-of-12">
+                            <div class="slds-media slds-media_center">
+                                <span class="slds-icon_container slds-icon-doctype-unknown" title="Description of icon when needed">
+                                    <lightning:icon iconName="doctype:unknown" size="small" />
+                                </span>
+                                &nbsp;&nbsp;
+                                <div class="slds-media__body">
+                                    <div class="fileName slds-truncate" title="{!file.name}">
+                                        {!file.name}
+                                    </div>
+                                    <span class="slds-text-color--weak slds-text-body--small">
+                                        <span>
+                                            <span class="fileSizeUnits uiOutputText" data-aura-class="uiOutputText">
+                                                {!file.size}
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col--padded slds-size_5-of-12">
+                            <div class="slds-progress-bar slds-progress-bar--medium slds-progress-bar--circular" aria-valuemin="0" aria-live="polite" aria-valuemax="100" aria-valuenow="{!file.progress}" role="progressbar">
+                                <span class="slds-progress-bar__value" style="{!'width: '+file.progress+'%;'}">
+                                    <span class="slds-assistive-text">
+                                        {!file.name} upload progress is {!file.progress}%
+                                    </span>
+                                </span>
+                                <aura:if isTrue="{!file.status=='pending'}"> 
+                                    &nbsp;{!file.progress}%
+                                </aura:if>
+                            </div>
+                        </div>
+                        <div class="slds-col--padded slds-size_2-of-12 slds-text-align--center">
+                            <span class="slds-icon_container slds-icon-utility-success">
+                                <aura:if isTrue="{!file.status=='uploaded'}">
+                                    <span class="lightningPrimitiveIcon" data-aura-class="lightningPrimitiveIcon">
+                                        <lightning:icon iconName="utility:success" size="xx-small" />
+                                    </span>
+                                </aura:if>
+                                <aura:if isTrue="{!file.status=='cancelled'}">
+                                    <span class="slds-text-color_default">
+                                        {!file.status}
+                                    </span>
+                                </aura:if>
+                                <aura:if isTrue="{!file.status=='pending'}"> 
+                                    <span class="lightningPrimitiveIcon" data-aura-class="lightningPrimitiveIcon">
+                                        <button id="{!'cancelFile:'+index}" class="slds-button slds-button_icon" title="Cancel upload" onclick="{!c.cancelFileUpload}" >
+                                            <lightning:icon iconName="utility:clear" size="xx-small" />
+                                            <span class="slds-assistive-text">Cancel file</span>
+                                        </button>
+                                    </span>
+                                </aura:if>                            
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </aura:iteration>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+            <div class="slds-text-align_center">
+                <!--<c:EnziButton type="destructive" label="Cancel remaining files" leftIcon="utility:close" click="{!c.cancelAllFilesUpload}" disabled="{!v.isCancelAll}" /> -->
+                <c:EnziButton type="brand" label="Done" click="{!c.done}" disabled="{! not(v.isCancelAll)}" /> 
+            </div>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

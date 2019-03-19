@@ -1,0 +1,12 @@
+Referrer: {!Opportunity.Referrer__c}
+Referrer Brokerage: {!Opportunity.Referrer_Account__c}
+PNM Account Name: {!Opportunity.Account}
+Main Contact: {!Opportunity.Primary_Member__c}
+HQ Market: {!Account.Account_Market__c}
+Account FTE: {!Account.Account_FTE__c}
+No. of Desks: {!Opportunity.No_of_Desks_unweighted__c}
+
+Timing: 
+Locations: 
+Budget: 
+Current Situation:

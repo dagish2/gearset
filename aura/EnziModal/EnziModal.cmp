@@ -1,0 +1,34 @@
+<aura:component >
+    <aura:attribute name="header" type="String" />
+    <aura:attribute name="isLarge" type="Boolean" />
+    <aura:attribute name="show" type="Boolean" default="true" />
+    <aura:attribute name="showFooter" type="Boolean" default="true" />
+    <aura:method name="close" action="{!c.close}"/>
+    <aura:method name="showModal" action="{!c.showModal}"/>
+    <aura:method name="closeModal" action="{!c.closeModal}"/>
+    <aura:attribute name="showCloseButton" type="Boolean" default="true" />
+    <aura:attribute name="customStyle" type="string" default=""/>
+    
+    <div class="{!(v.show?' ':'slds-hide')}">
+        <div role="dialog" tabindex="-1" class="{!'slds-modal slds-fade-in-open '+(v.isLarge?'slds-modal--large':' ')+(v.show?' ':'slds-hide')}" aria-labelledby="header43">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <aura:if isTrue="{! v.showCloseButton}">
+                        <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.close}">
+                            <lightning:icon iconName="utility:close" size="xx-small"/>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </aura:if>
+                    <h2 id="EnziModalCloseButton" class="slds-text-heading--medium">{!v.header}</h2>
+                </div>
+                <div class="slds-modal__content slds-p-around--medium" style="{!v.customStyle}">
+                    {!v.body[0]}
+                </div>
+                <div class="{!'slds-modal__footer '+(v.showFooter?'':'slds-hide')}" style="text-align:right;box-shadow:none">
+                    {!v.body[1]}
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </div>
+</aura:component>

@@ -1,0 +1,19 @@
+<aura:component >
+    <aura:attribute name="value" type="Integer" />
+    <aura:attribute name="start" type="Integer" />
+    <aura:attribute name="end" type="Integer" />
+    <aura:attribute name="order" type="String" />
+    <aura:attribute name="counter" type="Double" />
+    <aura:attribute name="size" type="Integer" default="1" />
+    <aura:attribute name="under50" type="Boolean" />
+    <aura:attribute name="gradient1" type="Integer" />
+    <aura:attribute name="gradient2" type="Integer" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}"/>
+
+    <div class="wrap">
+        <div class="progress-radial" style="{!'width: '+(v.size*100)+'px;height: '+(v.size*100)+'px;background-image: linear-gradient('+v.gradient1+'deg, #'+(v.under50?'2f3439':'ff6347')+' 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient('+v.gradient2+'deg, #ff6347 50%, #2f3439 50%, #2f3439);'}">
+            <div class="overlay" style="{!'width: '+(v.size*60)+'px;height: '+(v.size*60)+'px;margin-left: '+(v.size*20)+'px;margin-top: '+(v.size*20)+'px;line-height: '+(v.size*60)+'px;font-size: '+(v.size*16)+'px;'}">{!v.value}</div>
+        </div>
+    </div>
+</aura:component>

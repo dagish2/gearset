@@ -1,0 +1,6 @@
+<apex:page showHeader="false" sidebar="false">
+    <head>
+        <title>Request New Organization</title> 
+    </head>
+    <c:LightningResource component="RequestNewOrganization" parameters="isInLightningConsole=false"></c:LightningResource>
+</apex:page>

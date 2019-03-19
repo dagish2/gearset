@@ -1,0 +1,38 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="fastCallRecordId" type="String" />
+    <aura:attribute name="phoneUrl" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="fastCallObjectName" type="String"/>
+    <aura:attribute name="fastCallRecordName" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="allowFastCall" type="Boolean" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="onInput" type="Object" />
+    <aura:attribute name="maxPhoneLength" type="Integer" default="10"/>
+    <aura:handler name="change" value="{!v.value}" action="{!c.changeNumber}"/>
+    <aura:handler name="change" value="{!v.fastCallRecordId}" action="{!c.changeNumber}"/>
+    <aura:handler name="change" value="{!v.fastCallObjectName}" action="{!c.changeNumber}"/>
+    <aura:handler name="change" value="{!v.fastCallRecordName}" action="{!c.changeNumber}"/>
+    <aura:handler name="change" value="{!v.allowFastCall}" action="{!c.changeNumber}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+        .slds-input-has-icon--left svg {
+        position: absolute;
+        top: 9px;
+        left: 16px;
+        }
+    </style>
+    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left">
+        <lightning:icon iconName="utility:call" size="xx-small"/>
+        <aura:if isTrue="{!v.disabled}">
+            <div class="slds-input viewField">
+                <a id="{!v.name}" href="{!v.phoneUrl}">{!v.value}</a>
+            </div>
+            <aura:set attribute="else">
+                <input id="{v.name}" type="text" class="slds-input" placeholder="{!v.disabled?'':'Enter '+v.label}" value="{!v.value}" onkeyup="{!c.change}" oninput="{!v.onInput}" maxlength="22" disabled="{!v.disabled?'disabled':''}"  />
+            </aura:set>
+        </aura:if> 
+    </div>
+</aura:component>

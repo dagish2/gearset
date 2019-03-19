@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <interviewLabel>Salesforce Maintenance {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Salesforce Maintenance</label>
+    <processType>Flow</processType>
+    <screens>
+        <name>Salesforce_Permission_support</name>
+        <label>Salesforce Permission support</label>
+        <locationX>102</locationX>
+        <locationY>123</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>salesforcepermissions</name>
+            <fieldText>Hi,
+
+The Sales Technology team will be launching a global platform enhancement for our Sales Organization. Over the course of the weekend, there will be an interval of time when Salesforce will be under maintenance, beginning Friday, August 3rd at 8PM EDT through Sunday, August 5th at 8PM EDT. Please be aware that during the maintenance window, performance will be impacted.
+
+For any issues or support please contact salesforcesupport@wework.com
+
+Best,
+Salesforce Support</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Salesforce_Permission_support</startElementReference>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,47 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Arial; -webkit-text-stroke: #000000}
+span.s1 {font-kerning: none}
+</style>
+
+
+<p class="p1"><span class="s1">Hola {!Journey__c.First_Name__c},</span></p>]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Arial; -webkit-text-stroke: #000000}
+p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Arial; -webkit-text-stroke: #000000; min-height: 15.0px}
+li.li1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Arial; -webkit-text-stroke: #000000}
+span.s1 {font-kerning: none}
+span.s2 {text-decoration: underline ; font-kerning: none; color: #4787ff; -webkit-text-stroke: 0px #4787ff}
+ul.ul1 {list-style-type: disc}
+</style>
+
+
+<p class="p1"><span class="s1">Soy Pablo del equipo de WeWork para Ciudad de México. WeWork provee espacios de trabajo para empresas de todos los tamaños. En nuestras más de 90 ubicaciones en todo el mundo, alojamos desde pymes hasta divisiones de grandes empresas como <a href="https://dl.dropboxusercontent.com/u/15752007/WeWork_Enterprise.pdf"><span class="s2">Bacardi, Facebook y muchas más</span></a>. Con nuestras membresías obtienes:</span></p>
+<ul class="ul1">
+<li class="li1"><b></b><span class="s1"><b>Espacio Físico,</b> nuestras opciones incluyen oficinas privadas para 1 persona o equipos de hasta 100 personas, espacio de coworking y 1000m2 de áreas comunes, a lo cual tendrás acceso 24/7.</span></li>
+<li class="li1"></li>
+<li class="li1"><b></b><span class="s1"><b>Todo Incluido</b>, desde internet ultra rápido, la limpieza de tu oficina, impresiones, hasta el café, la CERVEZA y mucho más.</span></li>
+<li class="li1"></li>
+<li class="li1"><b></b><span class="s1"><b>Flexibilidad</b>, nuestros contratos son mensuales y puedes tener la plena confianza de crecer o disminuir tu equipo en WeWork sin el estrés asociado a buscar espacio para ellos.&nbsp;</span></li>
+</ul>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Queremos invitarte a un tour en nuestros edificios para que puedas conocer todo lo que ofrecemos y decirte como podemos hacer crecer tu negocio.</span></p>
+<p class="p1"><span class="s1">Estamos de 9.00 am a 5.30 pm de Lunes a Viernes, solo confirma el dia y la hora y programamos la visita.</span></p>
+<p class="p1"><span class="s1">Esperamos tu respuesta.</span></p>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Arial; -webkit-text-stroke: #000000}
+span.s1 {font-kerning: none}
+</style>
+
+
+<p class="p1" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span class="s1">Gracias,&nbsp;</span></p><p class="p1">{!Journey__c.OwnerFirstName}</p>]]></td>
+</tr>
+</table>

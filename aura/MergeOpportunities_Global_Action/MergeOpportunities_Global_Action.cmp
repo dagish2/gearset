@@ -1,0 +1,16 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" >
+    <style>
+        div.panel.slds-docked-composer.slds-is-open {
+       		display:none !important;
+        }
+        div.dockingPanelOverflow.slds-docked_container.forceDockingPanelOverflow.pop{
+        	display:none !important;
+        }
+    </style>
+	<aura:attribute name="recordId" type="Id" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div aura:id="div1">
+        {!v.body}
+    </div>
+</aura:component>

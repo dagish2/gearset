@@ -1,0 +1,112 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="value" type="Object"/>
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="settings" type="Object"/>
+    <aura:attribute name="keyword" type="String" default="" />
+    <aura:attribute name="search" type="Boolean" default="false" />
+    <aura:attribute name="required" type="Boolean" default="false" />
+    <aura:attribute name="selectedIndex" type="Integer" default="0" />
+    <aura:attribute name="searchResult" type="List" default="[]" />   
+    <aura:attribute name="searchResultMap" type="Map"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.value}" action="{!c.setGeoValue}"/>
+    <aura:handler name="change" value="{!v.keyword}" action="{!c.keywordChanged}" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+        .slds-input__icon {
+            position: absolute;
+            top: 9px !important;
+            right: 0px;
+        }
+         
+        .slds-scope .slds-lookup__item-action .slds-icon {
+        	margin: 0px !important;
+        }
+        .slds-input-has-icon--left svg {
+            position: absolute;
+            top: 9px;
+            left: 5px !important;
+        }
+        .placeholderLeftIcon {
+            position: absolute;
+            height: 25px;
+            width: 10px;
+            top: 9px;
+            left: 6px;
+            fill: #54698d !important;
+        }
+        
+        .placeholderRightIcon {
+            height: 25px;
+            width: 25px;
+            top: 3px; 
+        }
+        .slds-modal__container .placeholderLeftIcon{
+        	position: absolute;
+            height: 25px;
+            width: 10px;
+            top: 4px;
+            left: 6px;
+            fill: #54698d !important;
+        }
+    </style>
+    
+    <div class="slds-form-element slds-lookup slds-is-open" data-select="single">        
+        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left-right" >
+            <lightning:icon iconName="utility:location" class="placeholderLeftIcon" size="xx-small" />
+            <input aura:id="lookupField" type="text" id="{!v.name}" class="slds-input" placeholder="{!v.disabled?'':'Search '+v.label}"  title="{!v.keyword}" value="{!v.keyword}" style="padding-left:25px" disabled="{!v.disabled?'disabled':''}" aria-describedby="help"/>
+            <button class="slds-input__icon slds-input__icon_right slds-button slds-button_icon" onclick="{!c.openMap}" style="height: 25px; width: 25px; top: 0px; right: 0px;">
+                <lightning:icon iconName="utility:checkin" size="x-small" />
+            </button>
+        </div>
+         <aura:renderIf isTrue="false">
+        <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left" role="tooltip" id="help" style="position: absolute; top: -41px; left: 15px;">
+            <div class="slds-popover__body">Place not found.</div>
+        </div>
+        </aura:renderIf>
+        <aura:renderIf isTrue="{!and(v.search, v.keyword.length gt 0, v.keyword.length lt 2)}">
+            <div class="slds-lookup__menu" id="{!v.name+'list'}">
+                <ul class="slds-lookup__list" role="listbox">
+                    <li role="presentation">
+                        <span class="slds-lookup__item-action slds-lookup__item-action--label" id="lookup-option-2182" role="option">
+                            <span class="slds-truncate">Enter atleast 2 characters to search</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </aura:renderIf>
+        <div class="slds-lookup__menu" id="{!v.name+'list'}" style="{!'display:'+(v.search?(v.keyword.length gt 1?'block':'none'):'none')}">
+            <ul class="slds-lookup__list" role="listbox">
+                <li role="presentation">                      
+                    <span class="slds-lookup__item-action slds-lookup__item-action--label" id="lookup-option-2182" role="option">
+                        <span class="slds-truncate">Search results for &quot;{!v.keyword}&quot;</span>
+                        <c:EnziSpinner aura:id="referenceSpinner"></c:EnziSpinner>
+                    </span>
+                </li>        
+                <aura:iteration items="{!v.searchResult}" var="option" indexVar="index">
+                    <li class="{!index==v.selectedIndex?'selected':''}" role="presentation" onclick="{!c.selectOption}">
+                        <span class="slds-lookup__item-action slds-media" role="option">
+                            <div class="slds-media__body" data-index="{!index}" style="margin-left:10px">
+                                <div class="slds-lookup__result-text" data-index="{!index}" title="{!option.label}">
+                                    <mark data-index="{!index}">{!option.label}</mark>                                
+                                </div>
+                            </div>
+                        </span>
+                    </li>
+                </aura:iteration>
+                <li role="presentation" style="{!'display:'+(v.searchResult.length==0?'block':'none')}">
+                    <span class="slds-lookup__item-action slds-media" role="option">
+                        <div class="slds-media__body">
+                            <div class="slds-lookup__result-text">
+                                <mark style="margin-right:10px">No results found.</mark>                                
+                            </div>                        
+                        </div>
+                    </span>
+                </li>
+            </ul>
+        </div>             
+    </div>
+</aura:component>

@@ -1,0 +1,39 @@
+<aura:component > 
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:attribute name="recordId" type="String" />
+	<aura:method name="followUpCall" action="{!c.followUpCall}"/>
+    <aura:method name="logCall" action="{!c.logCall}"/>
+    <aura:method name="addToCampaign" action="{!c.addToCampaign}"/>
+    <aura:method name="sendToEnterprize" action="{!c.sendToEnterprize}"/>
+    <aura:method name="unqualify" action="{!c.unqualify}"/>
+    <aura:method name="refresh" action="{!c.refresh}"/>
+    <aura:method name="restartJourney" action="{!c.restartJourney}"/>
+    <aura:method name="availiblity" action="{!c.availiblity}"/>
+    <aura:method name="addOpportunity" action="{!c.addOpportunity}"/>
+    <aura:method name="manageTours" action="{!c.manageTours}">
+        <aura:attribute name="redirectToUrl" type="String"/>
+    </aura:method>
+    <aura:method name="manageToursFromLead" action="{!c.manageToursFromLead}">
+        <aura:attribute name="recordId" type="String"/> 
+        <aura:attribute name="redirectToUrl" type="String"/> 
+    </aura:method>
+    <aura:method name="sendToEnterprise" action="{!c.sendToEnterprise}"/>
+    <aura:method name="sendToEnterpriseFromLead" action="{!c.sendToEnterpriseFromLead}">
+        <aura:attribute name="recordId" type="String"/> 
+        <aura:attribute name="redirectToUrl" type="String"/> 
+    </aura:method>
+    <aura:method name="convertBrokerLead" action="{!c.convertBrokerLead}">
+        <aura:attribute name="record" type="Object"/>
+        <aura:attribute name="journeyId" type="String"/>
+        <aura:attribute name="isNewAccountCreated" type="Boolean"/>
+        <aura:attribute name="component" type="Object"/>
+        <aura:attribute name="success" type="Object"/>
+        <aura:attribute name="error" type="Object"/>
+    </aura:method>
+    <aura:method name="verifyBrokerLead" action="{!c.verifyBrokerLead}">    	
+        <aura:attribute name="recordId" type="String"/>
+        <aura:attribute name="component" type="Object"/>
+        <aura:attribute name="success" type="Object"/>
+        <aura:attribute name="error" type="Object"/>
+    </aura:method>
+</aura:component>

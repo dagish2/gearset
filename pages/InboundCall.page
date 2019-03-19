@@ -1,0 +1,108 @@
+<apex:page controller="WeworkEngine" standardStylesheets="false"
+    extensions="InboundCallController" sidebar="false" showHeader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}"
+        Vendor_CSS="bootstrap/css/bootstrap-toggle.min.css,bootstrap/js/bootstrap-toggle.min.js" Vendor_JS="jquery/moment.min.js,jquery/xdate.js,enz-table/enz-table.js,angu-complete/angucomplete-ie8.js,angu-complete/angular-touch.min.js,angu-complete/angucomplete-ie8.css" 
+        Application_JS="error-manager.js,ng-tags-input.min.js,angucomplete.js,bookTours.js,salesforce.js,autocomplete.js,inboundPageController.js,lookupApp.js,common-controls.js"
+        Application_CSS="angucomplete.css,simple-sidebar.css,pagestyle.css,ng-tags-input.bootstrap.min.css,ng-tags-input.min.css,applicationCSS.css,inboundCall.css,lookup-app.css,lookupapplication.css,autocomplete.css" />
+    <apex:includescript value="/support/console/42.0/integration.js" />
+    <apex:includescript value="/soap/ajax/36.0/connection.js" />
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inbound Call</title>
+        <script type="text/javascript">
+         	__sfdcSessionId = '{!$Api.Session_Id}';
+            Visualforce.remoting.timeout = 120000;
+        	window.theme = '{!$User.UIThemeDisplayed}';
+            function testCloseTab() {
+                sforce.console.getEnclosingTabId(closeSubtab);
+                sforce.console.refreshNavigationTab();
+                refreshJourneyDetails();
+            }
+            var closeSubtab = function closeSubtab(result) {
+                var tabId = result.id;
+                sforce.console.closeTab(tabId);
+            };
+            function refreshJourneyDetails() {
+                refreshInbound();
+            }
+            (function setCustomComponentSize() {
+                var width = screen.availWidth * 0.8;
+                var height = screen.availHeight * 0.8;
+                if (sforce.console.isInConsole()) {
+                    sforce.console.setCustomConsoleComponentWidth(width);
+                    sforce.console.setCustomConsoleComponentHeight(height);
+                }
+            })();
+            
+            
+        </script>
+    </head>
+    <apex:form >
+        <apex:actionfunction name="refreshInbound" rerender="enzTable"/>
+    </apex:form>
+    <body>        
+        <div id="spinnerContainer"></div>
+        <div ng-app="inboundCallApp" ng-controller="inboundCallController">
+           <br />
+           <div id="page-content-wrapper" >
+             <div class="panel panel-default panel-margin" >
+                <div class="panel-heading">
+                      <div class="row header-text-align">
+                      <b><input type="text" class="form-control phone-text" placeholder="Search" onkeydown="if(event.keyCode == 13)  document.getElementById('btnSearch').click()" ng-model="phoneTextToSearch" /></b> 
+                          <button type="button" id="btnSearch" class="btn btn-primary btn-sm default-font defaut-search-button-margin" style="margin-top: 0px;" ng-click="getContactAndRelatedJourneys(true)">
+                              <span class="glyphicon glyphicon-search"></span> Search
+                          </button>
+                          <div ng-show="showNewLead" class="pull-right" style="padding-top: 15px;padding-right: 15px;">
+                              <!-- <b><span>Leads : {{totalLeadsCount}}</span></b>&nbsp;&nbsp;
+                              <b><span>Contacts : {{totalContactsCount}}</span></b>
+                              <br/>-->
+                              <b><span style="font-family: 'Arial';">Total Records : {{mapAllContactJourny.length}}</span></b>
+                          </div>
+                     </div><!-- End of row -->
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                   <div class="col-md-2" style="padding: 5px;">                    
+                      <button class="fa fa-user-plus btn btn-primary create-new-contact" ng-show="showNewLead" ng-click="loadContactPopup()"><span class="default-font">&nbsp;&nbsp;New Lead &nbsp;&nbsp;</span></button>                  
+                  </div>
+                   <div class="col-md-7 text-center" >
+                       <div class="show-information-for-search">
+                           {{message}}
+                       </div>
+                   </div>
+                   <div class="col-md-3">
+                       <div class="float-number-element"> 
+                        <div class="pager pull-right" ng-show="showPageIgnation">
+                            <nav class="pagination">
+                                <a class="first" ng-click="setPage(-1)">&lt;&lt;</a>
+                                <a class="prev" ng-click="setPage(currentPage-1)">&lt;</a>
+                                <div class="pagedisplay ng-binding">{{currentPage}}/{{totalPageCount}}</div>
+                                <a ng-click="setPage(currentPage+1)">&gt;</a>
+                                <a ng-click="setPage(totalPageCount)">&gt;&gt;</a>
+                                <select class="pagesize ng-pristine ng-untouched ng-valid" ng-options="option as option for option in pageSizeOptions" ng-model="pageSize" ng-change="setPage(1)"><option value="0" selected="selected">20</option><option value="1">50</option><option value="2">100</option><option value="3">500</option><option value="4">1000</option></select>
+                            </nav>
+                       </div>
+                      </div>
+                    </div>
+                </div>
+                <div id="newContactPopupDiv"></div>
+                <div ng-repeat="contactRecord in mapContactJourny">
+                    <inbound-calls contact-record='contactRecord' lead-source='LeadSourceValOptions' journey-source='JourneySourceValOptions' journey-records='contactRecord.lstJourneyContacts' role-source="roleSource"></inbound-calls>
+                </div>
+               <input id="inboundNumber" type="hidden" name="country" value="{!inboundNumber}"/>
+               <input id="theme" name="themeName" type="hidden" value="{!$User.UIThemeDisplayed}" />
+               </div><!-- Panel Body End-->
+               <div class="row">
+               		<div class="col-xs-12" style ="padding: 20px !important;">
+	              		<button type="button" id="btnSearch" class="btn btn-primary create-new-contact" ng-click="cancel();" >
+		                	 <span style="margin-left: 33px;margin-right: 33px;">Close</span>
+		             	</button>
+		             </div>
+               </div>
+              </div><!-- Panel End -->             
+           </div>    
+        </div> <!-- Container End-->
+    </body>
+</apex:page>

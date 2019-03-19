@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>Manual Tour Scheduled</name>
+    <style>formalLetter</style>
+    <subject>Manual Tour Scheduled for {!Tour_Outcome__c.Location__c}</subject>
+    <textOnly>The following Manual Tour has been scheduled
+
+The following Manual Tour has been scheduled
+
+Location: {!Tour_Outcome__c.Location__c}
+Date: {!Tour_Outcome__c.Tour_Date__c}
+Time: {!Tour_Outcome__c.Start_Time__c}
+Scheduled by: {!Tour_Outcome__c.CreatedBy}
+
+
+Contact Information: 
+
+Name:{!Lead.Name}
+Email: {!Lead.Email}
+Phone:{!Lead.Phone}
+# Desks: {!Lead.Number_of_Desks__c}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

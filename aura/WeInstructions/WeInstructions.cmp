@@ -1,0 +1,14 @@
+<aura:component >
+	<aura:attribute name="instructions" type="List" default="[]" />
+	<article class="slds-card">
+        <div class="slds-scoped-notification slds-media " role="status">            
+            <div class="slds-media__body">
+                <ul class="slds-list--dotted">
+                    <aura:iteration items="{!v.instructions}" var="instruction">
+                        <li>{!instruction}</li>
+                    </aura:iteration>
+                </ul>
+            </div>
+        </div>
+    </article>
+</aura:component>

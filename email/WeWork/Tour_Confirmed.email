@@ -1,0 +1,9 @@
+Hi there! 
+
+We’re thrilled that you’re thinking about becoming a WeWork member. 
+
+Your tour is scheduled for {!Tour_Outcome__c.Tour_Date__c} at {!Tour_Outcome__c.Location__c} . We’ll be reaching out beforehand to confirm.
+
+{!Tour_Outcome__c.Location_Special_Instructions__c}.
+
+Looking forward to seeing you then!

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Direct Mail</fullName>
+        <default>false</default>
+        <label>Direct Mail</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Email</fullName>
+        <default>false</default>
+        <label>Email</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Event</fullName>
+        <default>true</default>
+        <label>Event</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Splash Event</fullName>
+        <default>false</default>
+        <label>Splash Event</label>
+    </standardValue>
+    <standardValue>
+        <fullName>List</fullName>
+        <default>false</default>
+        <label>List</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Outbound</fullName>
+        <default>false</default>
+        <label>Outbound</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Paid Media</fullName>
+        <default>false</default>
+        <label>Paid Media</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Partner</fullName>
+        <default>false</default>
+        <label>Partner</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Social Media</fullName>
+        <default>false</default>
+        <label>Social Media</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Web</fullName>
+        <default>false</default>
+        <label>Web</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Webinar</fullName>
+        <default>false</default>
+        <label>Webinar</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+</StandardValueSet>

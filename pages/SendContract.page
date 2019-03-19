@@ -1,0 +1,7 @@
+<apex:page showHeader="true" sidebar="true" action="{!sendContract}" controller="SendContractController" standardStylesheets="true">
+	<apex:pageMessages />
+
+	<apex:form >		
+		<apex:commandButton action="{!goBack}" value="Return"/>
+	</apex:form>	
+</apex:page>

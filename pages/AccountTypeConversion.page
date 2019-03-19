@@ -1,0 +1,6 @@
+<apex:page showHeader="false" standardStylesheets="false" >
+    <head>
+        <title>Account Type Conversion</title> 
+    </head>
+    <c:LightningResource component="AccountTypeConversion" parameters="recordId={!$CurrentPage.parameters.recordId}" showHeader="true"></c:LightningResource>
+</apex:page>

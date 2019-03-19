@@ -1,0 +1,12 @@
+.cJourneyDetails .topactions {
+   margin : 0px !important;
+}
+.THIS #lightning{
+    height: 100% !important;
+}
+.THIS .lightningHelptext{
+    display : none !important;
+}
+.THIS td{
+    vertical-align: inherit !important;
+}

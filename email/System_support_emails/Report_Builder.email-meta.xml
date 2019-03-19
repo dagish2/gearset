@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Update the users about the new report builder</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Report Builder</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Salesforce New Report Builder</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+As a part of Salesforce&apos;s Summer 2018 release, there is a new Report Builder available utilizing their Lightning experience. Here&apos;s a quick overview and training on the new Builder:
+
+https://help.salesforce.com/articleView?id=reports_build_lex.htm&amp;type=5
+
+* If you&apos;d like to create a new report using the Classic view of Report Builder, click the &apos;New Report (Salesforce Classic)&apos; button under the Reports tab.
+
+* If you&apos;d like to modify an existing report using the Classic view of Report Builder, click the arrow next to the &apos;Edit&apos; button the top right and select &apos;Edit (Salesforce Classic)&apos;.
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+Sincerely,
+Salesforce Support</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

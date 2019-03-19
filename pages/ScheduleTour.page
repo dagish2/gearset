@@ -1,0 +1,137 @@
+<apex:page controller="ScheduleTour" tabStyle="Tour_Outcome__c" title="Schedule Tour">
+    
+    <apex:includeScript value="//code.jquery.com/jquery-2.1.0.min.js"/>
+    
+    <style type="text/css">
+        .overlay {
+            background-color: rgb(0, 0, 0);
+            opacity: 0.1;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .overlay-holder {
+            top: 40%;
+            position: relative;
+            background-color: transparent;
+            z-index: 20;
+        }
+
+        .overlay .loading {
+            background: none 0px 0px repeat scroll transparent;
+            border: 0px none;
+            border-image: initial;
+            color: rgb(102, 102, 102);
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 6px;
+            padding: 0px 1.5em 0px 0.5em;
+        }
+
+    </style>
+
+    <apex:form id="mainForm" style="position: relative;">
+    
+        <div class="overlay" style="display: none;">
+            <div class="overlay-holder">
+                <span class="loading">Loading...</span>
+            </div>
+        </div>
+
+        <apex:actionFunction name="citySelected" action="{!citySelected}" oncomplete="javascript:$('.overlay').hide();" rerender="mainBlock"/>
+        <apex:actionFunction name="buildingSelected" action="{!buildingSelected}" oncomplete="javascript:$('.overlay').hide();" rerender="mainBlock"/>
+        <apex:actionFunction name="dateSelected" action="{!dateSelected}" oncomplete="javascript:$('.overlay').hide();" rerender="mainBlock"/>
+        <apex:actionFunction name="timeSelected" action="{!timeSelected}" oncomplete="javascript:$('.overlay').hide();" rerender="mainBlock"/>
+
+        <apex:sectionHeader title="Schedule a Tour"/>
+
+        <apex:pageBlock id="mainBlock" tabStyle="Tour_Outcome__c">
+           
+            <apex:pageBlockButtons rendered="{!NOT(ISBLANK(selectedTime))}">
+                <apex:commandButton action="{!confirmTour}" value="Confirm"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageMessages />
+
+            <apex:pageMessage severity="confirm"
+                strength="1"
+                summary="Click 'Confirm' to schedule {!tourDetails}"
+                rendered="{!NOT(ISBLANK(selectedTime))}"/>
+            
+            <apex:pageBlockSection title="Tour Scheduled For">
+            
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel for="tourLead" value="Lead"/>
+                    <apex:inputField value="{!newTour.Lead__c}"/>
+                </apex:pageBlockSectionItem>
+            
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel for="tourLead" value="Opportunity"/>
+                    <apex:inputField value="{!newTour.Opportunity__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                <!--<apex:pageBlockSectionItem >
+                    <apex:outputLabel for="tourLead" value="Journey"/>
+                    <apex:inputField value="{!newTour.Journey__c}"/>
+                </apex:pageBlockSectionItem>-->
+
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Location">
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel for="tourCity" value="City"/>
+                    <apex:selectList id="tourCity" size="5" onchange="javascript:$('.overlay').show();citySelected();" value="{!selectedCity}">
+                        <apex:selectOptions value="{!cityList}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!NOT(ISBLANK(selectedCity))}">
+                    <apex:outputLabel for="tourBuilding" value="Location"/>
+                    <apex:selectList id="tourBuilding"
+                        size="5"
+                        value="{!selectedBuilding}"
+                        onchange="javascript:$('.overlay').show();buildingSelected();">
+                        <apex:selectOptions value="{!buildingListForSelectedLocation}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Date and Time - Maximum date to schedule tour: {!maxTourDate}" rendered="{!NOT(ISBLANK(selectedBuilding))}">
+            
+                <apex:pageBlockSectionItem rendered="{!NOT(ISBLANK(selectedBuilding))}">
+                    <apex:outputLabel for="tourDate" value="Date"/>
+                    <apex:inputField id="tourDate" value="{!newTour.Tour_Date__c}" onchange="javascript:$('.overlay').show();dateSelected();"/>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem rendered="{!NOT(ISBLANK(newTour.Tour_Date__c))}">
+                    <apex:outputLabel for="tourTime" value="Time"/>
+                    <apex:outputPanel >
+                        <apex:selectList id="tourTime"
+                            size="5"
+                            value="{!selectedTime}"
+                            onchange="javascript:$('.overlay').show();timeSelected();"
+                            rendered="{!AND(availableTimes != null, availableTimes.size > 0)}">
+                            <apex:selectOptions value="{!availableTimes}"/>
+                        </apex:selectList>
+                        <apex:outputText rendered="{!OR(availableTimes == null, availableTimes.size == 0)}"
+                            value="No times available for selected date"
+                            style="color: red; font-weight: bold;"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Notes" columns="1">
+                <apex:inputTextArea id="notes" rows="3" value="{!tourNotes}" style="width: 100%;" html-maxlength="255"/>
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

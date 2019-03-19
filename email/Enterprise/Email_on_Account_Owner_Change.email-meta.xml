@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>43.0</apiVersion>
+    <available>true</available>
+    <description>Send email alert on account owner change to previous and existing owner of account record.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Email on Account Owner Change</name>
+    <style>none</style>
+    <subject>Account Owner Change</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

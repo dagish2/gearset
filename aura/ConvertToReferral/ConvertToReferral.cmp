@@ -1,0 +1,121 @@
+<aura:component controller="RetroactiveReferralController">
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="record" type="Object" />
+    <aura:attribute name="oppRec" type="object" />
+    <aura:attribute name="isFromGlobalAction" type="Boolean" default="false" />
+    <aura:attribute name="opportunities" type="List" default="[]" />
+    <aura:attribute name="conRec" type="Object" />
+    <aura:attribute name="selectedRows" type="List" default="[]"/>
+    <aura:attribute name="value" type="String" default="Contact"/>
+    <aura:attribute name="validUser" type="Boolean" default="false"/>
+    <aura:attribute name="utils" type = "Object" />
+    <aura:attribute name="theme" type="Boolean" default="false"/>
+    <aura:attribute name="retrictedStages" type="List" default="[]"/>
+    <aura:attribute name="message" type="String" default='You cannot perform this action as you does not have permission for "Convert To Referral"'/>
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}"/>
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:html tag="style">
+       #lightning {
+         background-image : url("/_slds/images/themes/lightning_blue/lightning_blue_background.png") !important;
+         background-position: center !important;
+         background-repeat: no-repeat !important;
+         background-size: cover !important;
+        } 
+        body, html {
+        height: 100%;
+        overflow: hidden;
+        }
+        .slds-scope .slds-vertical-tabs{ overflow: inherit !important; }
+    </aura:html>
+    <div id="referralheader" class="slds-p-around_x-small">
+        <div class="slds-page-header slds-page-header_record-home" id="PageHeaderDiv">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container" title = "Tour">
+                                <lightning:icon iconName="standard:opportunity" size="medium" alternativeText="Opportunity"/>
+                                <span class="slds-assistive-text">Opportunity</span>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__name-meta" title="{!empty(v.oppRec.Name) ? 'OPPORTUNITY' : 'CONVERT TO REFERRAL'}">{!empty(v.oppRec.Name) ? 'OPPORTUNITY' : 'CONVERT TO REFERRAL'}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                            <p class="slds-page-header__title slds-truncate">{!empty(v.oppRec.Name)? 'Convert To Referral' : v.oppRec.Name}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="{! 'slds-page-header__row slds-page-header__row_gutters ' + (empty(v.oppRec)?'slds-hide':'')}">
+                <div class="slds-page-header__col-details">
+                    <ul class="slds-page-header__detail-row">
+                        <li class="slds-page-header__detail-block">
+                            <div class="slds-text-title slds-truncate" title="Name">Name</div>
+                            <div class="slds-truncate" title="Name Of the Opportunity."><a href= "{!v.theme ? '/'+ v.oppRec.Id : '/lightning/r/'+ v.oppRec.Id +'/view'}" target="_blank">{!v.oppRec.Name}</a></div>
+                        </li>
+                        <li class="slds-page-header__detail-block">
+                            <div class="slds-text-title slds-truncate" title="Close Date">Close Date</div>
+                            <div class="slds-truncate" title="Close Date Of the Opportunity.">{!v.oppRec.CloseDate}</div>
+                        </li>
+                        <li class="slds-page-header__detail-block">
+                            <div class="slds-text-title slds-truncate" title="Owner">Owner</div>
+                            <div class="slds-truncate" title="Owner Of the Opportunity."><a href= "{!v.theme ? '/'+ v.oppRec.OwnerId : '/lightning/r/'+ v.oppRec.OwnerId +'/view'}" target="_blank">{!v.oppRec.Owner.Name}</a></div>
+                        </li>
+                        <li class="slds-page-header__detail-block">
+                            <div class="slds-text-title slds-truncate" title="Deal type">Deal Type</div>
+                            <div class="slds-truncate" title="Deal type Of the Opportunity.">{!v.oppRec.Deal_Type__c}</div>
+                        </li>
+                        <li class="slds-page-header__detail-block">
+                            <div class="slds-text-title slds-truncate" title="Stage Name">Stage Name</div>
+                            <div class="slds-truncate" title="Stage Name Of the Opportunity.">{!v.oppRec.StageName}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="errorMsg" class="slds-hide">
+        <div class="slds-wrap" style="width: 50%;margin: auto;">
+            <div class="slds-card">                            
+                <div class="slds-card__header slds-grid" >
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__figure" >
+                            <span class="slds-icon slds-icon_container">
+                                <lightning:icon iconName="utility:info"/>
+                            </span>
+                        </div>
+                        <div class="slds-media__body" style="overflow-wrap: break-word;">
+                            <div class="slds-media__body slds-p-around_small">
+                                <h2 class="slds-welcome-mat__tile-title">{!v.message}</h2>
+                            </div>
+                            <h2>
+                                <span class="slds-text-heading_small slds-align_absolute-center"></span>
+                            </h2>
+                        </div>
+                    </header>
+                </div> 
+                <footer class="slds-modal__footer">
+                    <c:EnziButton label="Close" leftIcon="utility:close" type="destructive" click="{! c.close}"></c:EnziButton>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <div id="referralBody" class="slds-hide">
+        <div id="search" class="{!(empty(v.recordId)? '': 'slds-hide')}">
+            <c:SearchConOrOppForReferral useOpportunity="{! c.useThisOpp}" retrictedStages="{!v.retrictedStages}" opportunityRec="{!v.record}" oppRecordId="{!v.recordId}" opportunities="{!v.opportunities}" contactRec="{!v.conRec}" selectedRows="{!v.selectedRows}" value="{!v.value}"/>
+        </div>
+        <div id="selectReferrar" class="{! empty(v.recordId)? 'slds-hide': ''}">
+            <aura:if isTrue="{! !empty(v.recordId)}">
+                <c:UpdateReferrer recordId="{!v.recordId}" opportunityData="{!v.oppRec}" isFromGlobalAction="{!v.isFromGlobalAction}" back="{!c.backFromUpdateReferrer}" />
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

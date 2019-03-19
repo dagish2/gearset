@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>None</fullName>
+        <default>false</default>
+        <label>None</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Enterprise Solutions</fullName>
+        <default>false</default>
+        <label>Enterprise Solutions</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Partnership</fullName>
+        <default>false</default>
+        <label>Partnership</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Mid Market</fullName>
+        <default>false</default>
+        <label>Mid Market</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Standard Product</fullName>
+        <default>false</default>
+        <label>Standard Product</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Powered by We</fullName>
+        <default>false</default>
+        <label>Powered by We</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Global Access</fullName>
+        <default>false</default>
+        <label>Global Access</label>
+    </standardValue>
+    <standardValue>
+        <fullName>PxWe</fullName>
+        <default>false</default>
+        <label>PxWe</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeWork</fullName>
+        <default>false</default>
+        <label>WeWork</label>
+    </standardValue>
+</StandardValueSet>

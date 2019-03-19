@@ -1,0 +1,58 @@
+<aura:component >
+    <aura:attribute name="object" type="String" default="User"/>
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="showPopover" type="Boolean" default="false" />
+    <aura:attribute name="errors" type="List" />
+    <aura:attribute name="validate" type="Boolean" default="false" />
+    <aura:attribute name="required" type="Boolean" default="false"/>
+    <aura:attribute name="keyword" type="String"/>
+    
+    <div class="entityMenu slds-p-left--xxx-small uiMenu" data-aura-class="uiMenu">
+        <lightning:button class="objectSelector" variant="base" label="" title="Base action" onclick="{! c.showPopover }" onblur="{! c.onBlur }"> 
+            <div class="entityMenu slds-p-left--xxx-small uiMenu" data-aura-class="uiMenu">
+                <div class="uiPopupTrigger" data-aura-class="uiPopupTrigger" data-interactive-uid="10">
+                    <div data-proxy-id="aura-pos-lib-1" id="37:1962;a">
+                        <div style="display: flex;">
+                            <div class="entityIcon slds-icon slds-icon--small slds-float--left forceEntityIcon" style="background-color: #65CAE4" data-aura-class="forceEntityIcon">
+                                <span class="uiImage" data-aura-class="uiImage">
+                                    <img src="{! '/img/icon/t4v35/standard/'+(v.object=='User' ? 'user_120.png':'orders_120.png')}" class="icon " alt="People" title="People" />
+                                </span>
+                            </div>
+                            <lightning:icon style="padding-top:5px;padding-left: 3px;" iconName="utility:down" alternativeText="Approved" size="xx-small" />
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </lightning:button>
+        <c:WeField keyword="{!v.keyword}" showOnlyActiveUsers="true" type="reference" errors="{!v.errors}" required="{!v.required}" validate="{!v.validate}"  label="{!'Select '+ (v.object == 'Group' ? 'Queue' : v.object)}" placeholder="{! 'Enter '+(v.object == 'Group' ? 'Queue' : 'User')}"  reference="{!v.object}" value="{!v.value}" />
+    </div>
+    
+    <section aria-describedby="dialog-body-id-21" aria-label="Dialog Title" class="{!(v.showPopover ? 'slds-show':'slds-hide')+' slds-popover'}" role="dialog" style="width: 7rem;position: absolute;" >
+        <div>
+            <div class="entityMenuList" role="menu">
+                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                    <li role="presentation" class="slds-listbox__item">
+                        <div id="User" class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option" onclick="{! c.setObject}">
+                            <div class="entityIcon slds-icon slds-icon--small slds-float--left slds-m-right--small forceEntityIcon" style="background-color: #65CAE4" data-aura-class="forceEntityIcon">
+                                <span class="uiImage" data-aura-class="uiImage">
+                                    <img src="/img/icon/t4v35/standard/user_120.png" class="icon" />
+                                </span>
+                            </div>
+                            <span class="entityLabel slds-align-middle slds-p-top--xx-small" title="People">People</span>
+                        </div>
+                    </li>
+                    <li role="presentation" class="slds-listbox__item" id="Group">
+                        <div id="Group" class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option" onclick="{! c.setObject}">
+                            <div class="entityIcon slds-icon slds-icon--small slds-float--left slds-m-right--small forceEntityIcon" style="background-color: #769ED9" data-aura-class="forceEntityIcon">
+                                <span class="uiImage" data-aura-class="uiImage">
+                                    <img src="/img/icon/t4v35/standard/orders_120.png" class="icon" />
+                                </span>
+                            </div>
+                            <span class="entityLabel slds-align-middle slds-p-top--xx-small" title="Queues">Queues</span>
+                        </div>
+                    </li>
+                </ul> 
+            </div>
+        </div>
+    </section>
+</aura:component>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Fort Point Tech Night</name>
+    <style>none</style>
+    <subject>WeWork | The Community for Creators</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

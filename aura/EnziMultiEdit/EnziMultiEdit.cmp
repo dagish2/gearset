@@ -1,0 +1,74 @@
+<aura:component >
+	<aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="records" type="Object" />
+    
+    <aura:attribute name="operators" type="List" />
+    <aura:attribute name="mapFields" type="Object" />
+    <aura:attribute name="lstFields" type="Object" />
+    <aura:attribute name="selectedCriteriaField" type="Object" />
+    <aura:attribute name="criteriaOperators" type="Object" />
+    <aura:attribute name="selectedCriteriaOperator" type="Object" />
+    <aura:attribute name="selectedCriteriaValue1" type="Object" />
+    <aura:attribute name="selectedCriteriaValue2" type="Object" />
+    <aura:attribute name="criterias" type="Object" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:EnziModal aura:id="multiEditModal" header="Bulk Update" isLarge="true">
+        <c:EnziModalContainer >
+            <div class="stage-main slds-grid slds-nowrap" role="main" style="margin:10px;">
+                <div class="slds-size--7-of-8" style="padding:10px">
+                    <div class="stage-main slds-grid slds-nowrap" role="main">
+                        <div class="slds-size--1-of-4" style="padding-right:10px">
+                            <c:EnziField type="picklist" name="Field" label="Field" options="{!v.lstFields}" value="{!v.selectedCriteriaField}" labelField="label" valueField="name" change="{!c.criteriaFieldChange}"></c:EnziField>
+                        </div>
+                        <div class="slds-size--1-of-4" style="padding-right:10px">
+                            <c:EnziField type="picklist" name="Operator" label="Operator" options="{!v.criteriaOperators}" value="{!v.selectedCriteriaOperator}"></c:EnziField>
+                        </div>
+                        <div class="slds-size--1-of-4" style="padding-right:10px">
+                            <c:EnziField sObjectName="{!v.sObjectName}" fieldName="{!v.selectedCriteriaField}" label="Value 1" value="{!v.selectedCriteriaValue1}"></c:EnziField>
+                        </div>
+                        <div class="slds-size--1-of-4">
+                            <c:EnziField sObjectName="{!v.sObjectName}" fieldName="{!v.selectedCriteriaField}" label="Value 2" disabled="{!v.selectedCriteriaOperator!='in between'}" value="{!v.selectedCriteriaValue2}"></c:EnziField>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-size--1-of-8" style="padding:10px;padding-top:32px">
+                    <button class="slds-button slds-button--neutral" style="width:100%" onclick="{!c.addCriteria}"><lightning:icon iconName="utility:insert_tag_field" size="x-small"/>&nbsp;&nbsp;Add Criteria</button>
+                </div>
+            </div>
+            <div style="padding:20px;padding-top:0px">
+                <c:EnziAccordian >
+                    <aura:iteration items="{!v.criterias}" var="criteria" indexVar="index">
+                        <c:EnziAccordianItem label="{!criteria.label}" allowDelete="{!criteria.criteria!='default'}" delete="{!c.deleteCriteria}" index="{!index}">
+                            <div class="stage-main slds-grid slds-wrap" role="main" style="padding:10px">
+                                <div class="slds-size--1-of-1" style="padding:10px;padding-top:0px">
+                                    <c:EnziField type="picklist" name="{!'criteria:'+index}" label="Field" options="{!v.lstFields}" labelField="label" valueField="name" change="{!c.addMappings}"></c:EnziField>
+                                </div>
+                                <div class="slds-size--1-of-1" style="padding:10px;padding-top:0px">
+                                    <div class="slds-card slds-grid slds-wrap" style="padding:10px;">
+                                        <aura:iteration items="{!criteria.mappings}" var="mapping" indexVar="mappingIndex">
+                                            <div class="slds-size--2-of-8" style="padding:10px;padding-bottom:0px">
+                                                <span style="padding:6px;background-color:darkgrey;color:white;width:100%;display:flex">{!mappingIndex+1}. {!mapping.field.label}:</span>
+                                            </div>
+                                            <div class="slds-size--5-of-8" style="padding:10px;padding-bottom:0px">
+                                                <c:EnziField sObjectName="{!v.sObjectName}" fieldName="{!mapping.field.name}" hideLabel="true" value="{!mapping.value}"></c:EnziField>
+                                            </div>
+                                            <div class="slds-size--1-of-8" style="padding:10px;padding-bottom:0px">
+                                                <button class="slds-button slds-button--neutral" style="width:100%" onclick="{!c.removeMappings}" id="{!'btnRemoveMapping:'+index+':'+mappingIndex}"><lightning:icon iconName="utility:close" size="x-small"/>&nbsp;&nbsp;Remove</button>
+                                            </div>
+                                        </aura:iteration>
+                                        <div style="{!'display:'+((criteria.mappings==undefined || criteria.mappings.length==0)?'block':'none')}">No field mappings assigned yet.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:EnziAccordianItem>
+                    </aura:iteration>
+                </c:EnziAccordian>
+            </div>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+        	<c:EnziButton label="Save" type="brand" click="{!c.save}"></c:EnziButton>
+            <c:EnziButton label="Cancel" type="brand" click="{!c.cancel}"></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

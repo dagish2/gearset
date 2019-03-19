@@ -1,0 +1,107 @@
+<apex:page controller="WeworkEngine" standardStylesheets="false" sidebar="false" showHeader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}" Vendor_CSS="" Vendor_JS="" Application_JS="complete-lost.js" Application_CSS="" />
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Complete-Lost</title>
+        <style>
+            .divider {
+            height: 10px;
+            }
+            
+            #field-comment {
+            resize: vertical;
+            }
+            
+            #next-folowup-date {
+            cursor: pointer;
+            background-color: white;
+            background: white url(../images/calendar.png) left no-repeat;
+            background-position-x: 97%;
+            background-position: 97%;
+            }
+            
+            .required {
+            color: red;
+            font-size: 20px;
+            }
+            label {
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+            }
+            
+            textarea {
+            resize:vertical;
+            }
+            body {
+            overflow-x: hidden;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <div id="wrapper" ng-app="completeLostApp" ng-controller="completeLostAppController">
+            <div id="page-content-wrapper">
+                <div class="container-fluid" ng-show="show">
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8">
+                            <form name="myForm">
+                                <div id="main-container">
+                                    <div class="row">
+                                        <div class="col-xs-12" ng-cloak="true"><i class="fa fa-plane fa-2x" aria-hidden="true"></i><label class="field-lbl ng-cloak" ng-cloak="true">&nbsp;{{journeyName}}</label></div>
+                                    </div>
+                                    <div class="row divider"></div>
+                                    <div class="row">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-8">
+                                            <label class="field-lbl" ng-cloak="true">You are about to unqualify this person, please enter the reason below</label>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+                                    <div class="row divider"></div>
+                                    <div class="row">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-4">
+                                            <label class="field-lbl" ng-cloak="true">Reason for Unqualifying <i class="required"> * </i></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" ng-init="lostReasons" ng-change="disableButton()" ng-model="selectedReason" ng-options="reason for reason in lostReasons" ng-required="true" >
+                                            </select>                                                                                        
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+                                    <div class="row divider"></div>
+                                    <div class="row" ng-show="selectedReason == 'Other'" >
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-4">
+                                            <label class="field-lbl" ng-cloak="true">Other Reason <i class="required"> * </i></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <textarea ng-model="otherReason" class="form-control" ng-required="status" maxlength="250"></textarea>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+                                    <div class="row divider"></div>
+                                    <div class="row">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-4 text-center">
+                                            <button ng-cloak="true"  ng-disabled="myForm.$invalid" Id="reason-save" class="btn btn-primary" ng-click="updateJourneyStage()"> Save </button>
+                                            <span style="margin-left: 10px;"></span>
+                                            <button ng-cloak="true"  Id="reason-cancel" class="btn btn-primary" ng-click="cancel()"> Cancel </button>
+                                        </div>
+                                        <div class="col-sm-4"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>          
+</apex:page>

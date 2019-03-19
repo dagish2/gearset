@@ -1,0 +1,26 @@
+<aura:component >
+    <aura:attribute name="sObject" type="map" default="{}" />
+    <aura:attribute name="fieldMetaData" type="List" default="[]" />
+    <aura:attribute name="headerColor" type="String" default="lavender" />
+    <aura:attribute name="showHeaderBox" type="Boolean" default="true" />
+
+    <div class="{!'slds-theme_shade' + v.showHeaderBox ? ' slds-box' : ''}" style="padding:4px;">
+        <ul class="slds-grid slds-wrap slds-page-header__detail-row" style="{!'margin:0px;background-color:'+(v.headerColor)+';'}">
+            <aura:iteration items="{!v.fieldMetaData}" var="field">
+                <li class="{! 'slds-col slds-size_1-of-1 slds-medium-size_1-of-'+(v.fieldMetaData.length)+' slds-large-size_1-of-'+(v.fieldMetaData.length) }">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="{!field.label}">{!field.label}</p>
+                    <p class="slds-text-body_regular slds-truncate" title="{!field.label}">
+                        <aura:If isTrue="{!field.icon}">
+                            <lightning:icon iconName="{!field.icon}" size="xx-small"></lightning:icon>&nbsp;&nbsp;
+                        </aura:If>
+                        <c:EnziDynamicBinder col="{!field.apiName}"
+                                             type="{!field.type}"
+                                             obj="{!v.sObject}"
+                                             isNameField="{!field.isNameField?true:false}">
+                        </c:EnziDynamicBinder>
+                    </p>
+                </li>
+            </aura:iteration>
+        </ul>
+    </div>
+</aura:component>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User Announcements for Sprint 27A - Changes to Opportunities and Tour Booking</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes 27A</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Feature Updates in Salesforce - 5/10/18</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+
+This week&apos;s release contains an update to our Journey and Opportunity pages. We also have an update our manage tour page.
+
+Journey: Unqualified options
+
+
+We have updated our picklist values for the unqualified journey.
+
+
+Opportunity: Tour booked by
+
+
+We have added tour booked by to the opportunity page.
+
+Manage Tour: Product Line
+Product line item is now pre-populated on the tour when booking multiple tours
+
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+
+
+Best,
+
+Tykira</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

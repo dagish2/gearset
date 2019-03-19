@@ -1,0 +1,12 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" standardController="Document__c">
+    <apex:includescript value="/support/console/31.0/integration.js" />
+    <head>
+        <title>Document Upload</title>
+        <script type="text/javascript">
+        function testSetTabTitle() {
+            //sforce.console.setTabTitle('Document Upload');
+        }
+        </script>
+    </head>
+    <c:LightningResource component="DocumentUpload" parameters="recordId={!$CurrentPage.parameters.id}"></c:LightningResource>
+</apex:page>

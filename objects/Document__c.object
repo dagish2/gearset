@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Document_Record_Page2</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>If this Document belongs to an Account id of that Account will be stores here.</description>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Documents</relationshipLabel>
+        <relationshipName>Documents</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Document_Template__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This field should contain the Document Template due to which the Document is generated automatically.</description>
+        <externalId>false</externalId>
+        <label>Document Template</label>
+        <referenceTo>Document_Template__c</referenceTo>
+        <relationshipLabel>Documents</relationshipLabel>
+        <relationshipName>Documents</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Extensions_Allowed__c</fullName>
+        <description>Extensions allowed in comma separated format. If none specified all extensions will be allowed.</description>
+        <externalId>false</externalId>
+        <label>Extensions Allowed</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Is_Finalized__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If this is true that means this document is finalized and can not be changed. Only administrator can uncheck this field if required.</description>
+        <externalId>false</externalId>
+        <label>Is Finalized</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Latest_Version__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Latest Version of the Document present. When document is empty this is 0, and at every upload of the version, this is incremented by 1.</description>
+        <externalId>false</externalId>
+        <label>Latest Version</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Opportunity to which this Document belongs (if any)</description>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Documents</relationshipLabel>
+        <relationshipName>Documents</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Parent__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup of the Document which Parent to the current Document.
+
+This will generally be used to relate a Document to Parent in case of a Document belongs to Multiple Dcouments</description>
+        <externalId>false</externalId>
+        <label>Parent</label>
+        <referenceTo>Document__c</referenceTo>
+        <relationshipLabel>Documents</relationshipLabel>
+        <relationshipName>Documents</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <description>Type of the Document if it is a Versioned, Multiple Versioned, Multiple Files.</description>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Versioned</fullName>
+                    <default>false</default>
+                    <label>Versioned</label>
+                </value>
+                <value>
+                    <fullName>Multiple Versioned</fullName>
+                    <default>false</default>
+                    <label>Multiple Versioned</label>
+                </value>
+                <value>
+                    <fullName>Multiple Files</fullName>
+                    <default>false</default>
+                    <label>Multiple Files</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>false</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>false</enableSharing>
+    <enableStreamingApi>false</enableStreamingApi>
+    <label>Document</label>
+    <nameField>
+        <label>Document Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Documents</pluralLabel>
+    <searchLayouts />
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>All_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Extensions_Allowed__c</columns>
+        <columns>Is_Finalized__c</columns>
+        <columns>Document_Template__c</columns>
+        <columns>Latest_Version__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Documents</label>
+    </listViews>
+</CustomObject>

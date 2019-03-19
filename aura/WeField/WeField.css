@@ -1,0 +1,26 @@
+.THIS  .slds-input[readonly]{
+    /*border-color: #d8dde6 !important;
+    border-width: 0px 0px 1px 0px !important;*/
+}
+.THIS.slds-input[disabled]{
+    background-color: white !important;
+}
+.THIS .slds-checkbox--faux{
+     border-width: 1px 1px 1px 1px !important;
+}
+.THIS .slds-form-element {
+    display: block !important;
+}
+.THIS .slds-form_compound .slds-form-element__label:not(.slds-form-element__legend){
+    display:none;
+}
+.THIS .slds-button[disabled] {
+    color: rgb(107, 109, 112);
+    margin:0px;
+}
+.THIS .slds-dropdown{
+    position: absolute !important;
+}
+.THIS [data-element-id=searchClear]{
+     margin-top: -13px !important;
+}

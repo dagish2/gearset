@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>40.0</apiVersion>
+    <available>true</available>
+    <description>Send email alert to Opp owner after Tour is cancelled</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Email Alert After Tour Cancelled</name>
+    <style>none</style>
+    <subject>Tour Completed Successfully</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

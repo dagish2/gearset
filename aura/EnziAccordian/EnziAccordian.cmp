@@ -1,0 +1,7 @@
+<aura:component >
+    <div class="slds-tree_container" role="application" style="min-width:100%;">
+        <ul class="slds-tree slds-has-dividers--around-space" role="tree" aria-labelledby="treeheading">
+            {!v.body}
+        </ul>
+    </div>
+</aura:component>

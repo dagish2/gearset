@@ -1,0 +1,7 @@
+.THIS .container-footer{
+    bottom:0;
+    width:100%;
+    z-index: 2;
+    text-align:right;
+    background:ghostwhite;
+}

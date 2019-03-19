@@ -1,0 +1,57 @@
+<aura:component >
+    <aura:attribute name="orgAccountId" type="String" />
+    <aura:attribute name="selectedSalesAccountId" type="String" />
+    <aura:attribute name="searchOrgMetaFields" type="List" default="[]" />
+    <aura:attribute name="orgRelatedSalesAccounts" type="List" default="[]" />    
+    <aura:attribute name="entity" type="Object" default="{}" />
+    <aura:attribute name="instructions" type="Object" default="{}" />
+    <aura:attribute name="showHeader" type="Boolean" default="false"/>     
+    <aura:attribute name="noSalesAccountFound" type="Boolean" />  
+    <aura:attribute name="accountTypesToShow" type="String" />    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.getSalesAccounts}"/>
+    <aura:handler name="change" value="{!v.orgAccountId}" action="{!c.getSalesAccounts}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <aura:if isTrue="{!v.showHeader}">    
+        <c:EnziHeader sObjectName="{!v.entity.sObjectName}" pageName="{!v.entity.name}" iconName="{!v.entity.iconName}"></c:EnziHeader>
+        <c:EnziSection expanded="true" disableToggle="false" label="Instructions" showTooltip="true" tooltipText="Information of Lead"> 
+            <div class="{! 'slds-wrap slds-grid slds-gutters slds-p-horizontal_small slds-scrollable_y '}" style="margin-left:10px;"> 
+                <ul style="{! 'padding:10px;list-style-type :'+ ( v.instructions.listStyleType)+';color:'+(v.instructions.color) +';font-size:'+(v.instructions.fontSize)}">
+                    <aura:iteration items="{!v.instructions.instructions}" var="item">
+                        <li>{!item}</li>
+                    </aura:iteration>
+                </ul>                
+            </div>
+            <ul class="slds-grid slds-page-header__detail-row" style="background-color: lavender;margin:0px">
+                <li class="slds-page-header__detail-block" style="width:25%">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Name"><b>Name</b></p>
+                    <p class="slds-text-body_regular slds-truncate">
+                        <ui:outputURL value="{!'/'+(v.entity.recordId)}" label="{!v.entity.name}" target="_blank"/>
+                    </p>                    
+                </li>
+                <li class="slds-page-header__detail-block" style="width:25%">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Email"><b>Email</b></p>
+                    <p class="slds-text-body_regular slds-truncate">{!v.entity.email}</p>
+                </li>
+                <li class="slds-page-header__detail-block" style="width:25%">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Company"><b>Company</b></p>
+                    <p class="slds-text-body_regular slds-truncate">{!v.entity.company}</p>
+                </li>
+                <li class="slds-page-header__detail-block" style="width:25%">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Phone"><b>Phone</b></p>
+                    <p class="slds-text-body_regular slds-truncate">{!v.entity.phone}</p>
+                </li>
+                <li class="slds-page-header__detail-block" style="width:25%">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Organization"><b>Organization</b></p>
+                    <p class="slds-text-body_regular slds-truncate">                         
+                        <ui:outputURL value="{!'/'+(v.entity.orgRecordId)}" label="{!v.entity.orgRecordName}" target="_blank"/>
+                    </p>                    
+                </li>
+            </ul>                 
+        </c:EnziSection>
+    </aura:if>
+    <div class="slds-scrollable">
+        <c:EnziDataTable describedFields="{!v.searchOrgMetaFields}" pageSizes="[5,20,50,100]" setBorder="true" records="{!v.orgRelatedSalesAccounts}" showMultiselect="false" showSearch="true" ></c:EnziDataTable>
+    </div>
+</aura:component>

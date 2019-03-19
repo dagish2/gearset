@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Reservable_Hold_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <compactLayouts>
+        <fullName>Reservable_Hold</fullName>
+        <fields>Account__c</fields>
+        <fields>No_Of_Between_Days__c</fields>
+        <fields>starts_at__c</fields>
+        <fields>expires_at__c</fields>
+        <label>Reservable Hold</label>
+    </compactLayouts>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Reservable Holds</relationshipLabel>
+        <relationshipName>Reservable_Holds</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Approval_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Hold Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Released</fullName>
+                    <default>false</default>
+                    <label>Released</label>
+                </value>
+                <value>
+                    <fullName>Hold</fullName>
+                    <default>false</default>
+                    <label>Hold</label>
+                </value>
+                <value>
+                    <fullName>Expired</fullName>
+                    <default>false</default>
+                    <label>Expired</label>
+                </value>
+                <value>
+                    <fullName>Inactive</fullName>
+                    <default>true</default>
+                    <label>Inactive</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Approved_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Approved Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Billing_Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Billing Account</label>
+        <referenceTo>Billing_Account__c</referenceTo>
+        <relationshipLabel>Reservable Holds</relationshipLabel>
+        <relationshipName>Reservable_Holds</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Company_UUID__c</fullName>
+        <externalId>false</externalId>
+        <label>Company UUID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_UUID__c</fullName>
+        <externalId>false</externalId>
+        <label>Contact UUID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Reservable Holds</relationshipLabel>
+        <relationshipName>Reservable_Holds</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Created_By_User_Role__c</fullName>
+        <description>Role of custom "Created By User" field</description>
+        <externalId>false</externalId>
+        <formula>created_by_id__r.UserRole.Name</formula>
+        <inlineHelpText>Role of custom "Created By User" field</inlineHelpText>
+        <label>Created By User Role</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Created_From__c</fullName>
+        <description>Source - from what system was the hold created</description>
+        <externalId>false</externalId>
+        <label>Created From</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hold_Period__c</fullName>
+        <description>Hold Start Date to Hold End Date</description>
+        <externalId>false</externalId>
+        <formula>CASE(
+  MONTH( starts_at__c ),
+  1, "Jan",
+  2, "Feb",
+  3, "Mar",
+  4, "Apr",
+  5, "May",
+  6, "Jun",
+  7, "Jul",
+  8, "Aug",
+  9, "Sep",
+  10, "Oct",
+  11, "Nov",
+  "Dec"
+)
+
+&amp; ' ' &amp;
+
+TEXT(DAY(starts_at__c))
+
+&amp; ', ' &amp;
+
+TEXT(YEAR(starts_at__c)) 
+
+&amp; ' to ' &amp;
+
+CASE(
+  MONTH( expires_at__c ),
+  1, "Jan",
+  2, "Feb",
+  3, "Mar",
+  4, "Apr",
+  5, "May",
+  6, "Jun",
+  7, "Jul",
+  8, "Aug",
+  9, "Sep",
+  10, "Oct",
+  11, "Nov",
+  "Dec"
+)
+
+&amp; ' ' &amp;
+
+TEXT(DAY(expires_at__c)) 
+
+&amp; ', ' &amp;
+
+TEXT(YEAR(expires_at__c))</formula>
+        <inlineHelpText>Hold Start Date to Hold End Date</inlineHelpText>
+        <label>Hold Period</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Is_Created_By__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(   created_by_id__r.Id  = $User.Id , true, false)</formula>
+        <label>Is Created By</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Opp_Owner__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(  Opportunity__r.OwnerId  = $User.Id , true, false)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Opportunity Owner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>No_Of_Between_Days__c</fullName>
+        <description>This field is used to get no.of days between start and expire date</description>
+        <externalId>false</externalId>
+        <formula>expires_at__c  -  starts_at__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hold Length (In Days)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Note__c</fullName>
+        <externalId>false</externalId>
+        <label>Note</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity_For_Related_List__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This lookup field is used to show active hold records on opportunity page layouts related list.No need to display on pagelayout</description>
+        <externalId>false</externalId>
+        <label>Opportunity For Related List</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Active Holds</relationshipLabel>
+        <relationshipName>Reservable_Holds1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Opportunity Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Reservable_Holds2</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>All Holds</relationshipLabel>
+        <relationshipName>Reservable_Holds</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Region_Name__c</formula>
+        <label>Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reminder_After_21_Days__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to send reminder after 21 days.This field is checked by time based workflow if reservable is still on hold for 21 days.</description>
+        <externalId>false</externalId>
+        <label>Reminder After 21 Days</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Removed_From__c</fullName>
+        <description>Source - from what system was the source removed</description>
+        <externalId>false</externalId>
+        <label>Removed From</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reservable_For_Related_List__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This field is used for show active Reservable Hold records on reservable Layout.No need to show on page layouts.</description>
+        <externalId>false</externalId>
+        <label>Reservable For Related List</label>
+        <referenceTo>Reservable__c</referenceTo>
+        <relationshipLabel>Active Holds</relationshipLabel>
+        <relationshipName>Reservable_Holds1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Reservable_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Reservable_Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Hot Desk</fullName>
+                    <default>false</default>
+                    <label>Hot Desk</label>
+                </value>
+                <value>
+                    <fullName>Office</fullName>
+                    <default>false</default>
+                    <label>Office</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Reservable_UUID__c</fullName>
+        <externalId>false</externalId>
+        <label>Reservable UUID</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reservable__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Reservable</label>
+        <referenceTo>Reservable__c</referenceTo>
+        <relationshipLabel>Reservable Holds</relationshipLabel>
+        <relationshipName>Reservable_Holds</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Send_Approval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Send Approval</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Send_Reminder_Alert__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to send reminder email after 21 days if reservable status is still on hold</description>
+        <externalId>false</externalId>
+        <label>Send Reminder Alert</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>UUID__c</fullName>
+        <externalId>true</externalId>
+        <label>UUID</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>created_by_id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This will contain the user name who has created the office hold record</description>
+        <externalId>false</externalId>
+        <label>Created By User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Reservable_Holds</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>expires_at__c</fullName>
+        <externalId>false</externalId>
+        <label>Expires At</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>removed_at__c</fullName>
+        <externalId>false</externalId>
+        <label>Removed At</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>removed_by_id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Removed By User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Reservable_Holds1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>removed_by_method__c</fullName>
+        <externalId>false</externalId>
+        <label>Removed By Method</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>paperwork</fullName>
+                    <default>false</default>
+                    <label>paperwork</label>
+                </value>
+                <value>
+                    <fullName>manual</fullName>
+                    <default>false</default>
+                    <label>manual</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>starts_at__c</fullName>
+        <externalId>false</externalId>
+        <label>Starts At</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Reservable Hold</label>
+    <nameField>
+        <displayFormat>RH{000000}</displayFormat>
+        <label>Hold Name</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Reservable Holds</pluralLabel>
+    <searchLayouts />
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>Active_Holds_China</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Region__c</field>
+            <operation>contains</operation>
+            <value>China</value>
+        </filters>
+        <label>Active Holds - China</label>
+    </listViews>
+    <listViews>
+        <fullName>Active_Holds_Europe_Israel_Australia</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Region__c</field>
+            <operation>contains</operation>
+            <value>Europe</value>
+        </filters>
+        <label>Active Holds - Europe, Israel, Australia</label>
+    </listViews>
+    <listViews>
+        <fullName>Active_Holds_Japan</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>Japan</value>
+        </filters>
+        <label>Active Holds - Japan</label>
+    </listViews>
+    <listViews>
+        <fullName>Active_Holds_Latin_America</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>Latin America</value>
+        </filters>
+        <label>Active Holds - Latin America</label>
+    </listViews>
+    <listViews>
+        <fullName>Active_Holds_Pacific</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>Pacific</value>
+        </filters>
+        <label>Active Holds - Pacific</label>
+    </listViews>
+    <listViews>
+        <fullName>Active_Holds_US_Canada_East</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>US &amp; Can - East</value>
+        </filters>
+        <label>Active Holds - US &amp; Canada East</label>
+    </listViews>
+    <listViews>
+        <fullName>Active_Holds_US_Canada_West</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>US &amp; Can - West</value>
+        </filters>
+        <label>Active Holds - US &amp; Canada West</label>
+    </listViews>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Region__c</field>
+            <operation>contains</operation>
+            <value>India</value>
+        </filters>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Active_Holds</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <columns>Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Region__c</field>
+            <operation>equals</operation>
+            <value>India</value>
+        </filters>
+        <label>All Active Holds</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Holds</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Holds</label>
+    </listViews>
+    <listViews>
+        <fullName>Inactive_Holds_Europe_Australia</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Inactive</value>
+        </filters>
+        <filters>
+            <field>Region__c</field>
+            <operation>contains</operation>
+            <value>Europe</value>
+        </filters>
+        <label>Inactive Holds - Europe Australia</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Active_Holds</fullName>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Is_Created_By__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Is_Opp_Owner__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Active Holds</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Holds</fullName>
+        <booleanFilter>(1 OR 2)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>expires_at__c</columns>
+        <columns>No_Of_Between_Days__c</columns>
+        <columns>Approval_Status__c</columns>
+        <columns>Reservable__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>Account__c</columns>
+        <columns>created_by_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Is_Created_By__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Is_Opp_Owner__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Holds</label>
+    </listViews>
+    <webLinks>
+        <fullName>Hold_Off</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Release Hold</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT("https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")} {!REQUIRESCRIPT("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js")} 
+{!REQUIRESCRIPT("/soap/ajax/32.0/connection.js")} 
+{!REQUIRESCRIPT("/soap/ajax/32.0/apex.js")} 
+{!REQUIRESCRIPT("/support/console/32.0/integration.js")} 
+
+
+jQuery(function () { 
+jQuery('head').append('&lt;link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/start/jquery-ui.css" type="text/css" /&gt;'); 
+var html = 
+'&lt;div id="dialog" title="Release Hold"&gt;&lt;p&gt;Are you sure you want to release this hold?&lt;/p&gt;&lt;/div&gt;'; 
+if (!jQuery('[id=dialog]').size()) { 
+jQuery('body').append(html); 
+} 
+jQuery("#dialog").dialog({ 
+modal: true, 
+draggable: false, 
+buttons: { 
+OK: function () {
+//jQuery(this).dialog("close"); 
+var strResult = sforce.apex.execute("HoldReservableController", "holdOffReservable", { 
+holdId: "{!Reservable_Hold__c.Id}", sourcePage: "salesforce_reservable_hold_classic" 
+}); 
+jQuery(this).dialog("close"); 
+var result = JSON.parse(JSON.parse(strResult)); 
+
+if(result.office_hold != null &amp;&amp; result.office_hold.active != null &amp;&amp; !result.office_hold.active){
+var html = 
+'&lt;div id="dialog1" title="Release Hold"&gt;&lt;p&gt;Hold Off Successfully&lt;/p&gt;&lt;/div&gt;'; 
+if (!jQuery('[id=dialog1]').size()) { 
+jQuery('body').append(html); 
+} 
+jQuery("#dialog1").dialog({ 
+modal: true, 
+draggable: false, 
+buttons: { 
+OK: function () { 
+jQuery(this).dialog("close"); 
+} 
+} 
+}); 
+}else if(result.error != null &amp;&amp; result.error){
+
+var html = 
+'&lt;div id="dialog2" title="Release Hold"&gt;&lt;p&gt;'+result.error+'&lt;/p&gt;&lt;/div&gt;'; 
+if (!jQuery('[id=dialog2]').size()) { 
+jQuery('body').append(html); 
+} 
+jQuery("#dialog2").dialog({ 
+modal: true, 
+draggable: false, 
+buttons: { 
+OK: function () { 
+jQuery(this).dialog("close"); 
+} 
+} 
+}); 
+}
+
+},
+Cancel : function (){
+jQuery(this).dialog("close"); 
+} 
+} 
+}); 
+});</url>
+    </webLinks>
+</CustomObject>

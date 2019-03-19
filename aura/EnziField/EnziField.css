@@ -1,0 +1,80 @@
+.THIS .defaultDisabled .slds-input[disabled]:not(.defaultDisabled){
+    background-color: rgb(255, 255, 255) !important;
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-radius: 0px !important;
+}
+
+.THIS .defaultDisabled .slds-select[disabled]{
+    background-color: rgb(255, 255, 255) !important;
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-radius: 0px !important;
+}
+
+.THIS#helpTextDiv{
+    font-weight: 900;
+    font-size: 15px;
+    display:inline-block;
+    height:0;
+    width: 0;
+    position:relative;
+    bottom: 2.5px;
+}
+
+.THIS .defaultDisabled .slds-textarea[disabled]{
+    background-color: rgb(255, 255, 255) !important;
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-radius: 0px !important;
+}
+
+.THIS .defaultDisabled .viewField{
+    background-color: rgb(255, 255, 255) !important;
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-radius: 0px !important;
+}
+
+.THIS .editIcon{
+    position: absolute;
+    top: 30px;
+    right: 5px;
+    background-color:white;
+    border:0px;
+    color:rgb(224, 229, 238);
+}
+.THIS .cancelIcon{
+    position: absolute;
+    top: 30px;
+    right: 28px;
+    background-color:white;
+    border:0px;
+    color:rgb(224, 229, 238);
+}
+
+.THIS .editIcon:hover{
+    background-color:white;
+    color:rgb(0, 112, 210);
+}
+.THIS .cancelIcon:hover{
+    background-color:white;
+    color:rgb(0, 112, 210);
+}
+.THIS .slds-input[readonly] {
+    background-color: white;
+}
+
+.THIS #helpTextDiv{
+    font-weight: 900;
+    font-size: 15px;
+    display:inline-block;
+    height:0;
+    width: 0;
+    position:relative;
+    bottom: 4.5px;
+}

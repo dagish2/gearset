@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Deals_Status</letterhead>
+    <name>Deal Status</name>
+    <style>freeForm</style>
+    <subject>Legal Deal Update - {!Deal__c.Name}</subject>
+    <textOnly>{!Deal__c.Phase__c}
+
+CURRENT STATUS
+
+{!Deal__c.Status__c}
+
+{!Deal__c.Gate_Details__c}
+
+
+Legal is excited to announce the following deal update:
+
+DEAL
+Name {!Deal__c.Name}
+Group {!Deal__c.Group__c}
+Priority {!Deal__c.Priority__c}
+Next Deadline {!Deal__c.Timing__c}
+Percent Complete {!Deal__c.Percent_Complete__c}%
+
+
+This email was sent from WeWork HQ.
+115 W 18th St, New York NY 10011
+Terms | Privacy</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

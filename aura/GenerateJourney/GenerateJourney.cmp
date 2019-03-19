@@ -1,0 +1,139 @@
+<aura:component >
+    <aura:attribute name="settingId" type="Id" />   
+    <aura:attribute name="settingRecord" type="Object" />   
+    <aura:attribute name="lstUserIds" type="string" description="This consists of user Ids that are in the sales console setting and is used in search feature to get data"/>
+    <aura:attribute name="lstQueueIds" type="string" description="This consists of queue Ids that are in the sales console setting and is used in search feature to get data"/>
+    
+    <aura:attribute name="selectedUserTableColumns" type="List" description="used as metafileds in selected users table"/>
+    <aura:attribute name="unSelectedUserTableColumns" type="List" description="used as metafileds in unselected users table"/>
+    <aura:attribute name="selectedQueueTableColumns" type="List" description="used as metafileds in selected queues table"/>
+    <aura:attribute name="unSelectedQueueTableColumns" type="List" description="used as metafileds in unselected queues table"/>
+    
+    <aura:attribute name="settingsJSON" type="Object"/>
+    <aura:attribute name="settings" type="List"/>
+    
+    <aura:attribute name="lstSelectedUsers" type="List" description="This holds the active users from sales console setting that are queried and got from setting__c object" />
+    <aura:attribute name="lstSelectedUsersTemp" type="List" description="This holds the list of users active users temporarily" />
+    <aura:attribute name="lstUnselectedUsers" type="List" description="This consist of list of records that are active and not in sales console settings"/>
+    <aura:attribute name="lstUnselectedUsersTemp" type="List" description="This holds the list of users active users temporarily" />
+    
+    <aura:attribute name="lstSelectedQueue" type="List" description="This holds the queues from sales console settings"/>
+    <aura:attribute name="lstSelectedQueueTemp" type="List" description="This holds the queues temporarily"/>
+    <aura:attribute name="lstUnSelectedQueue" type="List" description="This consist of list of queue records that are and not in sales console settings"/>
+    <aura:attribute name="lstUnSelectedQueueTemp" type="List" description="This holds the queues temporarily"/>
+    
+    <aura:attribute name="keyword" type="String" default=""/>
+    <aura:attribute name="currentPage" type="Integer" default="1"/>
+    <aura:attribute name="refreshActivities" type="Object"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:handler name="change" value="{!v.lstSelectedUsers}" action="{!c.removeUser}"/>
+    <aura:handler name="change" value="{!v.lstUnselectedUsers}" action="{!c.addUser}"/>
+    
+    <aura:handler name="change" value="{!v.lstSelectedQueue}" action="{!c.removeQueue}"/>
+    <aura:handler name="change" value="{!v.lstUnSelectedQueue}" action="{!c.addQueue}"/>
+    
+    <aura:handler name="change" value="{!v.settingRecord}" action="{!v.refreshActivities}"/>
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <!--created By : Shobhit Gahlot
+     Issue No : ST-1316 - improvement and conversion on page in angular to lightning
+ -->
+    <div class="slds-grid slds-wrap" style="width:100%">
+        <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--2-of-4" style="padding:14px;">
+            <div class="slds-size--6-of-8" style="padding-right:5px">
+                <div class="{!'slds-form-element'}">
+                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left-right">
+                        <lightning:icon class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default" iconName="utility:search" size="xx-small"/>
+                        <input type="search" class="slds-input" placeholder="Search User Or Queue" onkeyup="{!c.search}" value="{!v.keyword}"  />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div >
+        <lightning:tabset >
+            <lightning:tab >
+                <aura:set attribute="label">
+                    Selected User
+                </aura:set>
+                <aura:if isTrue="{!or(v.lstSelectedUsers.length > 0,v.lstUnselectedUsers.length > 0)}">
+                    <!--Selected User -->
+                    <div class="slds-card__body slds-m-around_small" style="margin-bottom:60px;border:1px solid #e3e3e3;">
+                        <div class="slds-card__body">
+                            <aura:if isTrue="{!v.lstSelectedUsers.length > 0 }">
+                                <div class="slds-m-around_small ">
+                                    <c:EnziDataTable records="{!v.lstSelectedUsers}"
+                                                     showMultiselect="false"
+                                                     describedFields="{!v.selectedUserTableColumns}"
+                                                     caption="Selected User" icon="standard:user" showSearch="false"
+                                                     currentPage="{!v.currentPage}">
+                                    </c:EnziDataTable>
+                                </div>
+                            </aura:if>
+                            <!--Unselected User-->
+                            <aura:if isTrue="{!v.lstUnselectedUsers.length > 0 }">
+                                <div class="slds-m-around_small">
+                                    <c:EnziDataTable records="{!v.lstUnselectedUsers}"
+                                                     showMultiselect="false"
+                                                     describedFields="{!v.unSelectedUserTableColumns}"
+                                                     caption="Unselected User" icon="utility:adduser" showSearch="false" 
+                                                     currentPage="{!v.currentPage}">
+                                    </c:EnziDataTable>
+                                </div>
+                            </aura:if>
+                        </div>
+                    </div>
+                </aura:if>
+            </lightning:tab>
+            
+            <lightning:tab >
+                <aura:set attribute="label">
+                    Selected Queues
+                </aura:set>
+                <aura:if isTrue="{!or(v.lstSelectedQueue.length > 0,v.lstUnSelectedQueue.length > 0)}">
+                    <div class="slds-card__body slds-m-around_small" style="margin-bottom:60px;border:1px solid #e3e3e3;">
+                        <div class="slds-card__body">
+                            <aura:if isTrue="{!v.lstSelectedQueue.length > 0}">
+                                <div class="slds-m-around_small ">
+                                    <c:EnziDataTable records="{!v.lstSelectedQueue}"
+                                                     showMultiselect="false"
+                                                     describedFields="{!v.selectedQueueTableColumns}"
+                                                     caption="Selected Queue" icon="custom:custom103" showSearch="false" 
+                                                     currentPage="{!v.currentPage}">
+                                    </c:EnziDataTable>
+                                </div>
+                            </aura:if>
+                            <!--Unselected Queues-->
+                            <aura:if isTrue="{!v.lstUnSelectedQueue.length > 0}">                       
+                                <div class="slds-m-around_small">
+                                    <c:EnziDataTable records="{!v.lstUnSelectedQueue}"
+                                                     showMultiselect="false"
+                                                     describedFields="{!v.unSelectedQueueTableColumns}"
+                                                     caption="Unselected Queue" icon="custom:custom103" showSearch="false" 
+                                                     currentPage="{!v.currentPage}">
+                                    </c:EnziDataTable>
+                                </div>                       
+                            </aura:if>
+                        </div>
+                    </div>       
+                </aura:if>
+            </lightning:tab>        
+        </lightning:tabset>
+    </div>
+    
+    <div class="test" id="test"> 
+        
+        <!--Selected Queues-->
+        
+        <div class="slds-align_absolute-center slds-page-header slds-text-heading_small" style="bottom:0;width:100%;z-index: 2;position: fixed;" >
+            <div class="slds-media slds-no-space slds-grow">
+                <div class="slds-media__body slds-align_absolute-center">   
+                    <c:SettingManagerFooter settingId="{!v.settingId}" save="{!c.saveJSON}"></c:SettingManagerFooter>                            
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

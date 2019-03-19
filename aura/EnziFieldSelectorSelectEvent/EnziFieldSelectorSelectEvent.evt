@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="This event is fired when a field is selected.">
+	<aura:attribute name="field" type="String"/>
+</aura:event>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Export reservable email</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Export Reservables</name>
+    <style>none</style>
+    <subject>Reservables Details</subject>
+    <textOnly>wework
+
+Hi {!Contact.Name},
+
+Thank you for your interest in WeWork!
+
+Please find all relevant pricing and availability in the table below
+
+
+
+
+
+
+Office Details
+
+
+*Membership requires a fully refundable service retainer and one time set-up fee
+
+The above options include the following:
+
+Fully furnished workspace
+Logo print on office door
+Paid tax + utilities
+24/7 access to the building
+Conference rooms
+Login to the Member Network of 100,000+ WeWork members globally
+Access to WeWork buildings our other cities (New York, San Francisco, LA, Boston, DC, Chicago, London, Tel Aviv, Etc.)
+Invitations to all of our events and office hours
+Phone booths
+Fast and secure wifi + ethernet connection
+Printing and scanning
+Access to benefits and discounts from partner companies
+Business address+ mail and package handling
+Free coffee, tea and beer on tap
+
+We&apos;d love to have you stop in for a cup of coffee so you can check out what&apos;s happening in our community. Please respond to this email or call us directly at 1-877-594-7916 to arrange a visit.
+
+Thanks,
+{!User.FirstName}
+
+Copyright 2016 | WeWork
+
+Terms | Privacy</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

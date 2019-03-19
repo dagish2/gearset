@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>redistrubtion of tour outcome guide</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Tour Outcome guide</name>
+    <style>freeForm</style>
+    <subject>Exciting changes coming to Salesforce</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+We are so excited for the launch of our new features and enhancement, Account Selector and Tour Outcome form.
+
+What&apos;s changing?
+
+Updated Tour Outcome
+
+New fields, for better reporting
+Better sync with Spacestation
+New UI
+
+Click here for training guide
+Click here for Video
+
+Account Selector
+New Feature
+The objective of the Account Selector page is to prevent the creation of duplicate Accounts by identifying and merging into existing records. The Account Selector page appears when converting a Lead into an Account/Contact/Opportunity. The page contains a list of existing accounts that are possible matches for the new record to be merged into.
+
+Click here for training guide
+Click here for Video
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+Sincerely,
+Susie Romero</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

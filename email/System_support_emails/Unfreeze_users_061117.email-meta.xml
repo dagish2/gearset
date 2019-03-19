@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Unfreeze users 061117</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Salesforce is now available</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+Thank you for your patience. Salesforce is now back online. Please email salesforcesupport@wework.com if you are experiencing any issues or have any concerns.
+
+Best,
+WeWork Sales Products Team</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,77 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="placeholder" type="String"/>
+    <aura:attribute name="type" type="String"/>
+    <aura:attribute name="numberType" type="String"/>
+    <aura:attribute name="class" type="String"/>
+    <aura:attribute name="required" type="Boolean" default="false"/>
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+    <aura:attribute name="readonly" type="Boolean" default="false"/>
+    <aura:attribute name="helpText" type="String"/>
+    <aura:attribute name="keyword" type="String"/>
+    
+    <aura:attribute name="max" type="Object"/>
+    <aura:attribute name="min" type="Object"/>
+    <aura:attribute name="maxlength" type="Integer"/>
+    <aura:attribute name="minlength" type="Integer"/>
+    <aura:attribute name="pattern" type="String"/>    
+    <aura:attribute name="variant" type="String" default="standard"/>
+    
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="fieldName" type="String"/>
+    <aura:attribute name="value" type="Object"/>
+    <aura:attribute name="dynamicBinding" type="Boolean" default="false"/>
+    <aura:attribute name="record" type="Map"/>
+    <aura:attribute name="options" type="List" default="[]"/>
+    <aura:attribute name="showOnlyActiveUsers" type="Boolean" default="false" />
+    <aura:attribute name="filteredOptions" type="List" />
+    <aura:attribute name="reference" type="Object"/>
+    <aura:attribute name="labelField" type="String" />
+    <aura:attribute name="valueField" type="String" />
+    
+    <aura:attribute name="onblur" type="Object"/>
+    <aura:attribute name="onchange" type="Object"/>
+    <aura:attribute name="onfocus" type="Object"/>
+    
+    <aura:attribute name="messageToggleActive" type="String"/>
+    <aura:attribute name="messageToggleInactive" type="String"/>
+    <aura:attribute name="messageWhenBadInput" type="String"/>
+    <aura:attribute name="messageWhenPatternMismatch" type="String"/>
+    <aura:attribute name="messageWhenRangeOverflow" type="String"/>
+    <aura:attribute name="messageWhenRangeUnderflow" type="String"/>
+    <aura:attribute name="messageWhenStepMismatch" type="String"/>
+    <aura:attribute name="messageWhenTooLong" type="String"/>
+    <aura:attribute name="messageWhenTypeMismatch" type="String"/>
+    <aura:attribute name="messageWhenValueMissing" type="String"/>
+    
+    <aura:attribute name="cmp" type="Object"/>
+    <aura:attribute name="metadata" type="Map"/>
+    <aura:attribute name="componentName" type="String" default="lightning:input"/>
+    <aura:attribute name="auraId" type="String" default="myInput" />
+    <aura:attribute name="errors" type="List" />
+    <aura:attribute name="validate" type="Boolean" default="false" />
+    <aura:attribute name="index" type="Integer" />
+    <aura:attribute name="needToValidate" type="Boolean" default="true" />
+    <aura:attribute name="retryValidate" type="Boolean" default="true" />
+     
+    <aura:attribute name="fireInitField" type="Boolean" />
+    <aura:handler name="change" value="{!v.fireInitField}" action="{!c.fireInitField}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}" />
+    <aura:handler name="change" value="{!v.options}" action="{!c.optionsChange}" />
+    <aura:handler name="change" value="{!v.record}" action="{!c.bindValue}" />
+    <aura:handler name="destroy" value="{!this}" action="{!c.handleDestroy}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <aura:if isTrue="{!v.cmp}">
+        {!v.cmp}
+        <aura:set attribute="else">
+            <div style="width:100%;border-bottom:1px solid rgb(216, 221, 230);padding:10px">
+                <div style="width:30%;height:8px;background-color:rgb(238, 241, 246);border-radius: 10px;margin-bottom:10px;"></div>
+                <div style="width:60%;height:8px;background-color:rgb(224, 229, 238);border-radius: 10px;margin-bottom:10px;"></div>
+            </div>
+        </aura:set>
+    </aura:if>
+</aura:component>

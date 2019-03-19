@@ -1,0 +1,124 @@
+<aura:component >
+	<aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="query" type="String" />
+    <aura:attribute name="displayFields" type="List" />
+    <aura:attribute name="filteredRecords" type="List" />
+    <aura:attribute name="records" type="List" default="[]" />
+    <aura:attribute name="selectedRecords" type="List"/>
+    <aura:attribute name="totalRecords" type="Integer"/>
+    <aura:attribute name="currentPage" type="Integer"/>
+    <aura:attribute name="pageSize" type="Integer" default="5"/>
+    <aura:attribute name="pageSizes" type="List" default="5,10,20,50,100"/>
+    <aura:attribute name="totalPages" type="Integer"/>
+    <aura:attribute name="keyword" type="String"/>
+    <aura:attribute name="icon" type="String"/>
+    <aura:attribute name="caption" type="String"/>
+    <aura:attribute name="describedFields" type="Object"/>
+    <aura:attribute name="sortBy" type="String"/>
+    <aura:attribute name="sortOrder" type="String"/>
+    <aura:attribute name="isStatic" type="Boolean"/>
+    <aura:attribute name="pages" type="List"/>
+    <aura:attribute name="showSearch" type="Boolean" default="true"/>
+    <aura:handler name="change" value="{!v.describedFields}" action="{!c.setPageData}"/>
+    <aura:handler name="change" value="{!v.records}" action="{!c.setPageData}"/>
+    <aura:handler name="change" value="{!v.totalPages}" action="{!c.setPages}"/>
+    <style>
+        .leftIcon {
+            position: absolute;
+            top: 9px;
+            left: 12px;
+        }
+    </style>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <div class="slds-grid slds-wrap" style="width:100%">
+        <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--2-of-3" style="padding:5px" role="group">
+        	<lightning:icon iconName="{!v.icon}"></lightning:icon>&nbsp;&nbsp;<h3 class="slds-section__title" style="display:inline">{!v.caption}</h3>
+    	</div>
+        <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3" style="padding:5px">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size--7-of-8" style="padding-right:5px">
+                    <div class="{!'slds-form-element '+(v.showSearch?'':'slds-hide')}">
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left-right">
+                            <lightning:icon class="leftIcon" iconName="utility:search" size="xx-small"/>
+                            <input type="search" class="slds-input" placeholder="Search..." onkeyup="{!c.search}" value="{!v.keyword}" id="tblSearch" />
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-size--1-of-8">
+                    <select class="slds-select" onchange="{!c.pageChange}">
+                        <aura:iteration items="{!v.pageSizes}" var="size">
+                            <option selected="{!size==v.pageSize?'selected':''}">{!size}</option>
+                        </aura:iteration>
+                    </select>
+                </div>
+            </div>
+        </div>    
+        <div class="slds-size--1-of-1" style="padding:5px">
+            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                         <th class="slds-cell-shrink" scope="col">
+                            <label class="slds-checkbox slds-hide">
+                                <input type="checkbox" name="options" onclick="{!c.selectAll}"/>
+                                <span class="slds-checkbox--faux checkboxBorder"></span>
+                                <span class="slds-assistive-text">Select All</span>
+                            </label>
+                        </th>
+                        <aura:iteration items="{!v.describedFields}" var="field">
+                            <th class="slds-is-sortable" scope="col" style="padding:0px" data-field="{!field.apiName}" onclick="{!c.sortByName}">
+                                <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset" tabindex="0">
+                                    <span class="slds-assistive-text">Sort </span>
+                                    <div class="slds-truncate" title="{!field.label}">{!field.label}</div>
+                                    <div class="slds-icon_container" style="{!'visibility:'+(v.sortBy==field.apiName?'visible':'hidden')}">
+                                        <lightning:icon iconName="{!'utility:'+(v.sortOrder=='asc'?'arrowup':'arrowdown')}" size="xx-small"></lightning:icon>
+                                    </div>
+                                    <span class="slds-assistive-text" aria-live="assertive" aria-atomic="true"></span>
+                                </a>
+                            </th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.filteredRecords}" var="record" indexVar="index">
+                        <tr class="{!'slds-hint-parent '+(record.selected?'slds-is-selected':'')}">
+                            <td class="slds-cell-shrink" data-label="Select Row">
+                                <label class="slds-checkbox">
+                                    <input type="checkbox" name="options" onclick="{!c.selectRow}" id="{!'checkbox:'+index}" checked="{!record.selected}"/>
+                                    <span class="slds-checkbox--faux checkboxBorder" id="{!'checkbox-span:'+index}"></span>
+                                    <span class="slds-assistive-text">Select Row</span>
+                                </label>
+                            </td>
+                            <aura:iteration items="{!v.describedFields}" var="field">
+                                <td data-label="{!field.label}">
+                                    <div class="slds-truncate" data-field="{!field.name}">
+                                        <c:EnziDynamicBinder obj="{!record}" col="{!field.apiName}" type="{!field.type}" isNameField="{!field.nameField}" list="{!v.filteredRecords}" field="{!field}"></c:EnziDynamicBinder>
+                                    </div>
+                                </td>
+                            </aura:iteration>
+                        </tr>
+                    </aura:iteration>
+                    <tr class="{!'slds-hint-parent '+(v.filteredRecords.length==0?'':'slds-hide')}">
+                        <td class="slds-cell-shrink" data-label="Select Row" colspan="{!v.describedFields.length+1}">
+                           No records to display.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    	</div>
+        <div class="{!'slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 mobileCenter '+(v.filteredRecords.length==0?'slds-hide':'')}" style="padding:5px">
+           Showing {!(v.currentPage * v.pageSize)-v.pageSize}-{!((v.currentPage * v.pageSize)-v.pageSize)+v.filteredRecords.length} of {!v.totalRecords} records...
+        </div>
+        <div class="{!'slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 mobileCenter '+(v.filteredRecords.length==0?'slds-hide':'')}" style="padding:5px;text-align:right">
+            <button id="btnFirst" class="slds-button slds-button--neutral" onclick="{!c.first}" disabled="{!v.currentPage==1?'disabled':''}" style="height:32px"><lightning:icon iconName="utility:jump_to_top" size="x-small"/></button>
+            <button id="btnPrev" class="slds-button slds-button--neutral" onclick="{!c.prev}" disabled="{!v.currentPage==1?'disabled':''}" style="height:32px"><lightning:icon iconName="utility:chevronleft" size="x-small"/></button>
+            <select class="slds-select" onchange="{!c.pageChanged}" style="width: 50px;height: 32px;margin: 0px 4px;">
+                <aura:iteration items="{!v.pages}" var="page">
+                    <option selected="{!page==v.currentPage?'selected':''}">{!page}</option>
+                </aura:iteration>
+            </select>
+            <button id="btnNext" class="slds-button slds-button--neutral" onclick="{!c.next}" disabled="{!(v.totalPages>0?v.currentPage:0)==v.totalPages?'disabled':''}" style="height:32px"><lightning:icon iconName="utility:chevronright" size="x-small"/></button>
+            <button id="btnLast" class="slds-button slds-button--neutral" onclick="{!c.last}" disabled="{!(v.totalPages>0?v.currentPage:0)==v.totalPages?'disabled':''}" style="height:32px"><lightning:icon iconName="utility:jump_to_bottom" size="x-small"/></button>
+        </div>
+    </div>
+</aura:component>

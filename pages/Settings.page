@@ -1,0 +1,17 @@
+<apex:page controller="WeworkEngine" standardStylesheets="false" sidebar="false" showHeader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}" Vendor_CSS="jsonviewer/jquery.json-viewer.js,bootstrap/js/ui-bootstrap-tpls.js" Vendor_JS=""
+                       Application_JS="settingsPageController.js,error-manager.js,salesforce.js"
+                       Application_CSS="applicationCSS.css,simple-sidebar.css"/>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Settings</title>
+    </head>
+	<body ng-app="settingsApp">
+		<nav-Bar></nav-Bar>
+		<div class="container-fluid">
+			<settings></settings>
+		</div>
+	</body>
+</apex:page>

@@ -1,0 +1,149 @@
+<aura:component controller="AddOpportunityController" access="global">
+    <aura:attribute name="journeyId" type="Id" /> 
+    <aura:attribute name="journey" type="Journey__c" />
+    <aura:attribute name="addOpportunityData" type="Object" default="{}" />
+    <aura:attribute name="opportunityForm" type="Opportunity" default="{}" />
+    <aura:attribute name="opportunity" type="Opportunity" default="{}" />
+    <aura:attribute name="journeyOpportunityData" type="Object" default="{}" />
+    <aura:attribute name="opportunities" type="List" default="[]" />
+    <aura:attribute name="opportunityColumns" type="List" default="[]" />
+    <aura:attribute name="companySize" type="Object" />
+    <aura:attribute name="numberOfDesks" type="Object" />
+    <aura:attribute name="showNewOpportunityModal" type="Boolean" default="false" />
+    <aura:attribute name="errors" type="List" default="[]" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="currentDate" type="String"/>
+    <aura:attribute name="accountId" type="Id" default=''/>
+    <aura:attribute name="isContact" type="Boolean" default="false"/>
+    <aura:attribute name="isFTEDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="hasAccess" type="Boolean" default="false"/>
+    <aura:attribute name="allowMerge" type="String"/>
+    <aura:attribute name="duplicateEntity" type="Map" default="{}"/>
+    <aura:attribute name="duplicateRecords" type="List" default="[]"/>
+    <aura:attribute name="orgAccountId" type="String"/>
+    <aura:attribute name="selectedSalesAccountId" type="String"/>
+    <aura:attribute name="showOrgAccountModal" type="Boolean" default="false"/>
+    <aura:attribute name="parentAccountIdToPopulate" type="String" />
+    <aura:attribute name="opportunityId" type="String" />
+    <aura:attribute name="createNewOrg" type="Boolean" default="false"/>
+    <aura:attribute name="instructions" type="Object" default="{}"/>
+    <aura:attribute name="entity" type="Object" default="{}"/>
+    <aura:attribute name="noSalesAccountFound" type="Boolean" /> 
+    <aura:attribute name="accountTypesToShow" type="String" /> 
+    <aura:attribute name="excludedProfiles" type="List" default="[]" /> 
+    <aura:attribute name="currentUsersProfile" type="String" /> 
+    <aura:attribute name="selectedRows" type="List" />
+    <aura:attribute name="OrgRecord" type="Object" />
+    <aura:attribute name="showAccountSelector" type="Boolean" default="false"/>
+    <aura:attribute name="showNewOppModal" type="Boolean" default="false"/>
+    <aura:attribute name="todayDate" type="date"/>
+    <aura:attribute name="accountRec" type="Account" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.duplicateEntity.processingCompleted}" action="{!c.processingCompleted}" />
+    <aura:handler name="change" value="{!v.duplicateEntity.selectedAction}" action="{!c.actionSelected}" />
+    <aura:handler name="change" value="{!v.noSalesAccountFound}" action="{!c.noSalesAccountFound}" />
+    <aura:handler name="rowActionEvent" event="c:WeTableRowActionEvent" action="{!c.handleRowAction}"/>
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:LightningCSS/>
+    <div id="add-opportunity-container">
+        <div class="slds-page-header slds-page-header_record-home" style="1px solid">    
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container" title = "Journey">
+                                <lightning:icon iconName="custom:custom20" size="medium" alternativeText="Journey"/>
+                                <span class="slds-assistive-text">Journey</span>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <p class="slds-page-header__name-meta">Journey</p>
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title="Journey">Add Opportunity</span>
+                                    </h1>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="{! 'slds-page-header__row slds-page-header__row_gutters'}">
+                <div class="slds-page-header__col-details">
+                    <ul class="slds-page-header__detail-row">
+                        <li class="slds-page-header__detail-block">
+                            <div class="slds-text-title slds-truncate" title="Field 1">Journey Name</div>
+                            <div class="slds-truncate" title="Name"><ui:outputUrl value="{! '/'+v.journey.Id}" label="{!v.journey.Name}" target="_blank" /></div>
+                        </li>
+                        <li class="slds-page-header__detail-block">
+                            <div class="slds-text-title slds-truncate" title="Field 2">Owner</div>
+                            <div class="slds-truncate" title="Owner"><ui:outputUrl value="{! '/'+v.journey.OwnerId}" label="{!v.journey.Owner.Name}" target="_blank" /></div>
+                        </li>
+                        <aura:if isTrue="{!v.isContact}">
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate" title="Field 5">Contact Name</div>
+                                <div class="slds-truncate" title="Contact Name"><ui:outputUrl value="{! '/'+v.journey.Primary_Contact__r.Id}" label="{!v.journey.Primary_Contact__r.Name}" target="_blank" /></div>
+                            </li>
+                            <li class="slds-page-header__detail-block">
+                                <div class="slds-text-title slds-truncate" title="Field 4">Account Name</div>
+                                <div class="slds-truncate" title="Account Name"><ui:outputUrl value="{! '/'+v.journey.Primary_Contact__r.Account.Id}" label="{!v.journey.Primary_Contact__r.Account.Name}" target="_blank" /></div>
+                            </li>
+                            <aura:set attribute="else">
+                                <li class="slds-page-header__detail-block">
+                                    <div class="slds-text-title slds-truncate" title="Field 4">Lead Name </div>
+                                    <div class="slds-truncate" title="Lead Name"><ui:outputUrl value="{! '/'+v.journey.Primary_Lead__c}" label="{!v.journey.Primary_Lead__r.Name}" target="_blank" /></div>
+                                </li>
+                                <li class="slds-page-header__detail-block">
+                                    <div class="slds-text-title slds-truncate" title="Field 5">Company </div>
+                                    <div class="slds-truncate" title="Company Name">{! v.journey.Primary_Lead__r.Company}</div>
+                                </li>
+                            </aura:set>
+                        </aura:if>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slds-card__body slds-p-around_small slds-m-around_x-small" style="border:1px solid #d9dbdd;margin-bottom:60px;background:ghostwhite;">
+            <c:WeTable meta="{!v.opportunityColumns}" data="{!v.opportunities}" height="325" selectedRows="{!v.selectedRows}" searchFields="Name" />
+        </div>
+        <footer class="slds-modal__footer" style="bottom:0;width:100%;z-index: 2;position: fixed;text-align:right;margin-top:20px;background:ghostwhite;">
+            <c:EnziButton label="Close" leftIcon="utility:close" type="destructive" click="{!c.close}"></c:EnziButton>
+            <c:EnziButton label="Back" type="brand" leftIcon="utility:back" click="{!c.back}" disabled="{!v.opportunities.length > 0}" show="{!v.hasAccess}"></c:EnziButton>
+            <c:EnziButton label="Add Opportunity" leftIcon="utility:add" type="brand" click="{!c.showNewOpportunityModal}"></c:EnziButton>   
+        </footer>
+    </div> 
+    <c:WeFormValidator errors="{!v.errors}" valid="{!v.valid}" />
+    <div id ="NewOpportunityModal" >
+        <c:EnziModal  aura:id="NewOpportunityModal" header="Add Opportunity" show="{!v.showNewOppModal}">
+            <c:EnziModalContainer >
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:WeField sObjectName="Opportunity" fieldName="Number_of_Full_Time_Employees__c" label="Company Size" value="{!v.opportunity.Number_of_Full_Time_Employees__c}" min="1" required="true" validate="true" errors="{!v.errors}" disabled="{!v.isFTEDisabled}"/>
+                </div> 
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:WeField validate="true" sObjectName="Opportunity" fieldName="Interested_in_Number_of_Desks__c" label="No. of Desks Required" min="1" value="{!v.opportunity.Interested_in_Number_of_Desks__c}" required="true" errors="{!v.errors}"/>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:WeField  validate="true" sObjectName="Opportunity" fieldName="Building__c" label="Building Interested" value="{!v.opportunity.Building__c}" required="true" errors="{!v.errors}"/>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px" id="addOpp-closedDate">
+                    <c:WeField validate="true" type="date" min="{!v.todayDate}" sObjectName="Opportunity" fieldName="CloseDate" label="Close Date" value="{!v.opportunity.CloseDate}" required="true" errors="{!v.errors}"/>                   
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <c:EnziButton label="Cancel" leftIcon="utility:close" type="destructive" click="{!c.closeNewOpportunityModal}"></c:EnziButton>
+                <c:EnziButton label="Save" leftIcon="utility:save" type="brand" click="{!c.save}" disabled="{!(!v.valid)}"></c:EnziButton>
+            </c:EnziModalFooter>        
+        </c:EnziModal> 
+    </div>
+    
+    <aura:if isTrue="{!v.showAccountSelector}">
+        <c:EnziModal aura:id="AccountSelector" header="Account Selector" showFooter="false" isLarge="true" show="true" showCloseButton="true">
+            <c:AccountSelector leadId="{!v.journey.Primary_Lead__c}" journeyId="{!v.journeyId}" selectedOrg="{!v.OrgRecord}" useSelectedAccount="{!c.addOpportunity}" accountRec="{!v.accountRec}" />
+        </c:EnziModal>
+    </aura:if>      
+
+</aura:component>

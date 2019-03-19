@@ -1,0 +1,38 @@
+<aura:component >
+    <aura:attribute name="price" type="String"/>
+    <aura:attribute name="uuid" type="String"/>
+    <aura:attribute name="capacity" type="Integer"/>
+    <aura:attribute name="isDiscount" type="boolean" default="false"/>
+    <aura:attribute name="describedFields" type="List" default="[]"/>
+    <aura:attribute name="records" type="List" default="[]"/>
+    <aura:attribute name="isLoading" type="boolean" default="true"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <style>
+        .thanks-Icon{
+            position:relative;
+            float: right;
+            display: block;
+        }
+        .slds-scope .slds-icon-standard-thanks {
+    		background-color: #2066d6;
+		}
+    </style>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>    
+    <div class="thanks-Icon">
+        {!v.price}&nbsp;
+        <button class="slds-button slds-button_icon" title="Show Discount" onclick="{! c.getDiscount }" style="{!'visibility:'+(v.isLoading?'hidden':'visible')}">
+            <lightning:icon size="small" iconName="{!'standard:'+(v.isDiscount?'thanks':'thanks_loading')}" ></lightning:icon>
+            <span class="slds-assistive-text">Discount</span>
+        </button>
+        <div role="status" class="{!'slds-spinner slds-spinner_brand slds-spinner_x-small '+(v.isLoading?'':'slds-hide')}" style="margin-left:15px">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </div>
+    <c:EnziModal aura:id="discountModal" header="Suggested Discounts" show="false" showFooter="false">
+        <c:EnziModalContainer >
+            <c:EnziDataTable describedFields="{!v.describedFields}" records="{!v.records}" showPagination="false" showSearch="false" showMultiselect="false" caption="Suggested Discounts" icon="standard:thanks"></c:EnziDataTable>
+        </c:EnziModalContainer>
+    </c:EnziModal>
+</aura:component>

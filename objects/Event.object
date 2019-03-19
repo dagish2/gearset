@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Decline</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>DeleteSeries</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>NewEvent</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>NewSfdcEvent</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Today</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>ActivityDate</fullName>
+    </fields>
+    <fields>
+        <fullName>ActivityDateTime</fullName>
+    </fields>
+    <fields>
+        <fullName>Attendees</fullName>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+    </fields>
+    <fields>
+        <fullName>DurationInMinutes</fullName>
+    </fields>
+    <fields>
+        <fullName>Email</fullName>
+    </fields>
+    <fields>
+        <fullName>EndDateTime</fullName>
+    </fields>
+    <fields>
+        <fullName>EventSubtype</fullName>
+    </fields>
+    <fields>
+        <fullName>IsAllDayEvent</fullName>
+    </fields>
+    <fields>
+        <fullName>IsPrivate</fullName>
+    </fields>
+    <fields>
+        <fullName>IsRecurrence2</fullName>
+    </fields>
+    <fields>
+        <fullName>IsReminderSet</fullName>
+    </fields>
+    <fields>
+        <fullName>Location</fullName>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Phone</fullName>
+    </fields>
+    <fields>
+        <fullName>ShowAs</fullName>
+    </fields>
+    <fields>
+        <fullName>StartDateTime</fullName>
+    </fields>
+    <fields>
+        <fullName>Subject</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <inlineHelpText>Call 
+Chat
+Email
+Event
+Website 
+Referral 
+Pardot Campaign
+Growth Consultation</inlineHelpText>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>WhatId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>WhoId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>allow_copy_to_buildings_in_same_country</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( 
+  Copy_to_Buildings_in_same_Country__c,
+  NOT( LEFT(WhatId, 3) = "a00")
+)</errorConditionFormula>
+        <errorDisplayField>Copy_to_Buildings_in_same_Country__c</errorDisplayField>
+        <errorMessage>Can't select "copy to buildings in same country" option if the event is not related to a building</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>edit_copy_to_buildings_in_same_country</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+  ISCHANGED(Copy_to_Buildings_in_same_Country__c),  
+  Copy_to_Buildings_in_same_Country__c,
+  NOT(ISNEW()) 
+)</errorConditionFormula>
+        <errorDisplayField>Copy_to_Buildings_in_same_Country__c</errorDisplayField>
+        <errorMessage>Can't edit "copy to buildings in same country" you need to create a new event</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Schedule_Tour</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Schedule Tour</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>/00U/e? 
+who_id={!Opportunity.AccountId}&amp;
+what_id={!Opportunity.Id}&amp;
+evt2_lkid={!Opportunity.Primary_Member_Id__c}&amp;
+evt2={!Opportunity.Primary_Member_Name__c}&amp;
+evt5=Tour&amp;
+retURL={!Opportunity.Id}</url>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,1888 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AdvancedSetup</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Campaign_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <compactLayouts>
+        <fullName>Campaign_Compact_Layout</fullName>
+        <fields>Name__c</fields>
+        <fields>Name</fields>
+        <fields>IsActive</fields>
+        <fields>StartDate</fields>
+        <fields>Type</fields>
+        <fields>Splash__c</fields>
+        <fields>Segment__c</fields>
+        <fields>Team__c</fields>
+        <fields>Email_Address__c</fields>
+        <label>Campaign Compact Layout</label>
+    </compactLayouts>
+    <fields>
+        <fullName>ActualCost</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>AmountAllOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>AmountWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>BudgetedCost</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Building__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Building</label>
+        <referenceTo>Building__c</referenceTo>
+        <relationshipLabel>Campaigns</relationshipLabel>
+        <relationshipName>Campaigns</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>By_Pass_Campaign_Assignment__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF((BEGINS(Lead_Owner__c, "005") || BEGINS(Lead_Owner__c,"00G")),false,true)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>By Pass Campaign Assignment</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CampaignMemberRecordTypeId</fullName>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Campaign_Audience__c</fullName>
+        <description>This is a dependent picklist based on the campaign target. According to the selection of the Target we have defined values for Audience</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the audience for the campaign</inlineHelpText>
+        <label>Campaign Audience</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Campaign_Target__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>CEO</fullName>
+                    <default>false</default>
+                    <label>CEO</label>
+                </value>
+                <value>
+                    <fullName>COO</fullName>
+                    <default>false</default>
+                    <label>COO</label>
+                </value>
+                <value>
+                    <fullName>Lawyers</fullName>
+                    <default>false</default>
+                    <label>Lawyers</label>
+                </value>
+                <value>
+                    <fullName>Recruitment</fullName>
+                    <default>false</default>
+                    <label>Recruitment</label>
+                </value>
+                <value>
+                    <fullName>Services</fullName>
+                    <default>false</default>
+                    <label>Services</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Industry</controllingFieldValue>
+                <valueName>Recruitment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Industry</controllingFieldValue>
+                <valueName>Services</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Persona</controllingFieldValue>
+                <valueName>CEO</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Persona</controllingFieldValue>
+                <valueName>COO</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Persona</controllingFieldValue>
+                <valueName>Lawyers</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Campaign_Auto_Number__c</fullName>
+        <displayFormat>CAMP-{000000}</displayFormat>
+        <externalId>false</externalId>
+        <label>Campaign Auto Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Campaign_Cadence__c</fullName>
+        <description>This fields captures the information about the campaign cadence. How many emails will the campaign member will receive if they are part of the event.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This fields captures the information about the campaign cadence</inlineHelpText>
+        <label>Campaign Cadence</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1 Touch</fullName>
+                    <default>false</default>
+                    <label>1 Touch</label>
+                </value>
+                <value>
+                    <fullName>2 Touch</fullName>
+                    <default>false</default>
+                    <label>2 Touch</label>
+                </value>
+                <value>
+                    <fullName>3 Touch</fullName>
+                    <default>false</default>
+                    <label>3 Touch</label>
+                </value>
+                <value>
+                    <fullName>4 Touch</fullName>
+                    <default>false</default>
+                    <label>4 Touch</label>
+                </value>
+                <value>
+                    <fullName>5 Touch</fullName>
+                    <default>false</default>
+                    <label>5 Touch</label>
+                </value>
+                <value>
+                    <fullName>6 Touch</fullName>
+                    <default>false</default>
+                    <label>6 Touch</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Campaign_Target__c</fullName>
+        <description>This field stores the information about the target, on which the specific campaign is focused.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the target for the campaign.</inlineHelpText>
+        <label>Campaign Target</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Industry</fullName>
+                    <default>false</default>
+                    <label>Industry</label>
+                </value>
+                <value>
+                    <fullName>Persona</fullName>
+                    <default>false</default>
+                    <label>Persona</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <externalId>false</externalId>
+        <label>City</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Country__c</fullName>
+        <externalId>false</externalId>
+        <label>Country</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Create_Event_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Create Event Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Broker</fullName>
+                    <default>false</default>
+                    <label>Broker</label>
+                </value>
+                <value>
+                    <fullName>Conference</fullName>
+                    <default>false</default>
+                    <label>Conference</label>
+                </value>
+                <value>
+                    <fullName>Influencer Event</fullName>
+                    <default>false</default>
+                    <label>Influencer Event</label>
+                </value>
+                <value>
+                    <fullName>Launch Event</fullName>
+                    <default>false</default>
+                    <label>Launch Event</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CurrencyIsoCode</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>DB_Campaign_Tactic__c</fullName>
+        <description>This is a field that is installed by and used with the Adoption Dashboard AppExchange package. If your org already has a similar field, you can change the reports that are part of the Adoption Dashboard package to use your custom field and then delete this field.</description>
+        <externalId>false</externalId>
+        <label>DB Campaign Tactic</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Type</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Print Advertisement</fullName>
+                    <default>false</default>
+                    <label>Print Advertisement</label>
+                </value>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                    <label>Email</label>
+                </value>
+                <value>
+                    <fullName>Employment Seminars</fullName>
+                    <default>false</default>
+                    <label>Employment Seminars</label>
+                </value>
+                <value>
+                    <fullName>Webinars</fullName>
+                    <default>false</default>
+                    <label>Webinars</label>
+                </value>
+                <value>
+                    <fullName>Public Relations</fullName>
+                    <default>false</default>
+                    <label>Public Relations</label>
+                </value>
+                <value>
+                    <fullName>Partners</fullName>
+                    <default>false</default>
+                    <label>Partners</label>
+                </value>
+                <value>
+                    <fullName>Referral Program</fullName>
+                    <default>false</default>
+                    <label>Referral Program</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Lunches</fullName>
+                    <default>false</default>
+                    <label>Lunches</label>
+                </value>
+                <value>
+                    <fullName>Direct Mail</fullName>
+                    <default>false</default>
+                    <label>Direct Mail</label>
+                </value>
+                <value>
+                    <fullName>Sales Call Down</fullName>
+                    <default>false</default>
+                    <label>Sales Call Down</label>
+                </value>
+                <value>
+                    <fullName>Online Banners/Ads</fullName>
+                    <default>false</default>
+                    <label>Online Banners/Ads</label>
+                </value>
+                <value>
+                    <fullName>Internal Website</fullName>
+                    <default>false</default>
+                    <label>Internal Website</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Default_Parent_Campaign__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Default Parent Campaign</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Email_Address__c</fullName>
+        <description>Email Address From Splash</description>
+        <externalId>false</externalId>
+        <label>Email Address</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email_Sendout_End_Date__c</fullName>
+        <description>This is end date for email send</description>
+        <externalId>false</externalId>
+        <label>Email Sendout End Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Email_Sendout_Start_Date__c</fullName>
+        <description>This is start date to for email send</description>
+        <externalId>false</externalId>
+        <label>Email Sendout Start Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EndDate</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Event_Advertised_on__c</fullName>
+        <externalId>false</externalId>
+        <label>Event Advertised On</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Facebook</fullName>
+                    <default>false</default>
+                    <label>Facebook</label>
+                </value>
+                <value>
+                    <fullName>Twitter</fullName>
+                    <default>false</default>
+                    <label>Twitter</label>
+                </value>
+                <value>
+                    <fullName>Newsletter</fullName>
+                    <default>false</default>
+                    <label>Newsletter</label>
+                </value>
+                <value>
+                    <fullName>Email Blast</fullName>
+                    <default>false</default>
+                    <label>Email Blast</label>
+                </value>
+                <value>
+                    <fullName>Partner</fullName>
+                    <default>false</default>
+                    <label>Partner</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Event_Email_Opt_Out__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Please check if this event should not receive automated email cadences from Marketing Cloud</description>
+        <externalId>false</externalId>
+        <label>Event Email Opt Out</label>
+        <trackHistory>true</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Event_Start_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Event Start Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Event_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Event_Type</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Event_on_WeWork_Premises__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Event on WeWork Premises?</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ExpectedResponse</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>ExpectedRevenue</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>HierarchyActualCost</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyAmountAllOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyAmountWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyBudgetedCost</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyExpectedRevenue</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfContacts</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfConvertedLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfResponses</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberOfWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyNumberSent</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyTotalEmailsDelivered</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyTotalFormSubmissions</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyTotalFormViews</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyTotalLandingPageFormSubmissions</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyTotalLandingPageViews</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyUniqueEmailOpens</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyUniqueEmailTrackedLinkClicks</fullName>
+    </fields>
+    <fields>
+        <fullName>HierarchyUniqueMarketingLinkClicks</fullName>
+    </fields>
+    <fields>
+        <fullName>Industry__c</fullName>
+        <externalId>false</externalId>
+        <label>Industry</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Finance</fullName>
+                    <default>false</default>
+                    <label>Finance</label>
+                </value>
+                <value>
+                    <fullName>Hardware</fullName>
+                    <default>false</default>
+                    <label>Hardware</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IsActive</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Lead_Owner__c</fullName>
+        <description>This field is used to route leads assigned to a campaign</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is used to route leads assigned to a campaign. Enter the user or queue ID.
+See link below for regional queue list 
+https://docs.google.com/spreadsheets/d/16_uqpniUGsFaqVEzxppQPy5MsaXho9xGaaiTDxW7Gw0/edit?usp=sharing</inlineHelpText>
+        <label>Lead Owner</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Name__c</fullName>
+        <description>This field captures the naming the naming convention of Campaign.</description>
+        <externalId>false</externalId>
+        <label>Name</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumberOfContacts</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfConvertedLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfLeads</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfResponses</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberOfWonOpportunities</fullName>
+    </fields>
+    <fields>
+        <fullName>NumberSent</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Number_of_Attendees__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Attendees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Count__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Opportunity Count</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ParentId</fullName>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Program__c</fullName>
+        <externalId>false</externalId>
+        <label>Program</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <externalId>false</externalId>
+        <label>Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>China</fullName>
+                    <default>false</default>
+                    <label>China</label>
+                </value>
+                <value>
+                    <fullName>EMEA</fullName>
+                    <default>false</default>
+                    <label>EMEA</label>
+                </value>
+                <value>
+                    <fullName>India</fullName>
+                    <default>false</default>
+                    <label>India</label>
+                </value>
+                <value>
+                    <fullName>Japan</fullName>
+                    <default>false</default>
+                    <label>Japan</label>
+                </value>
+                <value>
+                    <fullName>LatAm</fullName>
+                    <default>false</default>
+                    <label>LatAm</label>
+                </value>
+                <value>
+                    <fullName>NA-East</fullName>
+                    <default>false</default>
+                    <label>NA-East</label>
+                </value>
+                <value>
+                    <fullName>NA-West</fullName>
+                    <default>false</default>
+                    <label>NA-West</label>
+                </value>
+                <value>
+                    <fullName>Pacific</fullName>
+                    <default>false</default>
+                    <label>Pacific</label>
+                </value>
+                <value>
+                    <fullName>Global</fullName>
+                    <default>false</default>
+                    <label>Global</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Segment__c</fullName>
+        <description>Small Business: 1- 10 Full-Time Employees 
+Medium Business: 11 - 250 Full-Time Employees 
+Large Business: 251 - 999 Full-Time Employees
+Enterprise: 1k+ Full-Time Employees 
+Broker</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Small Business: 1- 10 Full-Time Employees 
+Medium Business: 11 - 250 Full-Time Employees 
+Large Business: 251 - 999 Full-Time Employees
+Enterprise: 1k+ Full-Time Employees 
+Broker</inlineHelpText>
+        <label>Segment</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Small Business</fullName>
+                    <default>false</default>
+                    <label>Small Business</label>
+                </value>
+                <value>
+                    <fullName>Medium Business</fullName>
+                    <default>false</default>
+                    <label>Medium Business</label>
+                </value>
+                <value>
+                    <fullName>Large Business</fullName>
+                    <default>false</default>
+                    <label>Large Business</label>
+                </value>
+                <value>
+                    <fullName>Enterprise</fullName>
+                    <default>false</default>
+                    <label>Enterprise</label>
+                </value>
+                <value>
+                    <fullName>Broker</fullName>
+                    <default>false</default>
+                    <label>Broker</label>
+                </value>
+                <value>
+                    <fullName>Member</fullName>
+                    <default>false</default>
+                    <label>Member</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Splash__c</fullName>
+        <externalId>false</externalId>
+        <label>Event Detail</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Type</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Brokers</fullName>
+                    <default>false</default>
+                    <label>Brokers</label>
+                </value>
+                <value>
+                    <fullName>Creator Awards</fullName>
+                    <default>false</default>
+                    <label>Creator Awards</label>
+                </value>
+                <value>
+                    <fullName>Event Series</fullName>
+                    <default>false</default>
+                    <label>Event Series</label>
+                </value>
+                <value>
+                    <fullName>External - Conference</fullName>
+                    <default>false</default>
+                    <label>External - Conference</label>
+                </value>
+                <value>
+                    <fullName>Field Activation</fullName>
+                    <default>false</default>
+                    <label>Field Activation</label>
+                </value>
+                <value>
+                    <fullName>Happy Hour / Networking</fullName>
+                    <default>false</default>
+                    <label>Happy Hour / Networking</label>
+                </value>
+                <value>
+                    <fullName>Influencer Event</fullName>
+                    <default>false</default>
+                    <label>Influencer Event</label>
+                </value>
+                <value>
+                    <fullName>Lunch &amp; Learn</fullName>
+                    <default>false</default>
+                    <label>Lunch &amp; Learn</label>
+                </value>
+                <value>
+                    <fullName>Marketing Events - Other</fullName>
+                    <default>false</default>
+                    <label>Marketing Events - Other</label>
+                </value>
+                <value>
+                    <fullName>Meal - Breakfast, Lunch, Dinner</fullName>
+                    <default>false</default>
+                    <label>Meal - Breakfast, Lunch, Dinner</label>
+                </value>
+                <value>
+                    <fullName>New City - Launch Party</fullName>
+                    <default>false</default>
+                    <label>New City - Launch Party</label>
+                </value>
+                <value>
+                    <fullName>New Location - Opening Party</fullName>
+                    <default>false</default>
+                    <label>New Location - Opening Party</label>
+                </value>
+                <value>
+                    <fullName>Other - Community Events</fullName>
+                    <default>false</default>
+                    <label>Other - Community Events</label>
+                </value>
+                <value>
+                    <fullName>Other - External Events</fullName>
+                    <default>false</default>
+                    <label>Other - External Events</label>
+                </value>
+                <value>
+                    <fullName>Other - Internal Events</fullName>
+                    <default>false</default>
+                    <label>Other - Internal Events</label>
+                </value>
+                <value>
+                    <fullName>Other - Strategic HQ Events</fullName>
+                    <default>false</default>
+                    <label>Other - Strategic HQ Events</label>
+                </value>
+                <value>
+                    <fullName>Panel Discussion / Session</fullName>
+                    <default>false</default>
+                    <label>Panel Discussion / Session</label>
+                </value>
+                <value>
+                    <fullName>Partnership</fullName>
+                    <default>false</default>
+                    <label>Partnership</label>
+                </value>
+                <value>
+                    <fullName>Workshop</fullName>
+                    <default>false</default>
+                    <label>Workshop</label>
+                </value>
+                <value>
+                    <fullName>TGIM</fullName>
+                    <default>false</default>
+                    <label>TGIM</label>
+                </value>
+                <value>
+                    <fullName>Wellness</fullName>
+                    <default>false</default>
+                    <label>Wellness</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Brokers</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Creator Awards</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Event Series</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>External - Conference</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Field Activation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Happy Hour / Networking</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Influencer Event</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Lunch &amp; Learn</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Marketing Events - Other</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Meal - Breakfast, Lunch, Dinner</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>New City - Launch Party</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>New Location - Opening Party</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Other - Community Events</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Other - External Events</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Other - Internal Events</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Other - Strategic HQ Events</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Panel Discussion / Session</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Partnership</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Workshop</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>TGIM</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Splash Event</controllingFieldValue>
+                <controllingFieldValue>Event</controllingFieldValue>
+                <valueName>Wellness</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>StartDate</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>State__c</fullName>
+        <externalId>false</externalId>
+        <label>State</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Target_Industry__c</fullName>
+        <description>The above field contains the multi-picklist values of industries.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The above field contains the multi-picklist values of industries.</inlineHelpText>
+        <label>Target Industry</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Services</fullName>
+                    <default>false</default>
+                    <label>Services</label>
+                </value>
+                <value>
+                    <fullName>Finance</fullName>
+                    <default>false</default>
+                    <label>Finance</label>
+                </value>
+                <value>
+                    <fullName>Film/Video Production &amp; Services</fullName>
+                    <default>false</default>
+                    <label>Film/Video Production &amp; Services</label>
+                </value>
+                <value>
+                    <fullName>Human Resources &amp; Staffing</fullName>
+                    <default>false</default>
+                    <label>Human Resources &amp; Staffing</label>
+                </value>
+                <value>
+                    <fullName>Advertising &amp; Marketing</fullName>
+                    <default>false</default>
+                    <label>Advertising &amp; Marketing</label>
+                </value>
+                <value>
+                    <fullName>Electronics</fullName>
+                    <default>false</default>
+                    <label>Electronics</label>
+                </value>
+                <value>
+                    <fullName>Consumer Services</fullName>
+                    <default>false</default>
+                    <label>Consumer Services</label>
+                </value>
+                <value>
+                    <fullName>Hardware</fullName>
+                    <default>false</default>
+                    <label>Hardware</label>
+                </value>
+                <value>
+                    <fullName>Insurance</fullName>
+                    <default>false</default>
+                    <label>Insurance</label>
+                </value>
+                <value>
+                    <fullName>Management Consulting</fullName>
+                    <default>false</default>
+                    <label>Management Consulting</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Target_Membership__c</fullName>
+        <description>The above field contains the picklist values of Target Membership - Existing, Prospect, Former</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The above field contains the picklist values of Target Membership</inlineHelpText>
+        <label>Target Membership</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Existing</fullName>
+                    <default>false</default>
+                    <label>Existing</label>
+                </value>
+                <value>
+                    <fullName>Prospect</fullName>
+                    <default>false</default>
+                    <label>Prospect</label>
+                </value>
+                <value>
+                    <fullName>Former</fullName>
+                    <default>false</default>
+                    <label>Former</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Target_Region__c</fullName>
+        <description>The above field contains the picklist values of Target Region</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The above field contains the picklist values of Target Region</inlineHelpText>
+        <label>Target Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Amsterdam</fullName>
+                    <default>false</default>
+                    <label>Amsterdam</label>
+                </value>
+                <value>
+                    <fullName>Atlanta</fullName>
+                    <default>false</default>
+                    <label>Atlanta</label>
+                </value>
+                <value>
+                    <fullName>Austin</fullName>
+                    <default>false</default>
+                    <label>Austin</label>
+                </value>
+                <value>
+                    <fullName>Be'er Sheva</fullName>
+                    <default>false</default>
+                    <label>Be'er Sheva</label>
+                </value>
+                <value>
+                    <fullName>Beijing</fullName>
+                    <default>false</default>
+                    <label>Beijing</label>
+                </value>
+                <value>
+                    <fullName>Bengaluru</fullName>
+                    <default>false</default>
+                    <label>Bengaluru</label>
+                </value>
+                <value>
+                    <fullName>Berkeley</fullName>
+                    <default>false</default>
+                    <label>Berkeley</label>
+                </value>
+                <value>
+                    <fullName>Berlin</fullName>
+                    <default>false</default>
+                    <label>Berlin</label>
+                </value>
+                <value>
+                    <fullName>Bogota</fullName>
+                    <default>false</default>
+                    <label>Bogota</label>
+                </value>
+                <value>
+                    <fullName>Boston</fullName>
+                    <default>false</default>
+                    <label>Boston</label>
+                </value>
+                <value>
+                    <fullName>Buenos Aires</fullName>
+                    <default>false</default>
+                    <label>Buenos Aires</label>
+                </value>
+                <value>
+                    <fullName>Capital Federal</fullName>
+                    <default>false</default>
+                    <label>Capital Federal</label>
+                </value>
+                <value>
+                    <fullName>Charlotte</fullName>
+                    <default>false</default>
+                    <label>Charlotte</label>
+                </value>
+                <value>
+                    <fullName>Chicago</fullName>
+                    <default>false</default>
+                    <label>Chicago</label>
+                </value>
+                <value>
+                    <fullName>Dallas</fullName>
+                    <default>false</default>
+                    <label>Dallas</label>
+                </value>
+                <value>
+                    <fullName>Denver</fullName>
+                    <default>false</default>
+                    <label>Denver</label>
+                </value>
+                <value>
+                    <fullName>Detroit</fullName>
+                    <default>false</default>
+                    <label>Detroit</label>
+                </value>
+                <value>
+                    <fullName>Fort Worth</fullName>
+                    <default>false</default>
+                    <label>Fort Worth</label>
+                </value>
+                <value>
+                    <fullName>Frankfurt</fullName>
+                    <default>false</default>
+                    <label>Frankfurt</label>
+                </value>
+                <value>
+                    <fullName>Herzliya</fullName>
+                    <default>false</default>
+                    <label>Herzliya</label>
+                </value>
+                <value>
+                    <fullName>Hong Kong</fullName>
+                    <default>false</default>
+                    <label>Hong Kong</label>
+                </value>
+                <value>
+                    <fullName>Houston</fullName>
+                    <default>false</default>
+                    <label>Houston</label>
+                </value>
+                <value>
+                    <fullName>Kansas City</fullName>
+                    <default>false</default>
+                    <label>Kansas City</label>
+                </value>
+                <value>
+                    <fullName>London</fullName>
+                    <default>false</default>
+                    <label>London</label>
+                </value>
+                <value>
+                    <fullName>Los Angeles</fullName>
+                    <default>false</default>
+                    <label>Los Angeles</label>
+                </value>
+                <value>
+                    <fullName>Madrid</fullName>
+                    <default>false</default>
+                    <label>Madrid</label>
+                </value>
+                <value>
+                    <fullName>Mexico City</fullName>
+                    <default>false</default>
+                    <label>Mexico City</label>
+                </value>
+                <value>
+                    <fullName>Miami</fullName>
+                    <default>false</default>
+                    <label>Miami</label>
+                </value>
+                <value>
+                    <fullName>Minneapolis</fullName>
+                    <default>false</default>
+                    <label>Minneapolis</label>
+                </value>
+                <value>
+                    <fullName>Montreal</fullName>
+                    <default>false</default>
+                    <label>Montreal</label>
+                </value>
+                <value>
+                    <fullName>Mumbai</fullName>
+                    <default>false</default>
+                    <label>Mumbai</label>
+                </value>
+                <value>
+                    <fullName>Nashville</fullName>
+                    <default>false</default>
+                    <label>Nashville</label>
+                </value>
+                <value>
+                    <fullName>New York City</fullName>
+                    <default>false</default>
+                    <label>New York City</label>
+                </value>
+                <value>
+                    <fullName>Orange County</fullName>
+                    <default>false</default>
+                    <label>Orange County</label>
+                </value>
+                <value>
+                    <fullName>Paris</fullName>
+                    <default>false</default>
+                    <label>Paris</label>
+                </value>
+                <value>
+                    <fullName>Philadelphia</fullName>
+                    <default>false</default>
+                    <label>Philadelphia</label>
+                </value>
+                <value>
+                    <fullName>Portland</fullName>
+                    <default>false</default>
+                    <label>Portland</label>
+                </value>
+                <value>
+                    <fullName>San Diego</fullName>
+                    <default>false</default>
+                    <label>San Diego</label>
+                </value>
+                <value>
+                    <fullName>San Francisco</fullName>
+                    <default>false</default>
+                    <label>San Francisco</label>
+                </value>
+                <value>
+                    <fullName>San Jose</fullName>
+                    <default>false</default>
+                    <label>San Jose</label>
+                </value>
+                <value>
+                    <fullName>Sao Paulo</fullName>
+                    <default>false</default>
+                    <label>Sao Paulo</label>
+                </value>
+                <value>
+                    <fullName>Seattle</fullName>
+                    <default>false</default>
+                    <label>Seattle</label>
+                </value>
+                <value>
+                    <fullName>Seoul</fullName>
+                    <default>false</default>
+                    <label>Seoul</label>
+                </value>
+                <value>
+                    <fullName>Shanghai</fullName>
+                    <default>false</default>
+                    <label>Shanghai</label>
+                </value>
+                <value>
+                    <fullName>Silicon Valley</fullName>
+                    <default>false</default>
+                    <label>Silicon Valley</label>
+                </value>
+                <value>
+                    <fullName>Singapore</fullName>
+                    <default>false</default>
+                    <label>Singapore</label>
+                </value>
+                <value>
+                    <fullName>Tokyo</fullName>
+                    <default>false</default>
+                    <label>Tokyo</label>
+                </value>
+                <value>
+                    <fullName>Toronto</fullName>
+                    <default>false</default>
+                    <label>Toronto</label>
+                </value>
+                <value>
+                    <fullName>Vancouver</fullName>
+                    <default>false</default>
+                    <label>Vancouver</label>
+                </value>
+                <value>
+                    <fullName>Washington, D.C</fullName>
+                    <default>false</default>
+                    <label>Washington, D.C</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Target_Segment__c</fullName>
+        <description>The above field contains the Segment type.</description>
+        <externalId>false</externalId>
+        <label>Target Segment</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Consumer</fullName>
+                    <default>false</default>
+                    <label>Consumer</label>
+                </value>
+                <value>
+                    <fullName>MidMarket</fullName>
+                    <default>false</default>
+                    <label>MidMarket</label>
+                </value>
+                <value>
+                    <fullName>Enterprise</fullName>
+                    <default>false</default>
+                    <label>Enterprise</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Team__c</fullName>
+        <externalId>false</externalId>
+        <label>Team</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>broker</fullName>
+                    <default>false</default>
+                    <label>broker</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TotalEmailsDelivered</fullName>
+    </fields>
+    <fields>
+        <fullName>TotalFormSubmissions</fullName>
+    </fields>
+    <fields>
+        <fullName>TotalFormViews</fullName>
+    </fields>
+    <fields>
+        <fullName>TotalLandingPageFormSubmissions</fullName>
+    </fields>
+    <fields>
+        <fullName>TotalLandingPageViews</fullName>
+    </fields>
+    <fields>
+        <fullName>Total_Delivered_Emails__c</fullName>
+        <description>Captures the count of emails that are delivered successful out of the total that are sent out for the campaign</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the count of emails that are delivered successful out of the total that are sent out for the campaign</inlineHelpText>
+        <label>Total Delivered Emails</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Desk_Booked__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Desk Booked</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Email_Sent_Out__c</fullName>
+        <description>Captures the count of emails that are sent out from Marketing Cloud for the campaign</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the count of emails that are sent out from Marketing Cloud for the campaign</inlineHelpText>
+        <label>Total Email Sent Out</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Emails_Clicked__c</fullName>
+        <description>Captures the Click Through Rate for the emails sent out.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the Click Through Rate for the emails sent out.</inlineHelpText>
+        <label>Total Emails Clicked</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Emails_Opened__c</fullName>
+        <description>Captures the count of emails that are opened at the prospect end</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the count of emails that are opened at the prospect end</inlineHelpText>
+        <label>Total Emails Opened</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Unsubscribe_Count__c</fullName>
+        <description>Captures the count of emails on which user opts for unsubscription</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the count of emails on which user opts for unsubscription</inlineHelpText>
+        <label>Total Unsubscribe Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tour_Count__c</fullName>
+        <externalId>false</externalId>
+        <label>Tour Count</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tracking_Method__c</fullName>
+        <externalId>false</externalId>
+        <label>Tracking Method</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Guest Sign In</fullName>
+                    <default>false</default>
+                    <label>Guest Sign In</label>
+                </value>
+                <value>
+                    <fullName>Headcount</fullName>
+                    <default>false</default>
+                    <label>Headcount</label>
+                </value>
+                <value>
+                    <fullName>Business Cards Collected</fullName>
+                    <default>false</default>
+                    <label>Business Cards Collected</label>
+                </value>
+                <value>
+                    <fullName>RSVP</fullName>
+                    <default>false</default>
+                    <label>RSVP</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>UniqueEmailOpens</fullName>
+    </fields>
+    <fields>
+        <fullName>UniqueEmailTrackedLinkClicks</fullName>
+    </fields>
+    <fields>
+        <fullName>UniqueMarketingLinkClicks</fullName>
+    </fields>
+    <fields>
+        <fullName>Venue__c</fullName>
+        <externalId>false</externalId>
+        <label>Venue</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <compactLayoutAssignment>Campaign_Compact_Layout</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <searchLayouts>
+        <customTabListAdditionalFields>CAMPAIGN.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CAMPAIGN.STATUS</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CAMPAIGN.START_DATE</customTabListAdditionalFields>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>CAMPAIGN.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CAMPAIGN.START_DATE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CAMPAIGN.CAMPAIGN_TYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Splash__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Segment__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Region__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CAMPAIGN.NAME</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>CAMPAIGN.NAME</searchFilterFields>
+        <searchFilterFields>PARENT_NAME</searchFilterFields>
+        <searchFilterFields>CAMPAIGN.CAMPAIGN_TYPE</searchFilterFields>
+        <searchFilterFields>Splash__c</searchFilterFields>
+        <searchFilterFields>Region__c</searchFilterFields>
+        <searchFilterFields>Segment__c</searchFilterFields>
+        <searchResultsAdditionalFields>CAMPAIGN.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PARENT_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.CAMPAIGN_TYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Splash__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CAMPAIGN.START_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Team__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Region__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Segment__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <listViews>
+        <fullName>AllActiveCampaigns</fullName>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <filters>
+            <field>CAMPAIGN.CAMPAIGN_TYPE</field>
+            <operation>contains</operation>
+            <value>Event</value>
+        </filters>
+        <label>Today's Campaigns</label>
+        <sharedTo>
+            <role>Admin</role>
+            <role>Marketing_Manager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>External_Newsletter_List_Campaigns</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.NUM_LEADS</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.NUM_CONTACTS</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>CAMPAIGN.NUM_CONVERTED_LEADS</columns>
+        <columns>CAMPAIGN.NUM_OPPORTUNITIES</columns>
+        <columns>CAMPAIGN.NUM_WON_OPPORTUNITIES</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.NAME</field>
+            <operation>contains</operation>
+            <value>External Newsletter List:</value>
+        </filters>
+        <label>External Newsletter List Campaigns</label>
+        <sharedTo>
+            <role>Admin</role>
+            <role>Marketing_Manager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Campaigns</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.BUDGETED_COST</columns>
+        <columns>CAMPAIGN.ACTUAL_COST</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <filterScope>Mine</filterScope>
+        <label>My Campaigns</label>
+    </listViews>
+    <listViews>
+        <fullName>Outbound_Emails</fullName>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.NUM_LEADS</columns>
+        <columns>CAMPAIGN.NUM_CONVERTED_LEADS</columns>
+        <columns>CAMPAIGN.NUM_OPPORTUNITIES</columns>
+        <columns>CAMPAIGN.NUM_WON_OPPORTUNITIES</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.NAME</field>
+            <operation>contains</operation>
+            <value>Outbound Email:</value>
+        </filters>
+        <filters>
+            <field>CAMPAIGN.CREATED_DATE</field>
+            <operation>greaterThan</operation>
+            <value>4/10/2016 12:00 AM</value>
+        </filters>
+        <label>Outbound Emails [Jen/Brittnei]</label>
+        <sharedTo>
+            <role>Admin</role>
+            <role>Marketing_Manager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Splash_Event_Campaigns</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Email_Address__c</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>Building__c</columns>
+        <columns>City__c</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <columns>CAMPAIGN.LAST_UPDATE</columns>
+        <columns>CAMPAIGN.NUM_LEADS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.CAMPAIGN_TYPE</field>
+            <operation>equals</operation>
+            <value>Splash Event</value>
+        </filters>
+        <filters>
+            <field>City__c</field>
+            <operation>contains</operation>
+            <value>Mumbai,Bengaluru,Gurugram</value>
+        </filters>
+        <filters>
+            <field>Email_Address__c</field>
+            <operation>contains</operation>
+            <value>brandandmarketing</value>
+        </filters>
+        <label>Splash Event Campaigns</label>
+    </listViews>
+    <listViews>
+        <fullName>Splash_Event_Campaigns_last_30_days</fullName>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>Email_Address__c</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>Building__c</columns>
+        <columns>City__c</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <columns>CAMPAIGN.LAST_UPDATE</columns>
+        <columns>CAMPAIGN.NUM_LEADS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.CAMPAIGN_TYPE</field>
+            <operation>equals</operation>
+            <value>Splash Event</value>
+        </filters>
+        <filters>
+            <field>CAMPAIGN.START_DATE</field>
+            <operation>equals</operation>
+            <value>LAST_90_DAYS</value>
+        </filters>
+        <filters>
+            <field>City__c</field>
+            <operation>contains</operation>
+            <value>Bengaluru,Mumbai,Delhi</value>
+        </filters>
+        <label>Splash Event Campaigns last 30 days</label>
+    </listViews>
+    <listViews>
+        <fullName>yesterday_events</fullName>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>YESTERDAY</value>
+        </filters>
+        <label>Yesterdays Campaigns</label>
+        <sharedTo>
+            <role>Admin</role>
+            <role>Marketing_Manager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>yesterdays_events</fullName>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CAMPAIGN.NAME</columns>
+        <columns>CAMPAIGN.START_DATE</columns>
+        <columns>CAMPAIGN.END_DATE</columns>
+        <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+        <columns>CAMPAIGN.STATUS</columns>
+        <columns>CAMPAIGN.CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAMPAIGN.START_DATE</field>
+            <operation>equals</operation>
+            <value>YESTERDAY</value>
+        </filters>
+        <label>Yesterdays Campaigns</label>
+        <sharedTo>
+            <role>Admin</role>
+            <role>Marketing_Manager</role>
+        </sharedTo>
+    </listViews>
+    <webLinks>
+        <fullName>Add_to_Pardot_List</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Add to Pardot List</masterLabel>
+        <openType>sidebar</openType>
+        <protected>false</protected>
+        <url>https://pi.pardot.com/list/pullCrmCampaign/fid/{!Campaign.Id}/campaignName/{!URLENCODE(Campaign.Name)}/leadCount/{!Campaign.NumberOfLeads}/contactCount/{!Campaign.NumberOfContacts}?sessionid={!$Api.Session_ID}&amp;serverurl={!$Api.Partner_Server_URL_90}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewAllCampaignMembers</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View All Campaign Members</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/camp/rptcmpgncalldown.jsp?scope=1&amp;scopeid={!Campaign_Name}</url>
+        <width>500</width>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewCampaignInfluenceReport</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Campaign Influence Report</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/00O?rt=117&amp;break0=CAN&amp;scope=1&amp;scopeid_lkid={!Campaign.Id}&amp;scopeid={!Campaign_Name}&amp;c=CAN&amp;c=MR&amp;c=PCS&amp;c=CFN&amp;c=RN&amp;c=ON&amp;c=OA&amp;c=OS&amp;c=OCD&amp;c=AN&amp;s=OA&amp;duel0=CAN%2CMR%2CCFN%2CRN%2CAN%2CON%2CPCS%2COS%2COCD%2COA&amp;details=yes&amp;format=t</url>
+        <width>500</width>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User announcements for sprint 26 B  Campaign logic, commitments and holds</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes 26 B</name>
+    <style>freeForm</style>
+    <subject>IMPORTANT PLEASE READ: New Feature Updates</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+This week&apos;s release contains changes to Opportunities and Campaign assignment logic
+
+Commitment terms
+We&apos;ve renamed the &quot;Member Success&quot; section on the Opportunity as &quot;Sales Details&quot; for improved clarity.
+This section contains a series of now required fields detailing inventory use case and projected move out details
+
+Additionally, as an Opportunity may contain multiple reservables, you will now see a field labeled &quot;Weighted Avg Commitment Term (in months)&quot; which is the average of your Opportunity’s commitments in months.
+Once an agreement is signed, commitment term and discount details are visible via related lists on the Opportunity
+
+Reservable Hold Feature
+Select the &quot;Reservable Hold&quot; button on an Opportunity
+Then fill in the form and click Save.
+You will receive an email notification about your hold as well as updates at various benchmarks.
+
+Additionally, a hold can be released by clicking the &quot;Release Hold&quot; button on the hold record
+The holds for an Opportunity are viewable via a related list
+
+Billing Account Selector Update
+The Billing Account Selector page has been updated to include all Billing/Blank Accounts under an Organization in its results.
+
+Campaign Assignment logic
+Lead/journey assignment can now be managed from campaigns
+To ensure that related journeys are routed correctly please ensure that the fields below are filled in when creating a Campaign
+
+Additional Notes:
+
+Lead Owner requires a user or Queue ID
+Email Address requires your building&apos;s email address
+City and State requires the same value on the building record
+
+If you have any questions, please contact us at salesforcesupport@wework.com
+
+Warmly,
+
+Tykira</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

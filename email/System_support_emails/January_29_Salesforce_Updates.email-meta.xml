@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>January 29th 2019 Salesforce Updates</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: January 29th 2019 Salesforce Updates</subject>
+    <textOnly>NEW PAGE ACCOUNT AND OPPORTUNITY PAGE LAYOUTS
+ 
+In an effort to organize relevant fields and information in Salesforce, we have made some UI changes to the Account and Opportunity Page layouts. This includes renaming sections and rearranging the order in which fields appear. 
+
+
+ROE (RULES OF ENGAGEMENT) UPDATES
+
+In a continued effort to support the new ROE, new fields and UI functionality have been added for an added layer of visibility. 
+
+Field Additions
+ROE Segment: This field appears on the Account page layout and denotes whether the Account is an Enterprise, MLB (medium large business) or Consumer account based on the company’s FTE (full time employee) count. 
+Owner Sales Function: This field indicates whose book of business the Account falls within (Enterprise, MLB or Account Management.)
+
+
+UI Functionality
+Account Hover Fields: You can now hover over an Account anywhere in Salesforce and see what the Account FTE and HQ Market is. 
+Owner Hover Fields: You can now hover over the Owner and see what the Owner’s Sales Function is. 
+
+
+
+TCV (TOTAL CONTRACT VALUE) 
+As Nick Worswick noted earlier this week, the company is transitioning from desk count to TCV for measuring achievement. A number of TCV related fields and a Net TCV calculator has been added to Salesforce. More details are to follow shortly.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,104 @@
+<aura:component controller="AccountSelectorController">
+    <aura:attribute name="leadId" type="Id" />
+    <aura:attribute name="journeyId" type="Id" />
+    <aura:attribute name="journeyRecord" type="Object" />
+    <aura:attribute name="leadRec" type="Map" />
+    <aura:attribute name="accountColumns" type="List" default="[]" />
+    <aura:attribute name="matchedOrgRecords" type="List" default="[]" />
+    <aura:attribute name="salesAccountColumns" type="List" default="[]" />
+    <aura:attribute name="salesAccounts" type="List" default="[]" />
+    <aura:attribute name="selectedOrgId" type="Id" />
+    <aura:attribute name="selector" type="Integer" default="1" />
+    <aura:attribute name="previous" type="Object" />
+    <aura:attribute name="headerMetaFields" type="List" />
+    <aura:attribute name="headerFieldsSearchAccount" type="List" />
+    <aura:attribute name="selectedOrg" type="Object" />
+    <aura:attribute name="contactRec" type="Contact" />
+    <aura:attribute name="mapDisabled" type="Map" />    
+    
+    <aura:attribute name="useSelectedAccount" type="Aura.action" />
+    <aura:attribute name="isNewAccountCreated" type="Boolean" default="false" />    
+    <aura:attribute name="isFromConverBrokerFunctionality" type="Boolean" /> 
+    <aura:attribute name="redirectIdAfterRequestNewOrg" type="String" />
+    <aura:attribute name="accountRec" type="Account" /> 
+    <aura:handler name="init" value="{!this}" action="{!c.getLeadRecord}" />    
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <style>
+        td[data-label="Actions"]{ text-align: center; padding:0px !important;}
+        #enzi-data-table-container > table > thead > tr > th:nth-child(2) > a{width:60px;}
+    </style>
+    
+    <div class="slds-box" style="padding: 0px;"> 
+        <aura:if isTrue="{! v.selector eq 1}">
+            <c:EnziHeader sObjectName="Lead" pageName="{!v.leadRec.Name}" iconName="standard:lead"></c:EnziHeader>   
+        </aura:if>
+        <c:EnziDataHeader sObject="{!v.leadRec}" fieldMetaData="{!(v.selector == 1) ? v.headerMetaFields : v.headerFieldsSearchAccount}" showHeaderBox="false"/>        
+    </div>
+    
+    <aura:if isTrue="{! v.selector eq 1}">
+        <div id="MatchedOrganizations" class="slds-p-bottom_small">
+            <c:EnziDataTable visibleItems= "true" 
+                             records="{!v.matchedOrgRecords}" 
+                             setBorder="true"  
+                             showMultiselect="false"
+                             describedFields="{!v.accountColumns}"  
+                             pageSizes="[5,10,20,50]"
+                             showPagination="false"
+                             pageSize="10"
+                             selectedRecords = "{!v.selectedOrgId}"
+                             showSearch="false"
+                             />
+            <div class="slds-modal__footer slds-text-align--right" role="main" style="width:100%">
+                <c:EnziButton label="Search Other Account" type="neutral" click="{!c.searchOtherAccounts}" />
+                <c:EnziButton label="Create New Org" type="neutral" click="{!c.createNewAccount}" />
+                <c:EnziButton label="Use Selected Account" type="brand" leftIcon="utility:check" click="{!c.useSelectedOrg}" disabled="{! empty(v.selectedOrgId)}" />
+            </div>
+        </div>                
+    </aura:if>
+    
+    <aura:if isTrue="{! v.selector eq 2}">
+        <div id="SearchOrganizations" class="slds-p-bottom_small" style="padding-top:12px;">
+            <c:SearchOrganizations selectedOrgId="{!v.selectedOrgId}" searchAllOrg="true" showTooltips="false" selectedOrg="{!v.selectedOrg}" />                     
+            <div class="slds-modal__footer slds-text-align--right" role="main" style="width:100%">
+                <c:EnziButton label="Back" type="neutral"  click="{!c.selectMatchedAccounts}" />
+                <c:EnziButton label="Create New Org" type="neutral" click="{!c.createNewAccount}" />
+                <c:EnziButton label="Use Selected Account" type="brand" leftIcon="utility:check" click="{!c.useSelectedOrg}" disabled="{! empty(v.selectedOrgId)}" />
+            </div>
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{! v.selector eq 3}">
+        <div id="CreateNewOrganization" class="slds-p-bottom_small">
+            <c:CreateNewOrganization recordId="{! not(empty(v.journeyId)) ? v.journeyId : v.leadId}" isNewAccountCreated="{!v.isNewAccountCreated}" isFromConverBrokerFunctionality="{!v.isFromConverBrokerFunctionality}" redirectIdAfterRequestNewOrg="{!v.redirectIdAfterRequestNewOrg}"  isInLightningConsole="false" valid="true" canCreateOrg="true" contactRec="{!v.contactRec}" existingContact="{!v.contactRec}" previous="{!v.previous}" showCloseButton="false" mapDisabled="{!v.mapDisabled}" selectedOrg="{!v.selectedOrg}" useCreatedAccount="{!v.useSelectedAccount}" accountRec= "{!v.accountRec}" leadRec="{!v.leadRec}"/>
+        </div>
+    </aura:if>
+
+    <aura:if isTrue="{! v.selector eq 5}">
+        <c:EnziModal aura:id="salesAccountModal" header="View Hierarchy" showFooter="false" isLarge="false" show="true" showCloseButton="false">
+            <div>
+                <c:EnziModalContainer>
+                    <div class="slds-box" style="padding:4px;"> 
+                        <b>Instructions : </b>
+                        <c:WeInstructions instructions="['By clicking on Use Selected Account will convert the Lead on selected Account.']"></c:WeInstructions>
+                    </div> 
+                    <c:EnziDataTable records="{!v.salesAccounts}" 
+                                     setBorder="true"  
+                                     showMultiselect="false"
+                                     describedFields="{!v.salesAccountColumns}"  
+                                     pageSizes="[5,10,20,50]"
+                                     showPagination="true"
+                                     pageSize="5"
+                                     selectedRecords = "{!v.selectedOrgId}"
+                                     showSearch="false"
+                                     sortBy="Account_Type__c"
+                                     />
+                </c:EnziModalContainer>
+                <div class="slds-text-align--right slds-modal__footer">
+                    <c:EnziButton label="Use Selected Account" type="brand" leftIcon="utility:check" click="{!c.useSelectedOrg}" disabled="{! empty(v.selectedOrgId)}" />
+                </div>     
+            </div>
+        </c:EnziModal>
+    </aura:if>    
+</aura:component>

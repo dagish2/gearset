@@ -1,0 +1,122 @@
+<aura:component >
+	<aura:attribute name="name" type="String" />
+    <aura:attribute name="allowFastCall" type="Boolean" />
+    <aura:attribute name="fastCallRecordId" type="String" />
+    <aura:attribute name="fastCallRecordName" type="String" />
+    <aura:attribute name="fastCallObjectName" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="metadata" type="Object" />
+    <aura:attribute name="icons" type="Object" />
+    <aura:attribute name="fieldName" type="String" />
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="length" type="Integer" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="controllingValue" type="Object" />
+    <aura:attribute name="isDependent" type="Boolean" />
+    <aura:attribute name="options" type="Object" />
+    <aura:attribute name="filteredOptions" type="Object" />
+    <aura:attribute name="labelField" type="String" />
+    <aura:attribute name="valueField" type="String" />
+    <aura:attribute name="upperBound" type="Object" />
+    <aura:attribute name="lowerBound" type="Object" />
+    <aura:attribute name="unrestricted" type="boolean" default="true" />    
+    <aura:attribute name="min" type="Integer" />
+    <aura:attribute name="max" type="Integer" />
+    <aura:attribute name="reference" type="String" />
+    <aura:attribute name="hideLabel" type="Boolean" />
+    <aura:attribute name="isLoaded" type="Boolean" default="false" />
+    <aura:attribute name="editable" type="Boolean" default="false" />
+    <aura:attribute name="saving" type="Boolean" default="false" />
+    <aura:attribute name="save" type="Object"/>
+    <aura:attribute name="showEmptyContainer" type="Boolean" />
+    <aura:attribute name="sibblings" type="List" />
+    <aura:attribute name="allowDecimal" type="Boolean" />
+    <aura:attribute name="defaultDisabled" type="Boolean" />
+    <aura:attribute name="varient" type="String" />
+    <aura:attribute name="sort" type="String" default="asc" />
+	<aura:attribute name="addNew" type="Object" />
+	<aura:attribute name="icon" type="String" />
+    <aura:attribute name="maxPhoneLength" type="Integer" />
+    <aura:attribute name="list" type="Object" />
+    <aura:attribute name="helpText" type="String"/>
+    <aura:attribute name="index" type="Integer" />
+    <aura:attribute name="criteria" type="String" />
+    <aura:attribute name="errorMessage" type="String" />
+    <aura:attribute name="customValidate" type="Boolean" default="false" />
+	<aura:attribute name="searchFields" type="List" />
+	<aura:attribute name="getFields" type="Object" />
+    <aura:attribute name="createNew" type="Map" default='{"isShow":false,"label":"Create New"}'/>
+    <aura:attribute name="keyword" type="String" />
+
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="dirty" type="Boolean" />
+    <aura:attribute name="validations" type="Object" />
+    <aura:attribute name="errors" type="Object" />
+    
+    <aura:attribute name="dynamicBinding" type="Boolean" default="false" />
+    <aura:attribute name="record" type="Map"/>
+    <aura:attribute name="placeholder" type="String" />
+    
+    <aura:attribute name="change" type="Object" default="{!c.defaultChange}" />
+   	<aura:attribute name="onInput" type="Object" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.sObjectName}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.fieldName}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}"/>
+    <aura:handler name="change" value="{!v.options}" action="{!c.optionsChange}"/>
+    <aura:handler name="destroy" value="{!this}" action="{!c.handleDestroy}"/>
+    <aura:registerEvent name="saveInline" type="c:EnziFieldInlineSaveEvent"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+    	.slds-form-element__label{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+    <div class="{!'slds-form-element '+(v.dirty?(v.valid?'':'slds-has-error'):'')}">
+        <div class="{!'slds-spinner_container '+(v.saving?'':'slds-hide')}">
+            <div role="status" class="slds-spinner slds-spinner--x-small">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+        <label class="slds-form-element__label"  style="{!'display:'+((v.hideLabel || v.body.length==0)?'none':'flex')}">
+            <span>
+                <aura:if isTrue="{!v.required}">
+                    <span class="slds-required" title="Required" style="font-weight: 900;font-size: 15px;display:inline-block">*</span>
+                    <aura:set attribute="else">
+                        <span class="slds-required" title="Required" style="font-weight: 900;font-size: 15px;display:inline-block">&nbsp;</span>       
+                    </aura:set>
+                </aura:if>
+                {!v.label} &nbsp;
+            </span>
+            <aura:if isTrue="{!!empty(v.helpText)}">               
+                <span id = "helpTextDiv">                   
+                    <lightning:helptext content="{!v.helpText}" />
+                </span>
+            </aura:if>            
+        </label>
+        
+        <div class="{!'slds-form-element__control '+(v.defaultDisabled?'':'defaultDisabled')}">
+            <aura:iteration items="{!v.body}" var="cmp">
+                <div>
+                    {!cmp}
+                </div>
+                <lightning:buttonIcon iconName="utility:edit" size="x-small" class="{!'editIcon '+(v.editable?(v.disabled?'':'slds-hide'):'slds-hide')}" onclick="{!c.makeEditable}"></lightning:buttonIcon>
+                <lightning:buttonIcon iconName="utility:check" size="x-small" class="{!'editIcon '+(v.editable?(v.saving?'slds-hide':(v.disabled?'slds-hide':'')):'slds-hide')}" onclick="{!c.save}"></lightning:buttonIcon>
+                <lightning:buttonIcon iconName="utility:close" size="x-small" class="{!'cancelIcon '+(v.editable?(v.saving?'slds-hide':(v.disabled?'slds-hide':'')):'slds-hide')}" onclick="{!c.cancel}"></lightning:buttonIcon>
+            </aura:iteration>
+            <div class="slds-card" style="{!'padding: 6px;margin-top:'+(v.hideLabel?'0':'21')+'px;display:'+((v.body.length==0)?(v.showEmptyContainer?'block':'none'):'none')}">Field Not Available</div>
+        </div>
+  		<c:EnziValidate name="{!v.name}" type="{!v.type}" value="{!v.value}" required="{!v.required}" length="{!v.length}" valid="{!v.valid}" validations="{!v.validations}" dirty="{!v.dirty}" errors="{!v.errors}" min="{!v.min}" max="{!v.max}" message="{!v.errorMessage}" customValidate="{!v.customValidate}"></c:EnziValidate>
+	</div>
+    <div class="{!v.isLoaded?'slds-hide':''}" style="width:100%;border-bottom:1px solid rgb(216, 221, 230);padding:10px">
+        <div style="width:30%;height:8px;background-color:rgb(238, 241, 246);border-radius: 10px;margin-bottom:10px;"></div>
+        <div style="width:60%;height:8px;background-color:rgb(224, 229, 238);border-radius: 10px;margin-bottom:10px;"></div>
+    </div>
+</aura:component>

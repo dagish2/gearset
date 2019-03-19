@@ -1,0 +1,105 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="upperBound" type="Object"/>
+    <aura:attribute name="lowerBound" type="Object"/>
+    <aura:attribute name="timezoneOffset" type="Integer"/>
+    
+    <aura:attribute name="todaysDate" type="Object" />
+    <aura:attribute name="currentDate" type="Object" />
+    <aura:attribute name="currentMonth" type="Object" />
+    <aura:attribute name="currentYear" type="Object" />
+    <aura:attribute name="years" type="List" />
+    <aura:attribute name="months" type="List" />
+    <aura:attribute name="days" type="List" />
+    <aura:attribute name="calenderData" type="List" />
+    <aura:attribute name="dateString" type="String"/>
+    <aura:attribute name="show" type="Boolean"/>
+    <aura:attribute name="change" type="Object"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+        .slds-has-error .slds-select.year{
+        box-shadow: rgb(235, 15, 15) 0 0 0 0px inset;
+        border-color: #f4f6f9;
+        }
+        .slds-datepicker td.slds-is-today:not(.slds-disabled-text)>.slds-day {
+        background: rgb(84, 105, 141);
+        color: rgb(255, 255, 255);
+        }
+        .slds-input-has-icon--left svg {
+        position: absolute;
+        top: 9px;
+        left: 16px;
+        }
+    </style>
+ 
+    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left">
+        <lightning:icon iconName="utility:event" size="xx-small"/>
+        <input id="{!v.name}" type="text" class="slds-input" name="{!v.name}" placeholder="{!v.disabled?'':'Select '+v.label}" value="{!v.dateString}" readonly="readonly" onclick="{!c.getPicker}" disabled="{!v.disabled?'disabled':''}" onchange="{!v.change}" style="border-color: rgb(217, 219, 221)"></input>
+    	<button id="{!v.name}" onclick="{!v.change}" class="slds-hide"></button>
+    </div>
+    <div class="slds-datepicker slds-dropdown slds-dropdown--left" aria-hidden="false" style="{!'display:'+(v.show?'block':'none')}">
+        <div class="slds-datepicker__filter slds-grid">
+            <div class="slds-datepicker__filter--month slds-grid slds-grid--align-spread slds-grow">
+                <div class="slds-align-middle">
+                    <button class="slds-button slds-button--icon-container" title="Previous Month" onclick="{!c.getPrevMonth}">
+                        <lightning:icon iconName="utility:left" size="xx-small"/>
+                        <span class="slds-assistive-text">Previous Month</span>
+                    </button>
+                </div>
+                <h2 id="month" class="slds-align-middle" aria-live="assertive" aria-atomic="true">{!v.currentMonth}</h2>
+                <div class="slds-align-middle">
+                    <button class="slds-button slds-button--icon-container" title="Next Month" onclick="{!c.getNextMonth}">
+                        <lightning:icon iconName="utility:right" size="xx-small"/>
+                        <span class="slds-assistive-text">Next Month</span>
+                    </button>
+                </div>
+            </div>
+            <div class="slds-shrink-none">
+                <label class="slds-assistive-text" for="select-01">Pick a Year</label>
+                <div class="slds-select_container">
+                    <select id="select-01" class="slds-select year" onchange="{!c.yearChange}">
+                        <aura:iteration items="{!v.years}" var="year">
+                            <option selected="{!v.currentYear==year?'selected':''}">{!year}</option>
+                        </aura:iteration>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <table class="slds-datepicker__month" role="grid" aria-labelledby="month">
+            <thead>
+                <tr id="weekdays">
+                    <aura:iteration items="{!v.days}" var="day">
+                        <th id="{!day}" scope="col">
+                            <abbr title="{!day}">{!day}</abbr>
+                        </th>
+                    </aura:iteration>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.calenderData}" var="week" >
+                    <tr>
+                        <aura:iteration items="{!week}" var="day" >
+                            <td class="{!day.disabled?'slds-disabled-text':(day.selected?'slds-is-selected':(day.today?'slds-is-today':''))}" headers="Sunday week11" role="gridcell" aria-disabled="true" aria-selected="false" >
+                                <span class="slds-day" onclick="{!c.setDate}" id="{!day.disabled?'':day.value}">{!day.label}</span>
+                            </td>
+                        </aura:iteration>
+                    </tr>
+                </aura:iteration>
+                <tr>
+                    <td colspan="7" role="gridcell">
+                        <a class="slds-show--inline-block slds-p-bottom--x-small" style="margin-right:10px" onclick="{!c.setToday}">Today</a>
+                        <a class="slds-show--inline-block slds-p-bottom--x-small" style="margin-right:10px" onclick="{!c.clear}">Clear</a> 
+                        <a class="slds-show--inline-block slds-p-bottom--x-small" onclick="{!c.close}">Close</a> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

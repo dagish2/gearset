@@ -1,0 +1,49 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+	<aura:attribute name="recordId" type="String" />
+    <aura:attribute name="errorMessage" type="String" default = "Something went wrong, please contact your system admin. "/>
+    <aura:attribute name="opportunityRec" type="Map" />
+    <aura:attribute name="opportunityStage" type="String" />
+    <aura:attribute name="opportunityStages" type="List" default="[{'name': 'Closed Won', 'value': 'Closed Won'}, {'name': 'Closed Lost', 'value': 'Closed Lost'}]" />
+    <aura:attribute name="competitorSolution" type="Boolean" default="false" />
+    <aura:attribute name="errors" type="Object" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="hideUpdateButton" type="Boolean" default="true" />
+    <aura:attribute name="helpText" type="String" />
+    <aura:attribute name="helptextData" type="Map" default="{}"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.opportunityRec.Lost_Reason__c}" action="{!c.changeLostReason}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />
+        
+    <c:EnziUtils aura:id="utils"/> 
+    <lightning:path aura:id="path" recordId="{!v.recordId}" onselect="{!c.handleSelect}" variant="linear" hideUpdateButton="{!v.hideUpdateButton}" />
+  
+    <c:EnziModal aura:id="ChangeOpportunityStageModal" isLarge="false" header="Close Opportunity" showFooter="true" show="false">
+        <c:EnziModalContainer>
+           <c:EnziFormValidator errors="{! v.errors}" valid="{! v.valid}">
+                <div id="OpportunitySalesPath" class="slds-grid slds-wrap slds-grid--pull-padded slds-p-bottom_small" role="main"> 
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                        <c:EnziField unrestricted="false" type="picklist" name="OpportunityStage" label=" Opportunity Stage" value="{!v.opportunityRec.StageName}" options="{!v.opportunityStages}" labelField="name" valueField="value" required="true" errors="{!v.errors}"  />
+                    </div>
+                    <aura:if isTrue="{!v.opportunityRec.StageName == 'Closed Lost'}">
+                        <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                            <c:EnziField name="Lost_Reason__c" sObjectName="Opportunity" fieldName="Lost_Reason__c" value="{!v.opportunityRec.Lost_Reason__c}" required="true" errors="{!v.errors}" helpText="{!empty(v.helpText)?'Select a Lost Reason':v.helpText}"/>
+                        </div>
+                        <aura:if isTrue="{!v.competitorSolution}">
+                            <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                                <c:EnziField name="Competitor_Solution__c" sObjectName="Opportunity" fieldName="Competitor_Solution__c" value="{!v.opportunityRec.Competitor_Solution__c}" required="true" errors="{!v.errors}" />
+                            </div>
+                            <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                                <c:EnziField name="Competitor_Solution_Detail__c" sObjectName="Opportunity" fieldName="Competitor_Solution_Detail__c" value="{!v.opportunityRec.Competitor_Solution_Detail__c}" required="false"/>
+                            </div>
+                        </aura:if>
+                    </aura:if>                    
+                </div> 
+            </c:EnziFormValidator>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter>
+            <c:EnziButton label="Cancel" type="neutral" click="{!c.cancel}"/>
+            <c:EnziButton label="Save" type="brand" click="{!c.save}" disabled="{! v.opportunityRec.StageName =='Closed Won' ? false : (v.opportunityRec.StageName == '' ? true : !v.valid)}" />
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

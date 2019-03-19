@@ -1,0 +1,4 @@
+<apex:page standardController="Account" standardStylesheets="false" sidebar="false" showHeader="false">
+    <title>Merge Organizations</title>
+    <c:LightningResource component="MergeOrganisations"></c:LightningResource>
+</apex:page>

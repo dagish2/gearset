@@ -1,0 +1,15 @@
+.THIS .objectSelector{
+    position: absolute;
+    top: 27px;
+    left: 6px;
+    z-index: 100;
+}
+.THIS.uiMenu{
+    position: relative !important;
+}
+.THIS input{
+    padding-left: 58px !important;
+}
+.THIS.slds-listbox__option:hover{
+    background-color:#f3f2f2;
+}

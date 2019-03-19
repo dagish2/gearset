@@ -1,0 +1,30 @@
+Hello, 
+
+I am handing off {!Opportunity.Name} to you, as you are the designated driver on this opportunity per the ROE. See below for information on the opportunity and account, and feel free to contact me to discuss.
+
+[Pre-populated, where available] 
+Account Name: {!Account.Name} 
+Account FTE: {!Account.Account_FTE__c} 
+Account HQ Market: {!Account.Account_Market__c} 
+Opportunity: ({!Opportunity.Link}) 
+Opp Portfolio: {!Opportunity.Territory__c}
+Opp Territory: {!Opportunity.Territory_Name__c}
+Locations interested: {!Opportunity.Building__c} 
+Primary Member: {!Opportunity.Primary_Member__c}
+Product Type: {!Opportunity.Type__c} 
+No of Desks (unweighted): {!Opportunity.No_of_Desks_unweighted__c} 
+Commitment Term: {!Opportunity.Term__c}
+Move In Date: {!Opportunity.Date_Time_Needed__c}
+Monthly Budget: {!Opportunity.Desired_Budget__c}
+Description: {!Opportunity.Description}
+
+[Manual Input] 
+Desired solution (e.g., SKU Type): 
+Desired SQFT: 
+Has a discount been offered: 
+Existing member or new member: 
+Current desks: 
+Additional info: 
+
+Best, 
+{!Opportunity.OwnerFirstName}

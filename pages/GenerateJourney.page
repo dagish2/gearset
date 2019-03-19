@@ -1,0 +1,31 @@
+<apex:page showheader="false" sidebar="false" standardstylesheets="false">
+    <apex:includescript value="/support/console/31.0/integration.js" />
+    <head>
+        <title>Generate Journey - User or Queue</title>
+        <script type="text/javascript">
+            function testSetTabTitle() {
+               sforce.console.setTabTitle('Generate Journey - User or Queue');
+            }
+        //change for commit
+        </script>
+        <style>
+            .slds-scope{
+            overflow-y: scroll;
+            overflow-x: hidden;
+            }
+            .slds-scope::-webkit-scrollbar{
+            width:10px;
+            }
+            
+            .slds-scope::-webkit-scrollbar-track{
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            
+            }
+            .slds-scope::-webkit-scrollbar-thumb{
+            background: -webkit-linear-gradient(top, #8bc7ef 1%,#4e87ca 100%);
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+            }
+        </style>
+    </head>
+    <c:LightningResource component="GenerateJourney" parameters="settingId={!$CurrentPage.parameters.settingId}"></c:LightningResource>
+</apex:page>

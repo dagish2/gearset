@@ -1,0 +1,56 @@
+<apex:page standardController="Tour_Outcome__c" showheader="false" sidebar="false" standardStylesheets="false">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <apex:includescript value="/support/console/32.0/integration.js" />
+    <apex:includeLightning /> 
+    <body style="margin:0px">
+        <div id="lightning" style="overflow-x:hidden;overflow-y:auto;background-color:white">
+            <div class="slds-spinner_container slds-is-fixed" id="vfSpinner">
+                <div role="status" class="slds-spinner slds-spinner--large slds-spinner--brand">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+        var width,height;
+        (function setCustomComponentSize() {
+            width = screen.availWidth * 0.8;
+            height = screen.availHeight * 0.8;
+            if (sforce.console.isInConsole()) {
+                sforce.console.setCustomConsoleComponentWidth(width);
+                sforce.console.setCustomConsoleComponentHeight(height);
+            }
+        })();
+        if(width){
+            document.getElementById('lightning').style.height = window.innerHeight+"px";
+            document.getElementById('lightning').style.width = window.innerWidth+"px";
+        }else{
+            document.getElementById('lightning').style.height = window.innerHeight+"px";
+            document.getElementById('lightning').style.width = window.innerWidth+"px";
+        }
+        window.addEventListener("resize", function(){
+            if(width){
+                document.getElementById('lightning').style.height = window.innerHeight+"px";
+                document.getElementById('lightning').style.width = window.innerWidth+"px";
+            }else{
+                document.getElementById('lightning').style.height = window.innerHeight+"px";
+                document.getElementById('lightning').style.width = window.innerWidth+"px";
+            }
+        });
+
+        $Lightning.use("c:OverrideNewTourApp", function() {debugger;
+            var attributes = {}; // Set component attributes here
+            $Lightning.createComponent('c:RedirectionForNewTour', attributes, 'lightning',function(cmp) {
+                $A.eventService.addHandler({ "event": "force:navigateToURL", "handler" : visualForceFunction});
+                document.getElementById("vfSpinner").remove();
+            });
+        });
+        </script>
+        <script>
+        var visualForceFunction = function(event){debugger;
+            top.location = location.origin + event.getParam("url");
+        };
+        </script>
+    </body>
+</apex:page>

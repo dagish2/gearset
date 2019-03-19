@@ -1,0 +1,35 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="value" type="Boolean" default="false" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="length" type="Integer" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="change" type="Object" />
+    <aura:attribute name="varient" type="String" default="checkbox" />
+    <aura:attribute name="inlineStyle" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     
+    <div class="slds-form-element">
+        <div class="slds-form-element__control" style="{!'padding: 8px;padding-left:0px;'+(v.inlineStyle ? v.inlineStyle:'')}">
+            <aura:if isTrue="{!v.varient=='toggle'}">
+                <span class="slds-checkbox_toggle slds-grid">
+                    <span class="slds-form-element__label">{!v.label}&nbsp;&nbsp;</span>
+                    <input type="checkbox" name="checkbox" aria-describedby="toggle-desc" id="{!v.name}" checked="{!v.value?'checked':''}" value="{!v.value}" onclick="{!c.change}" disabled="{!v.disabled?'disabled':''}" onchange="{!v.change}"/>
+                    <label class="slds-checkbox_faux_container" aria-live="assertive" for="{!v.name}">
+                        <span class="slds-checkbox_faux"></span>
+                    </label>
+                </span>
+                <aura:set attribute="else">
+                    <span class="slds-checkbox">
+                        <input type="checkbox" name="options" id="{!v.name}" checked="{!v.value?'checked':''}" value="{!v.value}" onclick="{!c.change}" disabled="{!v.disabled?'disabled':''}" onchange="{!v.change}" />
+                        <label class="slds-checkbox__label" for="{!v.name}">
+                            <span class="slds-checkbox--faux"></span>
+                            <span class="slds-form-element__label"> {!v.label}</span>
+                        </label>
+                    </span>
+                </aura:set>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

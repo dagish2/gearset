@@ -1,0 +1,54 @@
+<aura:component >
+    <aura:attribute name="title" type="String" />
+    <aura:attribute name="pageName" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="iconName" type="String" />
+    <aura:attribute name="isInLightning" type="Boolean" default="false" />
+    <aura:attribute name="dataFields" type="List" default="[]" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.isInLightning}"/>
+    
+    <div class="slds-page-header slds-page-header_record-home page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container" title="{!v.title}">
+                            <lightning:icon iconName="{!v.iconName}" size="Medium" alternativeText="{!v.title}"/>
+                            <span class="slds-assistive-text">{!v.title}</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__name-meta slds-text-title--caps" title="{!v.sObjectName}">{!v.sObjectName}</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <p class="slds-page-header__title slds-truncate">{!v.pageName}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-page-header__row slds-page-header__row_gutters">
+            <div class="slds-page-header__col-details">
+                <ul class="slds-page-header__detail-row slds-grid slds-wrap">
+                    <aura:iteration items="{!v.dataFields}" var="field">
+                        <li class="{!'slds-p-bottom_small slds-col slds-size_1-of-1 slds-medium-size_1-of-'+v.dataFields.length+' slds-large-size_1-of-'+v.dataFields.length}">
+                            <div class="slds-text-title slds-truncate" title="{!field.label}">{!field.label}</div>
+                            <div class="slds-truncate" title="{!field.value}">
+                                <aura:if isTrue="{! empty(field.url)}">
+                                    {!field.value}
+                                    <aura:set attribute="else">
+                                        <a href= "{!v.isInLightning?'/lightning/r/'+field.url+'/view':'/'+ field.url}" target="_blank">{!field.value}</a>  
+                                    </aura:set>
+                                </aura:if>                                
+                            </div>
+                        </li>
+                    </aura:iteration>                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</aura:component>

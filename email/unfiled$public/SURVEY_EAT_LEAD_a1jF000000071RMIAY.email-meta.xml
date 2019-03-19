@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This is the default email alert template invitation to the Survey: Exit Survey</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>[Send using Workflow Leads] Exit Survey</name>
+    <style>none</style>
+    <subject>Please complete this survey: Exit Survey</subject>
+    <textOnly>Please complete this survey at:&lt;br/&gt;https://timbasurveys.na10.visual.force.com/apex/timbasurveys__survey?id=a1jF000000071RMIAY&amp;lId={!Lead.Id}&amp;wf=yes</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

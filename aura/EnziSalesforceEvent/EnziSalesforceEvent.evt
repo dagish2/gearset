@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="This event is fired for Global Salesforce Portal">
+	<aura:attribute name="event" type="String"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="title" type="String"/>
+</aura:event>

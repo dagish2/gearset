@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Announcing updates to the tour form and launching account selector</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Account selector and tour outcome form v.2</name>
+    <style>freeForm</style>
+    <subject>IMPORTANT SALESFORCE UPDATES: Feature roll back</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+Today we released the account selector feature. Based on our assessment of user readiness, we plan to roll the feature back and relaunch this coming Wednesday (September 20, 2017). For your benefit and overall preparation, please make sure to review the material below.
+
+Account Selector
+What is the Account Selector Page?
+
+The Account Selector page is a page in Salesforce that appears when converting a Lead into an Account/Contact/Opportunity. The page contains a list of existing accounts that are possible matches for the new record to be merged into.
+
+The objective of the Account Selector page is to prevent the creation of duplicate Accounts by identifying and merging into existing records.
+
+Click the link below for training guide
+https://docs.google.com/a/wework.com/presentation/d/1Kc5CT9S9FSCgRHqUBEFYKohhkXcvlBtDCsnm1jyHDZ8/edit?usp=sharing
+
+Click the link below for Video
+https://drive.google.com/a/wework.com/file/d/0BxnEtTaM6arTdzVvZ2ZNN0FMUnc/view?usp=sharing
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+Sincerely,
+Susie Romero</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

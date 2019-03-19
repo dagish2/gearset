@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Geography_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Building_Updated_Date__c</fullName>
+        <description>This field store the date when batch update the building on geography.</description>
+        <externalId>false</externalId>
+        <label>Building Updated Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <description>administrative_area_level_3 or locality should be saved here in City field.</description>
+        <externalId>false</externalId>
+        <label>City</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cluster__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Cluster</label>
+        <referenceTo>Cluster__c</referenceTo>
+        <relationshipName>Google_Places</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Country__c</fullName>
+        <description>Country of the Google Location</description>
+        <externalId>false</externalId>
+        <label>Country</label>
+        <length>120</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>District__c</fullName>
+        <description>This will be the administrative_area_level_2 value which generally represents County or District</description>
+        <externalId>false</externalId>
+        <label>County/District</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Formatted_Address__c</fullName>
+        <description>Formatted Address of the Location which will also be stored in Name field.</description>
+        <externalId>false</externalId>
+        <label>Formatted Address</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Geocode__c</fullName>
+        <description>Geo Location of the location in terms of Latitude and Longitude should be stored here.</description>
+        <displayLocationInDecimal>true</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <label>Geocode</label>
+        <required>false</required>
+        <scale>15</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>JSON__c</fullName>
+        <description>Entire JSON retrieved from Google Maps should be saved here, so we can pull any additional information easily in future from Google if required.</description>
+        <externalId>false</externalId>
+        <label>JSON</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>20</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Location_Type__c</fullName>
+        <description>Location Type provided in the Google Location should be stored here.</description>
+        <externalId>false</externalId>
+        <label>Location Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>APPROXIMATE</fullName>
+                    <default>false</default>
+                    <label>APPROXIMATE</label>
+                </value>
+                <value>
+                    <fullName>GEOMETRIC_CENTER</fullName>
+                    <default>false</default>
+                    <label>GEOMETRIC_CENTER</label>
+                </value>
+                <value>
+                    <fullName>RANGE_INTERPOLATED</fullName>
+                    <default>false</default>
+                    <label>RANGE_INTERPOLATED</label>
+                </value>
+                <value>
+                    <fullName>ROOFTOP</fullName>
+                    <default>false</default>
+                    <label>ROOFTOP</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Nearest_Building__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This field contains the value of nearest building which is included in buildings object.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The value in this field comes from buildings available for the user.</inlineHelpText>
+        <label>Nearest Building</label>
+        <referenceTo>Building__c</referenceTo>
+        <relationshipLabel>Geographies</relationshipLabel>
+        <relationshipName>Geographies</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Place_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Google ID of the location. Google API calls is Place ID</description>
+        <externalId>true</externalId>
+        <label>Place ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Previous_Building__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Previous Building</label>
+        <referenceTo>Building__c</referenceTo>
+        <relationshipLabel>Geographies (Previous Building)</relationshipLabel>
+        <relationshipName>previousGeographies</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>State__c</fullName>
+        <description>Google Places returns administrative_area_level_1 which is generally a State or Province which will be stored here.</description>
+        <externalId>false</externalId>
+        <label>State/Provience</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sublocality__c</fullName>
+        <description>Sub-locality of the place should be stored here.</description>
+        <externalId>false</externalId>
+        <label>Sublocality</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Zip_Postal_Code__c</fullName>
+        <description>Zip or Postal code of the Location should be stored here.</description>
+        <externalId>false</externalId>
+        <label>Zip/Postal Code</label>
+        <length>120</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object will represent Google Maps Location so that we can reuse same location as and when required within multiple objects.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>false</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>false</enableSharing>
+    <enableStreamingApi>false</enableStreamingApi>
+    <label>Geography</label>
+    <nameField>
+        <label>Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Geographies</pluralLabel>
+    <searchLayouts />
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>Geography_and_Nearest_Building</fullName>
+        <columns>NAME</columns>
+        <columns>Nearest_Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Geography and Nearest Building</label>
+    </listViews>
+</CustomObject>

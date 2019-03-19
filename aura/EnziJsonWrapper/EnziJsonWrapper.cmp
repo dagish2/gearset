@@ -1,0 +1,12 @@
+<aura:component >
+    <c:EnziUtils aura:id="utils"/>
+    <aura:attribute name="JSONObj" type="String" /><!--input  JSON object to be convert to apex class-->
+    <aura:attribute name="className" type="String" default="JSON2apex"/><!--input Wrappper class name -->
+    <aura:attribute name="wrapperClass" type="String" default=" "/><!--output wrapperClass in string format -->
+    <aura:attribute name="innerClassFields" type="Map" default="{}" /><!-- -->
+    <aura:attribute name="error" type="Object" default="" /><!-- -->
+    <aura:handler name="init" value="{!this}" action="{!c.parseJSON}" /><!-- -->
+    <div >
+       <textarea rows="50" style="width:100%;background-color: white;border: 0px;resize: none;" value="{!v.wrapperClass}" disabled="true"></textarea>
+    </div>
+</aura:component>

@@ -1,0 +1,137 @@
+<apex:page controller="AddMembersToCampaignController" extensions="WeworkEngine" showheader="false" sidebar="false" standardstylesheets="false">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <apex:includescript value="/support/console/20.0/integration.js" />
+        <style>
+            .vcenter {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .autoselect {
+                    list-style: none;
+                    padding: 0px;
+                    border: 1px solid #337ab7;
+                    position: absolute;
+                    z-index: 10;
+                    background-color: white;
+                    width: 91%;
+                    max-height: 250px;
+                    overflow-y: auto;
+            }
+
+                .autoselect li {
+                    margin: 0px;
+                    padding: 1px 10px;
+                }
+
+                    .autoselect li:hover {
+                        background-color: #037eea;
+                        color: white;
+                    }
+
+            .selectContainer {
+                margin-bottom: -35px;
+            }
+
+            .autoinput {
+                width: calc(100% - 20px);
+                border: 0px;
+                height: 31px;
+                margin-bottom: 4px;
+                margin-top: 2px;
+                margin-left: 1px;
+            }
+
+            .selected {
+                background-color: #037eea;
+                color: white;
+            }
+
+            body {
+                font-family: "ProximaNovaSoft-Regular", Calibri,"Gill Sans", "Gill Sans MT", Candara, Segoe,"Segoe UI", Arial, sans-serif;;
+                font-size: 15px !important;
+            }
+
+            .form-control {
+                font-family: "ProximaNovaSoft-Regular", Calibri,"Gill Sans", "Gill Sans MT", Candara, Segoe,"Segoe UI", Arial, sans-serif;
+                font-size: 15px !important;
+            }
+
+            .btn {
+                font-family: "ProximaNovaSoft-Regular", Calibri,"Gill Sans", "Gill Sans MT", Candara, Segoe,"Segoe UI", Arial, sans-serif;
+                font-size: 15px !important;
+            }
+            .custom-btn{
+            	margin-left: 30%;
+            }
+            .close-btn{
+            	width: 105px;
+                margin-left: 10px;
+            }
+            .campaign-label{
+            	padding-right: 53px;
+            }
+        </style>
+        <script type="text/javascript">
+        /* function testCloseTab() {
+            //First find the ID of the current tab to close it
+            sforce.console.getEnclosingTabId(closeSubtab);
+        }
+        var closeSubtab = function closeSubtab(result) {
+            //Now that we have the tab ID, we can close it
+            var tabId = result.id;
+            sforce.console.closeTab(tabId);
+        };*/
+        </script>
+    </head>
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}"
+                       vendor_css="bootstrap/css/bootstrap-toggle.min.css,bootstrap/js/bootstrap-toggle.min.js" vendor_js="jquery/moment.min.js"
+                       application_js="error-manager.js,salesforce.js,addMembersToCampaign.js,common-controls.js,angucomplete.js,salesforce.js"
+                       application_css="ng-tags-input.bootstrap.min.css,ng-tags-input.min.css,applicationCSS.css,angucomplete.css" />
+    <!-- Begin Default Content REMOVE THIS -->
+    <div id="spinnerContainer"></div>
+    <div ng-app="addMembersApp" ng-controller="addMembersController">
+        <div class="container">
+            <div class="panel panel-primary" style="margin: auto; width: 90%; margin-top: 5%;">
+                <div class="panel-heading">Add Members To Campaign</div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="email">Campaign Types :</label>
+                            <div class="col-sm-8">
+                                <select class="form-control selectContainer" onclick="$('#campaignType').focus();" ng-click="typeFlag=true;"></select>
+                                <input id="campaignType" placeholder="Select Campaign Type" class="form-control autoinput typeinput" ng-model="selectedCampaignType" ng-click="typeFlag=true;campnFlag=false;" ng-keydown="navigate($event)" ng-focus="typeFlag=true;campnFlag=false;" />
+                                <ul ng-show="typeFlag" class="autoselect">
+                                    <li ng-repeat="item in lstCampaignTypes | filter : selectedCampaignType" ng-click="selectCampaignType(item)" class="typeinput">{{item}}</li>
+                                    <li ng-if="(lstCampaignTypes | filter : selectedCampaignType).length==0">No records found.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3 campaign-label" for="pwd">Campaign :</label>
+                             <div class="col-sm-8">
+                                <select ng-readonly="lstCampaign.length==0" class="form-control selectContainer" onclick="$('#campaign').focus();" ng-click="campnFlag=true;"></select>
+                                <input ng-readonly="lstCampaign.length==0" id="campaign" placeholder="Select Campaign" class="form-control autoinput campninput" ng-model="selectedCampaignName" ng-click="campnFlag=(lstCampaign.length>0);typeFlag=false;" ng-keydown="navigate($event,selectedCampaignName)" ng-focus="campnFlag=(lstCampaign.length>0);typeFlag=false;" ng-model-options="{ debounce: 1000 }" />
+                                <ul ng-show="campnFlag" class="autoselect">
+                                    <li ng-repeat="item in filteredCampaign" ng-click="selectCampaign(item)" class="campninput" id="{{item.id}}">{{item.Name}}</li>
+                                    <li ng-if="filteredCampaign.length==0">No records found.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="pwd"></label>
+                            <div class="col-sm-9 custom-btn">
+                                <button type="button" class="btn btn-primary" ng-click="addMembersToCampaign()">Add Members</button>
+                                <button type="button" class="btn btn-primary close-btn" ng-click="testCloseTab();">Close</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:page>

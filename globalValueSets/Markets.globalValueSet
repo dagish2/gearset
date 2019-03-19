@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>India</fullName>
+        <default>false</default>
+        <label>India</label>
+    </customValue>
+    <customValue>
+        <fullName>Hong Kong</fullName>
+        <default>false</default>
+        <label>Hong Kong</label>
+    </customValue>
+    <description>This should be reused everywhere where user can select one or more Markets e.g. Lead, Opportunity, Task</description>
+    <masterLabel>Markets</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

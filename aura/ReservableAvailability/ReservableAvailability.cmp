@@ -1,0 +1,94 @@
+<aura:component >
+    <aura:attribute name="icon" type="String"/>
+    <aura:attribute name="reservableApiData" type="Object"/>
+    <aura:attribute name="view" type="Object"/>
+    <aura:attribute name="saveAsViewName" type="String"/>
+    <aura:attribute name="saveAsOnlyForMe" type="String"/>
+    <aura:attribute name="lstViews" type="Object"/>
+    <aura:attribute name="mapViews" type="Object"/>
+    <aura:attribute name="currentViewId" type="String"/>
+    <aura:attribute name="lstUnits" type="Object"/>
+    <aura:attribute name="lstCities" type="Object"/>
+    <aura:attribute name="mapBuildings" type="Object"/>
+    <aura:attribute name="allBuildings" type="Object"/>
+    <aura:attribute name="lstBuildings" type="Object"/>
+    <aura:attribute name="reservables" type="List" default="[]"/>
+    <aura:attribute name="reservablesColumns" type="Object"/>
+    <aura:attribute name="currentPage" type="Integer" default="0"/>
+    <aura:attribute name="pageSize" type="Integer" default="5"/>
+    <aura:attribute name="totalRecords" type="Integer" default="0"/>
+    <aura:attribute name="totalPages" type="Integer"/>
+    <aura:attribute name="selectedReservables" type="List"/>
+    <aura:attribute name="availableFromPastBound" type="Object"/>
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.view.City__c}" action="{!c.cityChanged}"/>
+    <aura:handler name="change" value="{!v.currentViewId}" action="{!c.viewChanged}"/>
+    <aura:handler name="change" value="{!v.currentPage}" action="{!c.getReservablesPagination}"/>
+    <aura:handler name="change" value="{!v.pageSize}" action="{!c.getReservablesPagination}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+	<c:EnziHeader sObjectName="Reservable" pageName="Availability" iconName="{!v.icon}"></c:EnziHeader>
+    <div class="slds-grid slds-wrap slds-p-vertical--small">
+        <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+            <div class="slds-size--1-of-1 slds-p-horizontal--small">
+                <c:EnziField type="picklist" name="presetViews" label="Preset Views" options="{!v.lstViews}" labelField="Name" valueField="Id" value="{!v.currentViewId}" errors="{!v.errors}"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-2 slds-p-horizontal--small">
+                <c:EnziField sObjectName="Reservable_View__c" fieldName="Available_From__c" required="true" value="{!v.view.Available_From__c}" upperBound="{!v.availableFromPastBound}" errors="{!v.errors}"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-2 slds-p-horizontal--small">
+                <c:EnziField type="picklist" name="city" label="City" options="{!v.lstCities}" value="{!v.view.City__c}" required="true" errors="{!v.errors}"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-4 slds-p-horizontal--small">
+                <c:EnziField sObjectName="Reservable_View__c" fieldName="Minimum_Capacity__c" value="{!v.view.Minimum_Capacity__c}" min="1" max="{!v.view.Maximum_Capacity__c}" errors="{!v.errors}"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-4 slds-p-horizontal--small">
+                <c:EnziField sObjectName="Reservable_View__c" fieldName="Maximum_Capacity__c" value="{!v.view.Maximum_Capacity__c}" min="{!v.view.Minimum_Capacity__c?v.view.Minimum_Capacity__c:1}" errors="{!v.errors}"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-4 slds-p-horizontal--small">
+                <c:EnziField sObjectName="Reservable_View__c" fieldName="Minimum_Price_Range__c" value="{!v.view.Minimum_Price_Range__c}" min="1" max="{!v.view.Maximum_Price_Range__c}" errors="{!v.errors}" allowDecimal="true"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-4 slds-p-horizontal--small">
+                <c:EnziField sObjectName="Reservable_View__c" fieldName="Maximum_Price_Range__c" value="{!v.view.Maximum_Price_Range__c}" min="{!v.view.Minimum_Price_Range__c?v.view.Minimum_Price_Range__c:1}" errors="{!v.errors}" allowDecimal="true"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-2 slds-p-horizontal--small">
+                <c:EnziField type="multipicklist" name="unitType" label="Unit Type" value="{!v.view.Unit_Type__c}" options="{!v.lstUnits}" labelField="label" valueField="value" errors="{!v.errors}"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-2 slds-p-horizontal--small">
+                <c:EnziField sObjectName="Reservable_View__c" fieldName="Include_Pending_Contract__c" value="{!v.view.Include_Pending_Contract__c}" errors="{!v.errors}"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-2 slds-p-horizontal--small">
+                <c:EnziField sObjectName="Reservable_View__c" fieldName="Show_Records__c" value="{!v.view.Show_Records__c}" errors="{!v.errors}"></c:EnziField>
+            </div>
+            <div class="slds-size--1-of-1 slds-p-horizontal--small">
+                <c:EnziField type="multipicklist" name="building" label="Building" value="{!v.view.Buildings__c}" options="{!v.lstBuildings}" labelField="Name" valueField="Name" errors="{!v.errors}"></c:EnziField>
+            </div>
+        </c:EnziFormValidator>
+        <div class="slds-size--1-of-1 slds-p-horizontal--small slds-align--absolute-center" style="background-color: aliceblue;padding: 10px;">
+            <c:EnziButton id="btnSaveAsPresetView" label="Save as Preset View" type="brand" click="{!c.saveAs}" disabled="{!(!v.valid)}"></c:EnziButton>
+            <c:EnziButton id="btnSave" label="Save" type="brand" disabled="{!(v.currentViewId==undefined || v.currentViewId=='')?true:(!v.valid)}" click="{!c.save}"></c:EnziButton>
+            <button id="btnSubmit" class="slds-button slds-button--brand" onclick="{!c.getReservables}" disabled="{!(!v.valid)?'disabled':''}">
+                Submit
+            </button>
+        </div>
+        <div class="slds-size--1-of-1 slds-p-horizontal--small">
+            <c:EnziTable isStatic="true" describedFields="{!v.reservablesColumns}" records="{!v.reservables}" caption="Available Reservables" pageSize="{!v.pageSize}" currentPage="{!v.currentPage}" totalRecords="{!v.totalRecords}" selectedRecords="{!v.selectedReservables}" totalPages="{!v.totalPages}"></c:EnziTable>
+        </div>
+        <div class="slds-size--1-of-1 slds-p-horizontal--small slds-align--absolute-center" style="background-color: aliceblue;padding: 10px;">
+            <c:EnziButton label="Refresh Buildings" type="brand" click="{!c.updateCache}"></c:EnziButton>
+            <c:EnziButton id="sendProposal" label="Send Proposal" type="brand" click="{!c.exportReservables}" disabled="{!(!v.selectedReservables.length>0)}"></c:EnziButton>
+            <c:EnziButton id="btnAvailabilityClose" label="Close" type="brand" click="{!c.cancel}"></c:EnziButton>
+        </div>
+    </div>
+    <c:EnziModal aura:id="saveAsModal" header="Save New View" show="false">
+    	<c:EnziModalContainer >
+        	<c:EnziField type="string" name="viewName" label="View Name" value="{!v.saveAsViewName}" required="true"></c:EnziField>
+            <c:EnziField sObjectName="Reservable_View__c" fieldName="Only_for_me__c" value="{!v.saveAsOnlyForMe}"></c:EnziField>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+        	<c:EnziButton id="save" label="Save" type="brand" click="{!c.saveAsView}" disabled="{!(!v.saveAsViewName)}"></c:EnziButton>
+            <c:EnziButton label="Close" type="brand" click="{!c.closeModal}"></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

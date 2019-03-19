@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User Announcements for Account Hierarchy and Community UX</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes AHv2</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Salesforce Updates on August 6, 2018 for Sales and Community</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+We will be releasing several updates to Salesforce on Monday, August 6th, 2018.
+
+Community User Experience
+
+Community Transition to Salesforce
+
+The process for tour booking, tour management and paperwork sending (excluding transfers) will be transitioning for Community to Salesforce from Spacestation. Training materials and a recorded webinar are available on Connect.
+
+Connect Page: https://connect.we.co/display/WWST/Salesforce+for+Community
+
+
+New Sales Features
+
+Account Hierarchy Restructuring
+
+With our business transitioning to an Account based selling model, account hierarchy enables Sales teams to better manage and report on organizational relationships. It also allows us to manage companies based on how they’re structured or how WeWork is selling to them. You can find training resources including a recorded webinar on Connect.
+
+Connect Page: https://connect.we.co/display/WWST/Account+Hierarchy
+
+
+New Enterprise Organization Creation Request
+
+You will no longer be able to create Organization accounts. If the organization that you are attempting to associate the Opportunity with cannot be found via the search on the Create Opportunity page, you can request the creation of a new account by clicking &apos;Request New Organization&apos; button in the search window.
+
+On the next screen, you will once again see the list of organizations matching your search criteria. You can either select an existing organization or request a new one.
+
+To request a new organization, click on the Request New Organization tab and fill in the required fields (indicated by the red asterisk) along with optional relevant notes.
+
+Upon clicking &apos;Request&apos;, Enterprise Growth Ops will be notified of your request and will notify you on next steps. If the organization is created, you will be able to associate the new Opportunity with your desired organization.
+
+
+Associating Enterprise Opportunities with Sales Accounts
+
+You will now be able to associate an Opportunity with an existing Sales Account corresponding to the Organization. To do this:
+
+Select the Organization that the Opportunity pertains to
+
+Enter the name of the Sales Account that the Opportunity is associated with OR select &apos;Show Sales Accounts&apos;.
+
+If you enter the name, a list of Sales Account matching the string inputted will display. If you select &apos;Show Sales Accounts&apos;, the following screen will appear.
+
+If you would like a new Sales Account, please contact the owner of the Organization or contact Enterprise Growth Ops.
+
+Other Enhancements for Enterprise
+
+Bug Fixes to the Organization Pipeline Report
+
+Notifications will now be sent to the Real Estate Advisory team when new RE Advisory cases are created
+
+Journey Importer Improvements for Sales and Marketing Users
+
+We have increased the number of records that you can upload at once using the Lead/Journey Importer. You may now upload a CSV file up to 25 MB in size, which will usually accommodate lists of 4,000 records or smaller.
+
+To access the Journey Importer, navigate to the Global Action icon and click &apos;Import Journeys&apos;.
+
+
+If you have any questions or concerns or Salesforce Support (salesforcesupport@wework.com) or your Growth Ops team.
+
+Best,
+
+Salesforce Support</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

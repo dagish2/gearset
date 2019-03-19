@@ -1,0 +1,8 @@
+<aura:component controller = "BrokerInvolvedController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" >
+    <aura:attribute name="recordId" type="Id" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+     <div aura:id="div1">
+        {!v.body}
+    </div>
+</aura:component>

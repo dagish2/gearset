@@ -1,0 +1,41 @@
+<apex:page controller="KickboxVerificationController" standardStylesheets="false" sidebar="false" showHeader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}"
+                       vendor_css=""
+                       vendor_js="csv-parser/angular-PapaParse.js,csv-parser/papaparse.js"
+                       application_js="error-manager.js,salesforce.js,common-controls.js,kickboxVerification.js,autocomplete.js"
+                       application_css="applicationCSS.css,controlsFactory.css,sfmcReplies.css,kickboxVerification.css,autocomplete.css" /> 
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS092,'assets/styles/salesforce-lightning-design-system.css')}" />    
+    <apex:includescript value="/support/console/42.0/integration.js" />  
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>KickBox Verification</title>
+        <script type="text/javascript">
+        $(document).on('click', '.browse', function(){
+          var file = $(this).parent().parent().parent().find('.file');
+          file.trigger('click');
+        });
+        $(document).on('change', '.file', function(){
+          $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+        });
+        sforce.console.setTabTitle('KickBox Verification');
+        __sfdcSessionId = '{!$Api.Session_Id}';
+        __sfdcUserId = '{!$User.Id}';
+    </script>
+        <style>
+            .file {
+              visibility: hidden;
+              position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="spinnerContainer"></div>
+        <div ng-app="kickboxVerificationApp" ng-controller="kickboxVerificationController">
+            <div class="container-fluid">
+                 <kickbox-verification></kickbox-verification>
+            </div>            
+        </div>
+    </body> 
+</apex:page>

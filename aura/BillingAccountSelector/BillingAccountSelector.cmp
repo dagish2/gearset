@@ -1,0 +1,184 @@
+<aura:component Controller="BillingAccountController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="ultimateParentOrgId" type="String"/>
+    <aura:attribute name="parentRecordTypeId" type="String" />
+    <aura:attribute name="parentId" type="String" />
+    <aura:attribute name="AccountOwnerId" type="String" />
+    <aura:attribute name="showAddAccountModal" type="Boolean" default="false" />
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="editData" type="Map" default="{}"/>
+    <aura:attribute name="newEntity" type="Map" default="{}"/>
+    <aura:attribute name="selectedRecord" type="String" />
+    <aura:attribute name="metaFields" type="List" default="[]" />
+    <aura:attribute name="searchData" type="List" default="[]"/>
+    <aura:attribute name="records" type="List" default="[]" />
+    <aura:attribute name="ParentOrgData" type="map" default="{}"/>
+    <aura:attribute name="billingAccountUUID" type="String" />
+    <aura:attribute name="transferpaperwork" type="String" default="false" />
+    <aura:attribute name="showCreatePrimaryMemberModal" type = "boolean" default="false"/>
+    <aura:attribute name="contactId" type="String"/>
+    <aura:attribute name="newPrimaryContact" type="Contact" default="{'sobjectType':'Contact','Name':null,'Email':null,'LeadSource':null}"/>
+    <aura:attribute name="selectedAccount" type="Object"/>
+    <aura:attribute name="billingAccountName" type="String" default="Billing Account"/>
+    <aura:attribute name="errors1" type="Object"/>
+    <aura:attribute name="keyword" type="String" default=""/>
+    <aura:attribute name="valid1" type="Boolean"/>
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+	<aura:handler name="change" value="{! v.ultimateParentOrg }" action="{! c.changeName }"/>
+
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+        .slds-modal__container {
+            margin: 0 auto;
+            width: 90%;
+            max-width: 100rem;
+            min-width: 20rem;
+        }
+
+        #OppMainContact{
+            text-decoration:none;
+        }
+
+        .slds-modal__container .leftIcon{
+            top: 9% !Important;
+        }
+    </style>
+    <div class="slds-page-header" style="border-bottom: 1px solid #d9dde7;background-color:#f5f5f4b5">
+        <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate">
+                <div class="slds-media slds-no-space slds-grow">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="custom:custom68"/>
+                    </div>
+                    <div class="slds-media__body">
+                        <h1 style="color:#16325b;font-size: 1.2em;" class="slds-m-right--small" title="Building Name">Billing Account</h1>
+                        <p class="slds-text-title--caps slds-line-height--reset" >Organization : {! v.ParentOrgData.Parent_Org_Name__c }&nbsp;{! v.ParentOrgData.Number_of_Full_Time_Employees__c }</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal">
+        <c:EnziFormValidator errors="{! v.errors }" valid="{! v.valid }">
+            <c:EnziModal aura:id="accountSelectorModal" header="Add Billing Account" show="{! v.showAddAccountModal }" isLarge="false">
+                <c:EnziModalContainer >
+                    <div class="slds-p-horizontal_small slds-size_1-of-1 fieldContainer" style="padding-left: 0px; padding-right: 0px;">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <div class="slds-combobox_container">
+                                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true" aria-haspopup="listbox" role="combobox" id="searchList">
+                                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left" role="none" style="padding-top: -1px;">
+                                            <label for="searchInput" class="slds-form-element__label" style="padding-left: 9px;padding-top: 3px;">Primary Member Email</label>
+                                            <input type="email" class="slds-input slds-combobox__input" placeholder="Search Contact Email" style="padding:0px 9px" onkeyup="{! c.searchContacts }" id="searchInput" value="{! v.newEntity.Email }"/>
+                                            <span><lightning:icon iconName="utility:copy" size="xx-small"/><a id="OppMainContact" value="OppMainContact" onclick="{! c.fetchLinkData }">Copy Opportunity Main Contact</a>&nbsp;&nbsp;</span>
+                                        </div>
+                                        <div id="listbox-unique-id" role="listbox">
+                                                <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid" role="presentation" style="{!'display:'+(v.keyword.length>2?'block':'none')}">
+                                                    <aura:iteration items="{! v.searchData }" var="data">
+                                                        <li role="presentation" class="slds-listbox__item" onclick="{! c.selectEntity }" id="{! data.Id }">
+                                                            <span id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                                <span class="slds-media__body">
+                                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{! data.Name }</span>
+                                                                    <span class="slds-listbox__option-meta slds-listbox__option-meta_entity"><aura:if isTrue="{! data.Email }">✉{! data.Email }</aura:if> <aura:if isTrue="{! data.Phone }">✆{! data.Phone }</aura:if></span>
+                                                                </span>
+                                                            </span>
+                                                        </li>
+                                                    </aura:iteration>
+                                                </ul>
+                                            </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-1 fieldContainer">
+                        <c:EnziField sObjectName="Billing_Account__c" fieldName="Name" name="ParentAccountName" label="Parent Account Name" value="{! v.newEntity.ParentAccountName }" disabled="true" errors="{! v.errors }" ></c:EnziField>
+                    </div>
+                    <div class="slds-size_1-of-1 fieldContainer">
+                        <c:EnziField sObjectName="Billing_Account__c" fieldName="Name" name="AccountName" label="Billing Account Name" value="{! v.newEntity.AccountName }" required="true" errors="{! v.errors }" ></c:EnziField>
+                    </div>
+                    <div class="slds-size_1-of-1 fieldContainer">
+                        <c:EnziField sObjectName="Contact" fieldName="Name" label="Primary Member Name"  value="{! v.newEntity.ContactName }" disabled="{! v.editData.ContactName == true }" required="true" errors="{! v.errors }" ></c:EnziField>
+                    </div>
+                    <div class="slds-size_1-of-1 fieldContainer">
+                        <c:EnziField sObjectName="Contact" fieldName="Phone" label="Phone" value="{! v.newEntity.Phone }" disabled="{! v.editData.Phone == true }"  errors="{! v.errors }" ></c:EnziField>
+                    </div>
+
+                </c:EnziModalContainer>
+
+                <c:EnziModalFooter >
+                    <c:EnziButton  type="neutral" label="Cancel" click="{! c.showConfirm }"></c:EnziButton>
+                    <c:EnziButton  type="brand" label="Save" disabled="{! not(v.valid) }" click="{! c.createNewAndSend }"></c:EnziButton>
+                </c:EnziModalFooter>
+            </c:EnziModal>
+        </c:EnziFormValidator>
+        <c:EnziModal aura:id="createNewContact" header="Add Primary Member" show="{! v.showCreatePrimaryMemberModal }" isLarge="false" >
+            <c:EnziModalContainer>
+                <div class="slds-grid slds-wrap" style="border: 1px solid #f4f6f9;z-index: -9999;padding: 10px;">
+                    <c:EnziFormValidator errors="{! v.errors1 }" valid="{! v.valid1 }">
+                        <div class="slds-grid slds-wrap" style="width:100%;">
+                            <div class="{!'slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 '}">
+                                <c:EnziField type="reference" name="Contact" label="Contact" reference="Contact" value="{! v.contactId }" disabled="{! or(! empty(v.newPrimaryContact.LeadSource),or(! empty(v.newPrimaryContact.FirstName),or(! empty(v.newPrimaryContact.LastName),! empty(v.newPrimaryContact.Email)))) }" defaultDisabled="true" errors="{! v.errors1 }" required="{! not(or(! empty(v.newPrimaryContact.LeadSource),or(! empty(v.newPrimaryContact.FirstName),or(! empty(v.newPrimaryContact.LastName),! empty(v.newPrimaryContact.Email))))) }" labelField="Name" valueField="Id" change="{! c.checkPrimaryMember }"></c:EnziField>
+                            </div>
+                        </div>
+                        <div class="{!'slds-align_absolute-center '+(empty(v.contactId) ? 'slds-show':'slds-hide')}" style="height: 10px;">OR</div>
+                        <div class="slds-grid slds-wrap" style="width:100%;">
+                            <div class="{!'slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 '+(empty(v.contactId) ? 'slds-show':'slds-hide')}">
+                                <c:EnziField name="FirstName" sObjectName="Contact" fieldName="FirstName" value="{! v.newPrimaryContact.FirstName }" disabled="{! !empty(v.contactId) }" required ="false" errors="{! v.errors1 }"/>
+                            </div>
+                            <div class="{!'slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 '+(empty(v.contactId) ? 'slds-show':'slds-hide')}">
+                                <c:EnziField name="LastName" sObjectName="Contact" fieldName="LastName" value="{! v.newPrimaryContact.LastName }" disabled="{! !empty(v.contactId) }" required ="{! empty(v.contactId) }"  errors="{! v.errors1 }"/>
+                            </div>
+                            <div class="{!'slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 '+(empty(v.contactId) ? 'slds-show':'slds-hide')}">
+                                <c:EnziField name="Email" sObjectName="Contact" fieldName="Email" value="{! v.newPrimaryContact.Email }" disabled="{! !empty(v.contactId) }" required ="{! empty(v.contactId) }" errors="{! v.errors1 }"/>
+                            </div>
+                            <div class="{!'slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 '+(empty(v.contactId) ? 'slds-show':'slds-hide')}">
+                                <c:EnziField name="Lead Source" sObjectName="Contact" fieldName="LeadSource" value="{! v.newPrimaryContact.LeadSource }" disabled="{! !empty(v.contactId) }" required="false" errors="{! v.errors1 }"/>
+                            </div>
+                        </div>
+                    </c:EnziFormValidator>
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <c:EnziButton label="Cancel" type="neutral" click="{! c.closePrimaryMemberModal }" ></c:EnziButton>
+                <c:EnziButton label="Save"  type="brand" click="{! c.createPrimaryContact }" disabled="{! not(v.valid1) }" ></c:EnziButton>
+            </c:EnziModalFooter>
+        </c:EnziModal>
+    </div>
+    <article class="slds-card">
+        <div class="slds-scoped-notification slds-media " role="status">
+            <div  style="padding-right: 10px;padding-left: 10px;padding-top: 4px;">
+                <span class="slds-icon_container slds-icon-utility-info" title="Note">
+                    <lightning:icon iconName="utility:info" size="small"/>
+                    <span class="slds-assistive-text">Note</span>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <ul class="slds-list--dotted">
+                    <li>The name of the billing account should reflect the legal name of the company, as listed on their membership agreement.</li>
+                    <li>The primary member on billing account should match the primary member on the membership agreement.</li>
+                    <aura:if isTrue="{! (v.transferpaperwork)=='false' }">
+                        <li>If a billing account cannot be found below that satisfies these conditions, select 'Add New'.</li>
+                    </aura:if>
+                </ul>
+            </div>
+        </div>
+    </article>
+    <div class="slds-m-around_small" style="margin-bottom:5%;">
+        <div class="slds-scrollable">
+            <c:EnziDataTable describedFields="{! v.metaFields }" pageSizes="[5,20,50,100]" setBorder="true" records="{! v.records }" showMultiselect="false" searchFields = "Name,Primary_Member__r.Name,Primary_Member__r.Email,UUID__c" showPagination="true"></c:EnziDataTable>
+        </div>
+    </div>
+    <div class="slds-modal__footer" style="text-align:right;box-shadow:none;">
+        <aura:if isTrue="{! v.transferpaperwork }">
+            <c:EnziButton label="Cancel" type="neutral" click="{! c.closeModal }"></c:EnziButton>
+            <c:EnziButton leftIcon="utility:file" type="brand" label="Transfer Paperwork" click="{! c.sendSelected }" disabled="{! or(v.selectedRecord==undefined,v.selectedRecord=='') }"></c:EnziButton>
+            <aura:set attribute="else">
+                <c:EnziButton label="Cancel" type="neutral" click="{! c.closeModal }"></c:EnziButton>
+                <c:EnziButton label="Add New" type="brand" click="{! c.openAddAccountModule }" disabled="{! or(v.transferpaperwork=='true',or(v.ParentOrgData.Account_Type__c=='Bill',v.ParentOrgData.Account_Type__c==undefined)) }" leftIcon="utility:add"></c:EnziButton>
+                <c:EnziButton leftIcon="utility:file" type="brand" label="Send Paperwork" click="{! c.sendSelected }" disabled="{! or(v.selectedRecord==undefined,v.selectedRecord=='') }"></c:EnziButton> 
+            </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

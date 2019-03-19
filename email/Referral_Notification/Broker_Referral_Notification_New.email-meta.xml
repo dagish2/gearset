@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email notification for Broker referral leads</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>Broker Referral Notification (New)</name>
+    <style>freeForm</style>
+    <subject>Updated Template triggered off Journey creation to Brokers</subject>
+    <textOnly>The following Journey has been assigned to {!Journey__c.OwnerFullName}
+
+Name: {!BLANKVALUE(Journey__c.Primary_Contact__c, Journey__c.Primary_Lead__c)}
+Company: {!Journey__c.Company_Name__c}
+
+
+
+Click on the link to access the Journey directly:
+{!Journey__c.Link}
+
+
+
+Please read carefully and follow directions accordingly:
+
+1. Select the Journey link
+
+2 Qualify the potential new member submission - reach out via phone or email
+a. If Unqualified, please update the Journey Status field to &apos;Unqualified&apos; and enter an Unqualified Reason
+b. If Unresponsive, please update the Journey Status field to ‘Unresponsive’
+
+3. If Qualified:
+a. Please select &quot;Add Opportunity&quot;
+b. If the potential new member would like to take space at a future date - please select ‘Follow Up’. This feature will allow the Journey to return to your queue on that specific date.
+
+4. For Business Development Managers (BDMs) only: If you are a Business Development Manager passing the lead to a Broker Relations Manager or Account Executive, please add yourself on the opportunity team under the role of “Growth Partnerships Business Development&quot;.
+
+a. How to add yourself to the opportunity team - step by step
+i. Click the PEOPLE tab
+ii. Select &apos;Add Opportunity Team Members&apos;
+iii. Add your name under User and ensure that Team Role = ‘Opp: BDM’
+
+5. Once added, please ensure the Opportunity Owner is the designated sales team member.
+
+
+Best,
+
+WeWork Team</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

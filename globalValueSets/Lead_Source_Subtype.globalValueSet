@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Acquisitions</fullName>
+        <default>false</default>
+        <label>Acquisitions</label>
+    </customValue>
+    <customValue>
+        <fullName>Affiliate Referral</fullName>
+        <default>false</default>
+        <label>Affiliate Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Audience</fullName>
+        <default>false</default>
+        <label>Audience</label>
+    </customValue>
+    <customValue>
+        <fullName>Book a tour</fullName>
+        <default>false</default>
+        <label>Book a tour</label>
+    </customValue>
+    <customValue>
+        <fullName>Book A Tour Availability</fullName>
+        <default>false</default>
+        <label>Book A Tour Availability</label>
+    </customValue>
+    <customValue>
+        <fullName>Book Event Space</fullName>
+        <default>false</default>
+        <label>Book Event Space</label>
+    </customValue>
+    <customValue>
+        <fullName>Broker Referral</fullName>
+        <default>false</default>
+        <label>Broker Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Call to Sales</fullName>
+        <default>false</default>
+        <label>Call to Sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Chat</fullName>
+        <default>false</default>
+        <label>Chat</label>
+    </customValue>
+    <customValue>
+        <fullName>Community Event</fullName>
+        <default>false</default>
+        <label>Community Event</label>
+    </customValue>
+    <customValue>
+        <fullName>Conference/Tradeshow</fullName>
+        <default>false</default>
+        <label>Conference/Tradeshow</label>
+    </customValue>
+    <customValue>
+        <fullName>CoStar</fullName>
+        <default>false</default>
+        <label>CoStar</label>
+    </customValue>
+    <customValue>
+        <fullName>Creator Awards</fullName>
+        <default>false</default>
+        <label>Creator Awards</label>
+    </customValue>
+    <customValue>
+        <fullName>Email to Sales</fullName>
+        <default>false</default>
+        <label>Email to Sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Employee Referral</fullName>
+        <default>false</default>
+        <label>Employee Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Existing Relationship</fullName>
+        <default>false</default>
+        <label>Existing Relationship</label>
+    </customValue>
+    <customValue>
+        <fullName>Field Activation</fullName>
+        <default>false</default>
+        <label>Field Activation</label>
+    </customValue>
+    <customValue>
+        <fullName>Global Contact CTA</fullName>
+        <default>false</default>
+        <label>Global Contact CTA</label>
+    </customValue>
+    <customValue>
+        <fullName>Happy Hour</fullName>
+        <default>false</default>
+        <label>Happy Hour</label>
+    </customValue>
+    <customValue>
+        <fullName>Hospitality</fullName>
+        <default>false</default>
+        <label>Hospitality</label>
+    </customValue>
+    <customValue>
+        <fullName>Humanize</fullName>
+        <default>false</default>
+        <label>Humanize</label>
+    </customValue>
+    <customValue>
+        <fullName>Influencer Event</fullName>
+        <default>false</default>
+        <label>Influencer Event</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal Event</fullName>
+        <default>false</default>
+        <label>Internal Event</label>
+    </customValue>
+    <customValue>
+        <fullName>Landlords Portal</fullName>
+        <default>false</default>
+        <label>Landlords Portal</label>
+    </customValue>
+    <customValue>
+        <fullName>List Purchase</fullName>
+        <default>false</default>
+        <label>List Purchase</label>
+    </customValue>
+    <customValue>
+        <fullName>Lunch &amp; Learn</fullName>
+        <default>false</default>
+        <label>Lunch &amp; Learn</label>
+    </customValue>
+    <customValue>
+        <fullName>Marketing Landing Page</fullName>
+        <default>false</default>
+        <label>Marketing Landing Page</label>
+    </customValue>
+    <customValue>
+        <fullName>Meetup</fullName>
+        <default>false</default>
+        <label>Meetup</label>
+    </customValue>
+    <customValue>
+        <fullName>Member Referral</fullName>
+        <default>false</default>
+        <label>Member Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Mid Market Landing Page Form</fullName>
+        <default>false</default>
+        <label>Mid Market Landing Page Form</label>
+    </customValue>
+    <customValue>
+        <fullName>Networking</fullName>
+        <default>false</default>
+        <label>Networking</label>
+    </customValue>
+    <customValue>
+        <fullName>New Building Launch</fullName>
+        <default>false</default>
+        <label>New Building Launch</label>
+    </customValue>
+    <customValue>
+        <fullName>New City Launch</fullName>
+        <default>false</default>
+        <label>New City Launch</label>
+    </customValue>
+    <customValue>
+        <fullName>New Member Event</fullName>
+        <default>false</default>
+        <label>New Member Event</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Referral</fullName>
+        <default>false</default>
+        <label>Other Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Partner Referral</fullName>
+        <default>false</default>
+        <label>Partner Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Product</fullName>
+        <default>false</default>
+        <label>Product</label>
+    </customValue>
+    <customValue>
+        <fullName>Prospecting List</fullName>
+        <default>false</default>
+        <label>Prospecting List</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Navigator</fullName>
+        <default>false</default>
+        <label>Sales Navigator</label>
+    </customValue>
+    <customValue>
+        <fullName>SalesScout</fullName>
+        <default>false</default>
+        <label>SalesScout</label>
+    </customValue>
+    <customValue>
+        <fullName>SocialSignIn</fullName>
+        <default>false</default>
+        <label>SocialSignIn</label>
+    </customValue>
+    <customValue>
+        <fullName>Space Services</fullName>
+        <default>false</default>
+        <label>Space Services</label>
+    </customValue>
+    <customValue>
+        <fullName>Strategic HQ Event</fullName>
+        <default>false</default>
+        <label>Strategic HQ Event</label>
+    </customValue>
+    <customValue>
+        <fullName>Thought Leadership</fullName>
+        <default>false</default>
+        <label>Thought Leadership</label>
+    </customValue>
+    <customValue>
+        <fullName>Unomy</fullName>
+        <default>false</default>
+        <label>Unomy</label>
+    </customValue>
+    <customValue>
+        <fullName>Waiting List Form</fullName>
+        <default>false</default>
+        <label>Waiting List Form</label>
+    </customValue>
+    <customValue>
+        <fullName>Walk-ins</fullName>
+        <default>false</default>
+        <label>Walk-ins</label>
+    </customValue>
+    <customValue>
+        <fullName>WeGrow</fullName>
+        <default>false</default>
+        <label>WeGrow</label>
+    </customValue>
+    <customValue>
+        <fullName>WeLive</fullName>
+        <default>false</default>
+        <label>WeLive</label>
+    </customValue>
+    <customValue>
+        <fullName>Wellness</fullName>
+        <default>false</default>
+        <label>Wellness</label>
+    </customValue>
+    <customValue>
+        <fullName>WeWork Labs</fullName>
+        <default>false</default>
+        <label>WeWork Labs</label>
+    </customValue>
+    <customValue>
+        <fullName>Workshop</fullName>
+        <default>false</default>
+        <label>Workshop</label>
+    </customValue>
+    <customValue>
+        <fullName>Promo</fullName>
+        <default>false</default>
+        <label>Promo</label>
+    </customValue>
+    <description>Global pick list value of Lead Source Subtype  for Lead, Account, Contact and Journey.</description>
+    <masterLabel>Lead Source Subtype</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

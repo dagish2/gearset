@@ -1,0 +1,195 @@
+<aura:component controller="RetroactiveReferralController">
+    <aura:attribute name="recordId" type="string" /> <!-- default="0061D000001vgz3" -->
+    <aura:attribute name="referralType" type="List"/>
+    <aura:attribute name="referralTypeVal" type="String"/>
+    <aura:attribute name="ContactRecordType" type="String"/>
+    <aura:attribute name="AccountRecordType" type="String"/>
+    <aura:attribute name="APIUser" type="String"/>
+    <aura:attribute name="entity" type="Map" default="{}" />
+    <aura:attribute name="valid1" type="Boolean"/>
+    <aura:attribute name="valid2" type="Boolean"/> 
+    <aura:attribute name="valid3" type="Boolean"/>
+    <aura:attribute name="valid4" type="Boolean"/>
+    <aura:attribute name="referral" type="Boolean" default="false"/>
+    <aura:attribute name="confidential" type="Boolean" default="false"/>
+    <aura:attribute name="hide" type="Boolean" default="true"/>
+    <aura:attribute name="errors1" type="Object"/>
+    <aura:attribute name="errors2" type="Object"/>
+    <aura:attribute name="errors3" type="Object"/>
+    <aura:attribute name="errors4" type="Object"/>
+    <aura:attribute name="settingData" type="Object"/>
+    <aura:attribute name="referralObj" type="object"  /> 
+    <aura:attribute name="accountObj" type="Object"/>
+    <aura:attribute name="refObj" type="Object"/>
+    <aura:attribute name="contact" type="Object" />
+    <aura:attribute name="primaryContact" type="Object" />
+    <aura:attribute name="opportunityData" type="Object" />
+    <aura:attribute name="referrType" type="List"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <aura:handler name="change" value="{!v.referralTypeVal}" action="{!c.changeForm}"/>
+    
+    <c:EnziHeader sObjectName="Opportunity" pageName="{!v.opportunityData.Name}" iconName="custom:custom50"></c:EnziHeader>
+    <style>
+        .slds-scope .slds-section{ border: 1px solid #d9dbdd !important; border-radius:3px !important;}
+    </style>
+    <div class="stage-container slds-grid slds-wrap" style="margin-left: 10px;">  
+        <section class="stage slds-grid slds-grid--vertical slds-nowrap" style="padding:20px">
+            <c:EnziSection label="Referral Types" showTooltip="true" tooltipText="Types of Referral.">
+                <div class="stage-main slds-grid slds-nowrap" role="main" > 
+                    <div class="slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1" style="padding:10px;padding-left:20px">
+                        <c:EnziField name="Referral Type" type="picklist" options="{!v.referralType}" labelField="" value="{!v.referralTypeVal}" label="Referral Type" required="true" helpText="Please select the Referral Type." errors="{!v.errors1}" ></c:EnziField>      
+                    </div>
+                </div>
+                <aura:if isTrue="{!and(!v.referral,!v.confidential)}">
+                    <div class="slds-text-align--center" role="main" style="width:100%">
+                        <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{!c.referralClose}"></c:EnziButton>
+                    </div> 
+                </aura:if> 
+            </c:EnziSection>
+            <c:EnziFormValidator errors="{!v.errors1}" valid="{!v.valid1}">
+                <aura:if isTrue="{!v.referral}">
+                    <c:EnziSection label="Referring User" showTooltip="true" tooltipText="Information Related to Referrer.">
+                        <div class="slds-grid slds-wrap slds-grid--pull-padded" style="padding:10px;padding-left:20px">
+                            <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                <c:EnziField name="Referrer" type="reference" sObjectName="Contact" label="Referrer" reference="Contact" required="true" value="{!v.referralObj.Id}" helpText="Who is referring" errors="{!v.errors1}" change="{!c.getAllReferralContacts}" addNew="{!c.createContactReferral}"  getFields='{"Email":"Email"}'/>
+                            </div>
+                            <aura:if isTrue="{! !empty(v.referralObj.Email)}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField name="Email" defaultDisabled="true" disabled="true" type="email" label="Email" value="{!v.referralObj.Email}" addNew="{!c.createContactReferral}" helpText="Referrer Email" errors="{!v.errors1}"  />
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{! !empty(v.referralObj.Phone)}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField name="Phone" defaultDisabled="true" disabled="true" type="phone" label="Phone" value="{!v.referralObj.Phone}" helpText="Referrer Contact" errors="{!v.errors1}"  />
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{! !empty(v.referralObj.Type__c)}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField name="Type" defaultDisabled="true" disabled="true" type="string" label="Type" value="{!v.referralObj.Type__c}" helpText="Referrer Type" errors="{!v.errors1}"  />
+                                </div>    
+                            </aura:if>
+                            <div class="slds-text-align--center" role="main" style="width:100%">
+                                <c:EnziButton label="Save" type="brand" leftIcon="utility:save" click="{!c.referralSave}" disabled="{!(!v.valid1)}"></c:EnziButton>
+                                <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{!c.referralClose}"></c:EnziButton>
+                            </div> 
+                        </div>     
+                    </c:EnziSection>   
+                </aura:if> 
+            </c:EnziFormValidator>
+            <c:EnziFormValidator errors="{!v.errors4}" valid="{!v.valid4}">
+                <aura:if isTrue="{!v.confidential}">
+                    <c:EnziSection label="Billing Account" showTooltip="true" tooltipText="Information Related to Billing Account.">
+                        <div class="slds-grid slds-wrap slds-grid--pull-padded" style="padding:10px;padding-left:20px">
+                            <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                <c:EnziField name="Assign to Billing Account" icon="standard:account" type="reference" sObjectName="Billing_Account__c" label="Assign to Billing Account" reference="Billing_Account__c" required="true" addNew="{!c.createNewAccount}"  value="{!v.accountObj.Id}" helpText="Please select an billing account where you want to move this opportunity." errors="{!v.errors4}" change="{!c.getAccounts}"/>
+                            </div>
+                            <aura:if isTrue="{! !empty(v.accountObj.Primary_Member_Email__c)}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField name="Primary Member" type="email" label="Primary Member" value="{!v.accountObj.Primary_Member_Email__c}" defaultDisabled="true" helpText="Primary member Email for the selected billing account" disabled="true"  errors="{!v.errors4}"></c:EnziField>
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{! !empty(v.accountObj.Parent_Account__c)}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField name="Parent Account" type="reference" reference="Account" label="Parent Account" value="{!v.accountObj.Parent_Account__c}" defaultDisabled="true" disabled="true" helpText="Parent Account for the selected billing account." errors="{!v.errors4}"></c:EnziField>
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{! !empty(v.accountObj.ID_Status__c)}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField name="Status" type="string" label="Status" value="{!v.accountObj.ID_Status__c}" defaultDisabled="true" disabled="true" helpText="Status of Billing Account" errors="{!v.errors4}"></c:EnziField>
+                                </div>
+                            </aura:if>
+                        </div>
+                    </c:EnziSection>
+                    <c:EnziSection label="Referring User" showTooltip="true" tooltipText="Information Related to Referrer.">
+                        <div class="slds-grid slds-wrap slds-grid--pull-padded" style="padding:10px;padding-left:20px">
+                            <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                <c:EnziField name="Referrer" type="reference" sObjectName="Contact" label="Referrer" reference="Contact" value="{!v.refObj.Id}" required="true" addNew="{!c.createContactReferral}" helpText="Please select a Referrer"  errors="{!v.errors4}" change="{!c.getReferrals}" getFields='{"Email":"Email"}'/>
+                            </div>
+                            <aura:if isTrue="{! !empty(v.refObj.Email)}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField name="Email" defaultDisabled="true" disabled="true" type="email" label="Email" value="{!v.refObj.Email}" addNew="{!c.createContactReferral}" helpText="Referrer Email" errors="{!v.errors4}"  />
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{! !empty(v.refObj.Phone)}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField name="Phone" defaultDisabled="true" disabled="true" type="phone" label="Phone" value="{!v.refObj.Phone}" helpText="Referrer Contact" errors="{!v.errors4}"  />
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{! !empty(v.refObj.Type__c)}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField name="Type" defaultDisabled="true" disabled="true" type="string" label="Type" value="{!v.refObj.Type__c}" helpText="Referrer Type" errors="{!v.errors4}"  />
+                                </div>    
+                            </aura:if>
+                            
+                            <div class="slds-text-align--center" role="main" style="width:100%">
+                                <c:EnziButton label="Save" type="brand" leftIcon="utility:save" click="{!c.confidentialSave}" disabled="{!(!v.valid4)}"></c:EnziButton>
+                                <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{!c.confidentialClose}"></c:EnziButton>
+                            </div>  
+                        </div>
+                    </c:EnziSection>
+                </aura:if>
+            </c:EnziFormValidator>
+        </section>
+    </div> 
+    <c:EnziFormValidator errors="{!v.errors2}" valid="{!v.valid2}">
+        <c:EnziModal aura:id="NewContactModal" header="Add Referrer" show="false">            
+            <c:EnziModalContainer >
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField sObjectName="Contact" fieldName="Email" label="Primary Member Email" value="{!v.contact.Email}" required="true" errors="{!v.errors2}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="string" name="firstName" label="First Name" value="{!v.contact.FirstName}" errors="{!v.errors2}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="string" name="lastName" label="Last Name" value="{!v.contact.LastName}" required="true" errors="{!v.errors2}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="string" name="CompanyName" label="Company Name" value="{!v.contact.CompanyName}" errors="{!v.errors2}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField name="Referral Type" type="picklist" options="{!v.referrType}" labelField="" value="{!v.contact.referrType}" label="Referral Type" required="true" errors="{!v.errors2}" ></c:EnziField> 
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField name="Phone" type="phone" label="Phone" value="{!v.contact.Phone}" maxPhoneLength="15" errors="{!v.errors2}"  />
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <div class="slds-text-align--center">
+                    <c:EnziButton label="Save" type="brand" leftIcon="utility:save" click="{!c.saveContact}" disabled="{!(!v.valid2)}"></c:EnziButton>
+                    <c:EnziButton label="Cancel" type="destructive" leftIcon="utility:close" click="{!c.closeNewContactModal}"></c:EnziButton>
+                </div> 
+            </c:EnziModalFooter>            
+        </c:EnziModal>
+    </c:EnziFormValidator>
+    
+    <c:EnziFormValidator errors="{!v.errors3}" valid="{!v.valid3}">
+        <c:EnziModal aura:id="NewAccountModal" header="Add Billing Account" show="false">            
+            <c:EnziModalContainer >
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField name="Email" type="email" label="Primary Member Email" value="{!v.primaryContact.Email}" required="true" errors="{!v.errors3}" />
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="string" name="Primary Member First Name" label="First Name" value="{!v.primaryContact.FirstName}" errors="{!v.errors3}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="string" name="lastName" label="Last Name" value="{!v.primaryContact.LastName}" required="true" errors="{!v.errors3}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="string" name="Company Name" label="Billing Account Name" value="{!v.primaryContact.Name}" required="true" errors="{!v.errors3}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">      
+                    <c:EnziField name="Phone" type="phone" label="Phone" value="{!v.primaryContact.Phone}" maxPhoneLength="15" errors="{!v.errors3}"  />
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <div class="slds-text-align--center">      
+                    <c:EnziButton label="Save" type="brand" leftIcon="utility:save" click="{!c.saveAccount}" disabled="{!(!v.valid3)}"></c:EnziButton>
+                    <c:EnziButton label="Cancel" type="destructive" leftIcon="utility:close" click="{!c.closeNewAccountModal}"></c:EnziButton>
+                </div> 
+            </c:EnziModalFooter>            
+        </c:EnziModal>
+    </c:EnziFormValidator>
+</aura:component>

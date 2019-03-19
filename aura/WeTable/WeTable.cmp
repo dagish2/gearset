@@ -1,0 +1,86 @@
+<aura:component >
+    <aura:attribute name="sObjectName" type="String"/>
+    <aura:attribute name="fields" type="List"/>
+    <aura:attribute name="query" type="String"/>
+    <aura:attribute name="data" type="List"/>
+    <aura:attribute name="records" type="List"/>
+    <aura:attribute name="meta" type="List"/>
+    <aura:attribute name="relationshipMeta" type="List"/>
+    <aura:attribute name="key" type="String" default="Id"/>
+    <aura:attribute name="sortedBy" type="String"/>
+    <aura:attribute name="sortedDirection" type="String" default="asc"/>
+    <aura:attribute name="searchFields" type="List"/>
+    <aura:attribute name="searchCriteria" type="List"/>
+    <aura:attribute name="searchKeyword" type="String"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="resizeColumn" type="Boolean" default="false"/>
+    <aura:attribute name="showSelect" type="Boolean" default="false"/>
+    <aura:attribute name="showSearch" type="Boolean" default="true"/>
+    <aura:attribute name="maxRowSelection" type="Integer"/>
+    <aura:attribute name="selectedRows" type="List"/>
+    <aura:attribute name="preSelectedRows" type="List"/>
+    <aura:attribute name="checkSelectedRows" type="Boolean" default="true"/>
+    <aura:attribute name="limit" type="Integer" default="10"/>
+    <aura:attribute name="offset" type="Integer" default="10"/>
+    <aura:attribute name="height" type="Integer" default="300"/>
+    <aura:attribute name="isDynamicLoading" type="Boolean"/>
+    <aura:attribute name="isLimitExceed" type="Boolean" default="false"/>
+    <aura:attribute name="enableInfiniteLoading" type="Boolean" default="false"/>
+    <aura:attribute name="showRowNumberColumn" type="Boolean"/>
+    <aura:attribute name="rowActions" type="List"/>
+    <aura:attribute name="mapRecords" type="Map"/>
+    <aura:attribute name="highlightRowsOn" type="Map"/>
+    <aura:attribute name="mapOfFieldName" type="Map" default="{}"/>
+    <aura:attribute name="toolTip" type="String" default=""/>    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.searchKeyword}" action="{!c.search}"/>
+    <aura:handler name="change" value="{!v.data}" action="{!c.doInit}"/>
+    
+    <aura:registerEvent name="rowActionEvent" type="c:WeTableRowActionEvent"/>
+    <aura:registerEvent name="save" type="c:WeTableSaveEvent"/>
+    <aura:method name="saveDraft" action="{!c.saveDraft}"/> 
+    <aura:method name="cancelDraft" action="{!c.cancelDraft}"/> 
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <div>
+        <div class="slds-grid slds-wrap" style="width:100%;">
+            <div class="slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-bottom_x-small">
+                <div class="slds-float--left" style="width:24%;">
+                    <aura:if isTrue="{!v.showSearch}">
+                        <lightning:input name="search" type="search" placeholder="Search" title="{!v.toolTip}" variant="label-hidden" value="{!v.searchKeyword}"/>
+                    </aura:if>
+                </div>
+                <div class="slds-float--right" style="margin-top:8px;">
+                    <lightning:badge style="font-size: 11px;" label="{!'Total Records - '+v.records.length}"/>
+                </div>
+            </div>   
+        </div>
+    </div>
+    <div style="{!(v.records.length>0?'height:'+v.height+'px;':'')}"> 
+    	<lightning:datatable
+                aura:id="datatable"
+                keyField="{!v.key}"
+                selectedRows="{!v.preSelectedRows}"
+                data="{!v.records}"
+                columns="{!v.meta}"
+                resizeColumnDisabled="{!not(v.resizeColumn)}"
+                hideCheckboxColumn="{!not(v.showSelect)}"
+                maxRowSelection="{!v.maxRowSelection}"
+                enableInfiniteLoading="{!v.enableInfiniteLoading}"
+                sortedBy="{!v.sortedBy}"
+                sortedDirection="{!v.sortedDirection}"
+                onsort="{!c.sort}"
+                onloadmore="{!c.loadMore}"
+                showRowNumberColumn="{!v.showRowNumberColumn}"
+                rowNumberOffset="1"
+                onrowaction="{!c.onRowAction}"
+               	onsave="{!c.save}"
+                onrowselection="{! c.getSelectedName }">
+        </lightning:datatable>
+        
+        <aura:if isTrue="{!v.records.length==0}">
+            <div style="text-align:center;" class="slds-p-around_small">
+                <lightning:badge label="No records to display."/>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>

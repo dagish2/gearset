@@ -1,0 +1,15 @@
+Hi,<br><br>
+
+New exception occurred in the system.<br><br>
+
+Here are some details on the exception:<br>
+Apex Class: {!Apex_Debug_Log__c.Apex_Class__c}<br>
+Method: {!Apex_Debug_Log__c.Method__c}<br>
+Message: {!Apex_Debug_Log__c.Message__c}<br><br>
+
+Link to the record:<br>
+{!Apex_Debug_Log__c.Link}<br><br>
+
+Please take care of this exception ASAP.<br><br>
+
+Thanks.

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User Announcement to parent Opportunities to Orgs</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Use Notification: Parenting to Orgs</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Instructions for Creating Opportunities</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

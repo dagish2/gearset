@@ -1,0 +1,22 @@
+<aura:component >
+    <aura:attribute name="url" type="String" />
+    <aura:attribute name="header" type="String" />
+    <aura:attribute name="isLarge" type="Boolean" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+        <div role="dialog" tabindex="-1" class="{!'slds-modal slds-fade-in-open '+(v.isLarge?'slds-modal--large':'')}" aria-labelledby="header43">
+            <div class="slds-modal__container" style="{!(not(or(v.header=='Restart Journey',v.header=='Availability'))? 'width: 50% !important;':'')}">
+                <div class="slds-modal__header">
+                    <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.close}">
+                        <lightning:icon iconName="utility:close" size="xx-small"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="header43" class="slds-text-heading--medium">{!v.header}</h2>
+                </div>
+                <div class="slds-modal__content slds-p-around--medium" style="padding:1px">
+                    <iframe id="frame" src="{!v.url}" target= "_self" style="width:100%;" onload="{!c.setHeight}"></iframe>    
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>  
+</aura:component>

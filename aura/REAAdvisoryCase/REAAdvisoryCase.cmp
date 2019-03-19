@@ -1,0 +1,45 @@
+<aura:component controller='REAAdvisoryCaseController' implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" >
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="opportunity" type="Map" />
+    <aura:attribute name="valid" type="Boolean" default="true"/> 
+    <aura:attribute name="message" type="String" /> 
+    <aura:attribute name="errors" type="Object" />
+    <aura:handler   name="init" value="{!this}" action="{!c.doInit}" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0rem !important;
+        }
+        .modal-body {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        height:unset !important;
+        max-height:unset !important;
+        }
+        .slds-button_icon-inverse {
+        color: rgb(112, 110, 107);
+        }
+        
+    </aura:html>
+    
+    <aura:renderIf isTrue="{! not(v.valid)}">
+        <div aura:id="WarningMessage">
+            {!v.body}
+        </div>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="">
+            <div class="">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">REA Advisory Case</h2>
+                </header>
+                <div id="content" style="font-weight: bold;" class="slds-modal__content slds-p-around--medium">
+                    {!v.message}
+                </div>
+                <footer class="slds-modal__footer container-footer">
+                    <c:EnziButton label="Close" leftIcon="utility:close" type="destructive" click="{!c.cancel}"></c:EnziButton>
+                </footer>
+            </div>
+        </section>
+    </aura:renderIf>
+</aura:component>

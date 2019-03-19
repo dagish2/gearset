@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>London Invite for Free Trial</name>
+    <style>none</style>
+    <subject>WeWork Moorgate is Now Open!</subject>
+    <textOnly>hi {!Lead.Salutation_Name__c}
+
+
+Thanks for your interest in WeWork. We are very happy to announce that our doors are now open at our new space in the heart of MOORGATE! . We would love to invite you back to see the finished space and try it out FREE for a day.
+
+This offer is limited to the month of JULY - so get in touch and schedule your FREE trial day asap! CLICK HERE to arrange everything.</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

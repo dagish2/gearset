@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>REA Case Ownership Change</name>
+    <style>freeForm</style>
+    <subject>REA Case Ownership Changed - {!Case.Account}, {!Case.Opportunity_Market__c}</subject>
+    <textOnly>Hi there!
+
+Your REA case has a new owner. Please see details below:
+
+Opportunity Name
+{!Case.Opportunity__c}
+Case Name
+{!Case.Subject}
+New Case Owner
+{!Case.OwnerFullName}
+Case Stage
+{!Case.Status}
+
+Helpful Links
+Case Link
+Opportunity Link
+Account Link
+
+Sincerely,
+Real Estate Advisory Operations Team</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,192 @@
+.THIS .visible{
+    display:inline-block;
+    padding-bottom:0px;
+}
+.THIS .invisible{
+    display:inline-block;
+    pointer-events: none;
+    cursor:not-allowed;
+}
+.THIS .invisible .slds-icon_container{
+    background: rgb(224, 229, 238);
+    border-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.THIS .span.slds-wizard__progress{
+     padding-top:9px;
+}
+.THIS .slds-card__body.slds-p-around_small.slds-m-around_x-small{
+    background: #ffffff;
+    border-radius: 6px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.THIS #firstRow{
+   margin-top: -3px;
+}
+.THIS #Building{
+   margin-top: -4px;
+}
+.THIS #unitOfMeasurement{
+   margin-top: -4px;
+}
+.THIS #unitPrice{
+    margin-top: 4px;
+}
+.THIS #totalPrice{
+    margin-top: 4px;
+}
+.THIS #desiredlength{
+   margin-top: -5px;
+}
+.THIS #area{
+    margin-top: 4px;
+}
+.THIS .slds-grid.slds-wrap.slds-p-left_small {
+    margin-top: -12px;
+}
+.THIS .slds-grid.slds-wrap.slds-border_bottom.slds-p-vertical_small {
+    margin-block-start: -12px;
+}
+.THIS .slds-form-element__icon.slds-align-middle {
+    margin-left: -12px;
+}
+.THIS .slds-page-header{
+    width: 98.5% !important;
+    margin: auto;
+    margin-top: .7rem;
+    background: rgb(243, 243, 242);
+    border-radius: 4px;
+}
+.THIS #currency{
+    width: 9%;margin-left: 7px;
+}
+.THIS #lightning{
+    height: 441px !important;
+}
+.THIS .slds-wizard__link{
+   padding-bottom:6px; 
+}
+.THIS .slds-page-header.cEnziHeader {
+    border-radius:6px;
+}
+.THIS .slds-button_icon-bare{
+    display: none;
+}
+
+.THIS .slds-grid.slds-wrap.slds-border_bottom.slds-p-vertical_small {
+    border-bottom: 0px solid rgb(217, 219, 221);
+}
+.THIS .container-footer{
+    bottom:0;
+    width:100%;
+    z-index: 2;
+    position: fixed;
+    text-align:right;
+    margin-top:20px;
+    background:ghostwhite;
+}
+.THIS .error-message{
+    width: 50%;
+    margin: auto;
+    margin-top: 12px;
+}
+.THIS .table-container{
+    border:1px solid #d9dbdd;
+    /*margin-bottom:60px;*/
+}
+.THIS .cEnziTable{
+    padding: 0px 1px 0px 0px !important;
+    margin-bottom: 3.5% !important;
+}
+
+.THIS .marginHeader{
+    margin-top:4px!important;
+    margin-left:8px!important;
+    margin-right:8px!important;
+}
+.THIS .buttonSize{
+    width: 90px;
+}
+.THIS .buttonPosition{
+    float:right;
+    padding-right: 10px;
+}
+.THIS .buttonParentContainer{
+    width:100%;
+}
+.THIS  #manage-lineitem-container{
+    height: 100% !important;
+    background-position: center !important;
+    background-repeat: repeat !important;
+    background-size: cover !important;
+    padding-bottom:112px;
+    width:100% !important;
+}
+.THIS .visible > span > lightning-icon {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.THIS #totalPrice > lightning-helptext > div{
+    margin-top: -60px;
+    margin-left: 106px;
+}
+.THIS .actionButtons{
+    width:100px;
+    margin-top: 90px;
+}
+.THIS #geography{
+    margin-top: -5px
+}
+.THIS #action-button{
+    margin-top: 30px;
+}
+.THIS #primary-button{
+    width:156px;
+    margin-top:-67px;
+}
+.THIS #currency{
+    margin-left: -4px;
+    min-width: fit-content;
+}
+.THIS div#product-focus {
+    Overflow : inherit !important;
+}
+.THIS div#product- {
+    Overflow : inherit !important;
+}
+@media screen and (max-width: 767px){
+    .THIS .actionButtons{
+        width:100px;
+        margin-top: 84px!important;          
+    }
+    .THIS #primary-button{
+        margin-top: 563px !important;
+    }
+    .THIS #action-button{
+        margin-top: 25px !important;
+    }
+    .THIS .standardButtons{
+        padding-right: 0.5% !important;
+    }        
+}
+@media screen and (max-width: 767px){
+    .THIS .pageHeader{
+        width: 95.8%;
+        margin-left: 7px;          
+    }    
+}
+@media screen and (max-width: 1023px) and (min-width: 767px){
+    .THIS .actionButtons{
+        width:100px;
+        margin-top: 152px !important;           
+    }
+    .THIS .standardButtons{
+        padding-right: 1% !important;
+    }
+}
+@media screen and (min-width: 1023px){
+    .THIS .standardButtons{
+        padding-right: 1.5% !important;
+    }
+}

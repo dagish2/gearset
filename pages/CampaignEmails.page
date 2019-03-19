@@ -1,0 +1,29 @@
+<apex:page controller="WeworkEngine"  extensions="KickboxVerificationController" standardstylesheets="false" sidebar="false" showheader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}"
+                       vendor_css="bootstrap/js/ui-bootstrap-tpls.js,jquery/jquery-ui.css,treeview/bootstrap-treeview.min.css,SLDS092/assets/styles/salesforce-lightning-design-system.css"
+                       vendor_js="jquery/moment.min.js,jquery/xdate.js,jquery/jquery-1.12.4.min.js,jquery/jquery-ui.js,angular/angular-sanitize.js,textAngular/textAngular-rangy.min.js,textAngular/textAngular-1.1.1.min.js,treeview/bootstrap-treeview.min.js,csv-parser/angular-PapaParse.js,csv-parser/papaparse.js"
+                       application_js="error-manager.js,campaignEmails.js,salesforce.js,common-controls.js,selectApp.js"
+                       application_css="campaignEmails.css,controlsFactory.css,autocomplete.css,selectApp.css" />
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_css,'/SLDS092/assets/styles/salesforce-lightning-design-system.css')}" /> 
+    <apex:includescript value="/support/console/30.0/integration.js" />
+    <apex:includescript value="/soap/ajax/32.0/connection.js" />
+    <script type="text/javascript">
+       sforce.connection.sessionId = '{!$Api.Session_ID}';
+        sforce.console.setTabTitle('Campaign Emails');
+    </script>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Campaign Emails</title>
+    </head>
+    <body id="sendPaper">
+        <div id="spinnerContainer"></div>
+        <div id="wrapper" class="scroll-window" ng-app="campaignEmailsApp" ng-controller="campaignEmailsCtrl">
+            <div class="container-fluid container-padding" style="margin-top: 25px">
+                <campaign-emails>
+                </campaign-emails>
+            </div>
+        </div>
+    </body>
+</apex:page>

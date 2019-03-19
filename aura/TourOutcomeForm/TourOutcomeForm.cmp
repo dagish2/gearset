@@ -1,0 +1,499 @@
+<aura:component controller="TourOutcomeFormController"> 
+    <ltng:require scripts="{!join(',', 
+                           $Resource.cometd + '/cometd.js', 
+                           $Resource.cometd + '/jquery-1.5.1.js',
+                           $Resource.cometd + '/json2.js',
+                           $Resource.cometd + '/jquery.cometd.js')}" afterScriptsLoaded="{!c.doInit}"/>
+    <aura:attribute name="sessionId" type="String"/>
+    <aura:attribute name="recievedObject" type="Object"/>
+    <aura:attribute name="oldTourOutcomeUUID" type="String" default="" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="recordUUID" type="String" />
+    <aura:attribute name="tourOutcome" type="Map" default="{}" />
+    <aura:attribute name="oldTourRecord" type="Map" default="{}" />
+    <aura:attribute name="tourInterest" type="String"/>
+    <aura:attribute name="tour" type="Object"/>
+    <aura:attribute name="communityView" type="Boolean" />
+    <aura:attribute name="buildingId" type="String" />
+    <aura:attribute name="theme" type="Boolean" default="false"/>
+    <aura:attribute name="currentDate" type="Object" />
+    <aura:attribute name="settings" type="Map" default="{}" />
+    <aura:attribute name="tourCompletedBy" type="Object" />
+    <aura:attribute name="contactList" type="List" default="[]" />
+    <aura:attribute name="buildingsList" type="List" default="[]" />
+    <aura:attribute name="buildingMap" type="Map" default="{}" />
+    <aura:attribute name="objections" type="List" default="[]" />    
+    <aura:attribute name="howDidHearOptions" type="List" default="[]" />
+    <aura:attribute name="urgenciesOptions" type="List" default="[]" />    
+    <aura:attribute name="officesToShowOptions" type="List" default="[]" />    
+    <aura:attribute name="officesShown" type="String" />
+    <aura:attribute name="contact" type="Object" />
+    <aura:attribute name="officesResult" type="Map" default="{}" />
+    <aura:attribute name="existngOfficesResult" type="Map" default="{}" />
+    <aura:attribute name="tourOutcomeUUID" type="String" />
+    <aura:attribute name="showNewContactModal" type="Boolean" default="false" />
+    <aura:attribute name="mapUrgenciesOptions" type="Object"/>
+    <aura:attribute name="mapHowDidHearOptions" type="Object"/>
+    <aura:attribute name="mapObjections" type="Object"/>
+    <aura:attribute name="utils" type="string"/>
+    <aura:attribute name="errors" type="Object" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="errors1" type="Object"/>
+    <aura:attribute name="valid1" type="Boolean"/>
+    <aura:attribute name="errors2" type="Object"/>
+    <aura:attribute name="valid2" type="Boolean"/>
+    <aura:attribute name="errors3" type="Object"/>
+    <aura:attribute name="valid3" type="Boolean"/>
+    <aura:attribute name="errors4" type="Object"/>
+    <aura:attribute name="valid4" type="Boolean"/>
+    <aura:attribute name="errors5" type="Object"/>
+    <aura:attribute name="valid5" type="Boolean"/>
+    <aura:attribute name="rescheduleTour" type="Object"/>
+    <aura:attribute name="available_tour_times" type="List"/>
+    <aura:attribute name="originalTour" type="Object"/>
+    <aura:attribute name="rescheduledTour" type="Object"/>
+    <aura:attribute name="rescheduledTourFields" type="Object"/>
+    <aura:attribute name="tourTable" type="List"/>
+    <aura:attribute name="checkTourStatusInfo" type="Boolean"/>
+    <aura:attribute name="tourStatus" type="String"/>
+    <aura:attribute name="LoggedInUser" type="String"/>
+    <aura:attribute name="referrer_Name" type="String"/>
+    <aura:attribute name="referrer_Email" type="String"/>
+    <aura:attribute name="opportunityId" type="String"/>
+    <aura:attribute name="checkSendpaperwork" type="String" default="false"/>
+    <aura:attribute name="tourAccount" type="Map" />
+    <aura:attribute name="oldTourData" type="Object"/>
+    <aura:attribute name="showUnomyFields" type="Boolean" default="false" />
+    <aura:attribute name="urlData" type="String" />
+    <aura:handler name="change" value="{!v.tourInterest}" action="{!c.changeOutcome}"/>
+    <aura:handler name="change" value="{!v.tourOutcome.Is_Decision_Maker__c}" action="{!c.changeIsDecisionMaker}"/>
+    <aura:handler name="change" value="{!v.tourOutcome.Interested_Buildings__c}" action="{!c.getOfficeDetails}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:LightningCSS></c:LightningCSS>
+    <style>
+        li.slds-item {background-color: rgb(255, 255, 255);margin-left: -12px;margin-top: -9px;margin-right: -12px;}
+        ul.slds-page-header__detail-row {height: 69px;}
+        #lightning > div.stage-container.slds-grid.slds-wrap.cTourOutcomeForm > section > div > ul > li:nth-child(2){margin-bottom: 3.75rem !important;}
+        #auraErrorMessage {padding-bottom : 65px !important;} 
+    </style>
+    <div class="slds-page-header slds-page-header_record-home" id="PageHeaderDiv">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container" title = "Tour">
+                            <lightning:icon iconName="action:description" size="small" alternativeText="Tour"/>
+                            <span class="slds-assistive-text">Tour</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__name-meta" title="Tour">Tour</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <p class="slds-page-header__title slds-truncate">{!v.tour.Name}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-page-header__row slds-page-header__row_gutters">
+            <div class="slds-page-header__col-details">
+                <ul class="slds-page-header__detail-row">
+                    <li class="slds-page-header__detail-block">
+                        <div class="slds-text-title slds-truncate" title="Primary Member">Primary Member</div>
+                        <div class="slds-truncate" title="{!v.tour.Primary_Member__r.Name}">
+                            <a href= "{!v.theme?'/'+ v.tour.Primary_Member__c:'/lightning/r/'+v.tour.Primary_Member__c+'/view'}" target="_blank">{!v.tour.Primary_Member__r.Name}</a>  
+                        </div>
+                    </li>
+                    <li class="slds-page-header__detail-block">
+                        <div class="slds-text-title slds-truncate" title="Location">Location</div>
+                        <div class="slds-truncate" title="{!v.tour.Location__r.Name}">
+                            <a href= "{!v.theme?'/'+ v.tour.Location__c:'/lightning/r/'+v.tour.Location__c+'/view'}" target="_blank">{!v.tour.Location__r.Name}</a>
+                        </div>
+                    </li>
+                    <li class="slds-page-header__detail-block">
+                        <div class="slds-text-title slds-truncate" title="Tour Date">Tour Date</div>
+                        <div class="slds-truncate" title="{!v.tour.Tour_Date__c}">{!v.tour.Tour_Date__c}</div>
+                    </li>
+                    <li class="slds-page-header__detail-block">
+                        <div class="slds-text-title slds-truncate" title="Start Time">Start Time</div>
+                        <div class="slds-truncate" title="{!v.tour.Start_Time__c}">{!v.tour.Start_Time__c}</div>
+                    </li>
+                    <li class="slds-page-header__detail-block">
+                        <div class="slds-text-title slds-truncate" title="Booked by">Booked by</div>
+                        <div class="slds-truncate" title="{!v.tour.booked_by_contact_id__r.Name}">
+                            <a href= "{!v.theme?'/'+ v.tour.booked_by_contact_id__c:'/lightning/r/'+v.tour.booked_by_contact_id__c+'/view'}" target="_blank">{!v.tour.booked_by_contact_id__r.Name}</a>
+                        </div>
+                    </li>
+                    <li class="slds-page-header__detail-block">
+                        <div class="slds-text-title slds-truncate" title="Status">Status</div>
+                        <div class="slds-truncate" title="{!v.tour.Status__c}">{!v.tour.Status__c}</div>
+                    </li>
+                    <li class="slds-page-header__detail-block">
+                        <div class="slds-text-title slds-truncate" title="Product Line">Product Line</div>
+                        <div class="slds-truncate" title="{!v.tour.Product_Line__c}">{!v.tour.Product_Line__c}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stage-container slds-grid slds-wrap">
+        <section class="stage slds-grid slds-grid--vertical slds-nowrap" style="padding:20px">
+            <c:EnziAccordian>
+                <c:EnziAccordianItem label = "Tour Status Information" collapsed = "false" allowDelete = "false">
+                    <div class="stage-main slds-grid slds-nowrap" role="main">
+                        <div class="slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1" id="tourOutcomeDiv">
+                            <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Tour_Outcome__c" label="Tour Outcome" sort="none" value="{!v.tourInterest}" required="true" helpText="Please select the outcome status"></c:EnziField>
+                        </div>                   
+                    </div>
+                    <aura:renderIf isTrue="{!or(v.tourInterest=='', v.tourInterest==undefined)}">
+                        <div class="slds-modal__footer page-footer">
+                            <c:EnziButton label="Cancel" type="neutral" click="{!c.cancel}"></c:EnziButton> 
+                        </div>                  
+                    </aura:renderIf>
+                </c:EnziAccordianItem>
+                <aura:if isTrue="{!v.tourInterest=='Ready to sign now'}">
+                    <c:EnziFormValidator errors="{!v.errors1}" valid="{!v.valid1}">
+                        <c:EnziAccordianItem label = "Ready to sign now" collapsed = "false" allowDelete = "false">
+                            <div class="slds-grid slds-wrap" role="main" style="width:100%">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField   label="Account Name" type="string"  labelField="Name"  name="AccountName" value="{!v.tour.Primary_Member__r.Account.Name}" errors="{!v.errors1}" required="true" helpText="Name of the Company"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField  type="number" name="FTE" labelField="Name"  label="# Full Time Employees" value="{!v.tour.Primary_Member__r.Account.Number_of_Full_Time_Employees__c}" errors="{!v.errors1}" required="true" helpText="Number of full time employees in the Company"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="picklist" options="{!v.buildingsList}" name="Interested_Buildings__c" labelField="Name" valueField="UUID__c" label="Building" value="{!v.tourOutcome.Interested_Buildings__c}" errors="{!v.errors1}" required="true" helpText="Name of the building for which Prospect is interested in"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Interested_in_Number_of_Desks__c" label="Number Of Desks" value="{!v.tourOutcome.Interested_in_Number_of_Desks__c}" min="1" required="true" errors="{!v.errors1}" helpText="Number of desk's prospect interested in"></c:EnziField>
+                                </div>
+                                <aura:if isTrue="{!v.showUnomyFields}">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="string" name="HQ_Country" icon="utility:world" label="HQ Country" labelField="Name" value="{!v.tour.Primary_Member__r.Account.Unomy_Location_Country__c}" errors="{!v.errors1}" helpText="Headquarter country of Company"/>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="string" name="HQ_State" label="HQ State" icon="utility:company" labelField="Name" value="{!v.tour.Primary_Member__r.Account.Unomy_Location_State__c}" errors="{!v.errors1}" helpText="Headquarter state of Company"/>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="string" icon="utility:home" name="HQ_City" label="HQ City" labelField="Name" value="{!v.tour.Primary_Member__r.Account.Unomy_Location_City__c}" errors="{!v.errors1}" helpText="Headquarter city of Company"/>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="string" name="HQ_Street" label="HQ Street" icon="utility:home" labelField="Name" value="{!v.tour.Primary_Member__r.Account.Unomy_Location_Address__c}" errors="{!v.errors1}" helpText="Headquarter street"/>
+                                    </div>
+                                    <aura:set attribute="else">
+                                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                            <c:EnziField type="string" name="HQ_Country" icon="utility:world" label="HQ Country" labelField="Name" value="{!v.tour.Primary_Member__r.Account.BillingCountry}" errors="{!v.errors1}" helpText="Headquarter country of Company"/>
+                                        </div>
+                                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                            <c:EnziField type="string" name="HQ_State" label="HQ State" icon="utility:company" labelField="Name" value="{!v.tour.Primary_Member__r.Account.BillingState}" errors="{!v.errors1}" helpText="Headquarter state of Company"/>
+                                        </div>
+                                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                            <c:EnziField type="string" icon="utility:home" name="HQ_City" label="HQ City" labelField="Name" value="{!v.tour.Primary_Member__r.Account.BillingCity}" errors="{!v.errors1}" helpText="Headquarter city of Company"/>
+                                        </div>
+                                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                            <c:EnziField type="string" name="HQ_Street" label="HQ Street" icon="utility:home" labelField="Name" value="{!v.tour.Primary_Member__r.Account.BillingStreet}" errors="{!v.errors1}" helpText="Headquarter street"/>
+                                        </div>
+                                    </aura:set>
+                                </aura:if>
+                                
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="picklist" name="Urgency" label="Urgency" value="{!v.tourOutcome.Urgency__c}" options="{!v.urgenciesOptions}" sort="none" labelField="text" valueField="id" required="true" errors="{!v.errors1}" helpText="How quickly the prospect wants to move in"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Unit_Type__c" label="Product Type(s)"  value="{!v.tourOutcome.Unit_Type__c}" required="true"  errors="{!v.errors1}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="multipicklist" name="officesShown" label="Office(s) shown" value="{!v.officesShown}" options="{!v.officesToShowOptions}" labelField="name" valueField="uuid" errors="{!v.errors1}" helpText="The office(s) that are shown to Prospect during Tour"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="picklist" name="HowDidYouHearAboutUs" label="How Did You Hear About Us?" value="{!v.tourOutcome.How_Did_You_Hear_About_Us__c}" options="{!v.howDidHearOptions}" labelField="text" valueField="id" errors="{!v.errors1}" helpText="The source by which the prospect came to know about WeWork"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Summary__c" fieldName="Move_In_Date__c" label="Desired Move In Date" upperBound="{!v.currentDate}" value="{!v.tourOutcome.Move_In_Date__c}" required="true" errors="{!v.errors1}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Lease_Expiration__c" label="Lease Expiration Date" upperBound="{!v.currentDate}" value="{!v.tourOutcome.Lease_Expiration__c}" required="false" errors="{!v.errors1}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Current_Budget__c" label="Currently Paying($)" value="{!v.tourOutcome.Current_Budget__c}" min="0" errors="{!v.errors1}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Desired_Budget__c" label="Desired Budget($)" value="{!v.tourOutcome.Desired_Budget__c}" min="1" errors="{!v.errors1}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField type="string" name="ReferrerName" label="Referrer Name" value="{!v.referrer_Name}" errors="{!v.errors2}" helpText="This will be the contact who referred us the Lead. It can be a member, employee or a broker."></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField type="email" name="ReferrerEmail" label="Referrer Email" value="{!v.referrer_Email}" errors="{!v.errors2}" helpText="Email of the contact who referred us the lead"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Is_Decision_Maker__c" value="{!v.tourOutcome.Is_Decision_Maker__c}" required="false" errors="{!v.errors1}" helpText="Decision Maker is the person who is responsible to settle the deal"></c:EnziField>
+                                </div>
+                                <aura:if isTrue="{!(!v.tourOutcome.Is_Decision_Maker__c)}">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="reference" name="Name_of_Decision_Maker__c" label="Name of decision maker" options="{!v.contactList}" labelField="Name" valueField="Email" value="{!v.tourOutcome.Decision_Maker__c}" addNew="{!c.showNewContactModal}" icon="standard:contact" required="{!(!v.tourOutcome.Is_Decision_Maker__c)}" errors="{!v.errors1}" helpText="Decision Maker is the person who is responsible to settle the deal"/>
+                                    </div>
+                                </aura:if>
+                                <div class="{!'slds-p-horizontal--small slds-size--1-of-1 '+(v.tourOutcome.Is_Decision_Maker__c?'slds-medium-size--1-of-2 slds-large-size--1-of-2':'slds-medium-size--1-of-1 slds-large-size--1-of-1')}" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Tour_Outcome_Notes__c" label="Notes / Next Steps" length="100" value="{!v.tourOutcome.Tour_Outcome_Notes__c}" errors="{!v.errors1}" helpText="Additional Notes for this tour"></c:EnziField>
+                                </div>
+                            </div>
+                        </c:EnziAccordianItem> 
+                    </c:EnziFormValidator>
+                </aura:if>
+                <aura:if isTrue="{!v.tourInterest=='Ready to sign now'}">
+                    <div class="slds-modal__footer page-footer">
+                        <c:EnziButton label="Cancel" type="neutral"  click="{!c.cancel}"></c:EnziButton>
+                        <c:EnziButton label="Save Outcome" type="brand" click="{!c.save}" disabled="{!(!v.valid1)}"></c:EnziButton>
+                        <c:EnziButton label="Save and Send Paperwork" aura:id="paperworkId" type="brand" leftIcon="utility:file" click="{!c.saveAndsendPaperwork}" disabled="{!(!v.valid1)}"></c:EnziButton>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.tourInterest=='Interested'}">
+                    <c:EnziFormValidator errors="{!v.errors2}" valid="{!v.valid2}">
+                        <c:EnziAccordianItem label = "Tour interested" collapsed = "false" allowDelete = "false">
+                            <div class="slds-grid slds-wrap" role="main" style="width:100%">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField   label="Account Name" type="string"  labelField="Name"  name="AccountName" value="{!v.tour.Primary_Member__r.Account.Name}" errors="{!v.errors1}" required="true" helpText="Name of the Company"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField  type="number" name="FTE" labelField="Name"  label="# Full Time Employees" value="{!v.tour.Primary_Member__r.Account.Number_of_Full_Time_Employees__c}" errors="{!v.errors1}" required="true" helpText="Number of full time employees in the Company"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="picklist" options="{!v.buildingsList}" name="Interested_Buildings__c" labelField="Name" valueField="UUID__c" label="Building" value="{!v.tourOutcome.Interested_Buildings__c}" errors="{!v.errors2}" required="true" helpText="Name of the building for which Prospect is interested in"></c:EnziField>
+                                </div>                            
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Interested_in_Number_of_Desks__c" label="Number Of Desks" value="{!v.tourOutcome.Interested_in_Number_of_Desks__c}" min="1" errors="{!v.errors2}" required="true" helpText="Number of desk(s) prospect is interested in"></c:EnziField>
+                                </div>
+                                <aura:if isTrue="{!v.showUnomyFields}">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="string" name="HQ_Country" icon="utility:world" label="HQ Country" labelField="Name" value="{!v.tour.Primary_Member__r.Account.Unomy_Location_Country__c}" errors="{!v.errors1}" helpText="Headquarter country of Company"/>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="string" name="HQ_State" label="HQ State" icon="utility:company" labelField="Name" value="{!v.tour.Primary_Member__r.Account.Unomy_Location_State__c}" errors="{!v.errors1}" helpText="Headquarter state of Company"/>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="string" icon="utility:home" name="HQ_City" label="HQ City" labelField="Name" value="{!v.tour.Primary_Member__r.Account.Unomy_Location_City__c}" errors="{!v.errors1}" helpText="Headquarter city of Company"/>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="string" name="HQ_Street" label="HQ Street" icon="utility:home" labelField="Name" value="{!v.tour.Primary_Member__r.Account.Unomy_Location_Address__c}" errors="{!v.errors1}" helpText="Headquarter street"/>
+                                    </div>
+                                    <aura:set attribute="else">
+                                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                            <c:EnziField type="string" name="HQ_Country" icon="utility:world" label="HQ Country" labelField="Name" value="{!v.tour.Primary_Member__r.Account.BillingCountry}" errors="{!v.errors1}" helpText="Headquarter country of Company"/>
+                                        </div>
+                                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                            <c:EnziField type="string" name="HQ_State" label="HQ State" icon="utility:company" labelField="Name" value="{!v.tour.Primary_Member__r.Account.BillingState}" errors="{!v.errors1}" helpText="Headquarter state of Company"/>
+                                        </div>
+                                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                            <c:EnziField type="string" icon="utility:home" name="HQ_City" label="HQ City" labelField="Name" value="{!v.tour.Primary_Member__r.Account.BillingCity}" errors="{!v.errors1}" helpText="Headquarter city of Company"/>
+                                        </div>
+                                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                            <c:EnziField type="string" name="HQ_Street" label="HQ Street" icon="utility:home" labelField="Name" value="{!v.tour.Primary_Member__r.Account.BillingStreet}" errors="{!v.errors1}" helpText="Headquarter street"/>
+                                        </div>
+                                    </aura:set>
+                                </aura:if>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField type="picklist" name="Urgency" label="Urgency" value="{!v.tourOutcome.Urgency__c}" options="{!v.urgenciesOptions}" sort="none" labelField="text" valueField="id" required="true" errors="{!v.errors2}" helpText="How quickly the prospect wants to move in"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Unit_Type__c" label="Product Type(s)"  value="{!v.tourOutcome.Unit_Type__c}" required="true"  errors="{!v.errors2}"></c:EnziField>
+                                </div>                            
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="multipicklist" name="officesShown" label="Office(s) shown on tour" value="{!v.officesShown}" options="{!v.officesToShowOptions}" labelField="name" valueField="uuid"  errors="{!v.errors2}" helpText="The office(s) that are shown to Prospect during Tour"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="picklist" name="Objection" label="Objection" options="{!v.objections}" labelField="reason" valueField="id" value="{!v.tourOutcome.Objections__c}" errors="{!v.errors2}" required="true" helpText="A reason for disagreeing"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Summary__c" fieldName="Move_In_Date__c" label="When do they want to move in?" upperBound="{!v.currentDate}" value="{!v.tourOutcome.Move_In_Date__c}" required="true" errors="{!v.errors2}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Lease_Expiration__c" label="Lease Expiration Date" upperBound="{!v.currentDate}" value="{!v.tourOutcome.Lease_Expiration__c}" required="false" errors="{!v.errors2}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Current_Budget__c" label="Currently Paying($)" value="{!v.tourOutcome.Current_Budget__c}" min="0" errors="{!v.errors2}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Desired_Budget__c" label="Desired Budget($)" value="{!v.tourOutcome.Desired_Budget__c}" min="1" errors="{!v.errors2}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField type="string" name="ReferrerName" label="Referrer Name" value="{!v.referrer_Name}" errors="{!v.errors2}" helpText="This will be the contact who referred us the Lead. It can be a member, employee or a broker."></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField type="email" name="ReferrerEmail" label="Referrer Email" value="{!v.referrer_Email}" errors="{!v.errors2}" helpText="Email of the contact who referred us the lead"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Is_Decision_Maker__c" value="{!v.tourOutcome.Is_Decision_Maker__c}" required="false" errors="{!v.errors2}" helpText="Decision Maker is the person who is responsible to settle the deal"></c:EnziField>
+                                </div>
+                                <aura:if isTrue="{!(!v.tourOutcome.Is_Decision_Maker__c)}">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="reference" name="Name_of_Decision_Maker__c" label="Name of decision maker" options="{!v.contactList}" labelField="Name" valueField="Email" value="{!v.tourOutcome.Decision_Maker__c}" addNew="{!c.showNewContactModal}" icon="standard:contact" required="{!(!v.tourOutcome.Is_Decision_Maker__c)}" errors="{!v.errors2}" helpText="Decision Maker is the person who is responsible to settle the deal"/>
+                                    </div>
+                                </aura:if> 
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="picklist" name="HowDidYouHearAboutUs" label="How Did You Hear About Us?" value="{!v.tourOutcome.How_Did_You_Hear_About_Us__c}" options="{!v.howDidHearOptions}" labelField="text" valueField="id" errors="{!v.errors2}" helpText="The source by which the prospect came to know about WeWork"></c:EnziField>
+                                </div>
+                                <div class="{!'slds-p-horizontal--small slds-size--1-of-1 '+(!v.tourOutcome.Is_Decision_Maker__c?'slds-medium-size--1-of-2 slds-large-size--1-of-2':'slds-medium-size--1-of-1 slds-large-size--1-of-1')}" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Tour_Outcome_Notes__c" label="Notes / Next Steps" length="100" value="{!v.tourOutcome.Tour_Outcome_Notes__c}" errors="{!v.errors2}" helpText="Additional Notes for this tour"></c:EnziField>
+                                </div>                           
+                            </div>                           
+                        </c:EnziAccordianItem>                
+                    </c:EnziFormValidator>
+                </aura:if>
+                <aura:if isTrue="{!v.tourInterest=='Interested'}">
+                    <div class="slds-modal__footer page-footer">
+                        <c:EnziButton label="Cancel" type="neutral" click="{!c.cancel}"></c:EnziButton>
+                        <c:EnziButton label="Save Outcome" type="brand" click="{!c.save}" disabled="{!(!v.valid2)}"></c:EnziButton> 
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.tourInterest=='Not Interested'}">
+                    <c:EnziFormValidator errors="{!v.errors3}" valid="{!v.valid3}">
+                        <c:EnziAccordianItem label = "Does not want membership" collapsed = "false" allowDelete = "false">
+                            <div class="slds-grid slds-wrap " role="main" style="width:100%">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="picklist" options="{!v.buildingsList}" name="Interested_Buildings__c" labelField="Name" valueField="UUID__c" label="Building" value="{!v.tourOutcome.Interested_Buildings__c}" errors="{!v.errors3}" required="true" helpText="Name of the building for which Prospect is interested in"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Interested_in_Number_of_Desks__c" label="Number Of Desks" value="{!v.tourOutcome.Interested_in_Number_of_Desks__c}" min="1" errors="{!v.errors3}" required="false" helpText="Number of desk's prospect interested in"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Unit_Type__c" label="Product Type(s)"  value="{!v.tourOutcome.Unit_Type__c}" required="false"  errors="{!v.errors3}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="multipicklist" name="officesShown" label="Office(s) shown on tour" value="{!v.officesShown}" options="{!v.officesToShowOptions}" labelField="name" valueField="uuid"  errors="{!v.errors3}" helpText="The office(s) that are shown to Prospect during Tour"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="picklist" name="Objection" label="Objection" options="{!v.objections}" labelField="reason" valueField="id" value="{!v.tourOutcome.Objections__c}" errors="{!v.errors3}" required="true" helpText="A reason for disagreeing"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Lease_Expiration__c" label="Lease Expiration Date" upperBound="{!v.currentDate}" value="{!v.tourOutcome.Lease_Expiration__c}" required="false" errors="{!v.errors3}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Current_Budget__c" label="Currently Paying($)" value="{!v.tourOutcome.Current_Budget__c}" min="0" errors="{!v.errors3}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Desired_Budget__c" label="Desired Budget($)" value="{!v.tourOutcome.Desired_Budget__c}" min="1"  errors="{!v.errors3}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Is_Decision_Maker__c" value="{!v.tourOutcome.Is_Decision_Maker__c}" required="false" errors="{!v.errors3}" helpText="Decision Maker is the person who is responsible to settle the deal"></c:EnziField>
+                                </div>
+                                <aura:if isTrue="{!(!v.tourOutcome.Is_Decision_Maker__c)}">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="reference" name="Name_of_Decision_Maker__c" label="Name of decision maker" options="{!v.contactList}" labelField="Name" valueField="Email" value="{!v.tourOutcome.Decision_Maker__c}" addNew="{!c.showNewContactModal}" icon="standard:contact" required="{!(!v.tourOutcome.Is_Decision_Maker__c)}" errors="{!v.errors3}" helpText="Decision Maker is the person who is responsible to settle the deal"/>
+                                    </div>
+                                </aura:if>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField unrestricted="false" type="picklist" name="HowDidYouHearAboutUs" label="How Did You Hear About Us?" value="{!v.tourOutcome.How_Did_You_Hear_About_Us__c}" options="{!v.howDidHearOptions}" labelField="text" valueField="id" errors="{!v.errors3}" helpText="The source by which the prospect came to know about WeWork"></c:EnziField>
+                                </div>
+                                <div class="{!'slds-p-horizontal--small slds-size--1-of-1 '+(!v.tourOutcome.Is_Decision_Maker__c?'slds-medium-size--1-of-2 slds-large-size--1-of-2':'slds-medium-size--1-of-1 slds-large-size--1-of-1')}" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Tour_Outcome_Notes__c" label="Notes / Next Steps" length="100" value="{!v.tourOutcome.Tour_Outcome_Notes__c}" errors="{!v.errors3}" helpText="Additional Notes for this tour"></c:EnziField>
+                                </div>
+                            </div>
+                        </c:EnziAccordianItem> 
+                    </c:EnziFormValidator>
+                </aura:if>
+                <aura:if isTrue="{!v.tourInterest=='Not Interested'}">
+                    <div class="slds-modal__footer page-footer">
+                        <c:EnziButton label="Cancel" type="neutral" click="{!c.cancel}"></c:EnziButton>
+                        <c:EnziButton label="Save Outcome" type="brand" click="{!c.save}" disabled="{!(!v.valid3)}"></c:EnziButton>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.tourInterest=='Did not show up'}">
+                    <c:EnziFormValidator errors="{!v.errors4}" valid="{!v.valid4}">
+                        <c:EnziAccordianItem label = "No show" collapsed = "false" allowDelete = "false">
+                            <div class="slds-grid slds-wrap " role="main" style="width:100%">
+                                <div >
+                                    <!--  <c:EnziField unrestricted="false" type="picklist" name="Objection" label="Objection" options="{!v.objections}" labelField="reason" valueField="id" value="{!v.tourOutcome.Objections__c}" errors="{!v.errors4}" required="true"></c:EnziField>-->
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                    <c:EnziField sObjectName="Tour_Outcome__c" fieldName="No_Follow_Up__c" value="{!v.tourOutcome.No_Follow_Up__c}" required="false" errors="{!v.errors4}" helpText="No further action on this tour"></c:EnziField>
+                                </div>
+                            </div>
+                        </c:EnziAccordianItem>
+                    </c:EnziFormValidator>
+                </aura:if>
+                <aura:if isTrue="{!v.tourInterest=='Did not show up'}">
+                    <div class="slds-modal__footer page-footer">
+                        <c:EnziButton label="Cancel" type="neutral" click="{!c.cancel}"></c:EnziButton>
+                        <c:EnziButton label="Book Tour" type="neutral" click="{!c.bookTours}" disabled="{!(!v.valid4)}" ></c:EnziButton>
+                        <c:EnziButton label="Save Outcome" type="brand" click="{!c.saveNoShow}" disabled="{!(!v.valid4)}" ></c:EnziButton>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.tourInterest=='Tour Reschedule'}">
+                    <c:EnziFormValidator errors="{!v.errors5}" valid="{!v.valid5}">
+                        <c:EnziAccordianItem label = "Tour Reschedule" collapsed = "false" allowDelete = "false">
+                            <aura:if isTrue="{! !v.tourTable.length>0}">
+                                <div class="slds-grid slds-wrap " role="main"  style="width:100%">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="reference" name="Building" label="Building" reference="Building__c" value="{!v.rescheduleTour.building}" disabled="true"  required="true" errors="{!v.errors5}" labelField="label" valueField="value" helpText="Name of the building for which Prospect is interested in"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="date" name="TourDate" label="Tour Date" value="{!v.rescheduleTour.tourDate}"  change="{!c.getTimeSlots}"  required="true" errors="{!v.errors5}" helpText="The revised date on which prospect wants to visit the building"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField unrestricted="false" type="picklist" name="StartTime" label="Start Time" value="{!v.rescheduleTour.startTime}"   options="{!v.available_tour_times}" disabled="{!not(v.rescheduleTour.tourDate)}" defaultDisabled="true"  change="{!c.setEndTime}" labelField="time" valueField="time"  required="true" errors="{!v.errors5}" helpText=" Time at which tour starts"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="string" name="EndTime" label="End Time" value="{!v.rescheduleTour.endTime}" disabled="true" defaultDisabled="true" errors="{!v.errors5}" helpText=" Time at which tour ends"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px">
+                                        <c:EnziField type="textarea" name="Notes" label="Notes and Comments" value="{!v.rescheduleTour.notes}" required="false" errors="{!v.errors5}" helpText="Additional Notes for this tour"></c:EnziField>
+                                    </div>
+                                </div>
+                            </aura:if>
+                            <div class="slds-grid slds-wrap slds-grid--pull-padded" role="main"  style="width:100%">
+                                <aura:if isTrue="{!v.tourTable.length>0}">  
+                                    <div class="slds-size--1-of-1 slds-p-horizontal--small slds-p-top--medium">
+                                        <c:EnziDataTable showMultiselect="false" records="{!v.tourTable}" describedFields="{!v.rescheduledTourFields}"></c:EnziDataTable>
+                                    </div> 
+                                </aura:if>
+                            </div>
+                        </c:EnziAccordianItem>
+                    </c:EnziFormValidator>
+                </aura:if>
+                <aura:if isTrue="{!v.tourInterest=='Tour Reschedule'}">
+                    <aura:if isTrue="{! !v.tourTable.length>0}">
+                        <div class="slds-modal__footer page-footer">
+                            <c:EnziButton label="Cancel" type="neutral" click="{!c.cancel}" ></c:EnziButton>
+                            <c:EnziButton label="Book Tour" type="brand" click="{!c.saveReschedule}" disabled="{!not(and(v.valid5))}"></c:EnziButton>
+                        </div> 
+                    </aura:if>
+                    <aura:if isTrue="{!v.tourTable.length>0}">
+                        <div class="slds-modal__footer page-footer">
+                            <c:EnziButton label="Cancel" type="neutral" click="{!c.cancel}" id="close"></c:EnziButton>  
+                        </div>
+                    </aura:if>
+                </aura:if>
+            </c:EnziAccordian>
+        </section>
+    </div>
+    <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+        <c:EnziModal aura:id="NewContactModal" header="Create New Contact" show="false">            
+            <c:EnziModalContainer >
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="string" name="firstName" label="First Name" value="{!v.contact.FirstName}" errors="{!v.errors}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="string" name="lastName" label="Last Name" value="{!v.contact.LastName}" required="true" errors="{!v.errors}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField sObjectName="Contact" fieldName="Email" value="{!v.contact.Email}" required="true" errors="{!v.errors}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField sObjectName="Contact" fieldName="Company__c" value="{!v.contact.Company__c}" disabled="true" required="true" errors="{!v.errors}"></c:EnziField>
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <div class="slds-text-align--right">
+                    <c:EnziButton label="Cancel" type="neutral" click="{!c.closeNewContactModal}"></c:EnziButton>
+                    <c:EnziButton label="Create Contact" type="brand" click="{!c.saveContact}" disabled="{!(!v.valid)}"></c:EnziButton>
+                </div> 
+            </c:EnziModalFooter>            
+        </c:EnziModal>
+    </c:EnziFormValidator>
+</aura:component>

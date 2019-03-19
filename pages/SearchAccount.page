@@ -1,0 +1,21 @@
+<apex:page showHeader="false" standardStylesheets="false" >
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js, 'jquery/jquery.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js, 'jquery/jquery-ui.js')}"/>    
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_css, 'jquery/jquery-ui.css')}"/>    
+    <apex:includescript value="/support/console/31.0/integration.js" />
+    <head>
+        <title>Search Account</title>
+        <script type="text/javascript">
+            sforce.console.setTabTitle('Search Account');
+        </script>
+        <style>
+            .sidebarCollapsible {
+            	padding: 0px !important
+            }
+            .outer td.oRight {
+            	padding:0px !important
+            }
+        </style>
+    </head>
+    <c:LightningResource component="SearchAccount" parameters="recordId={!$CurrentPage.parameters.ParentId}" showHeader="true"></c:LightningResource>
+</apex:page>

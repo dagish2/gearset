@@ -1,0 +1,6 @@
+<apex:page standardstylesheets="false" sidebar="false" showheader="false" cache="false">
+    <head>
+        <title>Transfer Paperwork</title>
+    </head>
+    <c:LightningResource component="Transfer_Paperwork_Lightning_Action" parameters="recordId={!$CurrentPage.parameters.id}"></c:LightningResource>
+</apex:page>

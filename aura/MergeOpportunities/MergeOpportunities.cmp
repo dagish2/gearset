@@ -1,0 +1,81 @@
+<aura:component  controller="MergeOpportunityController">
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="settingData" type="map" />
+    <aura:attribute name="mapUserInfo" type="map" />
+    <aura:attribute name="utils" type="String" />
+    <aura:attribute name="isOwnershipProfile" type="boolean" default="false"/>
+    <aura:attribute name="opptyDisplayFields" type="List"/>
+    <aura:attribute name="accountDisplayFields" type="List"/>
+    <aura:attribute name="lstPrimaryOppty" type="List"/>
+    <aura:attribute name="lstSelectedOppty" type="List"/>
+    <aura:attribute name="lstSelectedAccount" type="List"/>
+    <aura:attribute name="stage" type="Integer" default="0"/> 
+    <aura:attribute name="fieldList" type="List" default="[]"/> 
+    <aura:attribute name="query" type="String" default=""/>
+    <aura:attribute name="btnLabel" type="String" default="Next"/>
+    <aura:attribute name="btnIcon" type="String" default="utility:forward"/>
+    <aura:attribute name="progress" type="String" default="0"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- for 1st table -->
+    <aura:attribute name="opportunityMetaFields" type="List"/> 
+    <aura:attribute name="NotMergedOpportunity" type="String" default="1"/>
+    <aura:attribute name="selectedRowsCount" type="Integer"/>
+    <aura:attribute name="selectedOpportunities" type="List" default="[]"/>
+    <aura:attribute name="selectedOpportunitiesToMerge" type="List" default="[]"/>
+    <!-- for 2nd table -->
+    <aura:attribute name="SelectedMergedOpportunityData" type="List" default="[]"/>
+    <aura:attribute name="ChoosePrimaryOpportunity" type="String" default="1"/>
+    <aura:attribute name="selectedRows" type="List" default="'selectedAccountIds':[]"/>
+    <aura:handler name="rowActionEvent" event="c:WeTableRowActionEvent" action="{!c.handleRowAction}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:LightningCSS/>
+    <style>
+        .slds-spinner_container {display: none;}
+        #auraErrorMessage {padding-bottom : 65px !important;}  
+    </style>
+    <div id="mainDiv">
+        <c:EnziHeader sObjectName="{!and(v.type=='account',(v.stage le 1))?'Account':'Opportunity'}" pageName="{!and(v.type=='account',(v.stage le 1))?'Account Information':'Merge Opportunities'}" iconName="{!and(v.type=='account',(v.stage le 1))?'standard:account':'standard:opportunity'}"></c:EnziHeader>
+        <div style="background:ghostwhite;margin:8px;border-radius:6px;">
+            <c:EnziModal aura:id="instructionModel" header="Instructions to Merge Opportunity"  showFooter="true" >
+                <c:EnziModalContainer >
+                    <c:WeInstructions instructions="{!v.settingData.Instructions}"/>
+                </c:EnziModalContainer>
+                <c:EnziModalFooter >
+                    <c:EnziButton label="OK" leftIcon="utility:like" type="brand" click="{!c.closeInstructionModel}" ></c:EnziButton>
+                </c:EnziModalFooter> 
+            </c:EnziModal>
+        </div>
+        <div class="slds-card__body slds-p-around_small slds-m-around_x-small" style="border:1px solid #d9dbdd;margin-bottom:60px;background:ghostwhite;">
+            <aura:if isTrue="{!v.NotMergedOpportunity == 2}">
+                <c:WeTable meta="{!v.opportunityMetaFields}"
+                           query="{!v.query}"
+                           selectedRows="{!v.selectedOpportunities}" 
+                           showSelect="true" 
+                           height="500" 
+                           toolTip="Only Opportunity Name is searchable. Opportunity ID, Segment, Close Date, Stage and Account Name aren't searchable.Use filters or sort on these fields instead."
+                           searchFields="Name"
+                           />
+            </aura:if>
+            <aura:if isTrue="{!v.NotMergedOpportunity == 3}">
+                <c:WeTable meta="{!v.opportunityMetaFields}"
+                           data="{!v.SelectedMergedOpportunityData}"
+                           selectedRows="{!v.selectedOpportunitiesToMerge}" 
+                           showSelect="true" 
+                           height="200" 
+                           toolTip="please enter name"
+                           searchFields="Name"
+                           maxRowSelection ="1"/>
+            </aura:if>
+        </div>   
+        <footer class="slds-modal__footer" style="bottom:0;width:100%;z-index: 2;position: fixed;text-align:right;margin-top:20px;background:ghostwhite;">
+            <c:EnziButton label="Close" type="destructive" click="{!c.close}"  leftIcon="utility:close"></c:EnziButton>
+            <aura:if isTrue = "{!(and(v.stage == 1 ,not(v.NotMergedOpportunity==3)))}">
+                <c:EnziButton label="Next" type="brand" click="{!c.next}" leftIcon="{!v.btnIcon}" show="true"></c:EnziButton>
+            </aura:if>     
+            <aura:if isTrue = "{!v.NotMergedOpportunity == 3}">
+                <c:EnziButton label="Prev" click="{!c.prev}" type="brand" leftIcon="utility:back" show="{!v.stage==1}"></c:EnziButton>
+                <c:EnziButton label="Merge" type="brand" click="{!c.MergeOpprtunity}" leftIcon="{!v.btnIcon}" show="true"></c:EnziButton>
+            </aura:if>
+        </footer> 
+    </div>
+</aura:component>

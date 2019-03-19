@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Tour Cancel Followup - Opportunity</name>
+    <style>none</style>
+    <subject>Want to schedule a tour with WeWork?</subject>
+    <textOnly>Hi there!
+
+Looks like you canceled your tour. We would love to see you some other time. Would you like to scedule another tour with us?
+
+Yes:https://welcome.wework.com/forms/schedulenewtour.php?oppId={!Tour_Outcome__c.OpportunityId__c}
+
+No:https://welcome.wework.com/forms/notinterested.php?oppId={!Tour_Outcome__c.OpportunityId__c}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User announcements for sprint 26 B  Validation rule</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes 26 B Validation Live</name>
+    <style>freeForm</style>
+    <subject>IMPORTANT PLEASE READ: New Required Opportunity Fields</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+Just a friendly reminder that with today&apos;s release there are new rules regarding required Opportunity fields that are set to take effect Tomorrow, March 21st, 2018
+
+There is a new section on the Opportunity named &quot;Sales Details&quot;
+
+This section contains a series of now required fields (at sales stages Selling and beyond) detailing inventory use case and projected move out details:
+
+Primary Use Case (Required): High level use case of what the WeWork space utilized for (i.e. HQ, Swing space, Satellite Office, etc.)
+
+Use Case Additional Notes (Optional): Additional details relating to the use case of WeWork space
+
+Is member planning to move out? (Required): Likelihood of predetermined move out
+
+Forecasted move out date (Required): Earliest prospective move out date (required only when the &quot;Is member planning to move out?&quot; field is set to &quot;Yes-100%&quot; or &quot;Likely-75%&quot;)
+
+Reason for predetermined move out (Optional): Additional details relating to why the member is predetermined to move out
+
+Please note: The field requirements will not apply to already existing Opportunities. Only Opportunities created on March 21st 2018 and beyond will be subject to these rules.
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

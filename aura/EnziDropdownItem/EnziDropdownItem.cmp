@@ -1,0 +1,12 @@
+<aura:component >
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="id" type="String" />
+    <aura:attribute name="click" type="Object" />
+    <li class="slds-dropdown__item" role="presentation" id="{!v.id}" onclick="{!v.click}">
+        <a href="javascript:void(0);" role="menuitem" tabindex="-1">
+            <span class="slds-truncate">
+                {!v.label}
+            </span>
+        </a>
+    </li>
+</aura:component>

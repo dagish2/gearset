@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>42.0</apiVersion>
+    <available>true</available>
+    <description>This template is used to notify Referral Program Manager when an email and name of referrer is updated on an opportunity</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Referral Information</name>
+    <style>none</style>
+    <subject>Referral Information Updated for</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

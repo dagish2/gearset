@@ -1,0 +1,63 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="AccountTypeConversionController" access="global">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="pageName" type="String" />
+    <aura:attribute name="account" type="Map" />    
+    <aura:attribute name="errors" type="Object" />
+    <aura:attribute name="valid" type="Boolean" />    
+    <aura:attribute name="isParentAccount" type="Boolean" />
+    <aura:attribute name="isAllowedToConverion" type="Boolean" default="true" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <Style>
+        .slds-modal__container {
+        margin: 0 auto;
+        width: 80%;
+        max-width: 100rem;
+        min-width: 20rem;
+        }
+        .slds-spinner_container{
+        margin-top:150px;
+        margin-bottom:150px;
+        }
+    </Style>
+    <aura:renderIf isTrue="{!not(empty(v.isAllowedToConverion))}">
+        <aura:if isTrue="{! not(v.isAllowedToConverion)}">
+            <div aura:id="AccountTypeConversionErrorMessage">
+                {!v.body}
+            </div>
+            <aura:set attribute="else">
+                <c:EnziHeader sObjectName="Account" pageName="{!v.pageName}" iconName="standard:account" />
+                <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+                    <div class="slds-grid slds-grid--vertical slds-nowrap">
+                        <div class="slds-grid slds-wrap slds-grid--pull-padded slds-p-horizontal_large slds-p-vertical_small " role="main">
+                            <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 form-element">
+                                <c:EnziField type="reference" name="ActiveUsers" label="Account Owner" reference="User" value="{!v.account.OwnerId}" required="true" labelField="Name" valueField="Id" criteria="isActive = true" helpText="Enter the user name to set Account Owner for the Sales Account" errors="{!v.errors}" />
+                            </div>
+                            <aura:if isTrue="{!v.account.Account_Type__c == 'Org'}">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 form-element">
+                                    <c:EnziField type="string" name="Nickname" label="Nickname" value="{!v.account.Nickname__c}" required="true" helpText="Enter the nick name for the Sales Account(Maximum length: 40)" length="40" errors="{!v.errors}" />
+                                </div>
+                                <aura:set attribute="else">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 form-element">
+                                        <c:EnziField type="string" name="Name" label="Account Name" value="{!v.account.Name}" required="true" length="40" errors="{!v.errors}" helpText="Please specify the Org Account Name" />
+                                    </div>
+                                </aura:set>
+                            </aura:if>                          
+                            <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 form-element">
+                                <c:EnziField type="reference" reference="Account" name="ParentOrgAccount" label="Parent Account" value="{!v.account.ParentId}" required="{!v.account.Account_Type__c == 'Org'}" disabled="{!and(!empty(v.account.ParentId),not(v.isParentAccount))}" defaultDisabled="true" errors="{!v.errors}" criteria="{!'(Id != \''+v.recordId+'\' AND Parent_Org_Id__c != \''+v.recordId+'\' AND Parent_Org__c != \''+v.recordId+'\')  AND Account_Type__c = \'Org\'' }" helpText="Converted Account will be parented under this Org Account" />
+                            </div>
+                            <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 form-element">
+                                <c:EnziField type="reference" reference="Contact" name="Contact" label="Main Contact"  value="{!v.account.Primary_Member__c}" disabled="true" defaultDisabled="true" errors="{!v.errors}" />
+                            </div>
+                        </div>
+                        <div class="slds-modal__footer button-align-right">
+                            <c:EnziButton type="destructive" leftIcon="utility:close" label="Cancel" click="{!c.close}" />
+                            <c:EnziButton type="brand" leftIcon="utility:save" label="Convert" click="{!c.convertAccountType}" disabled="{!(!v.valid)}" />
+                        </div>
+                    </div>
+                </c:EnziFormValidator>
+            </aura:set>
+        </aura:if>
+    </aura:renderIf>
+</aura:component>

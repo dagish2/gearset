@@ -1,0 +1,3 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false">
+    <c:LightningResource component="ReferrerValidation" parameters="recordId={!$CurrentPage.parameters.Id};Name={!$CurrentPage.parameters.Name}"></c:LightningResource>
+</apex:page>

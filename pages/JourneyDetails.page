@@ -1,0 +1,180 @@
+<apex:page standardcontroller="Journey__c" extensions="JourneyDetailController">
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js, 'jquery/jquery.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js, 'jquery/jquery-ui.js')}"/>    
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_css, 'jquery/jquery-ui.css')}"/>    
+    <apex:includescript value="/support/console/31.0/integration.js" />
+    <head>
+        <title>Journey : {!Journey__c.Name}</title>
+        <script type="text/javascript">
+        function testSetTabTitle() {
+            sforce.console.setTabTitle('Journey : {!Journey__c.Name}');
+        }
+        var pageLoad = window.onload;
+          window.onload = function() {
+                if (pageLoad) {
+                        pageLoad();
+                }
+                  testSetTabTitle();
+          }
+          function refreshJourneyDetails() {
+              refreshJourney();
+          }
+          function testCloseTab() {
+              sforce.console.getEnclosingTabId(closeSubtab);
+              sforce.console.refreshNavigationTab();
+              refreshJourneyDetails();
+        }
+
+        var closeSubtab = function closeSubtab(result) {
+            var tabId = result.id;
+            sforce.console.closeTab(tabId);
+        };
+
+        function refreshRelatedDetails() {
+        	refreshDetails();
+        }
+        </script>        
+        <script>
+		$( function() {
+			$( "#menu" ).menu();
+		} );
+        </script>
+        <script>
+        $( function() {
+            var JSONResult;
+            var availableTags = [];
+            function bindTag() {
+            window.$j = jQuery.noConflict();
+             $j("#tags").autocomplete({
+                    source: availableTags,
+                    autoSelectFirst : true,
+                    select: function(event, ui) {
+                        var url = ui.item.data.Id + '&p2_lkid={!toId}';
+                        if(url != '#') {
+                            if (!sforce.console.isInConsole()) {
+                                location.href = '/_ui/core/email/author/EmailAuthor?template_id=' + url;
+                            }else{
+                                sforce.console.getEnclosingPrimaryTabId(function (result){
+                                    sforce.console.openSubtab(result.id , '{!$Site.BaseUrl}/_ui/core/email/author/EmailAuthor?template_id='+ url, true, 'Send Email : Salesforce', null);
+                                });
+                                //sforce.console.openPrimaryTab(null,'{!$Site.BaseUrl}/_ui/core/email/author/EmailAuthor?template_id='+ url, false, 'Send Email : Send Email', '' ,'Send Email');
+                            }
+                        }
+                    }
+             });
+            }
+            window.$j = jQuery.noConflict();
+              $j( document ).ready(function() {
+                JourneyDetailController.getStringMap(function(result, event){
+                    var JSONResult = result;
+                    for (var key in JSONResult) {
+                      if (JSONResult.hasOwnProperty(key)) {
+                        JSONResult[key].forEach(function(entry) {
+                            availableTags.push({ value : entry.Name, data: entry });
+                        });
+                      }
+                    }
+                    bindTag.call();
+                });
+              });
+            });
+        </script>
+        <style>
+            .showListButton {
+                background-position: 1px 0px !important;
+            }
+
+            .hideListButton {
+                background-position: 1px -12px !important;
+            }
+
+            body .bPageBlock .pbBody .pbSubheader {
+                color: black !important;
+            }
+
+            ul {
+                list-style-type: none;
+                -webkit-padding-start: 0px !important;
+            }
+
+            body .googleDocMutton .menuButtonMenu a:hover, body .searchCustomization .menuButton .menuButtonMenu a:hover, #browseTags .menuButton .menuButtonMenu a:hover, body .bMyTask .menuButton .menuButtonMenu input.theOption, body .menuButton .menuButtonMenu a:hover {
+                background: #007fff;
+                color: #FFF;
+                text-decoration: none;
+                padding: 4px 10px;
+            }
+
+            #sub-menu {
+                max-height: 250px;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            #custom-email a {
+                text-decoration: none;
+                padding: 5px 10px;
+                padding-left: 15px;
+            }
+
+                #custom-email a:hover {
+                    background: #007fff;
+                    color: #FFF;
+                    text-decoration: none;
+                    padding: 5px 10px;
+                    padding-left: 15px;
+                }
+          .ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
+        </style>
+    </head>    
+    <apex:form >
+        <apex:actionfunction name="CallApexMethod" action="{!getStringMap}" />
+        <apex:actionfunction name="refreshJourney" rerender="journeyDetails" />
+        <apex:actionfunction name="refreshDetails" rerender="relatedDetails" />
+    </apex:form>
+
+    <apex:pageblock mode="detail" id="journeyDetails">
+        <label for="tags"><b>&nbsp;&nbsp;&nbsp; Search : </b></label>
+        <input id="tags" tabindex="0" placeholder="search email template" style="height: 16px;" />
+        <div class="menuButton" id="MyMenu">
+            <div class="menuButtonButton" id="MyMenuButton"><span id="menuLabel" tabindex="0" style="">Send Email</span></div>
+            <div class="menuButtonMenu" id="MyMenuMenu">
+                <ul id="menu">
+                    <li><a id="custom-email" href="/_ui/core/email/author/EmailAuthor">Custom Email</a></li>
+                    <li><hr /></li>
+                    <apex:repeat value="{!mapEmailTemplate}" var="folderName" id="theRepeat">
+                        <li>
+                            <div>
+                                <apex:outputlink title="{!folderName}" value="#">
+                                    <apex:outputtext value="{!folderName}"></apex:outputtext>
+                                </apex:outputlink>
+                            </div>
+                            <ul id="sub-menu">
+                                <apex:repeat value="{!mapEmailTemplate[folderName]}" var="emailTemplate" id="theRepeat">
+                                    <li>
+                                        <div>
+                                            <apex:outputlink title="{!emailTemplate.Name}" value="/_ui/core/email/author/EmailAuthor?template_id={!emailTemplate.Id}&p2_lkid={!toId}">
+                                                <apex:outputtext value="{!emailTemplate.Name}"></apex:outputtext>
+                                            </apex:outputlink>
+                                        </div>
+                                    </li>
+                                </apex:repeat>
+                            </ul>
+                        </li>
+                    </apex:repeat>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript">
+	       new MenuButton('MyMenu', false);
+        </script>
+        <apex:detail subject="{!Journey__c.Id}" relatedlist="true" title="true" inlineedit="true" oncomplete="refreshRelatedDetails()" />
+    </apex:pageblock>
+    <apex:form id="relatedDetails">
+        <apex:pageblock rendered="{!(Journey__c.Primary_Contact__c != null)}" mode="detail">
+            <apex:detail subject="{!Journey__c.Primary_Contact__c}" relatedlist="true" title="true" inlineedit="true" oncomplete="refreshJourneyDetails()" />
+        </apex:pageblock>
+        <apex:pageblock rendered="{!(Journey__c.Primary_Lead__c != null)}" mode="detail">
+            <apex:detail subject="{!Journey__c.Primary_Lead__c}" relatedlist="true" title="true" inlineedit="true" oncomplete="refreshJourneyDetails()" />
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

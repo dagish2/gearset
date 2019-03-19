@@ -1,0 +1,1 @@
+Hello! You are receiving this email because a Membership Agreement was sent to {!Opportunity.Primary_Member_Name__c} from {!Opportunity.Account} to complete.

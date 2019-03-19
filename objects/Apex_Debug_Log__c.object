@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>Affected_User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Captures the User detail who got this exception</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the User detail who got this exception</inlineHelpText>
+        <label>Affected User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Apex_Debug_Logs</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ApexLogId__c</fullName>
+        <externalId>false</externalId>
+        <label>ApexLogId</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Apex_Class__c</fullName>
+        <externalId>false</externalId>
+        <label>Apex Class</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ErrorLineNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>ErrorLineNumber</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Estimated_Fix__c</fullName>
+        <description>This field is used to show the status of exception</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is used to show the status of exception</inlineHelpText>
+        <label>Estimated Fix</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Backlog</fullName>
+                    <default>true</default>
+                    <label>Backlog</label>
+                </value>
+                <value>
+                    <fullName>Data Issue</fullName>
+                    <default>false</default>
+                    <label>Data Issue</label>
+                </value>
+                <value>
+                    <fullName>Hotfix</fullName>
+                    <default>false</default>
+                    <label>Hotfix</label>
+                </value>
+                <value>
+                    <fullName>Next Sprint</fullName>
+                    <default>false</default>
+                    <label>Next Sprint</label>
+                </value>
+                <value>
+                    <fullName>Needs Prioritization</fullName>
+                    <default>false</default>
+                    <label>Needs Prioritization</label>
+                </value>
+                <value>
+                    <fullName>No Fix Required</fullName>
+                    <default>false</default>
+                    <label>No Fix Required</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ExceptionTypeName__c</fullName>
+        <externalId>false</externalId>
+        <label>ExceptionTypeName</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Exception_Category__c</fullName>
+        <description>Used to store the category around the issue once investigated</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Used to store the category around the issue once investigated</inlineHelpText>
+        <label>Exception Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Business Rule</fullName>
+                    <default>false</default>
+                    <label>Business Rule</label>
+                </value>
+                <value>
+                    <fullName>Custom Apex</fullName>
+                    <default>false</default>
+                    <label>Custom Apex</label>
+                </value>
+                <value>
+                    <fullName>Custom Config</fullName>
+                    <default>false</default>
+                    <label>Custom Config</label>
+                </value>
+                <value>
+                    <fullName>Data Integrity</fullName>
+                    <default>false</default>
+                    <label>Data Integrity</label>
+                </value>
+                <value>
+                    <fullName>Row Lock Exception</fullName>
+                    <default>false</default>
+                    <label>Row Lock Exception</label>
+                </value>
+                <value>
+                    <fullName>Standard Salesforce</fullName>
+                    <default>false</default>
+                    <label>Standard Salesforce</label>
+                </value>
+                <value>
+                    <fullName>Uncategorized</fullName>
+                    <default>true</default>
+                    <label>Uncategorized</label>
+                </value>
+                <value>
+                    <fullName>User Training</fullName>
+                    <default>false</default>
+                    <label>User Training</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>InstanceName__c</fullName>
+        <externalId>false</externalId>
+        <label>InstanceName</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Updated_On__c</fullName>
+        <description>Captures the information around, when the last update was made with the investigation or any event for the issue</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the information around, when the last update was made with the investigation or any event for the issue</inlineHelpText>
+        <label>Last Updated On</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Login_UserId__c</fullName>
+        <externalId>false</externalId>
+        <label>Login UserId</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Login_User_ProfileId__c</fullName>
+        <externalId>false</externalId>
+        <label>Login User ProfileId</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Message__c</fullName>
+        <externalId>false</externalId>
+        <label>Message</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Method__c</fullName>
+        <externalId>false</externalId>
+        <label>Method</label>
+        <length>180</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notes_and_Comments__c</fullName>
+        <description>This field is used to provide the findings for the issue or any comments related to the issue. Use this to update the investigation details. For resolution steps, we will use another field</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures all information around the findings, and exceptions</inlineHelpText>
+        <label>Findings and Observations</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Record_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Record</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ReplayId__c</fullName>
+        <externalId>false</externalId>
+        <label>ReplayId</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Resolution_Steps_and_Details__c</fullName>
+        <description>Field to capture the details and information around the resolution steps taken, and details what changed</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field to capture the details and information around the resolution steps taken, and details what changed</inlineHelpText>
+        <label>Resolution Steps and Details</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Resolved_On__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL(Status__c , 'Fixed and Deployed'), NOW() , NULL)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Resolved On</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>RollBar_Integration_status__c</fullName>
+        <externalId>false</externalId>
+        <label>RollBar Integration status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>200</fullName>
+                    <color>#33CC00</color>
+                    <default>false</default>
+                    <label>Operation was completed successfully</label>
+                </value>
+                <value>
+                    <fullName>400</fullName>
+                    <color>#78C953</color>
+                    <default>false</default>
+                    <label>The request was malformed and could not be parsed.</label>
+                </value>
+                <value>
+                    <fullName>403</fullName>
+                    <color>#E27001</color>
+                    <default>false</default>
+                    <label>Access token was missing, invalid, or does not have the necessary permissions.</label>
+                </value>
+                <value>
+                    <fullName>404</fullName>
+                    <color>#A845DC</color>
+                    <default>false</default>
+                    <label>The requested resource was not found. This response will be returned if the URL is entirely invalid (i.e. /asdf), or if it is a URL that could be valid but is referencing something that does not exist (i.e. /item/12345).</label>
+                </value>
+                <value>
+                    <fullName>413</fullName>
+                    <color>#F3D904</color>
+                    <default>false</default>
+                    <label>The request exceeded the maximum size of 128KB.</label>
+                </value>
+                <value>
+                    <fullName>422</fullName>
+                    <color>#A53711</color>
+                    <default>false</default>
+                    <label>The request was parseable (i.e. valid JSON), but some parameters were missing or otherwise invalid.</label>
+                </value>
+                <value>
+                    <fullName>429</fullName>
+                    <color>#66E9BD</color>
+                    <default>false</default>
+                    <label>If rate limiting is enabled for your access token, this return code signifies that the rate limit has been reached and the item was not processed.</label>
+                </value>
+                <value>
+                    <fullName>401</fullName>
+                    <color>#0B24BE</color>
+                    <default>false</default>
+                    <label>Bad Token</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Stack_Trace__c</fullName>
+        <externalId>false</externalId>
+        <label>Stack Trace</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Open</fullName>
+                    <default>true</default>
+                    <label>Open</label>
+                </value>
+                <value>
+                    <fullName>Fixed, Pending Deployment</fullName>
+                    <default>false</default>
+                    <label>Fixed, Pending Deployment</label>
+                </value>
+                <value>
+                    <fullName>Investigated</fullName>
+                    <default>false</default>
+                    <label>Investigation Complete</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>Investigation In Progress</label>
+                </value>
+                <value>
+                    <fullName>No Fix Required</fullName>
+                    <default>false</default>
+                    <label>No Fix Required</label>
+                </value>
+                <value>
+                    <fullName>Resolved</fullName>
+                    <default>false</default>
+                    <label>Resolved</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Exception Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Warning</fullName>
+                    <default>false</default>
+                    <label>Warning</label>
+                </value>
+                <value>
+                    <fullName>Info</fullName>
+                    <default>false</default>
+                    <label>Info</label>
+                </value>
+                <value>
+                    <fullName>Error</fullName>
+                    <default>false</default>
+                    <label>Error</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>User_ID__c</fullName>
+        <description>Captures the SFID of the affected user with the exception</description>
+        <externalId>false</externalId>
+        <formula>Affected_User__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Captures the SFID of the affected user with the exception</inlineHelpText>
+        <label>User ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>User_Profile__c</fullName>
+        <description>Captures the Profile Name for the User Affected with the exception</description>
+        <externalId>false</externalId>
+        <formula>Affected_User__r.Profile.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Captures the Profile Name for the User Affected with the exception</inlineHelpText>
+        <label>User Profile</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Apex Debug Log</label>
+    <nameField>
+        <displayFormat>L-{00000}</displayFormat>
+        <label>Apex Debug Log Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Apex Debug Logs</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Message__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Apex_Class__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Method__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>BatchToForceFullyUpdateJourneys</fullName>
+        <columns>NAME</columns>
+        <columns>ApexLogId__c</columns>
+        <columns>ErrorLineNumber__c</columns>
+        <columns>Message__c</columns>
+        <columns>Method__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Apex_Class__c</field>
+            <operation>equals</operation>
+            <value>BatchToForceFullyUpdateJourneys</value>
+        </filters>
+        <label>BatchToForceFullyUpdateJourneys</label>
+    </listViews>
+    <listViews>
+        <fullName>Logs_Created_Today</fullName>
+        <booleanFilter>(1 OR 3) AND 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Message__c</columns>
+        <columns>Apex_Class__c</columns>
+        <columns>Method__c</columns>
+        <columns>Stack_Trace__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Fix__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>Notes_and_Comments__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Open,In Progress</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>YESTERDAY</value>
+        </filters>
+        <label>Logs Created Today</label>
+    </listViews>
+    <listViews>
+        <fullName>THIS_Year_INVALID_EMAIL_ADDRESS</fullName>
+        <columns>NAME</columns>
+        <columns>Method__c</columns>
+        <columns>Message__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Message__c</field>
+            <operation>contains</operation>
+            <value>INVALID_EMAIL_ADDRESS</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterThan</operation>
+            <value>12/31/2018 12:00 AM</value>
+        </filters>
+        <label>THIS Year INVALID_EMAIL_ADDRESS</label>
+    </listViews>
+    <listViews>
+        <fullName>Today</fullName>
+        <columns>NAME</columns>
+        <columns>Apex_Class__c</columns>
+        <columns>Message__c</columns>
+        <columns>Method__c</columns>
+        <columns>Record_Id__c</columns>
+        <columns>Stack_Trace__c</columns>
+        <columns>Status__c</columns>
+        <columns>RollBar_Integration_status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>Today</label>
+    </listViews>
+    <listViews>
+        <fullName>Users_exceptions</fullName>
+        <columns>NAME</columns>
+        <columns>Apex_Class__c</columns>
+        <columns>Message__c</columns>
+        <columns>Method__c</columns>
+        <columns>Stack_Trace__c</columns>
+        <columns>Status__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>wewo</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>THIS_MONTH</value>
+        </filters>
+        <label>Users exceptions</label>
+    </listViews>
+</CustomObject>

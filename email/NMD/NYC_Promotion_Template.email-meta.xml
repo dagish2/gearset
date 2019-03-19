@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>NYC Promotion Template</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>NYC Promotion Template</name>
+    <style>none</style>
+    <subject>NYC Promotion Template</subject>
+    <textOnly>Hi,
+
+I gave you a call earlier, but wanted to follow up via email as well.
+
+I know you previously expressed interest in seeing a WeWork location, so I wanted to extend a limited time special offer to you: 50% off your first 3 months at FiDi, Wall Street, Charging Bull, or Fulton Center.
+
+I would love to have you come by for a tour and experience the community in person!  Let me know a good day and time that works.
+
+Looking forward to hearing from you.
+
+{!User.Name}
+{!User.Email}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

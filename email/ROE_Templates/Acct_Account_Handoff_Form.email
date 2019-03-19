@@ -1,0 +1,22 @@
+Hello, 
+
+I am handing off an account to you, as you are the designated owner per the ROE. This account will be added to your BoB. See below for information on the account, and feel free to contact me to discuss. 
+
+[Pre-populated, where available] 
+Account Name: {!Account.Name} 
+Account Link: {!Account.Link} 
+Account FTE: {!Account.Account_FTE__c} 
+Account HQ Market: {!Account.Account_Market__c} 
+Primary Member: {!Account.Primary_Member__c} 
+
+Manual Input: 
+Does member plan to move out?: 
+What is the member's primary use case?: 
+What relationship does Primary Member have to HQ?: 
+Has an intro to Decision Maker been made?: 
+If yes, can you facilitate an introduction?: 
+If no, can we work towards an introduction?: 
+Additional Information: 
+
+Best, 
+{!Account.OwnerFirstName}

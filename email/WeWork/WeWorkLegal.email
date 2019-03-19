@@ -1,0 +1,21 @@
+Can you please send your approval on this deal?
+
+Code Name : {!Deal__c.Code_Name__c}
+Deal Name: {!Deal__c.Name}
+Account: {!Deal__c.Account__c}
+Contact: {!Deal__c.Contact__c}
+
+
+Please note, You can approve or reject this request simply by replying this email with following content,
+APPROVE, APPROVED, YES, REJECT, REJECTED, or NO must be in 
+the very first line of the reply email. Followed by, your comment
+in the second line.
+
+Or you can submit your response in Salesforce by clicking on the given link below
+
+{!Deal__c.Link}
+
+wework
+115 W 18th St | New York, NY 10011
+O: {!User.Phone} ext.{!User.Extension}
+wework.com | facebook | twitter

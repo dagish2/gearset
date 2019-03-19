@@ -1,0 +1,216 @@
+<aura:component access="global" controller="MergeOrganizationsController" >
+    <aura:attribute name="attributes" type="Map" default="{'records':[]}"/>    
+    <aura:attribute name="result" type="Map" />  
+    <aura:attribute name="query" type="String" />
+    <aura:attribute name="stage" type="String" default ="1" />    
+    <aura:attribute name="selectedRecordIds" type="Map" default="{'masterAccountId':[], 'selectedAccountIds':[]}" />
+    <aura:attribute name="showSalesAccounts" type="Boolean" default="false"/>
+    <aura:attribute name="keyword" type="String" />
+    <aura:attribute name="orgAccounts" type="List" default="[]" />
+    <aura:attribute name="selectedOrg" type="Map" default="{'Id':'','Name':''}"/>
+    <aura:attribute name="isQueryDataTable" type="Boolean" default="false"/>
+    <aura:attribute name="currentUserInfo" type="Map"/>
+    <aura:attribute name="records" type="List" default="[]" />
+    <aura:attribute name="pickListValues" type="List" default="['Org Account','Sales Account']"/>
+    <aura:attribute name="selectedValue" type="String"/>
+    <aura:attribute name="setting" type="Map"/>
+    <aura:attribute name="isCustomSearch" type="Boolean" default="false"/>  
+    <aura:attribute name="instructions" type="List" default="[]" />
+    <!-- -->
+    <aura:attribute name="selectedAccounts" type="List" default="[]"/>
+    <aura:attribute name="selectedAccountsToMergeData" type="List" default="[]"/>
+    <aura:attribute name="selectedMasterAccount" type="List" default="[]"/>
+    <aura:attribute name="settingData" type="Map" default = "{}" />
+    <aura:attribute name="utils" type="String"  />
+    <aura:attribute name="searchKeyword" type="String"/>
+    <!---->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    <aura:handler name="change" value="{!v.selectedValue}" action="{!c.selectedValue}"/> 
+    <aura:handler name="change" value="{!v.attributes.keyword}" action="{!c.search}"/> 
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+        #lightning {
+        background-image : url("/_slds/images/themes/lightning_blue/lightning_blue_background.png") !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover;
+        }
+        .body{
+        width: -1px;
+        }
+        #searchBoxToolTip{position: absolute;top: 4px;right: 2px;}
+        #auraErrorMessage {padding-bottom : 65px !important;} 
+    </style>
+    <div style="background:ghostwhite;margin-left:8px;margin-right:8px;margin-bottom: -10px;margin-top:15px;border-radius:6px;padding-left:7px;" >
+        <c:EnziHeader sObjectName = "Account" pageName="Merge Accounts" iconName="standard:account"></c:EnziHeader>        
+    </div>
+    <c:EnziModal aura:id="instructionModel" header="Instructions to Merge the Accounts"  showFooter="true" >
+        <c:EnziModalContainer >
+            <c:WeInstructions instructions="{!v.settingData.Instructions}"/>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+            <c:EnziButton label="OK" leftIcon="utility:like" type="brand" click="{!c.closeInstructionModel}"></c:EnziButton>
+        </c:EnziModalFooter> 
+    </c:EnziModal>
+    <div style="background:ghostwhite;margin-left:8px;margin-right:8px;margin-top: 19px;border-radius:6px;">
+        <aura:if isTrue="{!v.stage lt 2}">            
+            <div class="slds-p-left_large slds-p-right_large">
+                <div class="slds-grid slds-wrap slds-grid--pull-padded" role="main" style="width:100%; padding: 10px; margin-bottom:-25px;">
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--4-of-12 slds-large-size--3-of-12" style="padding:10px;padding-left:4px;padding-bottom:25px;">
+                        <c:EnziField type="picklist" name="sales-account-picklist" label="Account Type To Merge" hideLabel="false" helpText="To merge the accounts you need to select Org Account or Sales Account value from the below picklist" options="{!v.pickListValues}" value="{!v.selectedValue}"></c:EnziField>                
+                    </div>
+                    <aura:if isTrue="{!v.selectedValue=='Sales Account'}">
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--8-of-12 slds-large-size--9-of-12" style="padding:11px">                        
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" style="width: 100%;padding-left: 5px;">                               
+                                    Organization Account &nbsp;
+                                    <span style="font-weight: 900;font-size: 15px;display:inline-block;height:0;width: 0;">                   
+                                        <lightning:helptext content="All Sales Accounts related to selected Org can be searched below." />
+                                    </span>
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <div class="slds-combobox_container">
+                                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true" aria-haspopup="listbox" role="combobox" id="searchList">
+                                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left" role="none" >
+                                                <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_left" style="top: 14px;left: 10px;">
+                                                    <lightning:icon iconName="utility:company" size="xx-small"></lightning:icon>
+                                                </span>
+                                                <input type="search" class="slds-input slds-combobox__input" placeholder="Search Org Account" style="padding:0px 40px;width:100%;" onkeyup="{!c.searchOrgAccounts}" id="searchInput" value="{!v.selectedOrg.Name}" autofocus="true"/>
+                                            </div>                                       
+                                            <div id="listbox-unique-id" class="{!(or(empty(v.selectedOrg.Name),empty(v.keyword))?'slds-hide':'')}" role="listbox">
+                                                <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid " role="presentation" style="{!'display:'+(v.keyword.length>2?'block':'none')}"> 
+                                                    <aura:if isTrue="{!v.orgAccounts.length==0}">
+                                                        <li role="presentation" class="slds-listbox__item">
+                                                            <span id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                                <span class="slds-media__body">
+                                                                    <div class="slds-lookup__result-text">
+                                                                        <!-- <mark style="margin-right:10px">No results found.</mark> -->
+                                                                        <mark style="margin-right:10px">No records found.</mark>
+                                                                    </div> 
+                                                                </span>
+                                                            </span>
+                                                        </li>
+                                                        <aura:set attribute="else">
+                                                            <aura:iteration items="{!v.orgAccounts}" var="data">
+                                                                <li role="presentation" class="slds-listbox__item" onclick="{!c.selectEntity}" id="{!data.Id}">
+                                                                    <span id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                                        <span class="slds-media__figure">
+                                                                            <lightning:icon iconName="standard:person_account" size="small"></lightning:icon>
+                                                                            <span class="slds-assistive-text">Description of icon</span>  
+                                                                        </span>
+                                                                        <span class="slds-media__body" style="margin-top:6px;">
+                                                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity"><b>{!data.Name}</b></span>
+                                                                            <span class="slds-listbox__option-meta slds-listbox__option-meta_entity"><aura:if isTrue="{!data.Primary_Member__r.Name}"><b>{!data.Primary_Member__r.Name}</b></aura:if><aura:if isTrue="{!data.Phone}">&nbsp;&nbsp;✆<b>{!data.Phone}</b></aura:if></span>
+                                                                        </span>
+                                                                    </span>
+                                                                </li>
+                                                            </aura:iteration>
+                                                        </aura:set>
+                                                    </aura:if>                                                
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                       
+                        </div>
+                    </aura:if>
+                 
+                    <aura:if isTrue="{!v.selectedValue=='Org Account'}">
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--8-of-12 slds-large-size--9-of-12" style="padding:11px">                        
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" style="width: 100%;padding-left: 5px;">                               
+                                    Organization Account &nbsp;
+                                    <span style="font-weight: 900;font-size: 15px;display:inline-block;height:0;width: 0;">                   
+                                        <lightning:helptext content="You can search all Orgs here" />
+                                    </span>
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <div class="slds-combobox_container">
+                                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true" aria-haspopup="listbox" role="combobox" id="searchList">
+                                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left" role="none" >
+                                                <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_left" style="top: 14px;left: 10px;">
+                                                    <lightning:icon iconName="utility:company" size="xx-small"></lightning:icon>
+                                                </span>
+                                                <input type="search" class="slds-input slds-combobox__input" placeholder="Search All Org Account" style="padding:0px 40px;width:103%;" onkeyup="{!c.searchOrganizations}" id="searchInput"  autofocus="true"/>
+                                            </div>                                       
+                                            <div id="listbox-unique-id" class="{!(or(empty(v.selectedOrg.Name),empty(v.keyword))?'slds-hide':'')}" role="listbox">
+                                                <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid " role="presentation" style="{!'display:'+(v.keyword.length>2?'block':'none')}"> 
+                                                    <aura:if isTrue="{!v.orgAccounts.length==0}">
+                                                        <li role="presentation" class="slds-listbox__item">
+                                                            <span id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                                <span class="slds-media__body">
+                                                                    <div class="slds-lookup__result-text">
+                                                                        <!-- <mark style="margin-right:10px">No results found.</mark> -->
+                                                                        <mark style="margin-right:10px">No records found.</mark>
+                                                                    </div> 
+                                                                </span>
+                                                            </span>
+                                                        </li>
+                                                        <aura:set attribute="else">
+                                                            <aura:iteration items="{!v.orgAccounts}" var="data">
+                                                                <li role="presentation" class="slds-listbox__item" onclick="{!c.selectEntity}" id="{!data.Id}">
+                                                                    <span id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                                        <span class="slds-media__figure">
+                                                                            <lightning:icon iconName="standard:person_account" size="small"></lightning:icon>
+                                                                            <span class="slds-assistive-text">Description of icon</span>  
+                                                                        </span>
+                                                                        <span class="slds-media__body" style="margin-top:6px;">
+                                                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity"><b>{!data.Name}</b></span>
+                                                                            <span class="slds-listbox__option-meta slds-listbox__option-meta_entity"><aura:if isTrue="{!data.Primary_Member__r.Name}"><b>{!data.Primary_Member__r.Name}</b></aura:if><aura:if isTrue="{!data.Phone}">&nbsp;&nbsp;✆<b>{!data.Phone}</b></aura:if></span>
+                                                                        </span>
+                                                                    </span>
+                                                                </li>
+                                                            </aura:iteration>
+                                                        </aura:set>
+                                                    </aura:if>                                                
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                       
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+        </aura:if>
+    </div>
+    <br/>
+    <br/>
+    <div style = "margin-top:-5px" >
+        <div style="background:ghostwhite;margin-left:8px;margin-right:8px;border-radius:6px;" id="tableDiv">
+            <div class="slds-p-left_large slds-p-right_large slds-scrollable_x" style="margin-bottom:5%;padding-top:10px;padding-bottom:10px;" id="inerTableDiv">       
+                <aura:If isTrue="{!and(v.isQueryDataTable==false,v.records.length > 0)}">
+                    <c:WeTable meta = "{!v.settingData.metaFieldsOrg}"
+                               data = "{!v.records}"
+                               selectedRows = "{!v.selectedAccounts}" 
+                               showSelect = "true" 
+                               height = "500"  
+                               searchFields = "Name"
+                               toolTip="You can search recently used Org accounts here."
+                               
+                               />
+                </aura:If>
+                <div style="margin-bottom:0%;padding-top:1px;padding-bottom:10px;">
+                    <aura:If isTrue="{!v.selectedAccountsToMergeData.length > 0}">
+                        <c:WeTable meta = "{!v.settingData.metaFieldsOrg}"
+                                   data = "{!v.selectedAccountsToMergeData}"
+                                   selectedRows = "{!v.selectedMasterAccount}" 
+                                   showSelect = "true" 
+                                   height = "500"  
+                                   searchFields = "Name"
+                                   maxRowSelection="1"
+                                   />
+                    </aura:If>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="slds-modal__footer" style="bottom:0;width:100%;z-index: 2;position: fixed;text-align:right;margin-top:20px;background:ghostwhite;">
+        <c:EnziButton label="Close" type="destructive" click="{!c.close}"  leftIcon="utility:close"></c:EnziButton>                
+        <c:EnziButton label="Prev" click="{!c.prevStage}" type="brand" leftIcon="utility:back" show="{! v.stage gt 1}"></c:EnziButton>
+        <c:EnziButton label="Merge" type="brand" click="{!c.mergeAccounts}" leftIcon="utility:merge" show="{! v.stage eq '2'}"></c:EnziButton>                               
+        <c:EnziButton label="Next" type="brand" click="{!c.nextStage}" leftIcon="utility:forward" show="{! v.stage lt 2}"></c:EnziButton>
+    </footer>  
+</aura:component>

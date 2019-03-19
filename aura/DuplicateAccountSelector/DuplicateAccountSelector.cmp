@@ -1,0 +1,49 @@
+<aura:component >
+    <aura:attribute name="leadId" type="String" />
+    <aura:attribute name="journeyId" type="String" />
+    <aura:attribute name="entity" type="Map" default="{}" />
+    <aura:attribute name="metaFields" type="List" default="[]" />
+    <aura:attribute name="records" type="List" default="[]" />
+    <aura:attribute name="pageName" type="String"/>
+    <aura:attribute name="selectedRecord" type="String" />
+    <aura:attribute name="selectedAction" type="String" />
+    <aura:attribute name="processingCompleted" type="Boolean"/>
+    <aura:attribute name="showAccountSelector" type="Boolean" default="false"/>
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.leadId}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.journeyId}" action="{!c.doInit}" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:EnziModal aura:id="accountSelectorModal" header="Duplicate Account Selector" show="{!v.showAccountSelector}" isLarge="true">
+        <c:EnziModalContainer >
+            <c:EnziHeader sObjectName="Lead" pageName="{!v.entity.name}" iconName="standard:lead"></c:EnziHeader>
+            <ul class="slds-grid slds-page-header__detail-row" style="background-color: lavender;margin:0px">
+                <li class="slds-page-header__detail-block" style="width:25%">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Name">Name</p>
+                    <p class="slds-text-body_regular slds-truncate">{!v.entity.name}</p>
+                </li>
+                <li class="slds-page-header__detail-block" style="width:25%">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Email">Email</p>
+                    <p class="slds-text-body_regular slds-truncate">{!v.entity.email}</p>
+                </li>
+                <li class="slds-page-header__detail-block" style="width:25%">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Company">Company</p>
+                    <p class="slds-text-body_regular slds-truncate">{!v.entity.company}</p>
+                </li>
+                <li class="slds-page-header__detail-block" style="width:25%">
+                    <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Phone">Phone</p>
+                    <p class="slds-text-body_regular slds-truncate">{!v.entity.phone}</p>
+                </li>
+            </ul>
+            <div class="slds-m-around_small" style="margin-bottom:5%;">
+                <c:EnziDataTable describedFields="{!v.metaFields}"  setBorder="true" records="{!v.records}" showMultiselect="false" caption="Potential Duplicates" icon="standard:account" showPagination="true"></c:EnziDataTable>
+            </div>        
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+            <c:EnziButton type="brand" label="Create Account and Don't Merge" click="{!c.createNewDontMerge}"></c:EnziButton>
+            <c:EnziButton type="brand" label="Create Account and Merge" click="{!c.createNew}"></c:EnziButton>
+            <c:EnziButton type="brand" label="Use Selected Account" disabled="{!v.selectedRecord==undefined}" click="{!c.continue}"></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

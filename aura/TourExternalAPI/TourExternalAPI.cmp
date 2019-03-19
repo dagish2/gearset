@@ -1,0 +1,30 @@
+<aura:component controller="TourExternalAPIController" access="global">
+    <aura:attribute name="AllTourEndPoints" type="Map" default="{}"/>
+    <aura:attribute name="utils" type="object" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+	<aura:method name="loadTimeSlots" action="{!c.loadTimeSlots}">    	
+        <aura:attribute name="urlParameters" type="Map" default="{}"/>
+        <aura:attribute name="success" type="Function"/>
+        <aura:attribute name="error" type="Function"/>
+    </aura:method>
+    
+    <aura:method name="bookASingleTour" action="{!c.bookASingleTour}">    	
+        <aura:attribute name="payload" type="Map" default="{}"/>
+        <aura:attribute name="success" type="Function"/>
+        <aura:attribute name="error" type="Function"/>
+    </aura:method>
+    
+    <aura:method name="createPayload" action="{!c.createPayload}">    	
+        <aura:attribute name="data" type="Object" />
+    </aura:method>
+    
+    <aura:method name="bookATour" action="{!c.bookATour}">    	
+        <aura:attribute name="payload" type="Object" />
+        <aura:attribute name="success" type="Function"/>
+        <aura:attribute name="error" type="Function"/>
+    </aura:method>
+    
+</aura:component>

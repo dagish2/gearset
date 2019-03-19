@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>WeLive-Tour-Confirm</name>
+    <style>none</style>
+    <subject>Tour Confirmation: WeLive {!Tour_Outcome__c.Building_No_City__c}</subject>
+    <textOnly>wework
+
+Hi {!Tour_Outcome__c.Tour_With__c},
+
+You&apos;re all set for a tour at WeLive, located at {!Tour_Outcome__c.Location_Address__c}, {!Tour_Outcome__c.Building__c.City__c},  on {!Tour_Outcome__c.Tour_Date__c} at {!Tour_Outcome__c.Start_Time__c}
+
+{!Tour_Outcome__c.Location_Special_Instructions__c}. If for whatever reason you’re unable to make it, please let us know and we’re happy to reschedule.
+
+We&apos;re looking forward to your visit!
+
+The WeLive Team
+
+CALL TO LEARN MORE  888-977-4184
+
+You&apos;re receiving this notification email because you booked a tour at WeLive.
+
+WeWork Member Terms | WeWork Member Privacy Policy
+
+This email was sent from WeWork Chelsea.
+115 W. 18th St., New York NY 10011
+Copyright 2016, WeWork
+
+&quot;</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

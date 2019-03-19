@@ -1,0 +1,14 @@
+<aura:component >
+    <aura:attribute name="actions" type="List" />
+    <div class="slds-button-group" role="group">
+        <aura:iteration items="{!v.actions}" var="action">
+            <c:EnziButton id="{!action.name}"
+                          label="{!action.label}"
+                          type="{!empty(action.type)?'neutral':action.type}"
+                          leftIcon="{!empty(action.leftIcon)?'':action.leftIcon}"
+                          rightIcon="{!empty(action.rightIcon)?'':action.rightIcon}"
+                          click="{!action.action}">
+            </c:EnziButton>
+        </aura:iteration>
+    </div>	
+</aura:component>

@@ -1,0 +1,328 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="initial-scale=1">
+<title>wework</title>
+<!--[if mso]>
+<style>
+    td {
+      font-family: Arial, Sans !important;
+    }
+</style>
+<![endif]-->
+<style type="text/css">
+      html {-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%}
+      body {background-color:#ffffff; margin:0; padding:0;}
+            a {color:#F04823;
+              text-decoration: none;}
+      img {border:none} 
+        .ReadMsgBody {width: 100%;}
+           .ExternalClass {width: 100%;}
+           .appleLinksBlue a {color:#F04823; text-decoration:none}
+           .appleLinksGray a {color:#F04823; text-decoration:none}
+      .ExternalClass * {line-height: 100%} 
+      .spacer {display:block !important;min-width:330px !important;}
+      .spacer {display:block !important;min-width:600px !important;}
+      p { margin-bottom:1em; }
+            
+      @media only screen and (max-width: 600px) {
+           
+       /************************************ MAIN *************************************/ 
+      body {
+             background-color:#ffffff; 
+      -webkit-text-size-adjust:100%;
+            -ms-text-size-adjust:100%;
+            }
+           *[class].remove { display:none !important; width:0 !important; height:0 !important; }
+       *[class].stack { display:block !important; }
+      
+       
+       /************************************ WIDTH RESIZERS *************************************/
+       
+       *[class].w-resize100 { width:100% !important; }
+       *[class].w-resize90 { width:90% !important; margin:0 auto !important; }
+       *[class].w-resize80 { width:80% !important; margin:0 auto !important; }
+       *[class].w-resize60 { width:60% !important; margin:0 auto !important; }
+       *[class].w-resize10 { width:10px !important; }
+       
+       /************************************ HEIGHT RESIZERS *************************************/
+      
+       *[class].h-resize0 { height:0px !important; }  
+       *[class].h-resize20 { height:20px !important; }
+       *[class].h-resize30 { height:30px !important; }
+       *[class].h-resize100 { height:100px !important; }
+       *[class].h-resize120 { height:120px !important; }
+       *[class].h-resize180 { height:180px !important; }    
+       /************************************ TEXT *************************************/
+       
+       *[class].text-center { text-align:center !important; }
+       *[class].text15 { font-size:15px !important; }
+       *[class].footer-links a {display:block !important; margin: 0 0 20px 0 !important;}
+       
+      
+       /************************************ IMAGE RESIZERS *************************************/
+      
+       *[class].image-resize img {width:100% !important; height:auto !important;}
+       *[class].hero-image img {width:100% !important; height:auto !important;}
+       *[class].social-full img {width:40px !important; height:auto !important;}
+      
+      /************************************ CTA *************************************/
+      
+      *[class].cta1 {margin:0 auto !important;}
+      *[class].cta2 {margin:0 auto !important;}
+      *[class].cta1 td {background-color:#ffffff !important; border: 2px solid #b41f29 !important;}
+      
+      
+      /************************************ PADDING *************************************/
+      *[class].pad20 {padding:0 0 20px 0 !important;}
+  
+       
+       }
+       
+       @media only screen and (max-width: 420px) {
+       
+       *[class].hero-image, *[class].hero-image a, *[class].hero-image img {display:none !important;}
+       
+       *[class].hero-swap, *[class].hero-swap a, *[class].hero-swap img {
+         width:100% !important; 
+         height:auto !important; 
+         max-height: none !important;
+         line-height: auto !important;
+         display:block !important;
+         margin: 0 auto !important;
+      }
+      }
+       
+        @media only screen and (max-width: 380px) {
+        
+        *[class].image-resize340 img {width:100% !important; height:auto !important;}
+    
+      }
+</style>
+</head>
+<body bgcolor="#ffffff" style="background-color:#ffffff;">
+<div class="HEADER">
+<!-- HEADER -->
+<table class="w-resize100" width="600" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+    <tr>
+    <td align="center" class="h-resize100" bgcolor="#ffffff" valign="top" width="600">
+      <!--[if gte mso 9]>
+  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
+    <v:fill type="tile" color="#ffffff" ></v:fill>
+    <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+  <![endif]-->
+      <div>
+      
+      <table class="w-resize100" width="600" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tbody>
+      
+        <tr>
+          <td class="h-resize100" height="120" align="center">
+          
+          <a href="http://www.welive.com/?utm_source=welive&amp;utm_medium=email&amp;utm_campaign=2016-04-03-welive-launch" target="_blank"><img src="http://res.cloudinary.com/wework/image/upload/v1459685740/email-marketing/2016-04/WeLive_Logo-black.png" width="150" alt="WeLive" border="0"></a>
+          
+          </td>
+        </tr>
+            
+      </tbody>
+    </table>
+      
+      </div>
+      <!--[if gte mso 9]>
+    </v:textbox>
+  </v:rect>
+  <![endif]-->
+    
+    </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- HEADER -->
+</div>
+
+<div>
+
+
+        <table class="w-resize90" width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;" align="center">
+          <tbody>
+            <tr>
+              <td class="w-resize10" style="line-height:0; font-size:0" width="40">&nbsp;</td>
+              
+              <td class="stack w-resize100" width="520" align="center" valign="top">
+              
+              <table class="w-resize90" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                  
+                <tr>
+              <td width="520" align="center" valign="top" colspan="2" class="image-resize"><a href="http://www.welive.com/?utm_source=welive&amp;utm_medium=email&amp;utm_campaign=2016-04-03-welive-launch" target="_blank"><img src="http://res.cloudinary.com/wework/image/upload/v1463077404/email-marketing/2016-05/2016-05-12-welive-header-flat_1.png" width="600" alt="What does it mean to live in a community?" border="0" style="font-family:Helvetica, Arial, sans-serif;">
+              
+              </a></td>
+              
+            </tr>
+                 <tr><td style="height:20px;">&nbsp;</td> </tr>
+                
+              </tbody>
+            </table>
+          
+
+<div class="MODULE-4-NO-BORDER">
+<!-- MODULE-4-NO-BORDER -->
+
+<table class="w-resize100" width="600" cellspacing="0" cellpadding="0" align="center" style="border: 1px solid #F04823;">
+      <tbody>
+        
+        <tr>
+          <td bgcolor="#ffffff">
+          
+          
+          <table class="w-resize90" width="600" border="0" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td class="remove" style="line-height:0; font-size:0" width="40">&nbsp;</td>
+              
+              <td class="stack w-resize100" width="560" align="center" valign="top">
+              
+              <table class="w-resize90" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                  <tr>
+                  <td style="font-size:0; line-height:0" height="40" class="">&nbsp;</td>
+                  </tr>
+                <tr>
+                  <td class="w-resize100 text15" align="center" style="font-family:Helvetica Neue, Helvetica, Arial, sans-serif; font-size:16px; color:#222222; line-height:20px; letter-spacing:0.025em;"><p><span style="font-weight:bold;">Hi {!Tour_Outcome__c.Tour_With__c},</span></p>
+
+                  <p>You're all set for a tour of WeLive on {!Tour_Outcome__c.Tour_Date__c} at {!Tour_Outcome__c.Start_Time__c}. When you arrive, please check in at the reception desk in the lobby and a member of our Community Management team will take you on the tour.</p>
+                  <p>{!Tour_Outcome__c.Location_Special_Instructions__c}</p> 
+                  <p>We're looking forward to seeing you!</p>
+                  <p>The WeLive Team</p>
+</td></tr></tbody></table>
+                                                
+                                                
+                                                
+                                                
+                                                </td>   <td class="remove" style="line-height:0; font-size:0" width="40">&nbsp;</td></tr><tr>
+                  <td style="font-size:0; line-height:0" height="30" class="">&nbsp;</td>
+                  </tr></tbody></table>
+
+        <table class="w-resize90" width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;">
+          <tbody>
+            <tr>
+              <td class="w-resize10" style="line-height:0; font-size:0" width="40">&nbsp;</td>
+              
+              <td class="stack w-resize100" width="520" align="center" valign="top">
+              
+              <table class="w-resize90" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                  
+                <tr>
+              <td width="520" align="center" valign="top" colspan="2" class="image-resize"><a href="http://www.welive.com/?utm_source=welive&amp;utm_medium=email&amp;utm_campaign=2016-04-03-welive-launch" target="_blank"><img src="http://res.cloudinary.com/wework/image/upload/v1459725053/email-marketing/2016-04/2015-04-03-welive-2-v2_1.png" width="520" alt="WeLive" border="0" style="font-family:Helvetica, Arial, sans-serif;">
+              
+              </a></td>
+              
+            </tr>
+                  
+                
+              </tbody>
+            </table>
+            
+         
+    
+            
+            
+            </td>
+              <td class="w-resize10" style="line-height:0; font-size:0" width="40">&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+        
+
+<table class="w-resize90" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td style="font-size:0; line-height:0" height="60" class="">&nbsp;</td>
+                  </tr>
+              </tbody>
+            </table>
+          
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+<!-- MODULE-4-NO-BORDER -->
+</div>
+
+
+<div class="FOOTER">
+<!-- FOOTER -->
+
+
+<table class="w-resize100" width="600" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#4A4A4A">
+  <tbody>
+
+                  
+    <tr>
+      <td bgcolor="#4A4A4A" style="line-height:0; font-size:0" height="20" class="" colspan="2">&nbsp;</td>
+    </tr>
+            <tr>
+              <td bgcolor="#4A4A4A" align="left" valign="top" class="" style="padding-left:40px;">
+              
+              <a href="http://www.welive.com/?utm_source=welive&amp;utm_medium=email&amp;utm_campaign=2016-04-03-welive-launch" target="_blank"><img src="http://res.cloudinary.com/wework/image/upload/v1459685740/email-marketing/2016-04/WeLive_Logo-white.png" width="107" alt="" border="0"></a>
+              
+              </td>
+             <td bgcolor="#4A4A4A" align="right" style="font-family:Helvetica Neue, Helvetica, Arial, sans-serif; font-size:14px; color:#dfdfdf; letter-spacing: .05em;line-height:18px;padding-right:40px;" class=""><span style="font-size:12px;" class="remove">CALL TO LEARN MORE&nbsp;&nbsp;</span><a href="tel:8889774184" style="color:#dfdfdf;text-decoration:none;">
+    888-977-4184</a><br></td>
+  </tr>
+
+
+    <tr>
+      <td bgcolor="#4A4A4A" style="line-height:0; font-size:0" height="20" class="" colspan="2">&nbsp;</td>
+    </tr>
+    
+</tbody></table>
+
+              <table class="w-resize100" width="600" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+    <tr>
+      <td bgcolor="#FFFFFF" style="line-height:0; font-size:0" height="18" class="">&nbsp;</td>
+    </tr>
+    <tr>
+     </tr>
+              <tr>
+      <td bgcolor="#FFFFFF" style="line-height:0; font-size:0" height="24" class="">&nbsp;</td>
+    </tr>                      
+      <tr><td bgcolor="#FFFFFF" align="center" style="font-family:Helvetica Neue, Helvetica, Arial, sans-serif; font-size:12px; color:#000000; letter-spacing: .025em; line-height:20px;" colspan="2" class=""><a href="http://e.wework.com/l/37722/2016-03-22/4d435k" style="color:#000000; text-decoration:none; ">You're receiving this notification email because you booked a tour at WeLive.
+        <br><br><a href="http://members.wework.com/terms" style="color: #000000; text-decoration:none;">WeWork Member Terms</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://members.wework.com/privacy" style="color: #000000; text-decoration:none;">WeWork Member Privacy Policy</a><br><br>
+        This email was sent from WeWork Chelsea.<br>
+        115 W. 18th St., New York NY 10011<br>
+        Copyright 2016, WeWork
+      
+      </td>
+    </tr>
+    
+    <tr>
+      <td bgcolor="#ffffff" style="line-height:0; font-size:0" height="30" class="" colspan="2">&nbsp;</td>
+    </tr>
+    
+    <tr>
+      <td bgcolor="#ffffff" style="line-height:0; font-size:0" height="40" class="">&nbsp;</td>
+    </tr>
+   
+  </tbody>
+</table>
+<!------------------------------------------------------------------------->
+<!------------------------------------------------------------------------->
+<!-- FOOTER -->
+
+</div>
+<div style="display:none; white-space:nowrap; font:12px courier; line-height:0;">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+</div>
+</td></tr></tbody></table></div>
+</body>
+</html>

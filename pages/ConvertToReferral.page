@@ -1,0 +1,6 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">  
+    <head>
+        <title>Convert To Referral</title> 
+    </head>
+    <c:LightningResource component="ConvertToReferral" parameters="recordId={!$CurrentPage.parameters.id}"></c:LightningResource>
+</apex:page>

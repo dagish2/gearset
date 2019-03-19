@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddAccountTeam</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddDefaultTeam</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddOppTeam</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>DeleteTeam</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>DisplayAccess</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayouts>
+        <fullName>Split_View</fullName>
+        <fields>UserId</fields>
+        <fields>TeamMemberRole</fields>
+        <fields>OpportunityId</fields>
+        <fields>Split_Rep_Percentage__c</fields>
+        <fields>OpportunityAccessLevel</fields>
+        <label>Split View</label>
+    </compactLayouts>
+    <fields>
+        <fullName>OpportunityAccessLevel</fullName>
+    </fields>
+    <fields>
+        <fullName>OpportunityId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Split_Rep_Percentage__c</fullName>
+        <description>This field captures the percentage the Rep will be getting on closing the opportunity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field captures the percentage the Rep will be getting on closing the opportuntiy.</inlineHelpText>
+        <label>Split Rep Percentage</label>
+        <precision>17</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TeamMemberCreationSource__c</fullName>
+        <externalId>false</externalId>
+        <label>TeamMemberCreationSource</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>TourOutcomeForm</fullName>
+                    <default>false</default>
+                    <label>TourOutcomeForm</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TeamMemberRole</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>UserId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <validationRules>
+        <fullName>Prevent_ACC_Team_Roles_on_Opportunity</fullName>
+        <active>true</active>
+        <description>Prevents user from selecting Account Team Roles on Opportunity</description>
+        <errorConditionFormula>AND(
+$User.ProfileId &lt;&gt;'00eF0000000Rfpc', 
+$User.ProfileId &lt;&gt;'00eF0000000aice',
+ISNEW(),
+BEGINS(TEXT(TeamMemberRole),"Acct:")
+)
+
+/* 
+WeWork System Administrator = 00eF0000000aice 
+System Administrator = 00eF0000000Rfpc 
+*/</errorConditionFormula>
+        <errorMessage>Account Team Roles cannot be added to Opportunities. Please select an Opportunity Team Role.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ROE_Opp_CoOwner_Restriction</fullName>
+        <active>true</active>
+        <description>Only Growth Ops, Admins, Support and Ops, and Enterprise reps can choose Opp: Co-Owner team role</description>
+        <errorConditionFormula>AND( 
+ISPICKVAL(TeamMemberRole,'Opp: Co-Owner'), 
+$Profile.Id &lt;&gt; '00eF0000000aice', 
+$Profile.Id &lt;&gt; '00eF0000000Rfpc', 
+$Profile.Id &lt;&gt; '00eF0000001V50Z', 
+$Profile.Id &lt;&gt; '00e0G000001Mjh0',
+$Profile.Id &lt;&gt; '00eF0000001V4iB'
+) 
+
+
+/* 
+Growth Ops = 00e0G000001Mjh0 
+Support and Ops = 00eF0000001V50Z 
+WW System Admin = 00eF0000000aice
+System Admin = 00eF0000000Rfpc
+Enterprise Solutions = 00eF0000001V4iB 
+*/</errorConditionFormula>
+        <errorMessage>You are not permitted to choose Team Role: Opp: Co-Owner. Please reach out to Growth Ops.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ROE_Opp_Originating_Rep_Team_Member</fullName>
+        <active>true</active>
+        <description>Only Growth Ops and Support and Ops can select Opp: Originating Rep Team Role</description>
+        <errorConditionFormula>AND( 
+ISPICKVAL(TeamMemberRole,'Opp: Originating Rep'), 
+$Profile.Id &lt;&gt; '00eF0000000aice',
+$Profile.Id &lt;&gt; '00eF0000000Rfpc', 
+$Profile.Id &lt;&gt; '00eF0000001V50Z', 
+$Profile.Id &lt;&gt; '00e0G000001Mjh0' 
+)
+
+
+/*
+Growth Ops = 00e0G000001Mjh0
+Support and Ops = 00eF0000001V50Z
+WW System Admin = 00eF0000000aice
+System Admin = 00eF0000000Rfpc
+*/</errorConditionFormula>
+        <errorMessage>You are not permitted to add Team Role Opp: Originating Rep</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ROE_Opp_Override_Team_Member</fullName>
+        <active>true</active>
+        <description>Prevents users from creating Opportunity Team Members with Role = Opp: Override unless they have ROE Override permission set</description>
+        <errorConditionFormula>AND(
+$User.ProfileId &lt;&gt;'00eF0000000Rfpc', 
+$User.ProfileId &lt;&gt;'00eF0000000aice',
+ISPICKVAL(TeamMemberRole,'Opp: Override'),  
+NOT( $Permission.ROE_Opp_Override) 
+)
+
+/*
+System Admin = '00eF0000000Rfpc', 
+WW System Admin = '00eF0000000aice',
+*/</errorConditionFormula>
+        <errorMessage>You are not permitted to select Team Role Opp: Override</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ROE_Prevent_Non_Admins_Assist_Role</fullName>
+        <active>true</active>
+        <description>Prevents non-Admins/Growth Ops from adding Opp Team member with "Assist" role</description>
+        <errorConditionFormula>IF(ISPICKVAL(TeamMemberCreationSource__c, 'TourOutcomeForm'), false,AND(
+ISPICKVAL(TeamMemberRole,'Assist'),
+$Profile.Id &lt;&gt; '00eF0000000aice',
+$Profile.Id &lt;&gt; '00eF0000001V50Z',
+$Profile.Id &lt;&gt; '00e0G000001Mjh0',
+$Profile.Id &lt;&gt; '00eF0000000Rfpc',
+NOT($Permission.ROE_Add_Assist_Team_Role) 
+))
+
+
+/*
+WW System Admin = 00eF0000000aice
+System Admin = 00eF0000000RfpcIAC
+Growth Ops = 00e0G000001Mjh0
+Support and Ops = 00eF0000001V50Z
+*/</errorConditionFormula>
+        <errorMessage>A person can only be added to the Opportunity Team as an Assist by submitting a tour outcome form.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ROE_Split_Rep_Percentage_Restriction</fullName>
+        <active>true</active>
+        <description>Prevents non-admin users from modifying Split Rep Percentage unless they have ROE Override permission set</description>
+        <errorConditionFormula>AND(
+$User.ProfileId &lt;&gt;'00eF0000000Rfpc', 
+$User.ProfileId &lt;&gt;'00eF0000000aice',
+ISCHANGED(Split_Rep_Percentage__c),  
+NOT($Permission.ROE_Opp_Override) 
+)
+
+/*
+System Admin = '00eF0000000Rfpc', 
+WW System Admin = '00eF0000000aice',
+*/</errorConditionFormula>
+        <errorDisplayField>Split_Rep_Percentage__c</errorDisplayField>
+        <errorMessage>You are not permitted to make changes to Split Rep Percentage. Please contact Growth Ops</errorMessage>
+    </validationRules>
+</CustomObject>

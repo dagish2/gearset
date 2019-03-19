@@ -1,0 +1,10 @@
+<aura:component >
+    <aura:attribute name="settingId" type="String" />
+    <aura:attribute name="save" type="Object"/>
+    <aura:attribute name="discard" type="Object" /> 
+    <footer class="slds-modal__footer" style="bottom:0;width:100%;z-index: 2;position: fixed;text-align:right;margin-top:20px">
+        <c:EnziButton label="Close" type="destructive" click="{!c.close}"  leftIcon="utility:close"></c:EnziButton>
+        <c:EnziButton label="Discard Changes" type="destructive" click="{!v.discard}"  leftIcon="utility:undo" show="false"></c:EnziButton>                               
+        <c:EnziButton label="Save" click="{!v.save}"  type="brand" leftIcon="utility:save" show="{!v.save}"></c:EnziButton>
+    </footer>
+</aura:component>

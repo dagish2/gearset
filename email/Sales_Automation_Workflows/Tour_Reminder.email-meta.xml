@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Tour Reminder</name>
+    <style>none</style>
+    <subject>We look forward to seeing you soon</subject>
+    <textOnly>Hi {!Tour_Outcome__c.Tour_With_First_Name__c}
+
+Just wanted to remind you about your tour scheduled for tomorrow.
+
+{!Tour_Outcome__c.Tour_Date__c}
+{!Tour_Outcome__c.Start_Time__c}
+{!Tour_Outcome__c.Location__c}.
+{!Tour_Outcome__c.Location_Address__c}
+{!Tour_Outcome__c.Location_Special_Instructions__c}
+
+When you arrive at the building, please check in at the lobby and mention that you&apos;re there for a tour. 
+
+If you have any questions, call us at 855-593-9675.
+
+Can’t make it? You can reschedule for a more convenient time.
+
+See you soon, 
+
+
+ 
+https://welcome.wework.com/forms/modifytour.php?tourId={!Tour_Outcome__c.Id}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

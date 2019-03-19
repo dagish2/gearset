@@ -1,0 +1,52 @@
+<aura:component>
+    <aura:attribute name="metaFields" type="List" default="[]" />
+    <aura:attribute name="weMetaFields" type="List" default="[{'label':'Name','fieldName':'Name'}]" />
+    <aura:attribute name="records" type="List" default="[]" />
+    <aura:attribute name="keyword" type="string"/>
+    <aura:attribute name="totalRecords" type="Integer"/>
+    <aura:attribute name="filteredRecords" type="List" />
+    <aura:attribute name="timeout" type="object"/>
+    <aura:attribute name="relatedAccounts" type="List" default="[]"/> 
+    <aura:attribute name="entity" type="map" default="{'isAll':false,'isOrg':true,'isSales':false,'isBill':false}"/> 
+    <aura:attribute name="defaultPageAttribute" type="Map" default="{'currentPage':1,'pageSize':5}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:EnziHeader sObjectName="Account" pageName="Search Accounts" iconName="standard:account"></c:EnziHeader>
+    <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+        <label class="slds-checkbox" for="requiredCheckbox" style="margin-left:20px">
+            <c:EnziInputCheckbox aura:Id="all" name="All" label="ALL" value="{!v.entity.isAll}" change="{!c.changeAll}" ></c:EnziInputCheckbox>            
+        </label>
+        <label class="slds-checkbox" for="requiredCheckbox" style="margin-left:20px">
+            <c:EnziInputCheckbox aura:Id="org" name="Org" label="ORGANIZATION" value="{!v.entity.isOrg}" change="{!c.change}" ></c:EnziInputCheckbox>        
+        </label>
+        <label class="slds-checkbox" for="requiredCheckbox" style="margin-left:20px">
+             <c:EnziInputCheckbox aura:Id="sales" name="Sales" label="SALES" value="{!v.entity.isSales}" change="{!c.change}" ></c:EnziInputCheckbox>                   
+        </label>
+        <label class="slds-checkbox" for="requiredCheckbox" style="margin-left:20px">
+            <c:EnziInputCheckbox aura:Id="bill" name="Bill" label="BILLING" value="{!v.entity.isBill}" change="{!c.change}" ></c:EnziInputCheckbox> 
+        </label>  
+    </div>
+    <div class="slds-form-element" style="padding:15px">       
+        <div class="slds-form-element__control">
+            <lightning:input aura:id="searchInput" type="search" name="searchAcount" label="" placeholder="Search Account" value="{!v.keyword}" onchange="{!c.search}"></lightning:input>
+        </div>
+    </div>  
+    <div class="slds-m-around_xxx-small">       
+       <c:EnziDataTable records="{!v.relatedAccounts}" 
+                        setBorder="true"  
+                        showMultiselect="false" 
+                        showSearch="false" 
+                        icon="standard:account" 
+                        caption="Records" 
+                        describedFields="{!v.metaFields}"  
+                        pageSizes="[5,10,20,50]" 
+                        showPagination="true"  
+                        showCaptionTooltip="true" 
+                        captionTooltipText="Records of Account"
+                        pageSize="{!v.defaultPageAttribute.pageSize}" 
+                        currentPage="{!v.defaultPageAttribute.currentPage}"></c:EnziDataTable>
+    </div>
+    <div class="slds-size--1-of-1 slds-p-horizontal--small slds-align--absolute-center" style="background-color: aliceblue;padding: 10px;">
+        <c:EnziButton label="Close" type="destructive" leftIcon="utility:power" click="{!c.close}"></c:EnziButton> 
+    </div>
+</aura:component>

@@ -1,0 +1,3 @@
+<apex:page showHeader="false" standardController="Tour_Closed_Hour__c" extensions="TourCloseHourController" title="Tour Close Hour">     
+    <c:LightningResource component="TourCloseHour" parameters="tourSchedulesId={!$CurrentPage.parameters.CF00NF000000DWCMe_lkid};recordId={!$CurrentPage.parameters.id};mode={!mode}" />
+</apex:page>

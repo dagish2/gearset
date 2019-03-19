@@ -1,0 +1,11 @@
+Hi {!Tour_Outcome__c.Assigned_To__c},
+
+Congratulations, you've been assigned a tour! 
+
+Tour Date: {!Tour_Outcome__c.Tour_Date__c}
+Start time: {!Tour_Outcome__c.Start_Time__c}
+{!Tour_Outcome__c.Tour_Notes__c}
+
+Go sell an office or two! I believe in you. (Oh, and be sure to fill out your tour outcome form as soon as it's complete).
+ 
+{!Tour_Outcome__c.Tour_Outcome_Form__c}

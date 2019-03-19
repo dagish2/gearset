@@ -1,0 +1,41 @@
+<aura:component Controller = "DisAssociateBillingAccountController" implements = "flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name = "recordId" type = "Id"  />
+    <aura:attribute name = "opportunityRec" type = "Object" />
+    <aura:attribute name = "message" type = "String" />
+    <aura:attribute name = "showDisassociation" type = "Boolean" default = "true"/>
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}"/>
+    <aura:handler event = "force:refreshView" action = "{!c.close}" />
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0rem !important;
+        }
+        .modal-body {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        height:unset !important;
+        max-height:unset !important;
+        }
+    </aura:html>
+    
+    <div aura:id = "warningMessage">
+        {!v.body}
+    </div>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="">
+        <div class="">
+            <header class="slds-modal__header">
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Disassociate Billing Account</h2>
+            </header>
+            <div id="content" style="font-weight: bold;" class="slds-modal__content slds-p-around--medium">
+                {!v.message}
+            </div>
+            <footer class="slds-modal__footer slds-text-align_center">
+                <c:EnziButton leftIcon="utility:close" type="destructive" label="Cancel" click="{! c.close }"></c:EnziButton>
+                <c:EnziButton rightIcon="utility:forward" type="brand" label="Disassociate Billing Account" click="{! c.disassociateBillAcc }" show="{!v.showDisassociation}"></c:EnziButton>
+            </footer>
+        </div>
+    </section>
+</aura:component>

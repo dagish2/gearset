@@ -1,0 +1,70 @@
+.THIS .span.slds-wizard__progress{
+     padding-top:9px;
+}
+.THIS .slds-card__body.slds-p-around_small.slds-m-around_x-small{
+    background:ghostwhite;border-radius:6px;
+}
+.THIS .slds-page-header{
+    margin-left:8px;margin-right:8px;border-radius:6px;margin-top:0.75rem;margin-bottom: -2px;
+}
+.THIS .slds-wizard__link{
+   padding-bottom:6px; 
+}
+.THIS .slds-page-header.cEnziHeader {
+    border-radius:6px;
+}
+.THIS .slds-button_icon-bare{
+    display: none;
+}
+
+.THIS .cEnziTable{
+    padding: 0px 1px 0px 0px !important;
+    margin-bottom: 3.5% !important;
+}
+
+.THIS .marginHeader{
+    margin-top:4px!important;
+    margin-left:8px!important;
+    margin-right:8px!important;
+}
+
+.THIS .buttonSize{
+    width: 90px;
+}
+
+.THIS .buttonPosition{
+    float:right;
+    padding-right: 10px;
+}
+
+.THIS .buttonParentContainer{
+    width:100%;
+}
+.THIS  #add-opportunity-container{
+    height: 100% !important;
+    background-position: center !important;
+    background-repeat: repeat !important;
+    background-size: cover !important;
+    padding-bottom:112px;
+    width:100% !important;
+}
+
+.THIS lightning-calendar > div{
+    left : 0px !important;
+}
+
+.THIS .slds-section{
+    border: 1px solid #d9dbdd !important;
+    border-radius: 3px !important;
+}
+
+.THIS #addOpp-closedDate > lightning-input > lightning-datepicker > div > div > lightning-calendar > div{
+    top:0px !important;
+}
+
+.THIS #addOpp-closedDate .slds-button_icon-bare{
+    display: block !important;
+}
+.THIS #lightning{
+    height: 491px !important;  
+}

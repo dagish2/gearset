@@ -1,0 +1,6 @@
+<p><span style="font-size: 12px;"><span style="font-family: verdana,geneva,sans-serif;"><strong>Dear {!Opportunity.Primary_Member_First_Name__c}</strong>, </span></span></p>
+<p><span style="font-size: 12px;"><span style="font-family: verdana,geneva,sans-serif;">Please follow the link below to fill out your payment details. Once we have payment info and your signed agreement, we'll be able to confirm your membership.
+
+Thanks and let us know if we can be of any assistance.</span></span></p>
+<p><strong><span style="font-size: medium; font-family: verdana,geneva,sans-serif;"><a href="{!Opportunity.Payment_Form_URL__c}" target="_blank">Submit Member Payment Details</a></span></strong></p>
+<p><span style="font-size: 12px;"><span style="font-family: verdana,geneva,sans-serif;">Best Regards, <br />{!Opportunity.OwnerFullName}<br />{!Opportunity.OwnerEmail}<br /><img style="width: 100px;" src="https://c.na10.content.force.com/servlet/servlet.ImageServer?id=015F0000001g0Zd&amp;oid=00DF000000050Jf&amp;lastMod=1378428928000" alt="" /> </span></span></p>

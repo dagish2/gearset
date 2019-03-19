@@ -1,0 +1,39 @@
+<aura:component Controller = "MarketAssignmentController" implements = "flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name = "recordId" type = "Id"  />
+    <aura:attribute name = "message" type = "String" />
+    <aura:attribute name = "mapResult" type = "Map" />
+    <aura:attribute name = "utils" type = "Object" />
+    <aura:attribute name = "showUpdateBtn" type = "Boolean" default = "true"/>
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}"/>
+    <aura:handler event = "force:refreshView" action = "{!c.close}" />
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0rem !important;
+        }
+        .modal-body {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        height:unset !important;
+        max-height:unset !important;
+        }
+    </aura:html>
+    
+    <section id='errorMessage' role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-hide">
+        <div class="">
+            <header class="slds-modal__header">
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Update HQ Market</h2>
+            </header>
+            <div id="content" style="font-weight: bold;" class="slds-modal__content slds-p-around--medium">
+               <aura:unescapedHtml value="{!v.message}" />
+            </div>
+            <footer class="slds-modal__footer">
+                <c:EnziButton leftIcon="utility:close" type="destructive" label="Cancel" click="{! c.close }"></c:EnziButton>
+                <c:EnziButton type="brand" leftIcon="utility:save" label="Update Market" click="{! c.updateMarket }" show="{!v.showUpdateBtn}"></c:EnziButton>
+            </footer>
+        </div>
+    </section>
+</aura:component>

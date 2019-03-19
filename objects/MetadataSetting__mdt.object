@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Data__c</fullName>
+        <description>This is used to store new Journey Creation criteria</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>Journey Creation criteria</inlineHelpText>
+        <label>Data</label>
+        <length>131072</length>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Description</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <description>This is used to filter for Journey creation criteria.</description>
+    <label>MetadataSetting</label>
+    <pluralLabel>MetadataSettings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

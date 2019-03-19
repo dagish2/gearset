@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to be sent to all users with Sysadmin access to salesforce</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Administrator access revolted</name>
+    <style>freeForm</style>
+    <subject>IMPORTANT PLEASE READ: Changes to salesforce access</subject>
+    <textOnly>Dear {!Receiving_User.FirstName},
+As part of implementing AutoRabit and embracing change control process, we will be taking off administrative privileges in Salesforce production and staging environment for majority of current administrators. Only selected users will have administrative privileges and any changes will have to be routed through technical support.
+
+Please know this change is being implemented to ensure better change control mechanisms, avoid integration issues and production errors.
+
+The change will be done later this week and this note is intended to be a heads up. Let me know of any questions or concerns.
+
+Appreciate your support and understanding. Thanks.
+
+Regards,
+Tykira</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,14 @@
+.THIS {
+    font-size: large;
+    font-family: monospace;
+}
+
+.THIS .string{
+    color:green;
+}
+.THIS .number{
+    color:red;
+}
+.THIS .boolean{
+    color:blue;
+}

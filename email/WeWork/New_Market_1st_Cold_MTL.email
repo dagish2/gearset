@@ -1,0 +1,10 @@
+Hi {!Lead.Salutation_Name__c},
+
+My name is {!User.Name}, and I’m on the local Montreal team at WeWork. I'm excited to be bringing WeWork, the platform for creators, to Montreal and I'm looking to connect with the city's best and brightest innovators.
+
+It'd be great to meet and explore how you could fit into our community. I think {!Lead.Company} would be a great fit and anchor member in Place Ville Marie.
+
+Would you like to stop by for a tour?
+
+Thanks,
+{!User.Name}

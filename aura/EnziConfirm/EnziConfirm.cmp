@@ -1,0 +1,27 @@
+<aura:component >
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="confirm" type="Object" />
+    <aura:attribute name="decline" type="Object" />
+    <aura:attribute name="button" type="Map" default="{'confirm':{'leftIcon':'utility:check','rightIcon':'','label':'Yes'},'decline':{'leftIcon':'utility:close','rightIcon':'','label':'No'}}"/>
+    <aura:attribute name="name" type="String" />
+    <aura:method name="showConfirm" action="{!c.showConfirm}">
+    	<aura:attribute name="message" type="String"/>
+        <aura:attribute name="confirm" type="Object"/>
+        <aura:attribute name="decline" type="Object"/>
+    </aura:method>
+    <div id="{!v.name}">
+        <c:EnziModal header="Confirmation Message" aura:id="confirmModal">
+            <c:EnziModalContainer >
+                <div class="stage-main slds-grid slds-wrap slds-card" role="main" style="margin-bottom:10px;padding:10px">
+                    <div class="slds-size--1-of-1">
+                        <aura:unescapedHtml value="{!v.message}"/>
+                    </div>
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter>
+                <c:EnziButton leftIcon="{!v.button.decline.leftIcon}" rightIcon="{!v.button.decline.rightIcon}" label="{!!empty(v.button.decline.label) ? v.button.decline.label : 'No'}" type="destructive" click="{!c.decline}"></c:EnziButton>      
+                <c:EnziButton leftIcon="{!v.button.confirm.leftIcon}" rightIcon="{!v.button.confirm.rightIcon}" label="{!!empty(v.button.confirm.label) ? v.button.confirm.label : 'Yes'}" type="brand" click="{!c.confirm}"></c:EnziButton>
+            </c:EnziModalFooter>
+        </c:EnziModal>
+    </div>
+</aura:component>

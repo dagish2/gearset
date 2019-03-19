@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>Forcefully Update Journeys Status</name>
+    <style>freeForm</style>
+    <subject>Forcefully update Journeys status</subject>
+    <textOnly>Hello
+
+Total Records: {{TotalRecords}}
+Success Records: {{SuccessRecords}}
+Failed Records: {{FailedRecords}}
+
+In the case of any issues, please contact your system administrator.
+
+Thanks
+WeWork</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

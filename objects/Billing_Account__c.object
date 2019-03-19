@@ -1,0 +1,1100 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Billing_Account_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <compactLayouts>
+        <fullName>Billing_Account_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Parent_Account__c</fields>
+        <fields>Primary_Member__c</fields>
+        <fields>UUID__c</fields>
+        <fields>ID_Status__c</fields>
+        <label>Billing Account Compact Layout</label>
+    </compactLayouts>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cleansed_Account_Name__c</fullName>
+        <description>This field is used to save cleansed Billing Account Name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field shows the cleansed version of the Billing Account Name.</inlineHelpText>
+        <label>Cleansed Account Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cleansed_Unomy_Company_Name__c</fullName>
+        <description>This field is used to save cleansed version of unomy company name by removing suffix,prefix and special character based on AccountCleansingSetting  sales console setting</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is used to save cleansed version of unomy company name by removing suffix,prefix and special character based on AccountCleansingSetting  sales console setting</inlineHelpText>
+        <label>Cleansed Unomy Company Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Conventional_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Conventional Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_Billing_Account_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Id)</formula>
+        <label>External Billing Account Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ID_Status__c</fullName>
+        <description>This field determine whether or not the company is active in WeWork spaces</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field determine whether or not the company is active in WeWork spaces</inlineHelpText>
+        <label>ID Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Member</fullName>
+                    <default>false</default>
+                    <label>Member</label>
+                </value>
+                <value>
+                    <fullName>Potential</fullName>
+                    <default>false</default>
+                    <label>Potential</label>
+                </value>
+                <value>
+                    <fullName>Past Member</fullName>
+                    <default>false</default>
+                    <label>Past Member</label>
+                </value>
+                <value>
+                    <fullName>active</fullName>
+                    <default>false</default>
+                    <label>active</label>
+                </value>
+                <value>
+                    <fullName>inactive</fullName>
+                    <default>true</default>
+                    <label>inactive</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Is_Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Show the status of Billing Account - Checked for Active and Unchecked for In-Active</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Show the status of Billing Account either Active or Inactive</inlineHelpText>
+        <label>Is Active?</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Source__c</fullName>
+        <externalId>false</externalId>
+        <label>Lead Source</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Legacy_Account_Id__c</fullName>
+        <description>Legacy Account Id of Deleted Account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Legacy Account Id of Deleted Account</inlineHelpText>
+        <label>Legacy Account Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Legacy_Account_Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Legacy Account Owner of Billing Account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Legacy Account Owner of Billing Account</inlineHelpText>
+        <label>Legacy Account Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Billing_Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Legacy_Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Legacy Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Billing Accounts (Legacy Account)</relationshipLabel>
+        <relationshipName>Billing_Accounts1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Number_Of_Lost_Opportunities__c</fullName>
+        <externalId>false</externalId>
+        <label>Number Of Lost Opportunities</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_Of_Open_Opportunities__c</fullName>
+        <externalId>false</externalId>
+        <label>Number Of Open Opportunities</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_Of_Total_Opportunities__c</fullName>
+        <externalId>false</externalId>
+        <label>Number Of Total Opportunities</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_Of_Won_Opportunities__c</fullName>
+        <externalId>false</externalId>
+        <label>Number Of Won Opportunities</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Full_Time_Employees__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Full Time Employees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Org_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL(Parent_Account__r.Account_Type__c, 'Org'),Parent_Account__r.RecordType.Name, Parent_Account__r.Parent.RecordType.Name )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Org Record Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This is lookup to the Parent Account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is lookup to the Parent Account</inlineHelpText>
+        <label>Parent Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Billing Accounts</relationshipLabel>
+        <relationshipName>Billing_Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Parent_Org__c</fullName>
+        <description>Shows the name of the first Org found in the multi-level hierarchy.</description>
+        <externalId>false</externalId>
+        <formula>Parent_Account__r.Parent_Org_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Shows the name of the first Org found in the multi-level hierarchy.</inlineHelpText>
+        <label>Org Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Phone</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Member_Email__c</fullName>
+        <description>Primary Member's email. Managed by Process: Billing Account - Update Primary Member Fields</description>
+        <externalId>true</externalId>
+        <label>Primary Member Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Member_Name__c</fullName>
+        <description>Primary Member's name. Managed by Process: Billing Account - Update Primary Member Fields</description>
+        <externalId>true</externalId>
+        <label>Primary Member Name</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Primary_Member__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This is the main point of contact for the Billing Account.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Person at the member company responsible for managing the membership: invoices, key card replacements, MENA account manager tab. Responsible for signing legal agreement (unless an authorized signatory is designated).</inlineHelpText>
+        <label>Primary Member</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Billing Accounts</relationshipLabel>
+        <relationshipName>Billing_Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Region_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Region Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UUID__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <description>This is unique,case sensitive auto generated field used to identify Billing Account record.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This is unique,case sensitive auto generated field used to identify Billing Account record.</inlineHelpText>
+        <label>UUID</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Ultimate_Parent_Org__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Shows the Ultimate Org when we have the multi-level hierarchy.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Shows the Ultimate Org when we have the multi-level hierarchy.</inlineHelpText>
+        <label>Ultimate Parent Org</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Billing Accounts (Ultimate Parent Org Name)</relationshipLabel>
+        <relationshipName>Billing_Accounts2</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Unomy_Acquisitions__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Acquisitions</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Alexa_Global_Rank__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Alexa Global Rank</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Alexa_US_Rank__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Alexa US Rank</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Available_Contacts__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Available Contacts</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Company_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Company Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Company_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>Unomy Company ID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Company_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Company Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Unomy_Company_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Company Phone</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Company_Size_Max__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Company Size Max</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Company_Size_Min__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Company Size Min</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Company_Size__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Company Size</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Company_Stock_Symbol__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Company Stock Symbol</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Company_Website__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Company Website</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Administration__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Administration</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Consulting__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Consulting</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Creative__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Creative</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Engineering__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Engineering</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Finance__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Finance</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Human_Resources__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Human Resources</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_IT__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job IT</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Legal__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Legal</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Marketing__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Marketing</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Medical__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Medical</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Operations__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Operations</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Other</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Product__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Product</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Sales__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Sales</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Support__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Support</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Job_Training__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Job Training</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Mgmt_C_Level__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Mgmt C Level</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Mgmt_Directors__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Mgmt Directors</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Mgmt_Managers__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Mgmt Managers</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Mgmt_Non_Managers__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Mgmt Non Managers</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Contacts_Mgmt_VP_Level__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Contacts Mgmt VP Level</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Estimated_Revenue_Max__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Estimated Revenue Max</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Estimated_Revenue_Min__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Estimated Revenue Min</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Estimated_Revenue__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Estimated Revenue</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Facebook_Likes__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Facebook Likes</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Founded__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Founded</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Industries__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Industries</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Unomy_Industry__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Industry</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Unomy_Investments__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Investments</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Investors__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Investors</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Latest_Round__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Latest Round</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Unomy_Location_Address__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Location Address</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Location_City__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Location City</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Location_Country__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Location Country</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Location_State__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Location State</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Metadata__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Metadata</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Unomy_Total_Funding_Full__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Total Funding Full</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Total_Funding__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Total Funding</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Twitter_Followers__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy Twitter Followers</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unomy_Updated_DateTime__c</fullName>
+        <description>The date/time a record was updated from Unomy</description>
+        <externalId>false</externalId>
+        <label>Unomy Updated DateTime</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Unomy_User__c</fullName>
+        <externalId>false</externalId>
+        <label>Unomy User</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>Billing_Account_Compact_Layout</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>All Billing account is moved to this Billing Account object it help Sales people to identify Org and Sales account easily and reduce the clutter of 100s of Accounts with same name.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Billing Account</label>
+    <nameField>
+        <label>Billing Account Name</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Billing Accounts</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Parent_Account__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Primary_Member__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ID_Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>UUID__c</customTabListAdditionalFields>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>Parent_Account__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Primary_Member__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ID_Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>UUID__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Unomy_Company_Phone__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>UUID__c</searchFilterFields>
+        <searchResultsAdditionalFields>Parent_Account__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Primary_Member__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Primary_Member_Email__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Primary_Member_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ID_Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UUID__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <validationRules>
+        <fullName>Cant_change_name_or_Primary_member</fullName>
+        <active>true</active>
+        <description>If Account has at least 1 Closed Won opportunity, nobody should be able to change the Name or primary Member.</description>
+        <errorConditionFormula>AND(Number_Of_Won_Opportunities__c &gt;0, $Profile.Id &lt;&gt; "00eF0000000aice",$Profile.Id &lt;&gt; "00eF0000001V50Z", $Profile.Id &lt;&gt; "00eF0000000Rfpc", OR(ISCHANGED( Primary_Member__c), ISCHANGED( Name )), TEXT(ID_Status__c)='active')</errorConditionFormula>
+        <errorMessage>You can't change the Name or Primary Member for this Account. Please contact your System Administrator.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Redirect_To_Spacestation</fullName>
+        <availability>online</availability>
+        <description>This button is used to redirect to Space Station Account view</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>true</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>true</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Link To Spacestation</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>true</showsLocation>
+        <showsStatus>true</showsStatus>
+        <url>https://spacestation.wework.com/#/companies/{!Billing_Account__c.UUID__c }</url>
+    </webLinks>
+</CustomObject>

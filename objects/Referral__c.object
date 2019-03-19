@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>Expires_On__c</fullName>
+        <description>Date on which this Reference Expires, every time reference needs to be extended this date should be updated to reflect the extension. Any Opportunity created while this reference is not expired, for the primary contact matching the email provided in this reference will be have Referrer set with Referrer in this record.</description>
+        <externalId>false</externalId>
+        <label>Expires On</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>To check if the reference is a active reference or not ?</description>
+        <externalId>false</externalId>
+        <label>IsActive</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Email__c</fullName>
+        <description>Captures the email of the new lead coming to the system with reference of a referrer.</description>
+        <externalId>false</externalId>
+        <label>Referral Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referral_Source__c</fullName>
+        <description>Captures the source of the lead from where the lead is coming from ?</description>
+        <externalId>false</externalId>
+        <label>Referral Source</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referred_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Referred Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Referrer_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>Referrer__r.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Referrer Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referrer_Type__c</fullName>
+        <description>Captures the type of the referrer (contact) either a member or employee or any other value fetched from the contact level.</description>
+        <externalId>false</externalId>
+        <label>Referrer Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referrer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Contact who Referred the Person identified by given email address.</description>
+        <externalId>false</externalId>
+        <label>Referrer</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Referrals</relationshipLabel>
+        <relationshipName>Referrals</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <description>Captures the start date of the reference, on which the referrer has referred the new lead. This is used to calculate the expiry of the reference record.</description>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object will represent references made by either Member/Broker/Employee to certain person identified by email. 
+
+This is generally valid for 60 days and may be extended by another 60 days based on certain events like if referred person books a tour, completes a tour or paperwork is sent to the person referred.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Referral</label>
+    <nameField>
+        <label>Referral Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Referrals</pluralLabel>
+    <searchLayouts />
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>Created_Today</fullName>
+        <columns>NAME</columns>
+        <columns>Expires_On__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>Referral_Email__c</columns>
+        <columns>Referral_Source__c</columns>
+        <columns>Referred_Date__c</columns>
+        <columns>Referrer__c</columns>
+        <columns>Referrer_Email__c</columns>
+        <columns>Referrer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>Created Today</label>
+        <sharedTo>
+            <role>Admin</role>
+        </sharedTo>
+    </listViews>
+    <webLinks>
+        <fullName>Update_Reference</fullName>
+        <availability>online</availability>
+        <description>Opens Visualforce page to update the reference record</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Update Reference</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var newWindow = window.open('/apex/ReferenceOverride?id={!Referral__c.Id}&amp;edit=true','ReferenceOverride');
+newWindow.focus();</url>
+    </webLinks>
+</CustomObject>

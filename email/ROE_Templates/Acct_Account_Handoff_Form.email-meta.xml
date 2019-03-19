@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Used to alert a rep that you are handing off an account to them</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Acct: Account Handoff Form</name>
+    <style>none</style>
+    <subject>{!Account.OwnerFullName} has handed off an account to you</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

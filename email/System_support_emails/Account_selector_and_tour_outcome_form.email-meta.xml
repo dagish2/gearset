@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Announcing updates to the tour form and launching account selector</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Account selector and tour outcome form</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Changes to salesforce Tour outcome form and new feature</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+This week we are releasing a few new features!
+
+Updated Tour Outcome
+The Tour Outcome Page is used in Salesforce by Sales and Community after a Tour has been completed.
+Here are the changes
+
+New fields, for better reporting
+Better sync with Spacestation (Better Together)
+New UI
+
+Click the link below for training guide
+https://docs.google.com/a/wework.com/presentation/d/1BW0I4vdd1W3fM6pm3pnlnF2J2M-RGyfCpAnKcZRHyXs/edit?usp=sharing
+
+Click the link below for Video
+https://drive.google.com/a/wework.com/file/d/0BxnEtTaM6arTOGVwNjIwdS1CU00/view?usp=sharing
+
+Account Selector
+What is the Account Selector Page?
+
+The Account Selector page is a page in Salesforce that appears when converting a Lead into an Account/Contact/Opportunity. The page contains a list of existing accounts that are possible matches for the new record to be merged into.
+
+The objective of the Account Selector page is to prevent the creation of duplicate Accounts by identifying and merging into existing records.
+
+Click the link below for training guide
+https://docs.google.com/a/wework.com/presentation/d/1Kc5CT9S9FSCgRHqUBEFYKohhkXcvlBtDCsnm1jyHDZ8/edit?usp=sharing
+
+Click the link below for Video
+https://drive.google.com/a/wework.com/file/d/0BxnEtTaM6arTdzVvZ2ZNN0FMUnc/view?usp=sharing
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+Sincerely,
+Susie Romeo</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

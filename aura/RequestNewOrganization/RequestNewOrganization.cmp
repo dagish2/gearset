@@ -1,0 +1,41 @@
+<aura:component controller="RequestNewOrganizationController">
+    <aura:attribute name="requestedOrg" type="Map" />   
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="requestNewOrgSuccess" type="Boolean"/>
+    <aura:attribute name="close" type="Object"/>
+    <aura:attribute name="isFromCreateOpportunity" type="Boolean" default="false"/>
+    <aura:attribute name="previous" type="object"/>
+    <aura:attribute name="isInLightningConsole" type="Boolean" default="true"/>
+    
+    <aura:handler name="init" value="{! this}" action="{! c.doInit}" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <lightning:workspaceAPI aura:id="workspace"/>
+    
+    <aura:attribute name="method" type="Aura.action">               
+    </aura:attribute>
+    
+    <div class="slds-grid slds-grid--vertical slds-nowrap" >
+        <div class="slds-grid slds-wrap slds-p-vertical_small " role="main"> 
+            <c:EnziFormValidator errors="{! v.errors}" valid="{! v.valid}">
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="Account" sObjectName="Account" fieldName="Name" label="Organization Name" value="{! v.requestedOrg.Name}" errors="{! v.errors}" required="true" helpText="Enter the name of the Organization." />
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="Number_of_Full_Time_Employees__c" sObjectName="Account" fieldName="Number_of_Full_Time_Employees__c" value="{! v.requestedOrg.Number_of_Full_Time_Employees__c}" min="1" required="true" errors="{! v.errors}" helpText="Enter Number of full time employees of the new Organization" />
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="Website" label="Website" sObjectName="Account" fieldName="Website" value="{! v.requestedOrg.Website}" required="true" errors="{! v.errors}" helpText="Enter the website of the Organization" />
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="Notes" label="Notes" sObjectName="Account" fieldName="Description" value="{! v.requestedOrg.Description}" required="false" errors="{! v.errors}" helpText="Enter the additional information and details about the new Organization" />
+                    </div>
+            </c:EnziFormValidator>
+        </div>        
+    </div>
+    <div class="slds-modal__footer">
+        <c:EnziButton label="Previous" type="brand" leftIcon="utility:chevronleft" click="{!v.previous}" show="{! empty(v.previous) ? false : true}" ></c:EnziButton>
+        <c:EnziButton label="Request New Organization" type="brand" leftIcon="utility:save" click="{! c.requestNewOrganization}" disabled="{! (!v.valid)}"></c:EnziButton>
+        <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{! empty(v.close) ? c.close : v.close}"></c:EnziButton>
+    </div>
+</aura:component>

@@ -1,0 +1,94 @@
+.THIS .placeholderIcon svg {
+    left: 3px !important;
+}
+
+.THIS .slds-input-has-icon--left svg{
+    left: 5px !important;
+}
+
+.THIS #OrgButton, .THIS #OppoRoleButton{
+   width:157px !important;
+   height:32px !important; 
+}
+
+.THIS .slds-modal__container {
+    max-width: 90rem !important;
+    width: 90% !important;
+    z-index: -100;
+}
+
+.THIS#CreateNew > div > div.slds-modal.slds-fade-in-open > div > div.slds-modal__content.slds-p-around--medium{
+    margin-top: -18px !important;
+}
+
+.THIS .slds-p-top_medium {
+    width: 99%;
+    margin-left: 7px;
+    margin-top: -15px;
+}
+
+.THIS .slds-page-header{
+    width:100% !important;  
+}
+
+.THIS .slds-text-heading--medium{
+   font-size: 0.80rem !important;
+   font-weight: 600 !important; 
+   font-size: .75rem !important;
+}
+
+.THIS .slds-box  {
+    padding-bottom: 0px !important;
+}
+
+.THIS.flexcroll::-webkit-scrollbar {
+    width: 0px;
+}
+
+.THIS .slds-scope [class*=slds-icon-action-] {
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.THIS .slds-section {
+    width: 100% !important;
+}
+
+.THIS div[role=group]{
+    display: none !important;
+}
+
+.THIS lightning-primitive-bubble {
+    z-index: 100000 !important;
+}
+.THIS #close-confirm > div > div.slds-modal.slds-fade-in-open > div{
+    width: 50% !important;
+    margin: auto;
+}
+
+.THIS #SalesAccountButton {
+    margin-top: 8.5px;
+}
+
+.THIS lightning-helptext > div > button {
+    margin-bottom: 8px !important;
+}
+
+.THIS #SalesAccountButton[disabled] {
+    margin-top: 31.5px;
+}
+
+.THIS .slds-modal__header { z-index: 1000;}
+.THIS.backgroundcolor { background : white; border-radius : 5px;}
+.THIS .slds-page-header {
+    width: 98.8%!important;
+    margin: auto;
+    margin-top: .7rem;
+    background: rgb(243, 243, 242);
+    border-radius: 4px;
+    margin-bottom: 9px;
+}
+.THIS.fullWidth { width : 100%; padding-right : 5px; position : fixed; bottom : 0; z-index: 1;}
+.THIS#createoppbody{  margin-bottom : 4.75rem !important;}
+.THIS #buildingorgeography > fieldset{ margin-bottom : 3px !important; margin-top: -6px !important; }
+.THIS .slds-form-element__label{ font-weight: 600 !important; font-size: .75rem !important; }

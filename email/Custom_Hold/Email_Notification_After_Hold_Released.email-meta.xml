@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>41.0</apiVersion>
+    <available>true</available>
+    <description>Send email to hold request approver after hold is released before request is Approved or Rejected</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Email Notification After Hold Released</name>
+    <style>none</style>
+    <subject>Requested Hold Released</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

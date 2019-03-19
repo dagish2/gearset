@@ -1,0 +1,13 @@
+.THIS .slds-scope .slds-modal__container {
+    padding: 0px !important;
+}
+.THIS .slds-scope .slds-modal__header {
+    padding: 5px !important;
+}
+.THIS .slds-scope .slds-modal__footer{
+    padding: 5px !important;
+}
+.THIS slds-text-heading--medium {
+    font-size: 1rem !important;
+    line-height: 1.25 !important;
+}

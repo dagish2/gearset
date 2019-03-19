@@ -1,0 +1,36 @@
+Hello, 
+
+Are you able to assist on a tour for my opportunity {!Tour_Outcome__c.Opportunity__c}? Please confirm receipt of this request and assign the tour in your name, if available. 
+
+Tour Outcome ID: {!Tour_Outcome__c.Name}
+Tour Link: {!Tour_Outcome__c.Link}
+Tour Date / Time: {!Tour_Outcome__c.Tour_Date_Time__c}
+Tour Location: {!Tour_Outcome__c.Location__c}
+Community Manager: {!Tour_Outcome__c.Community_Manager_Name__c}
+Community Lead: {!Tour_Outcome__c.Community_Lead_Name__c}
+Primary Member: {!Tour_Outcome__c.Primary_Member__c}
+
+See below for information on the opportunity and account, in advance of the tour. 
+
+[Auto-populated] 
+Account Name: {!Tour_Outcome__c.Company_Name__c}
+Account FTE: {!Tour_Outcome__c.company_size__c}
+Opportunity: {!Tour_Outcome__c.Opportunity__c}
+Desks Interested: {!Tour_Outcome__c.Interested_in_Number_of_Desks__c}
+
+[User Input] 
+Desired solution (e.g., SKU Type): 
+Product Type: {!Opportunity.Type__c} 
+Desired SQFT: 
+Desired Move-in Date: 
+Desired Commitment Term: 
+Budget: 
+Has a discount been offered: 
+Existing member or new member: 
+Current desks: 
+Notes: 
+
+Thank you for your assistance. 
+
+Best, 
+{!Opportunity.OwnerFirstName}

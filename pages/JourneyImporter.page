@@ -1,0 +1,20 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+     <head>
+         <title>Lead/Journey Importer</title> 
+    </head> 
+    <apex:includeScript value="/support/console/22.0/integration.js"/>
+    <script type="text/javascript">
+    function testSetTabTitle() {
+        //Set the current tab's title
+        sforce.console.setTabTitle('Lead/Journey Importer');
+    }
+    var pageLoad = window.onload;
+    window.onload = function() {
+        if (pageLoad) {
+            pageLoad();
+        }
+        testSetTabTitle();
+    }
+    </script>
+    <c:LightningResource component="JourneyImporter" parameters=""></c:LightningResource>
+</apex:page>

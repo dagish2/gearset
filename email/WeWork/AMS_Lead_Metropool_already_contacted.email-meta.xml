@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>AMS-Lead Metropool already contacted</name>
+    <style>freeForm</style>
+    <subject>Following up - {!Lead.Salutation_Name__c}</subject>
+    <textOnly>Hi {!Lead.Salutation_Name__c},
+
+
+I wanted to follow up on our previous email and see if you&apos;re interested in stopping by WeWork for a tour of our Metropool location.
+
+I&apos;d love to learn more about your company and show you around as space is filling up quickly!
+
+
+
+
+Are you available for a tour this week or next?
+As always, you can also check our Metropool page and book a tour online if more convenient for you.
+
+Looking forward to hearing from you!
+
+Mathilde</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

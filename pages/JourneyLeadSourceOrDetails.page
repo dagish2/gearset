@@ -1,0 +1,23 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" showQuickActionVfHeader="false">
+    <!--Style for Scroll Bar-->
+    <style>
+        .slds-scope{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        }
+        .slds-scope::-webkit-scrollbar{
+        width:8px;
+        }
+        
+        .slds-scope::-webkit-scrollbar-track{
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+        
+        }
+        .slds-scope::-webkit-scrollbar-thumb{
+        background: -webkit-linear-gradient(top, #8bc7ef 1%,#4e87ca 100%);
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+        }
+    </style>
+    <title>Lead Source Setting</title>
+    <c:LightningResource component="GenerateJourneyLeadSourceOrDetails" parameters="settingId={!$CurrentPage.parameters.Id}"></c:LightningResource>
+</apex:page>

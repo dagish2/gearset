@@ -1,0 +1,85 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="options" type="List" default="[]" />
+    <aura:attribute name="filteredOptions" type="List" default="[]" />
+    <aura:attribute name="value" type="String" default=""  />    
+    <aura:attribute name="result" type="List" default="[]"/>    
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="searchKeyword" type="String" default="" />
+    <aura:attribute name="showOptions" type="Boolean" default="false"  />
+    <aura:attribute name="showAll" type="Boolean" default="false"  />
+    <aura:attribute name="mapOptionsValue" type="Object"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}"/>
+    <aura:handler name="change" value="{!v.options}" action="{!c.optionsChange}"/>
+    <div>
+        <style>
+            .disablepill {
+            cursor: not-allowed !important;
+            pointer-events: none;
+            background-color: rgb(255, 255, 255) !important;
+            border-top: 0px !important;
+            border-left: 0px !important;
+            border-right: 0px !important;
+            border-radius: 0px !important;
+            }
+            .showAll svg{
+                margin:0px !important;
+            }
+            .slds-has-error .slds-pill_container  {
+                background-color: rgb(255, 255, 255);
+                border-color: rgb(194, 57, 52);
+                box-shadow: rgb(194, 57, 52) 0 0 0 1px inset;
+                background-clip: padding-box;
+            }
+        </style>
+        <div id="{!v.name}" aura:id="multipicklistResult" class="{!'slds-pill_container '+(v.disabled?'disablepill':'')}" onclick="{!c.showOptions }" style="width:100%; max-height: 85px; overflow-y: auto;display:block" >        
+            <span class="placeholder-text" style="{!'display:'+(v.result.length==0?'inline-block':'none')}">{!v.disabled?'':('Select '+v.label)}</span>
+            <aura:iteration items="{!v.result}" var="item" indexVar="key">
+                <span class="slds-pill pill"><a href="javascript:void(0);" class="slds-pill__label"> {!item.label}</a>
+                    <button id="{!'remove:'+key}" class="slds-button slds-button--icon slds-pill__remove" style="{!'display:'+(v.disabled?'none':'block')}" title="Remove" onclick="{!c.remove }">
+                        <lightning:icon iconName="utility:close" size="xx-small"/>
+                        <span class="slds-assistive-text">Remove</span>
+                    </button>
+                </span>
+            </aura:iteration>
+        </div>    
+        <div id="{!v.name+'container'}" aura:id="multipicklistOptions" class="{!'slds-form-element slds-lookup '+(v.showOptions?'slds-is-open':'slds-is-close')}" data-select="single">        
+            <div class="slds-lookup__menu" id="lookup-67">
+                <span class="slds-lookup__item-action slds-media" id="lookup-option-507" role="option">
+                    <div class="slds-media__body">
+                        <div class="slds-lookup__result-text">
+                            <input type="text" id="{!v.name+':txt'}" class="slds-input" placeholder="Search" value="{!v.searchKeyword}" onkeyup="{!c.searchOption}" style="border: 1px solid rgb(216, 221, 230);box-shadow: none;" />  
+                        </div>
+                        <div class="{!'slds-lookup__result-text '+(v.filteredOptions.length!=0?'slds-hide':'slds-show')}">
+                            No records found!
+                        </div>
+                    </div>
+                </span>
+                <ul class="slds-lookup__list" role="listbox">
+                    <aura:iteration items="{!v.filteredOptions}" var="item" indexVar="index">
+                        <li role="presentation">
+                            <span class="slds-lookup__item-action slds-media" id="lookup-option-507" role="option">
+                                <div class="slds-media__body">
+                                    <div id="{!v.name+':'+index}" class="slds-lookup__result-text" onclick="{!c.select }">
+                                        {!item.label}  
+                                    </div>                        
+                                </div>
+                            </span>
+                        </li>
+                    </aura:iteration>
+                    <li role="presentation" class="{!v.filteredOptions.length>=10?'':'slds-hide'}">
+                        <span class="slds-lookup__item-action slds-media" id="lookup-option-507" role="option">
+                            <div class="slds-media__body">
+                                <div id="{!'select:'+index}" class="slds-lookup__result-text" onclick="{!c.showMoreLess}">
+                                    <lightning:icon class="showAll" iconName="{!'utility:'+(v.showAll?'dash':'add')}" size="x-small"></lightning:icon>&nbsp;&nbsp;Show {!v.showAll?'less':'all'}
+                                </div>                        
+                            </div>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</aura:component>

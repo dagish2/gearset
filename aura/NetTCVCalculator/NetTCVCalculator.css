@@ -1,0 +1,7 @@
+.THIS .tooltipContainer {
+    display: flex; 
+    align-items: center;
+}
+.THIS .customIcon div{
+    padding: 0;
+}

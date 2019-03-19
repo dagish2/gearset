@@ -1,0 +1,86 @@
+<apex:page controller="ListViewController" standardStylesheets="false" sidebar="false" showHeader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}" Vendor_CSS="" Vendor_JS="enz-table/enz-table.js" Application_JS="list-views.js,common-controls.js" Application_CSS="listviews.css,applicationCSS.css" />
+    <script src="/soap/ajax/10.0/connection.js"></script>
+    <script src="/soap/ajax/10.0/apex.js"></script>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>ListViews</title>
+        <script>
+        	window.sessionId = '{!$Api.Session_ID}';
+        </script>
+    </head>
+    <body>        
+        <div id="spinnerContainer"></div>
+        <div id="wrapper" ng-app="listViewApp" ng-controller="listViewAppController" data-ng-init="init()">
+           <div id="page-content-wrapper" style="margin-top: 50px;">
+                <div class="container-fluid">
+                    
+                    <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">ListViews</div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="row">
+                                        <form class="form-horizontal">
+                                           <div class="form-group">
+                                              <label for="select" class="col-md-2 control-label">Select Object : </label>
+                                              <div class="col-md-4">
+                                                 <select class="form-control" id="objectList" ng-model="selectedObject" ng-options="object for object in objectList"  ng-change="showAllRecord(selectedObject)"></select>
+                                               </div>
+                                            </div>
+										</form>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                         <div class="col-md-12" Id="enzi-tbl-block"></div>
+                                    </div>
+                                    <button class="btn btn-primary center-block" onclick="window.close()">Close</button>
+                                </div>
+                            </form>
+                         </div>
+                     </div>
+                    </div>
+                </div>
+            </div>
+  		<div class="modal fade" id="myModal" role="dialog" >
+    		<div class="modal-dialog">
+     			<div class="modal-content">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<h4 class="modal-title">{{listviewName}}</h4>
+        			</div>
+        			<div class="modal-body">
+                        <h5 ng-if="filters.length == 0">
+                            No filter criteria for this ListView.
+                        </h5>
+            			<table class="table table-condensed"  ng-if="filters.length > 0">
+    						<thead>
+                    			<tr>
+                                    <th>Field</th>
+                                    <th>Operator</th>
+                                    <th>Value</th>
+                    			</tr>
+    						</thead>
+                			<tbody>
+                                <tr ng-repeat="x in filters">
+                                    <td>{{ x.field }}</td>
+                                    <td>{{ x.operator }}</td>
+                                    <td>{{ x.value }}</td>
+                                </tr>
+                			</tbody>
+            			</table>
+        			</div>
+        		<div class="modal-footer">
+          			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		</div>
+      		</div>
+    		</div>
+  		</div>
+      </div>
+    </body>
+</apex:page>

@@ -1,0 +1,8 @@
+Hey {!Lead.Salutation_Name__c}, 
+
+Thank you for your interest in WeWork! My name is {!User.FirstName}, and I’m on the Community Management team here in River North. Just wanted to reconnect with you, as our space is less than 2 weeks away from opening!
+
+I'd love to have you come by our space for a tour, and learn more about our different memberships. I have availability for a tour from 12pm to 6pm each day this week. Which time and day works best for you?
+
+Best, 
+{!User.Name}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User announcements update for sprint 25 dev release</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes 25 dev update</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Intermittent Salesforce issues resolved</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+Due to our release on Monday, January 8th, some users are experiencing intermittent Salesforce issues. To fix this issue, please log out of your salesforce instance. When you log back in, the issue will be resolved.
+
+If you have any questions or concerns, please reach out to salesforcesupport@wework.com
+
+Warmly,
+Susie</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

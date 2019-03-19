@@ -1,0 +1,78 @@
+<apex:page controller="WeworkEngine" standardStylesheets="false" sidebar="false" showHeader="false" cache="false">
+  
+    <script type="text/javascript">__sfdcSessionId = '{!$Api.Session_Id}';</script>
+
+<c:GlobalResources loadMaterial="true" local="{!$CurrentPage.parameters.local}"
+Vendor_CSS="bootstrap/css/bootstrap-toggle.min.css,bootstrap/js/bootstrap-toggle.min.js,material/material.css,material/file-input.css" Vendor_JS="jquery/moment.min.js,jquery/xdate.js,material/material.js,material/file-input.js" 
+        Application_JS="error-manager.js,ng-tags-input.min.js,salesforce.js,material-factory.js,material-factory.js,partnershipForm.js"
+        Application_CSS="simple-sidebar.css,pagestyle.css,ng-tags-input.bootstrap.min.css,ng-tags-input.min.css,applicationCSS.css,material-factory.css" />
+<!-- Begin Default Content REMOVE THIS -->
+<body>
+
+<div  ng-app="partnershipApp" ng-controller="partnershipFormController" style="padding-top:10px">
+ <div class="container">
+            <div class="row">
+                <form>
+                    <div class="col-md-6 paddingRight">
+                        <material-input-text ng-model="newLeadRecord.FirstName" label="FIRST NAME" ng-required="true" maxlength="40"></material-input-text>
+                    </div>
+                    <div class="col-md-6 paddingLeft">
+                        <material-input-text ng-model="newLeadRecord.LastName" label="LAST NAME" ng-required="true" maxlength="80"></material-input-text>
+                    </div>
+                    <div class="col-md-12">
+                        <material-input-email ng-model="newLeadRecord.Email" label="EMAIL" ng-required="true" maxlength="80"></material-input-email>
+                    </div>
+                    <div class="col-md-6 paddingRight">
+                        <material-input-text ng-model="newLeadRecord.Business_Contact_Name__c" label="POINT OF CONTACT AT WEWORK" ng-required="true" maxlength="80"></material-input-text>
+                    </div>
+                    <div class="col-md-6 paddingLeft">
+                        <material-input-email  ng-model="newLeadRecord.Business_Contact_Email__c" label="POINT OF CONTACT'S EMAIL" maxlength="80"></material-input-email>
+                    </div>
+                    <div class="col-md-6 paddingRight">
+                        <material-autocomplete ng-model="newLeadRecord.Country__c" label="COUNTRY" maxlength="80" data="countryData" label-field="name"></material-autocomplete>
+                    </div>
+                    <div class="col-md-6 paddingLeft">
+                        <material-input-text  ng-model="newLeadRecord.City__c" label="CITY" maxlength="40"></material-input-text>
+                    </div>
+                    <div class="col-md-12" style="height: 33px;">
+                        <material-input-text ng-model="newLeadRecord.Company" label="COMPANY NAME" maxlength="80" ng-required="true"></material-input-text>
+                    </div>
+                    <!-- <div class="col-md-12" style="height:32px">
+                        <material-input-url ng-model="newLeadRecord.Website" label="WEBSITE" maxlength="100"></material-input-url>
+                    </div> -->
+                    <div class="col-md-12 toppadding" style="height:66px;">
+                      <material-input-file ng-model="selectedFile" caption="SELECT LOGO"></material-input-file>
+                    </div>
+                    <div class="col-md-12" style="height:auto;">
+                        <material-chips ng-model="newLeadRecord.Partner_Benefits__c" label="BENEFIT AVAILABLE AT" data="partnerBenifits"></material-chips>
+                    </div>
+                    <div class="col-md-12">
+                        <material-input-text ng-model="newLeadRecord.Partner_Offerings__c" label="WHAT IS YOUR OFFERING TO OUR MEMBERS?" maxlength="255"></material-input-text>
+                    </div>
+                    <div class="col-md-12 textarea-css">
+                        <material-textarea  ng-model="newLeadRecord.Description" label="BRIEF DESCRIPTION OF YOUR COMPANY" maxlength="200"></material-textarea>
+                    </div>
+                     <div class="col-md-12 textarea-css">
+                        <material-textarea  ng-model="newLeadRecord.Partner_Benefit_Additional_Description__c" label="PLEASE PROVIDE ANY ADDITIONAL DETAILS SURROUNDING YOUR BENEFIT." maxlength="200"></material-textarea>
+                    </div>
+                    <div class="col-md-12" style="height:auto;">
+                        <material-chips ng-model="newLeadRecord.Member_Redeem_Benefit__c" label="HOW CAN MEMBERS REDEEM THIS BENEFIT?" data="availableBenifits" handle-other="true"></material-chips>
+                    </div>
+                    <div class="col-md-12" >
+                        <material-input-text ng-model="newLeadRecord.Promo_Code__c" label="PROMOTIONAL CODE" maxlength="100"></material-input-text>
+                    </div>
+                    <div class="col-md-12" style="height: 33px;">
+                        <material-input-text ng-model="newLeadRecord.Offer_Redeem_Instruction__c" label="INSTRUCTIONS ON HOW TO REDEEM YOUR OFFER" maxlength="100"></material-input-text>
+                    </div>
+                    <div class="col-md-6">
+                        <material-button label="SUBMIT" type="primary" material-click="saveLeadInfo()" ng-disabled="!isFormValid" css-class="material-button"></material-button>
+                    </div>
+                     <div class="col-md-6">
+                        <material-button label="CLOSE" type="primary" material-click="cancel()" css-class="material-button"></material-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+</body>
+</apex:page>

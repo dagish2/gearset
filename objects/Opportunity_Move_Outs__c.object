@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>Building__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>When we get building uuid insted of reservable uuid in Contract event payload map here.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>When we get building uuid insted of reservable uuid in Contract event payload map here.</inlineHelpText>
+        <label>Sellable Building</label>
+        <referenceTo>Building__c</referenceTo>
+        <relationshipLabel>Opportunity Move Outs</relationshipLabel>
+        <relationshipName>Opportunity_Move_Outs</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Conference_Room_Credits__c</fullName>
+        <externalId>false</externalId>
+        <label>Conference Room Credits</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Is_Won__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Opportunity__r.IsWon =True, "Yes", "No")</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Won</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Monthly_Payment_Method__c</fullName>
+        <externalId>false</externalId>
+        <label>Monthly Payment Method</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Credit Card</fullName>
+                    <default>false</default>
+                    <label>Credit Card</label>
+                </value>
+                <value>
+                    <fullName>ACH</fullName>
+                    <default>false</default>
+                    <label>ACH</label>
+                </value>
+                <value>
+                    <fullName>Wire</fullName>
+                    <default>false</default>
+                    <label>Wire</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Monthly_Price__c</fullName>
+        <externalId>false</externalId>
+        <label>Monthly Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Monthly_Prints_Copies_B_W__c</fullName>
+        <externalId>false</externalId>
+        <label>Monthly Prints/Copies B&amp;W</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Monthly_Prints_Copies_Color__c</fullName>
+        <externalId>false</externalId>
+        <label>Monthly Prints/Copies Color</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Move_Out_Date__c</fullName>
+        <description>Value of Move Out Date will get from Contract Event endpoint</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value of Move Out Date will get from Contract Event endpoint</inlineHelpText>
+        <label>Move Out Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Building__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Building__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunity Building</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Stage_2016__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT( Opportunity__r.StageName )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Opportunity Stage 2016</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Stage__c</fullName>
+        <externalId>false</externalId>
+        <label>Opportunity Stage</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Opportunity Move Outs (from "there")</relationshipLabel>
+        <relationshipName>Opportunity_Move_Outs</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Paperwork_Signed__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL(Opportunity__r.StageName, "Closing"), "Yes", "No")</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Paperwork Signed</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pending_Desks_For_Move_Outs__c</fullName>
+        <externalId>false</externalId>
+        <formula>Reservable__r.Office_Capacity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Pending Desks For Move Outs</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pending_Desks__c</fullName>
+        <externalId>false</externalId>
+        <label>Pending Desks</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Prints_B_W_and_Color__c</fullName>
+        <externalId>false</externalId>
+        <formula>"B&amp;W: "&amp; TEXT(Monthly_Prints_Copies_B_W__c) &amp;" Color: "&amp; TEXT(Monthly_Prints_Copies_Color__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Prints B&amp;W and Color</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reservable_Building__c</fullName>
+        <description>This field will fetch Move out's Reservable's Building</description>
+        <externalId>false</externalId>
+        <formula>Reservable__r.Building__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>This field will fetch Move out's Reservable's Building</inlineHelpText>
+        <label>Reservable Building</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reservable__c</fullName>
+        <externalId>false</externalId>
+        <label>Reservable</label>
+        <referenceTo>Reservable__c</referenceTo>
+        <relationshipLabel>Opportunity Move Outs</relationshipLabel>
+        <relationshipName>Opportunity_Move_Outs</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Reservation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Reservation</label>
+        <referenceTo>Reservation__c</referenceTo>
+        <relationshipLabel>Opportunity Move Outs</relationshipLabel>
+        <relationshipName>Opportunity_Move_Outs</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Security_Deposit__c</fullName>
+        <externalId>false</externalId>
+        <label>Security Deposit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Sellable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If in contract event payload we get deal:true then this field will be true then this value becomes true</description>
+        <externalId>false</externalId>
+        <inlineHelpText>To identify that this record was created for Sellable or for Normal move_ins</inlineHelpText>
+        <label>Sellable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Active</fullName>
+                    <default>true</default>
+                    <label>Active</label>
+                </value>
+                <value>
+                    <fullName>Cancel</fullName>
+                    <default>false</default>
+                    <label>Cancel</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>reservation_uuid__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>reservation_uuid</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>We will capture  Move Outs of opportunity which are coming from Contract event</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Opportunity Move Out</label>
+    <nameField>
+        <displayFormat>MO-{0000000}</displayFormat>
+        <label>Opportunity Move Outs Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Opportunity Move Outs</pluralLabel>
+    <searchLayouts />
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

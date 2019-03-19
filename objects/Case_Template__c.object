@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Case_Template_Record_Page1</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <fields>
+        <fullName>Auto_Close_Cases__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Auto Close Cases</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Default_Owner__c</fullName>
+        <description>Who will be the Current Owner of the newly created Task.</description>
+        <externalId>false</externalId>
+        <label>Default Owner</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Due_In_Days__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>This number of days should be added to Task Creation Time and set as Due Date.</description>
+        <externalId>false</externalId>
+        <label>Due In (Days)</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Stages__c</fullName>
+        <externalId>false</externalId>
+        <label>Opportunity Stages</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Closed Lost</fullName>
+                    <default>false</default>
+                    <label>Closed Lost</label>
+                </value>
+                <value>
+                    <fullName>Closed Won</fullName>
+                    <default>false</default>
+                    <label>Closed Won</label>
+                </value>
+                <value>
+                    <fullName>Closing</fullName>
+                    <default>false</default>
+                    <label>Closing</label>
+                </value>
+                <value>
+                    <fullName>Merged</fullName>
+                    <default>false</default>
+                    <label>Merged</label>
+                </value>
+                <value>
+                    <fullName>Negotiating</fullName>
+                    <default>false</default>
+                    <label>Negotiating</label>
+                </value>
+                <value>
+                    <fullName>Qualifying</fullName>
+                    <default>false</default>
+                    <label>Qualifying</label>
+                </value>
+                <value>
+                    <fullName>Selling</fullName>
+                    <default>false</default>
+                    <label>Selling</label>
+                </value>
+                <value>
+                    <fullName>Any</fullName>
+                    <default>false</default>
+                    <label>Any</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Owner_Role__c</fullName>
+        <description>Role of the User in given Object to which the Task should be assigned to.</description>
+        <externalId>false</externalId>
+        <label>Owner Role</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sales Rep</fullName>
+                    <default>false</default>
+                    <label>Sales Rep</label>
+                </value>
+                <value>
+                    <fullName>Sales Analyst</fullName>
+                    <default>false</default>
+                    <label>Sales Analyst</label>
+                </value>
+                <value>
+                    <fullName>Legal Counsel</fullName>
+                    <default>false</default>
+                    <label>Legal Counsel</label>
+                </value>
+                <value>
+                    <fullName>Product Design Manager</fullName>
+                    <default>false</default>
+                    <label>Product Design Manager</label>
+                </value>
+                <value>
+                    <fullName>Member Success Executive</fullName>
+                    <default>false</default>
+                    <label>Member Success Executive</label>
+                </value>
+                <value>
+                    <fullName>Real Estate Rep</fullName>
+                    <default>false</default>
+                    <label>Real Estate Rep</label>
+                </value>
+                <value>
+                    <fullName>Member Success Manager</fullName>
+                    <default>false</default>
+                    <label>Member Success Manager</label>
+                </value>
+                <value>
+                    <fullName>Real Estate Advisory</fullName>
+                    <default>false</default>
+                    <label>Real Estate Advisory</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Record_Type_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Record Type Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Enterprise Finance &amp; Strategy</fullName>
+                    <default>false</default>
+                    <label>Enterprise Finance &amp; Strategy</label>
+                </value>
+                <value>
+                    <fullName>Real Estate Advisory</fullName>
+                    <default>false</default>
+                    <label>Real Estate Advisory</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Subject__c</fullName>
+        <description>Subject of the Task should be generated using this Task. Initially it will be hard coded text, in future we may use merge fields.</description>
+        <externalId>false</externalId>
+        <label>Subject</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Triggering_Object__c</fullName>
+        <description>Object on which Workflow should be written, to create task.</description>
+        <externalId>false</externalId>
+        <label>Triggering Object</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Opportunity</fullName>
+                    <default>false</default>
+                    <label>Opportunity</label>
+                </value>
+                <value>
+                    <fullName>Account</fullName>
+                    <default>false</default>
+                    <label>Account</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This is a Task Template which will be used to generate Standard Tasks automatically or by manual event.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>false</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>false</enableSharing>
+    <enableStreamingApi>false</enableStreamingApi>
+    <label>Case Template</label>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Case Templates</pluralLabel>
+    <searchLayouts />
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Owner_Role__c</columns>
+        <columns>Opportunity_Stages__c</columns>
+        <columns>Record_Type_Name__c</columns>
+        <columns>Default_Owner__c</columns>
+        <columns>Subject__c</columns>
+        <columns>Triggering_Object__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+</CustomObject>

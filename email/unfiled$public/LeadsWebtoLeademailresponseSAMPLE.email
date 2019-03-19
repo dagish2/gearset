@@ -1,0 +1,5 @@
+Dear {!Lead.Salutation_Name__c},  
+
+Thank you for your interest in {!Organization.Name}.  We will be contacting you shortly.    
+
+Sincerely,  The Team at {!Organization.Name}

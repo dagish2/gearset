@@ -1,0 +1,19 @@
+.THIS .slds-icon--xx-small {
+    width: 20px;
+    height: 15px;
+}
+.THIS .slds-item.selected{
+    background-color:aquamarine;
+}
+.THIS .slds-item.selected:hover{
+    background-color:aquamarine;
+}
+.THIS .slds-item:hover{
+    background-color:lightsteelblue;
+}
+.THIS .copy{
+    display:none;
+}
+.THIS .selected .copy{
+    display:inline-block;
+}

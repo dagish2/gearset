@@ -1,0 +1,86 @@
+<aura:component controller="SOSLSearchController" access="global">
+    <aura:attribute name="searchData" type="List" default="[]"/>
+    <aura:attribute name="sortedDataForList" type="List" default="[]"/>
+    <aura:attribute name="keyword" type="String" default=""/>
+    <aura:attribute name="recordIcon" type="List" default="[]"/>
+    <aura:attribute name="recordLimit" type="string" default="20"/>
+    <aura:attribute name="leadId" type="String"/>
+    <aura:attribute name="contactId" type="String"/>
+    <aura:attribute name="selectedObject" type="Map" default="{'isContact':true}"/>
+    <aura:attribute name="sObjectWithFields" type="Object" default="{}"/>
+    <aura:attribute name="utils" type="object" />
+    <aura:attribute name="whereClause" type="string" />
+    <aura:attribute name="searchDataUsingSOSL" type="Aura.Action"/>
+    <aura:attribute name="resetAndSearchFromParentComponent" type="Aura.Action"/>
+    <aura:attribute name="createNewInParent" type="Aura.Action"/>
+    
+    <aura:attribute name="changeInRecords" type="Aura.Action"/>
+    <aura:handler name="change" value="{!v.searchData}" action="{!v.changeInRecords}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <aura:method name="selectRecordFromList" action="{!c.selectRecordFromList}">    	
+        <aura:attribute name="idToSearch" type="Id"/>
+    </aura:method>
+    
+    <aura:method name="searchUsingSOSL" action="{!c.search}">    	
+        <aura:attribute name="keyword" type="Id"/>
+    </aura:method>
+    
+    <div class="slds-grid slds-wrap" style="width:100%;margin-bottom:10px;">
+        <div class="slds-size_1-of-1">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <div class="slds-combobox_container">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true" aria-haspopup="listbox" role="combobox" id="searchList">
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left" role="none" >
+                                <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_left" style="top: 14px;left: 10px;">
+                                    <lightning:icon iconName="{!(v.objectRec.Type=='lead'?'standard:lead':(v.objectRec.Type=='contact'?'standard:contact':'action:new_group'))}" size="{!(v.objectRec.Type=='lead'?'medium':(v.objectRec.Type=='contact'?'medium':'xx-small'))}"></lightning:icon>
+                                </span>
+                                <input type="search" class="slds-input slds-combobox__input" placeholder="Search Lead/Contact" style="padding:5px 50px" onkeyup="{!v.resetAndSearchFromParentComponent}" id="searchLeadorContact"/>
+                            </div>
+                            <lightning:helptext id="searchBoxToolTip" content="Search Lead/Contact" />
+                            <div id="listbox-unique-id" role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid" role="presentation" style="{!'display:'+(v.keyword.length>2?'block':'none')}"> 
+                                    <aura:if isTrue="{!v.sortedDataForList.length==0}">
+                                        <li role="presentation" class="slds-listbox__item">
+                                            <span id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                <span class="slds-media__body">
+                                                    <div class="slds-lookup__result-text">
+                                                        <mark style="margin-right:10px">No results found.</mark>
+                                                        <a title="Create New" onclick="{!v.createNewInParent}">
+                                                            <lightning:icon iconName="utility:new" size="xx-small"></lightning:icon>
+                                                            <span class="slds-assistive-text">Create New</span>
+                                                            Create New
+                                                        </a>
+                                                    </div> 
+                                                </span>
+                                            </span>
+                                        </li>
+                                    </aura:if>
+                                    <aura:iteration items="{!v.sortedDataForList}" var="data">
+                                        <li role="presentation" class="slds-listbox__item" onclick="{!v.searchDataUsingSOSL}" id="{!data.Id}">
+                                            <span id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                <span class="slds-media__figure">
+                                                    <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
+                                                        <lightning:icon iconName="{!'standard:'+data.type}"></lightning:icon>
+                                                        <span class="slds-assistive-text">Description of icon</span>
+                                                    </span>
+                                                </span>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{!data.Name}</span>
+                                                    <span class="slds-listbox__option-meta slds-listbox__option-meta_entity"><aura:if isTrue="{!data.Email}">✉{!data.Email}</aura:if> <aura:if isTrue="{!data.Phone}">✆{!data.Phone}</aura:if></span>
+                                                </span>
+                                            </span>
+                                        </li>
+                                    </aura:iteration>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

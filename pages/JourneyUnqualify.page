@@ -1,0 +1,6 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">  
+    <head>
+        <title>Unqualify</title>        
+    </head>
+    <c:LightningResource component="JourneyUnqualifyAction" parameters="recordId={!$CurrentPage.parameters.id};isFromJourneyDetails=true"></c:LightningResource>
+</apex:page>

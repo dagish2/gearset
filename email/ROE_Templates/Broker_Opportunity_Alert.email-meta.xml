@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Used to alert a member of the Growth Partnerships team of broker involvement on your opportunity</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Opp: Broker Opportunity Alert</name>
+    <style>none</style>
+    <subject>Broker Involved on Opportunity: {!Opportunity.Name}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

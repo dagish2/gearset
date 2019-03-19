@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>03-08-2019 Release Notes</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: March 8th 2019 Salesforce Updates</subject>
+    <textOnly>REQUEST A UNOMY ENRICHMENT UPDATE FOR AN ACCOUNT 
+
+A Unomy update request field has been added to the Account page layout in the “Unomy Fields” section. This field should be used to request a change to the Account FTE or HQ Market fields  if you feel Unomy’s enrichment needs updating. Below are instructions on how the field should be used. 
+
+
+
+If the Account FTE or HQ Market fields on an account are not up to date, you should follow the steps below:
+
+Populate the accurate information in the “HQ Address” and “Number of Full Time Employees” fields on the account (you may not request a Unomy Update unless you’ve populated both of these fields)
+Request an update to Unomy by selecting “Request Unomy Update” from the dropdown in the “Unomy Update Request” field on the account
+Escalate the request to the Growth Operations team via this form
+A member of the Growth Operations team will approve or reject the request upon review. Upon approval, the “Unomy Location” and “Unomy Company Size Min” fields will be updated with the “HQ Address” and “Number of Full Time Employee” fields, respectively
+If necessary, conduct a handoff to the appropriate account / opportunity owner, based on the accurate enrichment data (once approved, the ROE Enforcer will evaluate ownership based on the new enrichment data)
+
+
+
+
+
+SALESFORCE AND TCV (TOTAL CONTRACT VALUE) EXPLAINED 
+
+We have put together some materials to help you better understand the following:
+
+What is TCV and net TCV?
+How are TCV and net TCV calculated? 
+How does calculating the net TCV correctly impact forecasting and goal tracking?
+What is the best way to calculate net TCV in Salesforce?
+
+
+
+
+The Salesforce Team</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

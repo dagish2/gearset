@@ -1,0 +1,259 @@
+<aura:component controller="CreateOpportunityController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global">
+    <aura:attribute name="recordId" type="Id"/> 
+    <aura:attribute name="dataFields" type="List"/> 
+    <aura:attribute name="fromGlobalAction" type="Boolean" default="false"/> 
+    <aura:attribute name="isNewOrgCreated" type="Boolean" default="false"/>
+    <aura:attribute name="opportunityId" type="Id"/> 
+    <aura:attribute name="hasNoRecordId" type="Boolean" default="false"/> 
+    <aura:attribute name="OpportunityQualifySetting" type="Object"/> 
+    <aura:attribute name="record" type="Map" default="{}"/>
+    <aura:attribute name="opportunityRecord" type="Opportunity" default="{'sobjectType': 'Opportunity', ' CloseDate': null, 'LeadSource': null, 'Lead_Source_Detail__c': null, 'Description': null, 'Building__c': null, 'Primary_Member__c': null, 'Geography__c': null, 'Referrer__c': null, 'Type__c': null, 'Requirement_Quantity__c': null, 'Desired_Budget__c': null, 'Actual_Start_Date__c': null, 'Commitment_Term_in_months__c': null}"/>
+    <aura:attribute name="opportunityRoleRecord" type="Opportunity_Role__c" default="{'sobjectType':'Opportunity_Role__c','Role__c':'Primary Member','Opportunity__c':null,'Is_Primary_Member__c':null,'Contact__c':null}"/> 
+    <aura:attribute name="selectedOpportunityRole" type="String" default="Main Contact" />
+    <aura:attribute name="buildingOptions" type="List" default="[{'label': 'Primary Building', 'value': 'Primary Building'},{'label': 'Primary Geography', 'value': 'Primary Geography'}]"/>
+    <aura:attribute name="selectedBuildingOption" type="String" default="Primary Building"/>
+    <aura:attribute name="leadPrimaryMember" type="String"/>
+    <aura:attribute name="isPrimaryGeography" type="Boolean" default="false" />
+    <aura:attribute name="orgAccountId" type="String" />
+    <aura:attribute name="newOrgAccount" type="Account" default="{'sobjectType':'Account','Name':null,'Number_of_Full_Time_Employees__c':null,'Account_Type__c':'Org'}"/>
+    <aura:attribute name="newPrimaryContact" type="Contact" default="{'sobjectType':'Contact','Name':null,'Email':null}"/>
+    <aura:attribute name="oppRoleContact" type="Id"/>
+    <aura:attribute name="disabledOnLoad" type="Map" default="{}"/>
+    <aura:attribute name="currentDate" type="Object" />
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="errors1" type="Object"/>
+    <aura:attribute name="valid1" type="Boolean"/>
+    <aura:attribute name="errors2" type="Object"/>
+    <aura:attribute name="valid2" type="Boolean"/>
+    <aura:attribute name="errors3" type="Object"/>
+    <aura:attribute name="valid3" type="Boolean"/>
+    <aura:attribute name="isProfileAllowed" type="boolean" default="false"/>
+    <aura:attribute name="mapRecordTypes" type="Object"/>
+    <aura:attribute name="orgRecordTypeName" type="String"/>
+    <aura:attribute name="mapRecordTypeInfo" type="Object"/>
+    <aura:attribute name="isForcastMoveOutDate" type="Boolean" default="false"/>
+    <aura:attribute name="allowCreateOpp" type="Boolean"/>
+    <aura:attribute name="orgRelatedSalesAccounts" type="List" default="[]"/>
+    <aura:attribute name="mapInstructions" type="Map"/>
+    <aura:attribute name="header" type="String"/>
+    <aura:attribute name="accountName" type="String" />
+    <aura:attribute name="hasSearched" type="Boolean" default="false"/>
+    
+    <aura:attribute name="instructions" type="List" default="[]" />
+    <aura:attribute name="selectedOrgId" type="String" />
+    <aura:attribute name="orgRequestTabs" type="Object" />
+    <aura:attribute name="requestedOrg" type="Object" />
+    <aura:attribute name="requestNewOrgSuccess" type="Boolean" default="false" />
+    
+    <aura:attribute name="selectedSalesAccountId" type="String" />
+    <aura:attribute name="saleAccCriteria" type="String" />
+    <aura:attribute name="salesAccountSearch" type="Boolean" default="false"/>
+    <aura:attribute name="orgName" type="String" />
+    <aura:attribute name="defaultOrgRecords" type="List" default="[]" />
+    <aura:attribute name="salesAccountId" type="String" />
+    <aura:attribute name="quantityinunits" type="Object" />
+    <aura:attribute name="units" type="String" default=""/>
+    <aura:attribute name="familyoptions" type="List" default="[]" />
+    <aura:attribute name="referrer" type="object" default="{}" />
+    <aura:attribute name="isBrokerOptions" type="List" default="[]" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.orgAccountId}" action="{!c.changeSearchOrg}"/>
+    <aura:handler name="change" value="{!v.requestNewOrgSuccess}" action="{!c.closeCreateNewOrganization}"/>
+    <aura:handler name="change" value="{!v.opportunityRecord.Type__c}" action="{!c.changefamily}"/>
+    <aura:handler name="change" value="{!v.opportunityRecord.Broker_Involvement_Indicated__c}" action="{!c.changeBrokerInvolvement}"/>
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <aura:html tag="style">
+        #lightning {
+        background-image : url("/_slds/images/themes/lightning_blue/lightning_blue_background.png") !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        } 
+        body, html {
+        height: 100%;
+        overflow: hidden;
+        }
+        .slds-scope .slds-vertical-tabs{ overflow: inherit !important; }
+        #auraErrorMessage{ padding-bottom : 4.75rem !important; }
+        @media screen and (max-width: 767px){
+        #buildingorgeography > fieldset{ margin-bottom : 0px !important; } 
+        }
+        #confirmModal > div > div.slds-modal.slds-fade-in-open > div{
+        max-width: 30rem !important;
+        width:50% !important;    
+        }
+        .slds-rise-from-ground{ z-index: 10000 !Important; }
+    </aura:html>
+    <aura:if isTrue="{! !empty(v.record.relatedRecord)}">
+        <div class="createOpportunityHeader">
+            <c:PageHeader sObjectName="{!v.record.relatedObjectName}" pageName="Create Opportunity" iconName="{! (v.record.relatedObjectName != 'journey') ? 'standard:'+ v.record.relatedObjectName : 'custom:custom20'}" dataFields="{!v.dataFields}" />
+        </div>
+    </aura:if>
+    <aura:if isTrue="{! empty(v.record.relatedRecord)}">
+        <div id="GlobalActionHeader">
+            <c:EnziHeader sObjectName="Opportunity" pageName="Create Opportunity" iconName="standard:opportunity"/>
+        </div>
+    </aura:if>
+    <div id="createoppbody" class="backgroundcolor slds-m-left_x-small slds-m-right_x-small" >
+        <div class="{! and(not(empty(v.allowCreateOpp)),! v.allowCreateOpp) ?'slds-wrap':'slds-hide'}" style="width: 50%;margin: auto;">
+            <div class="slds-card">                            
+                <div class="slds-card__header slds-grid" >
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__figure" >
+                            <span class="slds-icon slds-icon_container">
+                                <lightning:icon iconName="utility:info"/>
+                            </span>
+                        </div>
+                        <div class="slds-media__body" style="overflow-wrap: break-word;">
+                            <div class="slds-media__body slds-p-around_small">
+                                <h2 class="slds-welcome-mat__tile-title">You cannot perform this action. Only Enterprise Sales and Regional Sales can create Opportunities from Sales Accounts. Please contact Growth Ops or Salesforce Support (salesforcesupport@wework.com).</h2>
+                            </div>
+                            <h2>
+                                <span class="slds-text-heading_small slds-align_absolute-center"></span>
+                            </h2>
+                        </div>
+                    </header>
+                </div> 
+                <footer class="slds-card__footer slds-align_absolute-center">
+                    <c:EnziButton label="Close" type="destructive" click="{! c.cancel}"></c:EnziButton>
+                </footer>
+            </div>
+        </div>
+        <div class="{! and(not(empty(v.allowCreateOpp)),! v.allowCreateOpp) ?'slds-hide':'slds-grid slds-grid--vertical slds-nowrap'}" > 
+            <c:EnziFormValidator errors="{! v.errors}" valid="{! v.valid}" >
+                <div class="slds-grid slds-wrap slds-p-horizontal_xx-small" role="main"> 
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2  ">
+                        <c:EnziField name="searchOrg" type="reference" icon="standard:account" sObjectName="Account" label="Organization" reference="Account" value="{!v.orgAccountId}" keyword="{!v.orgName}" disabled="{!v.disabledOnLoad.orgAccountId}" getFields='{"Website":"Website","Owner.Name":"Account Owner"}' required="true" criteria="Account_Type__c = 'Org' AND RecordType.Name = 'Enterprise Solutions'" errors="{!v.errors}" defaultDisabled="true" change="{!c.changeSearchOrg}" createNew='{"isShow":true,"label":"Request New Organization"}' addNew="{!c.requestNewOrgModal}" helpText="Enter the name of the Organization associated with this new Opportunity. If an existing Organization does not appear when typing the name, click 'Request New Organization' to request/create a new one." />
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="SalesAccount" type="reference" icon="standard:account" sObjectName="Account" label="Sales Account" reference="Account" value="{!v.salesAccountId}" criteria="{! !empty(v.saleAccCriteria)?v.saleAccCriteria:''}" disabled="{! or(or(empty(v.orgAccountId), v.disabledOnLoad.salesAccountId), not(v.salesAccountSearch))}" defaultDisabled="true" errors="{!v.errors}" helpText="Click 'Show Sales Accounts' or enter the name of the Sales Account belonging to the Organization above that you would like to associate this Opportunity with. If you cannot find an appropriate Sales Account, contact the Org Account owner or Growth Ops to create one or proceed with Opportunity creation parented under the organization."/>
+                        <span class="{! or(or(empty(v.orgAccountId), v.disabledOnLoad.salesAccountId), not(v.salesAccountSearch)) ? 'slds-hide' : ''}" ><lightning:icon iconName="utility:new" size="xx-small"/>&nbsp;&nbsp;<a id="SalesAccountButton" value="OppMainContact" onclick="{! c.showOrgRelatedSalesAccounts }">Show Sales Accounts</a>&nbsp;&nbsp;</span>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ">
+                        <aura:if isTrue="{!if(or(equals('lead',v.record.relatedObjectName),equals('journey',v.record.relatedObjectName)),if(and(equals('journey',v.record.relatedObjectName),empty(v.record.relatedRecord.Primary_Lead__c)), true, false),true)}">
+                            <c:EnziField name="OppRoleContact" type="reference" icon="standard:contact" sObjectName="contact" getFields='{"Email":"Email","Account.Name":"Account Name","Account.Account_Type__c":"Account Type"}' label="{!((v.opportunityRoleRecord.Role__c == undefined || v.opportunityRoleRecord.Role__c == '')?'New Contact':((v.opportunityRoleRecord.Role__c == 'Primary Member')?'Main Contact':v.opportunityRoleRecord.Role__c))}" reference="Contact" defaultDisabled="true" value="{!v.opportunityRoleRecord.Contact__c}" addNew="{!c.showCreateContactPopup}" required="true" disabled="{!if(equals('lead',v.record.relatedObjectName),true,false)}" helpText="Enter the name of the main point of contact for the Opportunity. If an existing contact does not appear when typing the name, click 'New Main Contact'." errors="{!v.errors}"  searchFields="['Email', 'Name']"/>
+                            <aura:set attribute="else">
+                                <c:EnziField name="OppRoleContact" type="string" label="{!((v.opportunityRoleRecord.Role__c == undefined || v.opportunityRoleRecord.Role__c == '')?'New Contact':((v.opportunityRoleRecord.Role__c == 'Primary Member')?'Main Contact':v.opportunityRoleRecord.Role__c))}" value="{!v.leadPrimaryMember}" required="true" disabled="true" defaultDisabled="true" helpText="The name of the main point of contact for the Opportunity." addNew="{!c.showCreateContactPopup}"/>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <div class="slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2" style="padding-right: 8px;">
+                            <c:EnziField name="Broker_Involvement_Indicated" sObjectName="Opportunity" fieldName="Broker_Involvement_Indicated__c" label="Is Broker Involved ?" value="{! v.opportunityRecord.Broker_Involvement_Indicated__c}" errors="{! v.errors}" helpText="Select Is there a Broker or Referrer?" options="{!v.isBrokerOptions}" sort="desc"/>
+                        </div>
+                        <div class="{!'slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2 ' + (v.opportunityRecord.Broker_Involvement_Indicated__c == 'Yes' ? '' : 'slds-hide')}" style="padding-left: 8px;">
+                        	<c:EnziField name="brokerreferrername" sObjectName="Opportunity" fieldName="Referrer__c" label="Broker Name" value="{! v.opportunityRecord.Referrer__c}" getFields='{"Email":"Email","Account.Name":"Account Name","Account.Account_SubType__c":"Account Sub Type"}' searchFields="['Email', 'Name']" helpText='Search for the Referrer here if not found then Click on "Create New" to create a new Contact.' errors="{! v.errors}"/>
+                        </div>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="productfamily" sObjectName="Opportunity" fieldName="Type__c" label="Product Family" required="true" value="{! v.opportunityRecord.Type__c}" errors="{! v.errors}" helpText="Select the WeWork solution that the member or potential new member is interested in." change="{!c.changefamily}" options="{!v.familyoptions}"/>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="estimatedmonthlybudget" type="Number" sObjectName="Opportunity" fieldName="Desired_Budget__c" label="Estimated Monthly Budget (USD)" value="{! v.opportunityRecord.Desired_Budget__c}" errors="{! v.errors}" disabled="{!v.opportunityRecord.Type__c == 'PxWe' }" defaultDisabled="true" helpText="Enter the Estimated Monthly Budget expressed by the member or potential new member." min="1" />
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="requirementquantity" type="number" sObjectName="Opportunity" fieldName="Requirement_Quantity__c" required="true" label="{! 'Requirement ' + (empty(v.units)? '' :v.units)}" value="{! v.opportunityRecord.Requirement_Quantity__c}" errors="{! v.errors}" min="1" helpText="Enter in the number of units of the solution that the member or potential new member is interested in. For WeWork, enter in a number of desks. For Global Access, enter in a number of memberships. For PxWe, enter in a number of square feet. "/>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="targetmoveindate" sObjectName="Opportunity" fieldName="Actual_Start_Date__c" upperBound="{!v.currentDate}" label="Target Move-in Date" value="{! v.opportunityRecord.Actual_Start_Date__c}" errors="{! v.errors}" helpText="This is the Expected Start Date until Closed Won."/>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="closedate" sObjectName="Opportunity" fieldName="CloseDate" label="Close Date" upperBound="{!v.currentDate}" value="{! v.opportunityRecord.CloseDate}" errors="{! v.errors}" helpText="Enter the Desired Close Date for the Opportunity."/>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="desiredtermlength" type="number" sObjectName="Opportunity" fieldName="Desired_Term_Length_in_months__c" label="Desired Term Length (in months)" value="{! v.opportunityRecord.Desired_Term_Length_in_months__c}" errors="{! v.errors}" helpText="Enter in the Desired Term Length in months that the member or potential new member is interested in." min="1"/>
+                    </div>
+                    <div id="buildingorgeography" class="slds-p-horizontal_small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 ">
+                        <c:EnziSection label=" Select Building or Location " type="fieldset">                                
+                            
+                            <div class="slds-grid slds-wrap slds-small-size--1-of-1 slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                                <div class="slds-size_1-of-1 slds-large-size_1-of-2" style="padding-top: 21px; margin-top: -13px;">
+                                    <c:EnziField type="radio" hideLabel="true" aura:id="builingRadio" name="buildingGroup" options="{! v.buildingOptions}" value="{! v.selectedBuildingOption}" change="{! c.changeBuildingOption}"/>
+                                </div>
+                                <div class="slds-size_1-of-1 slds-large-size_1-of-2" style="margin-top: -5px;">
+                                    <div class="{!'slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size_1-of-1 ' + (equals('Primary Building',v.selectedBuildingOption) ? '' : 'slds-hide')}">
+                                        <c:EnziField name="primaryBuilding" type="reference" sObjectName="Building__c" label="Building" reference="Building__c" value="{! v.opportunityRecord.Building__c}" required="{!equals('Primary Building',v.selectedBuildingOption)}" errors="{!v.errors}" helpText="If the Opportunity is associated with a specific Building, enter Primary Building."/>
+                                    </div>
+                                    <div class="{!'slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size_1-of-1 ' + (equals('Primary Building',v.selectedBuildingOption) ? 'slds-hide' : '')}">
+                                        <c:EnziField name="googleLocation" sObjectName="Opportunity" fieldName="Geography__c" value="{! v.opportunityRecord.Geography__c}" required="{!!equals('Primary Building',v.selectedBuildingOption)}" errors="{!v.errors}" helpText="Search for the relevant geographic location."/>
+                                    </div>
+                                </div>
+                            </div>  
+                        </c:EnziSection>
+                    </div>      
+                    <div class="slds-p-horizontal_small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2" style="padding-bottom: 6px;">
+                        <c:EnziField name="description" label="Description" sObjectName="Opportunity" fieldName="Description" value="{! v.opportunityRecord.Description}" errors="{! v.errors}" helpText="Enter the additional information and details about the Opportunity. "/>
+                    </div>
+                </div>
+            </c:EnziFormValidator>
+        </div>
+    </div>
+    <div class="slds-modal__footer fullWidth">
+        <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{! c.cancel}"></c:EnziButton>
+        <c:EnziButton label="Create Opportunity" type="brand" leftIcon="utility:save" click="{! c.save}" disabled="{! not(v.valid)}"></c:EnziButton>
+    </div>
+    <c:EnziModal aura:id="createNewContact" header="{! 'New '+((v.opportunityRoleRecord.Role__c == undefined || v.opportunityRoleRecord.Role__c == '')?'New Contact':((v.opportunityRoleRecord.Role__c == 'Primary Member')?'Main Contact':v.opportunityRoleRecord.Role__c))}" isLarge="false" show="false">
+        <c:EnziModalContainer >
+            <div class="slds-grid slds-grid--vertical slds-nowrap" >
+                <div class="slds-grid slds-wrap slds-grid--pull-padded slds-p-horizontal_large slds-p-vertical_small " role="main">                 
+                    <c:EnziFormValidator errors="{! v.errors2}" valid="{! v.valid2}">
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-top_small">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size--1-of-3 slds-small-size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-3">
+                                    <c:EnziField name="FirstName" sObjectName="Contact" fieldName="FirstName" value="{! v.newPrimaryContact.FirstName}" errors="{! v.errors2}" helpText="Enter First Name"/>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-3 slds-small-size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-3 ">
+                                    <c:EnziField name="LastName" sObjectName="Contact" fieldName="LastName" value="{! v.newPrimaryContact.LastName}" errors="{! v.errors2}" helpText="Enter Last Name"/>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-3  slds-small-size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-3 ">
+                                    <c:EnziField name="Email" sObjectName="Contact" fieldName="Email" value="{! v.newPrimaryContact.Email}" required="true" errors="{! v.errors2}" helpText="Enter Email Address"/>
+                                </div>
+                            </div>
+                        </div>                        
+                    </c:EnziFormValidator>
+                </div>
+            </div>
+        </c:EnziModalContainer> 
+        <c:EnziModalFooter>
+            <c:EnziButton label="Close" leftIcon="utility:close" type="destructive" click="{! c.closeCreateContactPopup}" ></c:EnziButton>                
+            <c:EnziButton label="Save" leftIcon="utility:save" type="brand" click="{! c.createPrimaryContact}" disabled="{! not(v.valid2)}" ></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+    
+    <!-- ST-2630 Request New Organization -->
+    <div id="CreateNew">
+        <c:EnziModal aura:id="CreateNewOrganization" isLarge="false" show="false" showFooter="false">
+            <c:EnziModalContainer>
+                <div id="accountHeader">
+                    <c:EnziHeader sObjectName="Account" pageName="{!v.header}" iconName="standard:account" />
+                </div>
+                <div class="slds-p-top_medium">
+                    <div id="accountinstructions" class="slds-p-bottom_small slds-box" style="padding:0;">
+                        <c:WeInstructions instructions="{! v.instructions}" />
+                    </div>
+                </div>
+                <div id="searchOrganization" class="slds-p-bottom_small">
+                    <c:SearchOrganizations orgRecords="{!v.defaultOrgRecords}" selectedOrgId="{!v.selectedOrgId}" useExistingOrg="{!c.useExistingOrg}" searchAllOrg="false" close="{!c.closeCreateNewOrganization}" next="{!c.next}" accountName = "{!v.accountName}" hasSearched = "{!v.hasSearched}" showHierarchy="false"/>
+                </div>
+                <div id="requestNewOrganization" class="slds-p-bottom_small slds-hide" >
+                    <c:RequestNewOrganization method = "{!c.closeCreateNewOrganizationFromRequest}"  requestedOrg="{!v.requestedOrg}" isFromCreateOpportunity="true" previous="{!c.previous}" close="{!c.closeCreateNewOrganization}"/>
+                </div>
+            </c:EnziModalContainer>
+        </c:EnziModal>
+    </div>
+    
+    <!-- ST-2671 Show Org Related Sales Accounts -->
+    <c:EnziModal aura:id="ShowOrgRelatedSalesAccounts" header="Select Sales Account" isLarge="true" show="false">
+        <c:EnziModalContainer >
+            <c:SalesAccountSelector orgAccountId="{! v.orgAccountId}" selectedSalesAccountId="{! v.selectedSalesAccountId}" orgRelatedSalesAccounts = "{! v.orgRelatedSalesAccounts}" />
+        </c:EnziModalContainer>            
+        <c:EnziModalFooter >
+            <c:EnziButton label="Close" leftIcon="utility:close" type="destructive" click="{! c.closeOrgRelatedSalesAccounts}"></c:EnziButton>
+            <c:EnziButton label="Select Sales Account" leftIcon="utility:save" type="brand" click="{! c.selectSalesAccount}" disabled="{! empty(v.selectedSalesAccountId)}" ></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

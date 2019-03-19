@@ -1,0 +1,132 @@
+<apex:component controller="GlobalResources">
+    <apex:attribute name="localUrl" type="String" default="https://localhost/we-work/" required="false" description="Use local resources?" />
+    <apex:attribute name="local" type="Boolean" default="false" required="false" description="Use local resources?" />
+    <apex:attribute name="debug" type="Boolean" default="false" required="false" description="Use debug resources?" />
+    <apex:attribute name="Application_JS" type="String" default="" assignto="{!Application_JS_List}" required="false" description="Additional Application_JS resources" />
+    <apex:attribute name="Application_CSS" type="String" default="" assignto="{!Application_CSS_List}" required="false" description="Additional Application_CSS resources" />
+    <apex:attribute name="Vendor_JS" type="String" default="" assignto="{!Vendor_JS_List}" required="false" description="Additional Vendor_JS resources" />
+    <apex:attribute name="Vendor_CSS" type="String" default="" assignto="{!Vendor_CSS_List}" required="false" description="Additional Vendor_CSS resources" />
+    <apex:attribute name="loadMaterial" type="Boolean" default="false" required="false" description="Use material resources?" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <style>
+        .btn-primary {
+            color: #fff !important;
+            background-color: #337ab7 !important;
+            border-color: #2e6da4 !important;
+        }
+        .btn {
+            padding: 6px 12px !important;
+            margin-bottom: 0 !important;
+            font-size: 14px !important;
+            font-weight: 400 !important;
+            -webkit-user-select: none !important;
+            user-select: none !important;
+            background-image: none !important;
+            border: 1px solid transparent !important;
+            border-radius: 4px !important;
+        }
+        .btn-success {
+            color: #fff !important;
+            background-color: #5cb85c !important;
+            border-color: #4cae4c !important;
+        }
+        .fa{
+        	font-family:FontAwesome !important
+        }
+    </style>
+     <!-- Load global vendor css files --> 
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_css,'/fontawesome/css/font-awesome.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_css,'/bootstrap/css/bootstrap.min.css')}"/>   
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_css,'/jquery/jquery-ui.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_css,'/angular/angular-toaster.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_css,'/jsonviewer/jquery.json-viewer.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_js,'/enz-table/enz-table.css')}" />
+
+    
+    <script src="/soap/ajax/10.0/connection.js"></script>
+    <script src="/soap/ajax/10.0/apex.js"> </script>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js,'jquery/jquery.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js,'jquery/jquery-ui.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js,IF(loadMaterial,'angular/angular-material.js','angular/angular.min.js'))}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js,'angular/angular-animate.min.js')}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js,'angular/angular-toaster.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js,'angular/angular-route.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_css,'bootstrap/js/bootstrap.min.js')}"/>
+    <apex:includescript value="{!URLFOR($Resource.vendor_js,'enz-table/enz-table.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js,'angular/angular-aria.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vendor_js,'angular/angular-messages.min.js')}"/>
+    
+        
+    <!-- Load user supplied application css files -->
+    <apex:variable var="cssPath" value="{!IF(Local,LocalUrl & 'application_css' & '/attachments.css', URLFOR($Resource.application_css, '/attachments.css'))}" />
+    <apex:variable var="vendorCssPath" value="{!IF(Local,LocalUrl & 'vendor_css' & '/attachments.css', URLFOR($Resource.vendor_css, '/attachments.css'))}" />
+    <apex:variable var="scriptPath" value="{!IF(Local,LocalUrl & 'application_js' & '/myscript.js', URLFOR($Resource.application_js, IF( Debug, '/debug/myscript.js', '/myscript.js')))}" />
+    <apex:variable var="vendorJsPath" value="{!IF(Local,LocalUrl & 'vendor_js' & '/myscript.js', URLFOR($Resource.vendor_js, '/myscript.js'))}" />
+    
+    <!-- Load user supplied vendor css files -->
+    <apex:repeat var="vnd_css" value="{!Vendor_CSS_Files}">
+        <apex:outputPanel rendered="{!(CONTAINS(vnd_css,'.css'))}">
+            <apex:stylesheet value="{!SUBSTITUTE(vendorCssPath,'/attachments.css','/' + vnd_css)}"  />
+        </apex:outputPanel> 
+        <apex:outputPanel rendered="{!(CONTAINS(vnd_css,'.js'))}">
+            <apex:includescript value="{!SUBSTITUTE(vendorCssPath,'/attachments.css','/' + vnd_css)}"  />
+        </apex:outputPanel>        
+    </apex:repeat>
+    
+    <!-- Load user supplied vendor js files -->
+    <apex:repeat var="vnd_js" value="{!Vendor_JS_Files}">
+        <apex:outputPanel rendered="{!(CONTAINS(vnd_js,'.css'))}">
+            <apex:stylesheet value="{!SUBSTITUTE(vendorJsPath,'/myscript.js','/' + vnd_js)}" />
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!(CONTAINS(vnd_js,'.js'))}">
+            <apex:includescript value="{!SUBSTITUTE(vendorJsPath,'/myscript.js','/' + vnd_js)}" />
+        </apex:outputPanel>
+    </apex:repeat>      
+    
+    <!-- Load user supplied application css files -->
+    <apex:repeat var="app_css" value="{!Application_CSS_Files}">
+        <apex:stylesheet value="{!SUBSTITUTE(cssPath,'/attachments.css','/' + app_css)}" />
+    </apex:repeat>    
+ 
+    <!-- Load user supplied application js files -->
+    <apex:repeat var="app_js" value="{!Application_JS_Files}">
+        <apex:includescript value="{!SUBSTITUTE(scriptPath,'/myscript.js','/' + app_js)}" />
+    </apex:repeat>    
+
+    <script language="javascript">
+        var application_js = '{!IF(Local,LocalUrl & 'application_js/', URLFOR($Resource.application_js, '/'))}';
+        var application_css = '{!IF(Local,LocalUrl & 'application_css/', URLFOR($Resource.application_css, '/'))}';
+        var vendor_js = '{!IF(Local,LocalUrl & 'vendor_js/', URLFOR($Resource.vendor_js, '/'))}';
+        var vendor_css = '{!IF(Local,LocalUrl & 'vendor_css/', URLFOR($Resource.vendor_css, '/'))}';
+        var table_js = '{!IF(Local,LocalUrl & 'vendor_js/enz-table/', URLFOR($Resource.vendor_js, 'enz-table/'))}';
+        
+        function getBaseUrl(a){return (a.protocol == "" ? location.protocol : a.protocol) +'//' + (a.host == "" ? location.host : a.hostname) + ((a.pathname.charAt(0) == '/')?'':'/') + a.pathname;}
+    
+        application_js = getBaseUrl($('<a>', { href: application_js })[0]);
+        application_css = getBaseUrl($('<a>', { href: application_css })[0]);
+        vendor_js = getBaseUrl($('<a>', { href: vendor_js })[0]);
+        vendor_css = getBaseUrl($('<a>', { href: vendor_css })[0]);
+    var wclose = window.close;
+    window.close = function(refresh){
+            debugger;
+            if(refresh)
+                parent.postMessage('closeAndRefresh',location.origin);
+            else
+                parent.postMessage('close',location.origin);
+            wclose();
+        }
+        if("{!$User.UITheme}"=="Theme4t"){
+            sforce.one = {};
+            sforce.one.back = function(refresh){
+                debugger;
+                if(refresh)
+                    parent.postMessage('closeAndRefresh',location.origin);
+                else
+                    parent.postMessage('close',location.origin);
+            }
+        }
+        
+    </script>
+</apex:component>

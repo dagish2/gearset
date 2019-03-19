@@ -1,0 +1,37 @@
+.THIS .disable-div {
+    cursor: not-allowed !important;
+    pointer-events: none;
+    border-color: #a8b7c7;
+    background-color: #e0e5ee;
+}
+.THIS #tourOutcomeDiv{
+    width:99.3%
+}
+.THIS .page-footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+}
+.THIS#PageHeaderDiv{
+    background:rgb(243, 243, 242);
+    margin-top:0.75rem;
+    margin-left:8px;
+    margin-right:8px;
+    border-radius:4px;
+}
+.THIS .slds-form-element__icon.slds-align-middle {
+    padding-top: 0px;
+    margin-left: -13px;
+    margin-top: -3px;
+}
+.THIS .slds-size--4-of-5 {
+    margin-left: -17px;
+}
+.THIS .slds-is-expanded {
+    background-color:rgb(255, 255, 255);
+}
+.THIS .slds-tree__item {
+    background-color:rgb(250, 250, 249);
+}

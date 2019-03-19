@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Instructions on how to opportunity team setups</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Opportunity team tutorial</name>
+    <style>freeForm</style>
+    <subject>TIP AND TRICKS: Opportunity team set up</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+Based on user feedback, we&apos;re testing a weekly salesforce tutorials about different features. If you like these, please let us know.
+
+This week&apos;s feature set is opportunity team
+Click the link for video
+https://drive.google.com/file/d/1l7elvXXCnTsJt76ncwtsK0SaLRG9ofnW/view?usp=sharing
+
+What is an opportunity team?
+An opportunity team is a group of Salesforce users who work together
+on a sales opportunity.
+
+Why is this feature?
+Opportunity teams shows who’s working on the opportunity and what each team member’s role is. You can grant your opportunity team members special access to the opportunity and its related records, making it easier for everyone to work together.
+
+Using opportunity teams makes it easier for you to track the work of a team, too. In opportunity reports, filter opportunities by the opportunity teams that you’re a member of.
+
+How does it work?
+
+You can find the opportunity team feature in the related tab of your opportunity.With an opportunity team, you can add yourself and others as members of the opportunitySimply click add opportunity team member and  Fill in the names,  team Roles, and Opportunity Access Once you are done click ‘Save’
+
+
+If you want to set yourself as a default member to all the opportunities you own.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

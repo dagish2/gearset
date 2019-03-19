@@ -1,0 +1,394 @@
+<messaging:emailTemplate subject="Broker Involved Notification" recipientType="User" relatedToType="Opportunity">
+<messaging:htmlemailbody > 
+        <style type="text/css">
+            html {
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+            }
+
+            body {
+                background-color: #ffffff;
+                margin: 0;
+                border-width: 1;
+                padding: 0;
+            }
+
+            a {
+                color: #F04823;
+                text-decoration: none;
+            }
+
+            img {
+                border: none;
+            }
+
+            .ReadMsgBody {
+                width: 100%;
+            }
+
+            .ExternalClass {
+                width: 100%;
+            }
+
+            .appleLinksBlue a {
+                color: #F04823;
+                text-decoration: none;
+            }
+
+            .appleLinksGray a {
+                color: #F04823;
+                text-decoration: none;
+            }
+
+            .ExternalClass * {
+                line-height: 100%;
+            }
+
+            .spacer {
+                display: block !important;
+                min-width: 330px !important;
+            }
+
+            .spacer {
+                display: block !important;
+                min-width: 600px !important;
+            }
+
+            p {
+                margin-bottom: 1em;
+            }
+
+            #reservableTable {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100% !important;
+            }
+
+            @media only screen and (max-width: 600px) {
+
+                /************************************ MAIN *************************************/
+                body {
+                    background-color: #ffffff;
+                    -webkit-text-size-adjust: 100%;
+                    -ms-text-size-adjust: 100%;
+                }
+
+                *[class].remove {
+                    display: none !important;
+                    width: 0 !important;
+                    height: 0 !important;
+                }
+
+                *[class].stack {
+                    display: block !important;
+                }
+
+
+                /************************************ WIDTH RESIZERS *************************************/
+
+                *[class].w-resize100 {
+                    width: 100% !important;
+                }
+
+                *[class].w-resize90 {
+                    width: 90% !important;
+                    margin: 0 auto !important;
+                }
+
+                *[class].w-resize80 {
+                    width: 80% !important;
+                    margin: 0 auto !important;
+                }
+
+                *[class].w-resize60 {
+                    width: 60% !important;
+                    margin: 0 auto !important;
+                }
+
+                *[class].w-resize10 {
+                    width: 10px !important;
+                }
+
+                /************************************ HEIGHT RESIZERS *************************************/
+
+                *[class].h-resize0 {
+                    height: 0px !important;
+                }
+
+                *[class].h-resize20 {
+                    height: 20px !important;
+                }
+
+                *[class].h-resize30 {
+                    height: 30px !important;
+                }
+
+                *[class].h-resize100 {
+                    height: 100px !important;
+                }
+
+                *[class].h-resize120 {
+                    height: 120px !important;
+                }
+
+                *[class].h-resize180 {
+                    height: 180px !important;
+                }
+                /************************************ TEXT *************************************/
+
+                *[class].text-center {
+                    text-align: center !important;
+                }
+
+                *[class].text15 {
+                    font-size: 15px !important;
+                }
+
+                *[class].footer-links a {
+                    display: block !important;
+                    margin: 0 0 20px 0 !important;
+                }
+
+
+                /************************************ IMAGE RESIZERS *************************************/
+
+                *[class].image-resize img {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+
+                *[class].hero-image img {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+
+                *[class].social-full img {
+                    width: 40px !important;
+                    height: auto !important;
+                }
+
+                /************************************ CTA *************************************/
+
+                *[class].cta1 {
+                    margin: 0 auto !important;
+                }
+
+                *[class].cta2 {
+                    margin: 0 auto !important;
+                }
+
+                *[class].cta1 td {
+                    background-color: #ffffff !important;
+                    border: 2px solid #b41f29 !important;
+                }
+
+
+                *[class].pad20 {
+                    padding: 0 0 20px 0 !important;
+                }
+            }
+
+            @media only screen and (max-width: 420px) {
+
+                *[class].hero-image, *[class].hero-image a, *[class].hero-image img {
+                    display: none !important;
+                }
+
+                *[class].hero-swap, *[class].hero-swap a, *[class].hero-swap img {
+                    width: 100% !important;
+                    height: auto !important;
+                    max-height: none !important;
+                    line-height: auto !important;
+                    display: block !important;
+                    margin: 0 auto !important;
+                }
+            }
+
+            @media only screen and (max-width: 380px) {
+
+                *[class].image-resize340 img {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+            }
+        </style>    
+        <div bgcolor="#ffffff" class="HEADER" style="background-color:#ffffff">
+            <table align="center" frame="box" border="1" cellpadding="5" cellspacing="0" class="w-resize90" style="background-color:#ffffff;" width="80%">
+                <tbody>
+                    <tr>
+                        <td align="center" bgcolor="#ffffff" class="h-resize100" valign="top" width="100%">
+                            <div style="background-color:#ffffff">
+                                <table align="center" border="0" cellpadding="0" cellspacing="0" class="w-resize100" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center" class="h-resize100" height="60">
+                                                <a href="http://www.wework.com" target="_blank">
+                                                    <img src="{!$Label.ContentURL}/servlet/servlet.ImageServer?id=015F0000001g0Zd&oid=00DF000000050Jf&lastMod=1378428928000" width="150" alt="WeWork" border="0" />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td align="center" class="stack w-resize100" valign="top" width="100%">
+                            <div class="narrow-module">
+                                <table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" class="w-resize100" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td bgcolor="#ffffff">
+                                                <table border="0" cellpadding="0" cellspacing="0" class="w-resize90" width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="center" class="stack w-resize100" valign="top" width="100%">
+                                                                <div>
+                                                                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="w-resize100" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td bgcolor="#ffffff">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" class="w-resize100" width="100%">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td align="center" class="stack w-resize100" valign="top" width="100%">
+                                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td bgcolor="#ffffff" height="30" style="font-size:0;line-height:0"> </td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td align="left" class="w-resize100 text15" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;color:#222222;line-height:20px;letter-spacing:0.025em">
+                                                                                                                    <p>Hello Team,</p>
+                                                                                                                    <p>A Referrer has been added to an Opportunity:</p>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td align="left" class="w-resize100" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;color:#404040;line-height:18px;letter-spacing:0.05em">
+                                                                                                                    <h4>Opportunity Details : </h4>
+                                                                                                                    <table style="font-size: 14px; width: 100%; max-width: 100%; margin-bottom: 20px; background-color: transparent; border-spacing: 0; border-collapse: collapse; border-radius: 10px; border: 1px solid #ddd;">
+                                                                                                                        <tbody>
+                                                                                                                            <tr style="border-color: inherit; line-height: 10px; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;">Opportunity</td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; line-height: 1.8"><a href="{!$Label.URL}/{!relatedTo.Id}">{!relatedTo.Name}</a></td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: 10px; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;">Close Date</td>                                                                                                                                
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;">
+                                                                                                                                    <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                                                                                                                        <apex:param value="{!relatedTo.CloseDate}"/>
+                                                                                                                                    </apex:outputText>
+                                                                                                                                </td>
+                                                                                                                            </tr>                                                                                                                    
+                                                                                                                            <tr style="border-color: inherit; line-height: 10px; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;">Referrer</td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="{!$Label.URL}/{!relatedTo.Referrer__c}">{!relatedTo.Referrer__r.Name}</a></td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: 10px; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;">Referrer Account</td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="{!$Label.URL}/{!relatedTo.Referrer__r.Account}">{!relatedTo.Referrer__r.Account.Name}</a></td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: 10px; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;">Lead Source</td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;">{!relatedTo.LeadSource}</td>
+                                                                                                                            </tr>
+                                                                                                                            <tr style="border-color: inherit; line-height: 10px; vertical-align: middle;">
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px; width: 200px;">Lead Source Detail</td>
+                                                                                                                                <td style="border: 1px solid #ddd; padding: 8px;">{!relatedTo.Lead_Source_Detail__c}</td>
+                                                                                                                            </tr>                                                                                                                            
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                    <br />
+                                                                                                                    <p style="line-height:24px;font-size:13px">
+                                                                                                                        Thank You,<br />
+                                                                                                                        WeWork Team
+                                                                                                                    </p>
+                                                                                                                </td>
+                                                                                                            </tr>
+
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td height="30" style="font-size:0;line-height:0"> </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="body-divider" style="background-color:#ffffff">
+                                <table align="center" border="0" cellpadding="0" cellspacing="0" class="w-resize100" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td height="20" style="font-size:0;line-height:0"> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="FOOTER">
+                                <table align="center" border="0" cellpadding="0" cellspacing="0" class="w-resize100" style="background-color: rgb(255, 255, 255);" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td height="10" style="font-size:0;line-height:0;background-color:#252729"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" bgcolor="#252729" valign="top">
+                                                <a data-saferedirecturl="https://www.google.com/url?hl=en&amp;#38;q=http://click.email.wework.com/?qs%3D8a30dbc79a888c921b0d4e4fff949d98838c3e2b882466b7b73356a5a635a477c68e3002108bffaf&amp;#38;source=gmail&amp;#38;ust=1480791044093000&amp;#38;usg=AFQjCNFbHkJRdNbJeOH2CTucOItsXelEwQ" href="http://click.email.wework.com/?qs=8a30dbc79a888c921b0d4e4fff949d98838c3e2b882466b7b73356a5a635a477c68e3002108bffaf" target="_blank"><img border="0" class="CToWUd" height="25" src="https://ci3.googleusercontent.com/proxy/Vvte7EvGs9SMYBDCiwv9pJ5E4qnl7ET2Ob1FT0FEL1oPtHDbKg65-GC2SCbBj9xAz3qjdAUjQ5jfl124MrapaO_Sg3HK956Zk22Y-dN_QJd8Cl3EtDyuM8ocpW688rMOxeRvp8FoUazyUUZQlf0=s0-d-e1-ft#http://res.cloudinary.com/wework/image/upload/v1431535752/email-marketing/logo_wh_2x.png" width="107" /></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#252729" height="5" style="line-height:0;font-size:0"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" bgcolor="#252729" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;color:#dfdfdf;letter-spacing:.05em;line-height:18px;padding:0px 20px 0px 20px">
+                                                <p style="font-size:12px">
+                                                    Copyright 2018 | WeWork <br />
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#252729" height="5" style="line-height:0;font-size:0"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" bgcolor="#252729" valign="top">
+                                                <a data-saferedirecturl="https://www.google.com/url?hl=en&amp;#38;q=http://click.email.wework.com/?qs%3D8a30dbc79a888c92efae3e1ad93f70422b51a7f3a97f2385d909fb004d9ccbea49e0deca36dde345&amp;#38;source=gmail&amp;#38;ust=1480791044093000&amp;#38;usg=AFQjCNEB0zO34GCIQ_coTH_u2mrm5zJyJA" href="http://click.email.wework.com/?qs=8a30dbc79a888c92efae3e1ad93f70422b51a7f3a97f2385d909fb004d9ccbea49e0deca36dde345" target="_blank"><img border="0" class="CToWUd" height="35" src="https://ci5.googleusercontent.com/proxy/t8N7vmdyFsoZLOTILTUbvcECttpsDojuMXHig6FglkpuVTmxGsfCV5uKT1L5xweyBuughaq5eRAlxPxLa5zHaLzlBUHV1sDhPnmd31GXkowACbhhQHIR9Lv_6k_a2Jd8cR3PlpBMswBi_HNMecomKBHMdPaVb_PxQw=s0-d-e1-ft#http://res.cloudinary.com/wework/image/upload/v1431536224/email-marketing/social_icons_2x_r1_c1.gif" width="40" /></a>
+                                                <a data-saferedirecturl="https://www.google.com/url?hl=en&amp;#38;q=http://click.email.wework.com/?qs%3D8a30dbc79a888c92d9b43dd3f6008ed8d4cc44c012f9bbbc5cea4b9b08a5525fd0bc6e6e3623fd39&amp;#38;source=gmail&amp;#38;ust=1480791044093000&amp;#38;usg=AFQjCNE2cTXj9fszDlLllc-4y3rQebxM7A" href="http://click.email.wework.com/?qs=8a30dbc79a888c92d9b43dd3f6008ed8d4cc44c012f9bbbc5cea4b9b08a5525fd0bc6e6e3623fd39" target="_blank"><img border="0" class="CToWUd" height="35" src="https://ci5.googleusercontent.com/proxy/CpTo8b-30kAGUkoSzxKdu8H43KbeeYnHa2cV0s72LZgUOf_b6BplHOpapmM2ASjSxh4Q8AUjpBWB5jEWwHLZ0m21G_n5LKuYvkscdur8mUb6JB5kXOVDVyd3rzViw4xCS-AJI0qfIl8qVbgE5TUsiyduOkUFNCL3iA=s0-d-e1-ft#http://res.cloudinary.com/wework/image/upload/v1431536224/email-marketing/social_icons_2x_r1_c2.gif" width="49" /></a>
+                                                <a data-saferedirecturl="https://www.google.com/url?hl=en&amp;#38;q=http://click.email.wework.com/?qs%3D8a30dbc79a888c9259e30cfa9c6f9b622b116cfd4886cc588bae0949c3ef0f13cabb8d6ddf7b04b7&amp;#38;source=gmail&amp;#38;ust=1480791044093000&amp;#38;usg=AFQjCNEdJ96BaJTpYOp0uQlJJsU8KA6gLg" href="http://click.email.wework.com/?qs=8a30dbc79a888c9259e30cfa9c6f9b622b116cfd4886cc588bae0949c3ef0f13cabb8d6ddf7b04b7" target="_blank"><img border="0" class="CToWUd" height="35" src="https://ci3.googleusercontent.com/proxy/CkhZgBtEdnaoTmdy4XI6kBTrHZVJzGqYWdMJ5BfZzRUQOyQZp0ZRkiFbiPQNDyCtRmIPGmXbwHz_lrFJ0NuT2a-0Z7-Xm5rl9SnYpflWpOJVD7QUJqLiXUxl4DVACrgb067ZRCBSPcgpJwhlBdbPEwgrEK5m9bWbug=s0-d-e1-ft#http://res.cloudinary.com/wework/image/upload/v1431536224/email-marketing/social_icons_2x_r1_c3.gif" width="47" /></a>
+                                                <a data-saferedirecturl="https://www.google.com/url?hl=en&amp;#38;q=http://click.email.wework.com/?qs%3D8a30dbc79a888c9255c91cd46f212dab51e14923346980b30b75776f921d6b62538024f16ca881b3&amp;#38;source=gmail&amp;#38;ust=1480791044094000&amp;#38;usg=AFQjCNH0uCnQ1QVwGNVY2M-L-4WrG9XL_A" href="http://click.email.wework.com/?qs=8a30dbc79a888c9255c91cd46f212dab51e14923346980b30b75776f921d6b62538024f16ca881b3" target="_blank"><img border="0" class="CToWUd" height="35" src="https://ci6.googleusercontent.com/proxy/Dfzw4R-crUR1a61cKQWfA2AMzIIivevviLqiX5CwbHqNTmI4qv0oTp91NmvudnJXW2XQ1_ZYsV4OWp1IMhovjlquM5o84BhhSJfeJtATkSlqtLv723ykocQsWCcRN_Dxd_K3SpG8YI8hzBOw6SvExFKk5BNba4rqKA=s0-d-e1-ft#http://res.cloudinary.com/wework/image/upload/v1431536224/email-marketing/social_icons_2x_r1_c4.gif" width="40" /></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#252729" height="5" style="line-height:0;font-size:0"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" bgcolor="#252729" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:12px;color:#dfdfdf;letter-spacing:.025em;line-height:20px">
+                                                <a data-saferedirecturl="https://www.google.com/url?hl=en&amp;#38;q=http://click.email.wework.com/?qs%3D8a30dbc79a888c927ac0851215a9fadd35c30413218344daf3627418134160374523360360b5f9eb&amp;#38;source=gmail&amp;#38;ust=1480791044094000&amp;#38;usg=AFQjCNGSW0sYbmLWFCOoKsLGqhQbdYDOFQ" href="http://click.email.wework.com/?qs=8a30dbc79a888c927ac0851215a9fadd35c30413218344daf3627418134160374523360360b5f9eb" style="color:#dfdfdf;text-decoration:none" target="_blank">Terms</a>  |  <a data-saferedirecturl="https://www.google.com/url?hl=en&amp;#38;q=http://click.email.wework.com/?qs%3D8a30dbc79a888c9208c74844b1851edaabccf6115f3648661a94cf3c6f2991c8bbd13acf71569074&amp;#38;source=gmail&amp;#38;ust=1480791044094000&amp;#38;usg=AFQjCNHm6gQkjt0uCP35hvkFXej_hViD2w" href="http://click.email.wework.com/?qs=8a30dbc79a888c9208c74844b1851edaabccf6115f3648661a94cf3c6f2991c8bbd13acf71569074" style="color:#dfdfdf;text-decoration:none" target="_blank">Privacy</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="remove" height="5" style="font-size:0;line-height:0;background-color:#f3f4f5"> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </messaging:htmlemailbody>
+</messaging:emailTemplate>

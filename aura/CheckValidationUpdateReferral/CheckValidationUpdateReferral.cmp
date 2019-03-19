@@ -1,0 +1,44 @@
+<aura:component Controller = "RetroactiveReferralController" implements = "flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name = "recordId" type = "Id"  />
+    <aura:attribute name = "utils" type = "Object" />
+    <aura:attribute name = "message" type = "String" />
+    <aura:attribute name = "showConvertRefrrer" type = "Boolean" default = "true"/>
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}"/>
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:html tag="style">
+        .cuf-content { padding: 0rem !important; }
+        .modal-body { padding: 0rem !important; }       
+        .slds-modal__content{ height:unset !important; max-height:unset !important; }
+    </aura:html>
+    
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="">
+        <div class="">
+            <header class="slds-modal__header">
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Convert To Referral</h2>
+            </header>
+            <br/>
+            <div class="slds-media slds-no-space slds-grow">
+                <div class="slds-media__figure" id="icon">
+                    <span class="slds-icon slds-icon_container">
+                        <lightning:icon iconName="utility:info" size="small"/>
+                    </span>
+                </div>
+                <div class="slds-media__body" style="overflow-wrap: break-word;">
+                        <h2 class="slds-welcome-mat__tile-title" id="content">{!v.message}</h2>
+                    <h2>
+                        <span class="slds-text-heading_small slds-align_absolute-center"></span>
+                    </h2>
+                </div>
+            </div>
+            <br/>
+            <footer class="slds-modal__footer">
+                <c:EnziButton leftIcon="utility:close" type="destructive" label="Close" click="{! c.close }"></c:EnziButton>
+            </footer>
+        </div>
+    </section>
+    <div aura:id="referrer">
+        {!v.body}
+    </div>
+</aura:component>

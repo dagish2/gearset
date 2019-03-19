@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>43.0</apiVersion>
+    <available>true</available>
+    <description>Send email alert on Opportunity owner change to previous and existing owner of record.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Email on Opportunity Owner Change</name>
+    <style>none</style>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

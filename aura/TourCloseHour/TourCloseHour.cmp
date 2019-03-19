@@ -1,0 +1,74 @@
+<aura:component controller="TourCloseHourController"> 
+    <aura:attribute name="tourSchedulesId" type="String" />
+    <aura:attribute name="recordId" type ="Id" />
+    <aura:attribute name="record" type="Map" default="{}" />
+    <aura:attribute name="objectPrefix" type="String" />
+    <aura:attribute name="mode" type="String" default="VIEW" />
+    <aura:attribute name="valid" type="Boolean" default="false" />
+    <aura:attribute name="headerActions" type="List" default="[]" />
+    <aura:attribute name="instructions" type="List" default="[]" />
+    <aura:attribute name="picklistMetadata" type="List" default="[]" />
+    <aura:attribute name="userAccess" type="Map" />
+    <aura:attribute name="userHasEditAccess" type="Boolean" default="false" />
+    <aura:attribute name="userHasDeleteAccess" type="Boolean" default="false" />
+    <aura:attribute name="isAllowed" type="Boolean" />
+    <aura:attribute name="isClone" type="Boolean" default="false"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.mode}" action="{!c.checkUserPermission}"/>
+    <aura:if isTrue="{!or(v.tourSchedulesId,v.recordId)}">
+        <aura:html tag="style">
+            input[name="Building__c"] {
+            background-color: rgb(233, 234, 236) !important;
+            pointer-events: none !important;
+            }
+            input[name="Building__c"] ~ div {
+            display: none !important;
+            } 
+        </aura:html>
+    </aura:if>
+    <c:LightningCSS aura:id="lightningCSS" />    
+    <c:EnziUtils aura:id="utils" /> 
+
+    <aura:if isTrue="{! not(empty(v.isAllowed))}">
+        <div class="container" style="{!'margin: .75rem;' + (v.mode=='EDIT' ? 'margin-bottom: 64px;' : '')}">
+            <aura:if isTrue="{! v.isAllowed}">
+                <c:EnziHeader sObjectName="Tour Closed Hour" pageName="New Tour Closed Hour" iconName="custom:custom61" actions="{! (v.mode=='VIEW' ? v.headerActions : undefined)}" />
+                <aura:if isTrue="{!v.mode=='EDIT'}">
+                    <div class="instructions">
+                        <c:WeInstructions instructions="{!v.instructions}" />
+                    </div>            
+                </aura:if>
+                <div class="column region-main mainRow">
+                    <div class="tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset" >
+                        <c:WeForm aura:id="tourCloseHourForm" recordId="{!v.recordId}" valid="{!v.valid}" mode="{!v.mode}" record="{!v.record}"  sObjectName="Tour_Closed_Hour__c" />
+                    </div>
+                </div>   
+                
+                <aura:if isTrue="{!v.mode=='EDIT'}">
+                    <div class="footer active slds-text-align_right" data-aura-rendered-by="14:1612;a" style="position: fixed;background-color: rgb(243, 242, 242); padding: 10px; z-index: 3;right: 5px; width: 100%; bottom: 0px;border-top: 3px solid rgb(240, 241, 243);">
+                        <c:EnziButton label="Cancel" type="neutral" click="{!c.cancel}"/>                            
+                        <c:EnziButton label="Save &amp; New" type="neutral" click="{!c.saveAndNew}" disabled="{!(!v.valid)}"/>
+                        <c:EnziButton label="Save" type="brand" click="{!c.saveTourHour}" disabled="{!(!v.valid)}"/> 
+                    </div>
+                </aura:if>
+                <aura:set attribute="else">
+                    <div class="slds-card" style="margin: auto;margin-top: 20px;">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__body" style="overflow-wrap: break-word;">
+                                    <div class="slds-media__body slds-p-around_small">
+                                        <h2 class="slds-welcome-mat__tile-title">
+                                            Insufficient Privileges                                                
+                                        </h2>
+                                        You do not have the level of access necessary to perform the operation you requested. Please contact the owner of the record or your administrator if access is necessary. 
+                                    </div>
+                                </div>
+                            </header>
+                        </div>
+                    </div>
+                </aura:set>
+            </aura:if>
+        </div>
+    </aura:if>    
+</aura:component>

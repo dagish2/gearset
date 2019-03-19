@@ -1,0 +1,14 @@
+Hi {!Receiving_User.FirstName}, 
+
+As a part of Salesforce's Summer 2018 release, there is a new Report Builder available utilizing their Lightning experience. 
+
+If you'd like to create a new report using the Classic view of Report Builder, click the 'New Report (Salesforce Classic)' button under the Reports tab. 
+
+
+
+If you'd like to modify an existing report using the Classic view of Report Builder, click the arrow next to the 'Edit' button the top right and select 'Edit (Salesforce Classic)'. 
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com 
+
+Sincerely, 
+Shani

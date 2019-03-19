@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <interviewLabel>Reportcleanupmessage {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Release notes 23A</label>
+    <processType>Flow</processType>
+    <screens>
+        <name>Reportcleanupmessage</name>
+        <label>Reportcleanupmessage</label>
+        <locationX>219</locationX>
+        <locationY>142</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>reportcleanup</name>
+            <fieldText>Hi {user.firstname},
+
+This week&apos;s release includes bug fixes and performance improvements. In addition, this release contains a change to the Primary Member field on Opportunities. 
+
+Primary Member Opportunity Field - Changes
+
+There were previously two &quot;Primary Member&quot; fields in Salesforce. One was on the Opportunity object and the other on the Account object.
+
+The Account &quot;Primary Member&quot; field is what determines who Spacestation sends paperwork to. The &quot;Primary Member&quot; field on Opportunities has no impact in determining who should sign paperwork. 
+
+To prevent confusion over these two identically named fields, we are renaming the Opportunity &quot;Primary Member&quot; field to &quot;Key Contact&quot; instead. 
+
+The &quot;Primary Member&quot; field on Opportunities will be renamed to &quot;Key Contact&quot; 
+The &quot;Primary Member&quot; field on Accounts will remain unchanged 
+Paperwork is sent to Account &quot;Primary Member&quot;
+Opportunity &quot;Key Contact&quot; is a decision maker on the deal but may or may not be the Primary Member / Paperwork Signatory
+
+Sincerely,
+Susie</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Reportcleanupmessage</startElementReference>
+    <status>Active</status>
+</Flow>

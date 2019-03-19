@@ -1,0 +1,25 @@
+<apex:page controller="WeworkEngine" standardstylesheets="false" sidebar="false" showheader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}"
+                       vendor_css=""
+                       vendor_js=""
+                       application_js="error-manager.js,salesforce.js,common-controls.js,journeyAction.js"
+                       application_css="autocomplete.css,applicationCSS.css,journeyAction.css" />
+    <apex:includescript value="/support/console/30.0/integration.js" />
+    <script type="text/javascript">
+        sforce.console.setTabTitle('Journey Action');
+    </script>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Journey Action</title>
+    </head>
+    <body>
+        <div id="spinnerContainer"></div>
+        <div id="wrapper" ng-app="journeyActionApp" ng-controller="journeyActionCtrl">
+            <div class="container-fluid">
+                <add-journey-action></add-journey-action>
+            </div>
+        </div>
+    </body>
+</apex:page>

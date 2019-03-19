@@ -1,0 +1,18 @@
+Hi guys,
+
+The opportunity you just won had a WeWork member referral!
+
+Member Referrer: {!Opportunity.Member_Referrer__c}
+Referrer Building: {!Opportunity.Referrer_Building__c}
+New Member Location:  {!Opportunity.Building__c}
+Company Name: {!Opportunity.Account}
+
+What this means: 
+1) The Member Referrer gets 20% of the referred member's first month's fee (say that 10 times fast). This must be applied to their membership fee, not to the individual. The referral bonus is only applied  if/when the referred member maintains membership for at least 60 days.
+
+2) The Referred/ New Member gets 20% off their 1st month
+
+
+Please reach out if you have questions about processing any of the above. 
+
+<3

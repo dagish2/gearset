@@ -1,0 +1,73 @@
+<aura:component controller="ConvertBrokerLeadController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" >
+    <title> Broker Lead Converter </title>
+    <ltng:require scripts="/soap/ajax/43.0/connection.js" afterScriptsLoaded="{!c.doInit}" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="journeyId" type="String" />
+    <aura:attribute name="showConfirmation" type="Boolean" default="false" />
+    <aura:attribute name="record" type="Map" />
+    <aura:attribute name="utils" type="Object"/>
+    <aura:attribute name="closedJourneyStages" type="List"/>
+    <aura:attribute name="selectedAccount" type="Object" />
+    <aura:attribute name="showAccountSelector" type="Boolean" default="false" />
+    <aura:attribute name="isNewAccountCreated" type="Boolean" />
+    <aura:attribute name="updateJourneyStatusId" type="String" default="" />
+    <aura:attribute name="spinnerWithoutContainer" type="Boolean" default="false" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <aura:html tag="style">
+        <aura:if isTrue="{!v.showAccountSelector}">
+            .slds-modal__container {
+            margin: 0 auto;
+            width: 100% !important;
+            max-width: 100rem !important;
+            min-width: 20rem; 
+            }
+            .modal-container{
+            width: 90% !important;
+            max-width: 100rem !important;
+            min-width: 20rem; 
+            }
+            .cConvertBrokerLead_Journey_Action > .slds-backdrop{
+            background: transparent !important;
+            }
+           
+            <aura:set attribute="else">
+                .slds-modal__container {
+                margin: 0 auto;
+                width: 50% !important;
+                max-width: 40rem !important;
+                min-width: 20rem;
+                }
+            </aura:set>
+        </aura:if>
+        <aura:if isTrue="{!v.spinnerWithoutContainer}">
+            .slds-spinner_container {
+            background-color: transparent !important;
+            }
+        </aura:if>
+    </aura:html>
+
+    <div aura:id="ConvertBrokerLeadJourneyAction">
+        {!v.body}
+    </div> 
+    
+    <div class="{!(v.showConfirmation) ? '':'slds-hide'}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="">
+            <div>
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirmation</h2>
+                </header>
+                <div class="slds-modal__content" style="font-size: 17px;text-align: center;padding-top: 31px;">Are you sure you want to Convert/Handoff Journey ?</div>
+                <footer class="slds-modal__footer slds-text-align_right" style="margin-top:40px;padding: 6px 6px 6px 0px;">
+                    <c:EnziButton leftIcon="utility:close" type="destructive" label="Cancel" click="{! c.closeAction }"></c:EnziButton>
+                    <c:EnziButton leftIcon="utility:check" type="brand" label="Convert" click="{! c.verifyAndConvert }"></c:EnziButton>
+                </footer>
+            </div>
+        </section>
+    </div>
+    <aura:if isTrue="{!v.showAccountSelector}">
+        <c:EnziModal aura:id="AccountSelector" header="Account Selector" showFooter="false" isLarge="true" show="true" showCloseButton="true">
+            <c:AccountSelector leadId="{!v.recordId}" isNewAccountCreated="{!v.isNewAccountCreated}" selectedOrg="{!v.selectedAccount}" useSelectedAccount="{!c.convertBrokerLead}" isFromConverBrokerFunctionality="true" redirectIdAfterRequestNewOrg="{!v.journeyId}" />
+        </c:EnziModal>
+    </aura:if>
+</aura:component>

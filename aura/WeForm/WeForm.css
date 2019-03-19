@@ -1,0 +1,35 @@
+.THIS {
+    background-color : white;
+}
+.THIS  .slds-button_icon-bare {
+    margin : 1% !important;
+}
+.THIS .forceOutputModStampWithPreview{
+    height: 0;
+    top: -19px;
+    position: relative;
+}
+.THIS .uiOutputDateTime {
+    position: inherit !important;
+}
+.THIS .slds-section__title {
+    background-color: rgb(236, 236, 239);
+    margin-top: 19px;
+    margin-bottom: 15px;
+}
+.THIS .changeOwnerLink,.THIS .photoContainer,.THIS .slds-button_icon-bare {
+    visibility: hidden;
+    width : 0;
+    height : 0;
+    display : none;
+}
+.THIS .forceOutputOwnerIdLookupWithChangeLink .ownerName a{
+    max-width: calc(100%) !important;
+}
+.THIS .slds-checkbox{
+    position: relative;
+    top: 18px;
+}
+.THIS .outputLookupLink {
+    border-bottom : 0px !important;
+}

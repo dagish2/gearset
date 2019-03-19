@@ -1,0 +1,7 @@
+Hey {!Lead.Salutation_Name__c},
+
+Just wanted to touch base about exploring a few different month-to-month memberships at WeWork, after reaching out earlier! Our collaborative workspace in the West Loop, WeWork Fulton Market is now open, and is filling up quickly. We're interested in connecting with innovators in Chicago, and we know that {!Lead.Company} is a great fit for our community.
+
+We'd love to have you come tour WeWork and learn more about our space, community, and services. We are touring the space weekdays from 10am to 6pm. Which day and time works for you?
+
+{!Account.OwnerFullName}

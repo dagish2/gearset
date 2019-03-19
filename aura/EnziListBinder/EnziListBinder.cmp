@@ -1,0 +1,7 @@
+<aura:component >
+	<aura:attribute name="list" type="Object" />
+    <aura:attribute name="index" type="Integer" />
+    <aura:attribute name="field" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}"/>
+</aura:component>

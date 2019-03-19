@@ -1,0 +1,15 @@
+.THIS.component-body {
+    text-align:center;
+    width:80%;
+    margin:auto;
+}
+.THIS.slds-modal__container {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 100rem;
+    min-width: 20rem;
+}
+.THIS.slds-spinner_container{
+    margin-top:270px;
+    margin-bottom:270px;
+}

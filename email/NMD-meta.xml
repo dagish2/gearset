@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessType>Shared</accessType>
+    <name>NMD</name>
+    <publicFolderAccess>ReadOnly</publicFolderAccess>
+    <sharedTo>
+        <role>NMD_Associate</role>
+        <role>NMD_China</role>
+        <role>NMD_EMEA</role>
+        <role>NMD_East</role>
+        <role>NMD_LatAm</role>
+        <role>NMD_Manager</role>
+        <role>NMD_NYC</role>
+        <role>NMD_Sales_Development</role>
+        <role>NMD_South</role>
+        <role>NMD_West</role>
+    </sharedTo>
+</EmailFolder>

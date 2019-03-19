@@ -1,0 +1,18 @@
+.THIS .slds-page-header { 
+    border-bottom: 1px solid #d9dde7;
+    border-radius: 4px;
+    background: ghostwhite;
+}
+.THIS .mainRow {
+    margin: .75rem auto;
+}
+.THIS .instructions {
+    margin-top: 0.75rem;
+}
+.THIS lightning-calendar > div{
+    left : 0px !important;
+}
+
+.THIS label{
+    pointer-events: none !important;
+}

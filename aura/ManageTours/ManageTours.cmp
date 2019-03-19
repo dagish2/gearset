@@ -1,0 +1,430 @@
+<aura:component controller="ManageToursController">
+    <ltng:require scripts="{!join(',',
+                           $Resource.cometd + '/cometd.js',
+                           $Resource.cometd + '/jquery-1.5.1.js',
+                           $Resource.cometd + '/json2.js',
+                           $Resource.cometd + '/jquery.cometd.js')}" afterScriptsLoaded="{!c.doInit}"/>
+    <aura:attribute name="leadId" type="String"/>
+    <aura:attribute name="accountId" type="String"/>
+    <aura:attribute name="contactId" type="String"/>
+    <aura:attribute name="journeyId" type="String"/>
+    <aura:attribute name="opportunityId" type="String"/>
+    <aura:attribute name="buildingId" type="String"/>
+    <aura:attribute name="productLine" type="String"/>
+    <aura:attribute name="oldOpportunityId" type="String"/>
+    <aura:attribute name="opportunityRoleId" type="String"/>
+    <aura:attribute name="allowMerge" type="Boolean"/>
+    <aura:attribute name="currentUserDetail" type="object"/>
+    <aura:attribute name="TourRservableSettings" type="object"/>
+    <aura:attribute name="bookedbySalesLeadLabel" type="String" default="Booked by Sales Lead" />
+    <aura:attribute name="buildings" type="List" default="[]" />
+    <aura:attribute name="weworkBuildings" type="List" default="[]" />
+    <aura:attribute name="weliveBuildings" type="List" default="[]" />
+    <aura:attribute name="isVisibleForProfile" type="boolean" default="false"/>
+    <aura:attribute name="entity" type="Map" default="{}"/>
+    <aura:attribute name="mapofBuildings" type="Map" default="{}"/>
+    <aura:attribute name="bookingData" type="Map" default="{}"/>
+    <aura:attribute name="productLines" type="List" default="['WeWork','WeLive']" />
+    <aura:attribute name="bookedBySalesLead" type="List" default="[{'label':'Yes','value':true},{'label':'No','value':false}]" />
+    <aura:attribute name="tours" type="List" default="[]" />
+    <aura:attribute name="toursCount" type="Integer" default="1"/>
+    <aura:attribute name="lastValidTour" type="String"/>
+    <aura:attribute name="api" type="Object"/>
+    <aura:attribute name="mapBuildings" type="Object"/>
+    <aura:attribute name="tourInfoFields" type="List" default="[]"/>
+    <aura:attribute name="bookedTours" type="List" default="[]"/>
+    <aura:attribute name="mapBookedTours" type="Map" default="{}"/>
+    <aura:attribute name="keyword" type="String" default=""/>
+    <aura:attribute name="searchData" type="List" default="[]"/>
+    <aura:attribute name="currentUserContact" type="Map" default="{}"/>
+    <aura:attribute name="duplicateEntity" type="Map" default="{}"/>
+    <aura:attribute name="duplicateRecords" type="List" default="[]"/>
+    <aura:attribute name="bookedTourFields" type="List"/>
+    <aura:attribute name="tour" type="Map" default="{}"/>
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="errors1" type="Object"/>
+    <aura:attribute name="valid1" type="Boolean"/>
+    <aura:attribute name="errors2" type="Object"/>
+    <aura:attribute name="valid2" type="Boolean"/>
+    <aura:attribute name="showFTE" type="Boolean" default="true"/>
+    <aura:attribute name="showPhone" type="Boolean" default="true"/>
+    <aura:attribute name="hideReferralPane" type="Boolean" default="false" />
+    <aura:attribute name="hideMsg" type="Boolean" default="true" />
+    <aura:attribute name="globalNotes" type="String"/>
+    <aura:attribute name="relatedContacts" type="List" default="[]"/>
+    <aura:attribute name="relatedOpportunities" type="List" default="[]"/>
+    <aura:attribute name="syncedToursCount" type="Integer" default="0"/>
+    <aura:attribute name="validTours" type="Boolean" default="true"/>
+    <aura:attribute name="originalTour" type="Boolean"/>
+    <aura:attribute name="validReschedule" type="Boolean"/>
+    <aura:attribute name="disableOpportunity" type="Boolean" default="false"/>
+    <aura:attribute name="salesEntity" type="Map" default="{}"/>
+    <aura:attribute name="salesRecords" type="List" default="[]"/>
+    <aura:attribute name="OrgRecord" type="object" />
+    <aura:attribute name="showProfileInfo" type="Boolean" default="true"/>
+    <aura:attribute name="showSection" type="Boolean" default="false"/>
+    <aura:attribute name="showAccountSelector" type="Boolean" default="false"/>
+    <aura:attribute name="accountRec" type="Account" ></aura:attribute>
+    <aura:attribute name="isFromInboundCallPage" type="Boolean" default="false"></aura:attribute>
+    <aura:attribute name="AccountNOD" type="Boolean" default="false"></aura:attribute>
+    <aura:attribute name="AccountFTE" type="Boolean" default="false"></aura:attribute>
+    
+    <aura:attribute name="urlData" type="String" ></aura:attribute>
+    
+    <aura:handler name="change" value="{!v.globalNotes}" action="{!c.globalNotesChanged}" />
+    <style>
+        .tourBySalesLead{
+        width:11%;
+        }
+        .productLine{
+        width:10%;
+        }
+        .productLine2{
+        width:12%;
+        }
+        .building{
+        width:17%;
+        }
+        .building2{
+        width:22%;
+        }
+        .tourDate{
+        width:15%;
+        }
+        .tourDate2{
+        width:17%;
+        }
+        .startTime{
+        width:10%;
+        }
+        .startTime2{
+        width:12%;
+        }
+        .endTime{
+        width:10%;
+        }
+        .notes{
+        width:17%;
+        }
+        .action{
+        width:10%;
+        }
+        .action div{
+        padding-top:28px;
+        }
+        .invisible{
+        display:inline-block;
+        pointer-events: none;
+        cursor:not-allowed;
+        }
+        .invisible .slds-icon_container{
+        background: rgb(224, 229, 238);
+        border-color: rgba(0, 0, 0, 0);
+        color: rgb(255, 255, 255);
+        }
+        .visible{
+        display:inline-block;
+        padding-bottom:0px
+        }
+        .globalNotes{
+        width: 32%;
+        margin-right: 63%;
+        }
+        @media(max-width: 1023px){
+        .tourBySalesLead{
+        width:100%;
+        }
+        .productLine{
+        width:100%;
+        }
+        .productLine2{
+        width:100%;
+        }
+        .building{
+        width:100%;
+        }
+        .building2{
+        width:100%;
+        }
+        .tourDate{
+        width:100%;
+        }
+        .tourDate2{
+        width:100%;
+        }
+        .startTime{
+        width:100%;
+        }
+        .startTime2{
+        width:100%;
+        }
+        .endTime{
+        width:100%;
+        }
+        .notes{
+        width:100%;
+        }
+        .action{
+        width:100%;
+        padding-right: 12px;
+        text-align: right;
+        }
+        .action div{
+        padding-top:5px;
+        padding-bottom:10px;
+        }
+        .invisible{
+        display:none;
+        }
+        .globalNotes{
+        width:100%;
+        margin-left:0px
+        }
+        td[data-label=Action]{
+        padding-right: 7% !important;
+        }
+        }
+        .invalidTour{
+        background-color:lightpink
+        }
+        .slds-scope .slds-section{border: 1px solid #d9dbdd;border-radius:3px;}
+        #searchBoxToolTip{position: absolute;top: 7px;right: 2px;}
+
+        @keyframes slideInFromCenter { 0% { transform: translateY(-18px); width: 555px; margin: auto; background-color: #f4f6f9; } }
+
+        .shake-div { box-shadow:0px 0px 4px #ff0900;border:1px solid red !important;animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+        transform: translate3d(0, 0, 0);backface-visibility: hidden;perspective: 1000px;}
+
+        @keyframes shake {10%, 90% {transform: translate3d(-1px, 0, 0);}
+
+        20%, 80% {transform: translate3d(2px, 0, 0);}
+
+        30%, 50%, 70% {transform: translate3d(-4px, 0, 0);}
+        40%, 60% { transform: translate3d(4px, 0, 0);}}
+    </style>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:EnziHeader sObjectName="Tour" pageName="Manage Tours" iconName="custom:custom68"></c:EnziHeader>
+    <div style="padding:20px">
+        <aura:if isTrue="{!not(or(v.leadId,or(v.accountId,or(v.contactId,or(v.journeyId,or(v.opportunityId,v.opportunityRoleId))))))}">
+            <div class="slds-grid slds-wrap" style="width:100%;margin-bottom:10px;">
+                <div class="slds-size_1-of-1">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <div class="slds-combobox_container">
+                                <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true" aria-haspopup="listbox" role="combobox" id="searchList">
+                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left" role="none" >
+                                        <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_left" style="top: 14px;left: 10px;">
+                                            <lightning:icon iconName="{!(v.entity.entityType=='lead'?'standard:lead':(v.entity.entityType=='contact'?'standard:contact':'action:new_group'))}" size="{!(v.entity.entityType=='lead'?'medium':(v.entity.entityType=='contact'?'medium':'xx-small'))}"></lightning:icon>
+                                        </span>
+                                        <input type="search" class="slds-input slds-combobox__input" placeholder="Search Lead/Contact" style="padding:5px 50px" onkeyup="{!c.search}" id="searchLeadorContact"/>
+                                    </div>
+                                    <lightning:helptext id="searchBoxToolTip" content="Search Lead/Contact " />
+                                    <div id="listbox-unique-id" role="listbox">
+                                        <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid" role="presentation" style="{!'display:'+(v.keyword.length>2?'block':'none')}">
+                                            <aura:if isTrue="{!v.searchData.length==0}">
+                                                <li role="presentation" class="slds-listbox__item">
+                                                    <span id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                        <span class="slds-media__body">
+                                                            <div class="slds-lookup__result-text">
+                                                                <mark style="margin-right:10px">No results found.</mark>
+                                                                <a title="Create New" onclick="{!c.createNew}">
+                                                                    <lightning:icon iconName="utility:new" size="xx-small"></lightning:icon>
+                                                                    <span class="slds-assistive-text">Create New</span>
+                                                                    Create New
+                                                                </a>
+                                                            </div>
+                                                        </span>
+                                                    </span>
+                                                </li>
+                                            </aura:if>
+                                            <aura:iteration items="{!v.searchData}" var="data">
+                                                <li role="presentation" class="slds-listbox__item" onclick="{!c.selectEntity}" id="{!data.Id}">
+                                                    <span id="listbox-option-unique-id-01" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                        <span class="slds-media__figure">
+                                                            <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
+                                                                <lightning:icon iconName="{!'standard:'+data.type}"></lightning:icon>
+                                                                <span class="slds-assistive-text">Description of icon</span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="slds-media__body">
+                                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">{!data.Name}</span>
+                                                            <span class="slds-listbox__option-meta slds-listbox__option-meta_entity"><aura:if isTrue="{!data.Email}">✉{!data.Email}</aura:if> <aura:if isTrue="{!data.Phone}">✆{!data.Phone}</aura:if></span>
+                                                        </span>
+                                                    </span>
+                                                </li>
+                                            </aura:iteration>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!or(  and(v.entity.entityType!='newlead',v.showProfileInfo==true,v.showSection==true) ,and(v.entity.entityType=='newlead',v.showSection==true) )}">
+            <div style="text-align: center; height: 3px; line-height: 0px;">
+                <aura:if isTrue="{!!v.hideMsg}">
+                    <div class=" slds-box slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3" style="animation: 1s ease-out 0s 1 slideInFromCenter;margin: auto;padding: 0px;border: 0px;">
+                        <div class="slds-inline_icon_text slds-grid">
+                            <div class="slds-col slds-align-middle" style="color: red;">
+                                <p>Please fill below fields marked with *  </p>
+                            </div>
+                        </div>
+                    </div>
+                </aura:if>
+            </div>
+            <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}" aura:id="campaignForm">
+                <c:EnziSection label="Profile Information" disableToggle="true" showTooltip="true" tooltipText="Profile Information of Lead/Contact">
+                    <div class="slds-grid slds-wrap">
+                        <aura:if isTrue="{! v.entity.entityType=='newlead'|| v.entity.entityType=='lead' || v.entity.entityType=='updatedlead'}">
+                            <div class="slds-p-horizontal_small slds-p-bottom_small  slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2" id="entityName">
+                                <c:EnziField type="string" name="Name" label="Name" value="{!v.entity.Name}" required="true" defaultDisabled="true" disabled="{!(v.entity.entityType=='lead')}" errors="{!v.errors}" helpText="Name of Lead/Contact for which tour has to be booked" onInput="{!c.hideMessageIndicator}"></c:EnziField>
+                            </div>
+                            <div class="slds-p-horizontal_small slds-p-bottom_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <c:EnziField type="string" name="Company" label="Company" value="{!v.entity.Company}" required="true" errors="{!v.errors}" defaultDisabled="true" disabled="{!(v.entity.entityType=='lead')}" helpText="Company Name of Lead/Contact" onInput="{!c.hideMessageIndicator}"></c:EnziField>
+                            </div>
+                            <div class="slds-p-horizontal_small slds-p-bottom_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2" >
+                                <c:EnziField aura:id="entityEmail" type="email" name="Email" label="Email" value="{!v.entity.Email}" required="true" defaultDisabled="true" disabled="{!(v.entity.entityType=='lead')}" errors="{!v.errors}" helpText="Email Address" onInput="{!c.hideMessageIndicator}"></c:EnziField>
+                            </div>
+                            <div class="slds-p-horizontal_small slds-p-bottom_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <c:EnziField type="phone" name="Phone" label="Phone" value="{!v.entity.Phone}" errors="{!v.errors}" max="15" defaultDisabled="true" disabled="{!and(v.entity.entityType=='lead', v.showPhone)}" helpText="Phone Number" onInput="{!c.hideMessageIndicator}"></c:EnziField>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.entity.entityType}">
+                            <div class="slds-p-horizontal_small slds-p-bottom_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <c:EnziField type="number" name="FTE" label="Number of Full Time Employees" value="{!v.entity.Number_of_Full_Time_Employees__c}" disabled="{!not(v.showFTE)}" defaultDisabled="true" min="1" required="true" errors="{!v.errors}" helpText="Number of Employees in the Company" onInput="{!c.hideMessageIndicator}"></c:EnziField>
+                            </div>
+                            <div class="slds-p-horizontal_small slds-p-bottom_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <c:EnziField type="number" helpText="Number of Desk Interested in" name="InterestedDesks" label="Interested In Number of Desks" value="{!v.entity.Interested_in_Number_of_Desks__c}"  min="1" required="true" errors="{!v.errors}" onInput="{!c.hideMessageIndicator}"></c:EnziField>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!and(v.isVisibleForProfile,or(or(v.entity.entityType=='contact',v.entity.entityType=='account'),or(v.entity.entityType=='opportunity',v.entity.entityType=='opportunityRole')))}">
+                            <div class="slds-p-horizontal_small slds-p-bottom_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <c:EnziField type="reference" name="Contact" label="Contact" reference="Contact" value="{!v.entity.contactId}" disabled="{!or(v.entity.entityType=='contact',v.entity.entityType=='opportunityRole')}" defaultDisabled="true" errors="{!v.errors}" required="true" options="{!v.relatedContacts}" labelField="Name" valueField="Id" helpText="Tour Primary Member" change="{!c.updateTourInfo}"></c:EnziField>
+                            </div>
+                            <div class="slds-p-horizontal_small slds-p-bottom_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <c:EnziField type="reference" name="Opportunity" label="Opportunity" reference="Opportunity" value="{!v.entity.opportunityId}" disabled="{!v.disableOpportunity}" defaultDisabled="true" errors="{!v.errors}" required="true" addNew="{!c.createNewOpportunity}" options="{!v.relatedOpportunities}" labelField="Name" valueField="Id" criteria="{!(empty(v.relatedOpportunities))?'Id=null':''}" helpText="Tour will be related to selected Opportunity " change="{!c.updateTourInfo}"></c:EnziField>
+                            </div>
+                        </aura:if>
+                    </div>
+                </c:EnziSection>
+
+                <c:EnziSection label="Referral Information" expanded="false" showTooltip="true" tooltipText="Details of Referrer for Lead/Contact">
+                    <div class="slds-grid slds-wrap" style="width:100%;">
+                        <div class="slds-p-horizontal_small slds-p-bottom_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                            <c:EnziField type="string" name="ReferrerName" label="Referrer Name" value="{!v.entity.Referrer_Name__c}" errors="{!v.errors}" helpText="Name of the Referrer"></c:EnziField>
+                        </div>
+                        <div class="slds-p-horizontal_small slds-p-bottom_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                            <c:EnziField type="email" name="ReferrerEmail" label="Referrer Email" value="{!v.entity.Referrer_Email__c}" errors="{!v.errors}" helpText="Email of the Referrer"></c:EnziField>
+                        </div>
+                    </div>
+                </c:EnziSection>
+                <c:EnziSection label="Book Tours" disableToggle="true" showTooltip="true" tooltipText="Details for Tour" >
+                    <aura:iteration items="{!v.tours}" var="tour" indexVar="index">
+                        <aura:if isTrue="{!not(tour.removed)}">
+                            <div class="{!'slds-grid slds-wrap '+(tour.invalid?'invalidTour ':'')}" style="{!'padding:10px;width:100%;'+(index==v.tours.length-1?'':'border-bottom: 2px solid;margin-bottom: 10px;padding-bottom: 8px;border-color: lightgrey;')}" id="{!'BookTours'+index}">
+                                <aura:if isTrue="{!v.isVisibleForProfile}">
+                                    <div class="slds-p-horizontal_small tourBySalesLead">
+                                        <c:EnziField unrestricted="false" type="picklist" name="{#'BookedBySalesLead:'+tour.id}" label="{!v.bookedbySalesLeadLabel}" options="{!v.bookedBySalesLead}" errors="{!v.errors}" value="{!tour.bookedBySalesLead}" labelField="label" valueField="value" required="true" ></c:EnziField>
+                                    </div>
+                                </aura:if>
+                                <div class="{!'slds-p-horizontal_small '+(v.isVisibleForProfile?'productLine':'productLine2')}">
+                                    <c:EnziField unrestricted="false" type="picklist" name="{#'ProductLine:'+tour.id}" label="Product Line" value="{!tour.productLine}" options="{!v.productLines}" sort="none" required="{!and((tour.productLine==''),true)}" errors="{!v.errors}" change="{!c.refreshRow}" ></c:EnziField>
+                                </div>
+                                <div class="{!'slds-p-horizontal_small '+(v.isVisibleForProfile?'building':'building2')}">
+                                    <c:EnziField type="reference" name="{#'Building:'+tour.id}" label="Building" reference="Building__c" value="{!tour.building}" required="true" errors="{!v.errors}" change="{!c.refreshDate}" options="{!tour.buildings}" labelField="label" valueField="value" ></c:EnziField>
+                                </div>
+                                <div class="{!'slds-p-horizontal_small '+(v.isVisibleForProfile?'tourDate':'tourDate2')}">
+                                    <c:EnziField type="date" name="{#'TourDate:'+tour.id}" label="Tour Date" value="{!tour.tourDate}" disabled="{!tour.building==undefined || tour.building==''}" defaultDisabled="true" change="{!c.loadTimeSlots}" required="true" errors="{!v.errors}" ></c:EnziField>
+                                </div>
+                                <div class="{!'slds-p-horizontal_small '+(v.isVisibleForProfile?'startTime':'startTime2')}">
+                                    <c:EnziField unrestricted="false" type="picklist" name="{#'StartTime:'+tour.id}" label="Start Time" value="{!tour.startTime}" disabled="{!tour.tourDate==undefined || tour.tourDate==''}" defaultDisabled="true" options="{!tour.available_tour_times}" labelField="time" valueField="time" change="{!c.setEndTime}" required="true" errors="{!v.errors}" sort="none" ></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal_small endTime">
+                                    <c:EnziField type="string" name="{#'EndTime:'+tour.id}" label="End Time" value="{!tour.endTime}" disabled="true" defaultDisabled="true" required="true" errors="{!v.errors}" ></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal_small notes">
+                                    <c:EnziField type="string" name="{#'Notes:'+tour.id}" label="Notes and Comments" value="{!tour.notes}" required="false" errors="{!v.errors}" ></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal_small action">
+                                    <div class="{!v.toursCount==1?'visible':(v.lastValidTour==tour.id?'visible':'invisible')}" style="display:inline-block;padding-bottom:0px">
+                                        <span style="cursor:pointer" onclick="{!c.addNewTour}"><lightning:icon iconName="action:new" size="xx-small"></lightning:icon></span>
+                                    </div>
+                                    <div class="{!v.toursCount==1?'invisible':'visible'}" style="padding-left:5px;">
+                                        <span id="{!'remove:'+tour.id}" style="cursor:pointer" onclick="{!c.removeTour}"><lightning:icon iconName="action:close" size="xx-small"></lightning:icon></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </aura:if>
+                    </aura:iteration>
+                    <div class="slds-p-horizontal_small globalNotes" style="padding:10px;padding-left: 22px;padding-right: 22px;">
+                        <c:EnziField type="textarea" name="GlobalNotes" label="Notes and Comments" value="{!v.globalNotes}" required="false" errors="{!v.errors}"></c:EnziField>
+                    </div>
+                </c:EnziSection>
+            </c:EnziFormValidator> 
+        </aura:if>
+        <div class= "slds-modal__footer page-footer">
+            <c:EnziButton label="Cancel" type="neutral"  click="{!c.close}"></c:EnziButton>
+            <c:EnziButton label="Schedule Tour" type="brand" click="{!c.bookTours}"  disabled="{!not(and(v.valid,v.validTours))}"></c:EnziButton>
+            <c:EnziButton id="btnRefresh" show="false" label="Refresh" type="brand" leftIcon="utility:refresh" click="{!c.refreshTours}"></c:EnziButton>
+        </div>
+        <aura:renderIf isTrue="{!v.bookedTours.length > 0}">
+            <c:EnziSection label="Tours Information" disableToggle="true" showTooltip="true" tooltipText="Tour booked for the above Contact" >
+                <div class="slds-size--1-of-1 slds-p-horizontal--small" >
+                    <c:EnziDataTable showMultiselect="false" records="{!v.bookedTours}" describedFields="{!v.bookedTourFields}" currentPage="1" pageSize="5" pageSizes="5,10,20,50,100" ></c:EnziDataTable>
+                </div>
+            </c:EnziSection>
+        </aura:renderIf>
+    </div>
+
+    <aura:if isTrue="{!v.showAccountSelector}">
+        <c:EnziModal aura:id="AccountSelector" header="Account Selector" showFooter="false" isLarge="true" show="true" showCloseButton="true">
+            <c:AccountSelector leadId="{!v.salesEntity.leadId}" journeyId="{!v.journeyId}" accountRec = "{!v.accountRec}" selectedOrg="{!v.OrgRecord}" useSelectedAccount="{!c.manageTour}"/>
+        </c:EnziModal>
+    </aura:if>
+
+    <c:EnziFormValidator errors="{!v.errors1}" valid="{!v.valid1}">
+        <c:EnziModal aura:id="tourRescheduleModal" header="Reschedule Tour" isLarge="true" show="false">
+            <c:EnziModalContainer >
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-p-horizontal_small slds-size_1-of-2">
+                        <c:EnziField type="reference" name="Building" label="Building" reference="Building__c" value="{!v.tour.building}" required="true" errors="{!v.errors1}" change="{!c.refreshDate}" options="{!v.buildings}" labelField="label" valueField="value"></c:EnziField>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size_1-of-2">
+                        <c:EnziField type="date" name="TourDate" label="Tour Date" value="{!v.tour.tourDate}" disabled="{!not(v.tour.building)}" defaultDisabled="true" change="{!c.loadTimeSlots}" required="true" errors="{!v.errors1}"></c:EnziField>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size_1-of-2">
+                        <c:EnziField unrestricted="false" type="picklist" name="StartTime" label="Start Time" value="{!v.tour.startTime}" disabled="{!not(v.tour.tourDate)}" defaultDisabled="true" options="{!v.tour.available_tour_times}" labelField="time" valueField="time" change="{!c.setEndTime}" required="true" errors="{!v.errors1}" ></c:EnziField>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size_1-of-2">
+                        <c:EnziField type="string" name="EndTime" label="End Time" value="{!v.tour.endTime}" disabled="true" defaultDisabled="true"></c:EnziField>
+                    </div>
+                    <div class="slds-p-horizontal_small slds-size_1-of-1 ">
+                        <c:EnziField type="textarea" name="Notes" label="Notes and Commnets" value="{!v.tour.notes}" required="false" errors="{!v.errors1}"></c:EnziField>
+                    </div>
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <c:EnziButton id="tourRescheduleModal" label="Close" type="neutral" click="{!c.closeModal}"></c:EnziButton>    
+                <c:EnziButton label="Schedule Tour" type="brand" click="{!c.rescheduleTourSave}" disabled="{!(!v.valid1)}" ></c:EnziButton>
+            </c:EnziModalFooter>
+        </c:EnziModal>
+    </c:EnziFormValidator>
+    <c:EnziFormValidator errors="{!v.errors2}" valid="{!v.valid2}">
+        <c:EnziModal aura:id="tourCancelationModal" header="Cancel Tour" isLarge="true" show="false">
+            <c:EnziModalContainer >
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-p-horizontal_small slds-size_1-of-1">
+                        <c:EnziField sObjectName="Tour_Outcome__c" fieldName="Cancellation_Reason__c" value="{!v.tour.cancellationReason}" required="true" errors="{!v.errors2}" ></c:EnziField>
+                    </div>
+                </div>
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <c:EnziButton id="tourCancelationModal" label="Close" type="neutral" click="{!c.closeModal}"></c:EnziButton>
+                <c:EnziButton label="Cancel Tour" type="brand" click="{!c.canceTourSave}" disabled="{!(!v.valid2)}"></c:EnziButton>
+            </c:EnziModalFooter>
+        </c:EnziModal>
+    </c:EnziFormValidator>
+</aura:component>

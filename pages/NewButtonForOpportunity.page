@@ -1,0 +1,23 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" id="NewOpportunityPage" standardController="Opportunity">
+    <head>
+        <title>Create Opportunity</title>
+        <script type="text/javascript">
+            if(location.href.split("?").length>1){
+                var arrParams = location.href.split("?")[1].split("&");
+                var entRecordType;
+                arrParams.forEach(function(param){
+                    if(param.split("=")[0]=="RecordType"){
+                        entRecordType = param.split("=")[1];
+                    }
+                })
+                if(entRecordType=="012F0000001cmY1"){
+                    location.assign("/apex/CreateOpportunity");
+                }else{
+                    location.assign("/006/e?RecordType="+entRecordType+"&nooverride=0");
+                }
+            }else{
+                location.assign("/006/e?nooverride=0");
+            }
+        </script>
+    </head>
+</apex:page>

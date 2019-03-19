@@ -1,0 +1,8 @@
+.THIS .slds-page-header { 
+    border-bottom: 1px solid #d9dde7;
+    border-radius: 4px;
+    background: ghostwhite;
+}
+.THIS .main-row {
+    margin: .75rem auto;
+}

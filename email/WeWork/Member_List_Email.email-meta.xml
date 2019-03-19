@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Member List Email</name>
+    <style>none</style>
+    <subject>WeWork Member List</subject>
+    <textOnly>Dear {!Opportunity.Primary_Member_First_Name__c}, 
+
+Thank you for completing your Membership Agreement! We&apos;re so happy to have you at WeWork.
+
+If you have additional team members, please download and fill out the attached form. We&apos;ll get your team members set up and ready for your move-in day as soon as you send the completed form back to us. 
+
+Thanks so much! Please let us know if you have any questions. 
+ 
+Your community management team 
+{!Building__c.Email__c}
+WeWork.com</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

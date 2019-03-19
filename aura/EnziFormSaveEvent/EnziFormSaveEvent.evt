@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="This event is fired when form is saved">
+	<aura:attribute name="sObjectName" type="String"/>
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="mode" type="String"/>
+</aura:event>

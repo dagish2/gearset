@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>Response to Become a Member</name>
+    <style>freeForm</style>
+    <subject>Thanks for your interest in WeWork!</subject>
+    <textOnly>Hi,
+
+We appreciate your interest in WeWork!
+
+Whether searching for a desk in a communal setting or a beautifully designed private office, we can accommodate the needs of you and your team.
+
+We’d love for you to experience the energy of WeWork in person. Visit our WeWork Locations page, choose a city and building you’d like to tour and book it.
+
+https://www.wework.com/locations/?lid={!Lead.Id}&amp;utm_source=NMD&amp;utm_medium=email&amp;utm_campaign=NMD_become_a_member
+
+If you&apos;d like to speak with a member of our team, give us a ring at 855-593-9675 - we&apos;re more than happy to chat.
+
+All the best,
+
+{!User.Name}
+{!Lead.Location_Phone_Number__c}
+wework.com
+
+Create Your Life&apos;s Work</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

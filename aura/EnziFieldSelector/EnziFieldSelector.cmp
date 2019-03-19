@@ -1,0 +1,44 @@
+<aura:component >
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="selectedField" type="String" />
+    <aura:attribute name="levels" type="List" default="[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="fieldSelector" type="c:EnziFieldSelectorSelectEvent"/>
+    <style>
+        .slds-icon_container--circle, .slds-icon__container--circle {
+        padding: 0px;
+        margin-left:5px
+        }
+    </style>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:EnziModal header="Field Selector" isLarge="true" aura:id="enziFieldSelectorModal">
+        <c:EnziModalContainer >
+            <div class="slds-box slds-box--x-small">
+                <div class="slds-text-align--center">
+                    <span class="slds-badge" style="text-transform: none;">{!((v.selectedField)?v.selectedField:'No Field Selected')}</span>
+                    &nbsp;&nbsp;
+                    <button id="btnSelect" class="slds-button slds-button--neutral" onclick="{!c.selectField}" disabled="{!v.selectedField?'':'disabled'}">
+                        <lightning:icon class="" iconName="utility:check" size="xx-small"/>
+                        Select
+                    </button>
+                </div>
+            </div>
+            <div class="slds-grid slds-nowrap slds-scrollable--x">
+                <aura:iteration items="{!v.levels}" var="level" indexVar="levelIndex">
+                    <div class="slds-size--1-of-2 slds-medium-size--1-of-3 slds-large-size--1-of-4" style="min-width:300px;padding:10px">
+                        <fieldset class="slds-box slds-theme--default slds-container">
+                            <legend class="slds-text-heading--medium slds-p-vertical--medium">{!level.label +'('+level.fields.length+')'}</legend>
+                            <div class="slds-section" style="margin-top: -20px;">
+                                <ul class="slds-has-dividers--around-space slds-scrollable--y" style="height:300px">
+                                    <aura:iteration items="{!level.fields}" var="field" indexVar="fieldIndex">
+                                        <li class="slds-item" onclick="{!c.select}" id="{!'li:'+levelIndex+':'+fieldIndex}"><span class="slds-badge">{!field.custom?'C':'S'}</span>&nbsp;&nbsp;{!field.label} <a onclick="{!c.getRelatedFields}" id="{!'new:'+levelIndex+':'+fieldIndex}"><lightning:icon class="{!'slds-float--right '+((field.type=='reference')?(levelIndex==4?'slds-hide':'slds-show'):'slds-hide')}" iconName="action:new" size="xx-small"/></a></li>
+                                    </aura:iteration>
+                                </ul>
+                            </div>
+                        </fieldset>
+                    </div>
+                </aura:iteration>
+            </div>
+        </c:EnziModalContainer>
+    </c:EnziModal>
+</aura:component>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Exception Notification</name>
+    <style>none</style>
+    <subject>New exception in {!Apex_Debug_Log__c.Apex_Class__c} class</subject>
+    <textOnly>Hi,
+
+New exception occurred in the system.
+
+Here are some details on the exception:
+Apex Class: {!Apex_Debug_Log__c.Apex_Class__c}
+Method: {!Apex_Debug_Log__c.Method__c}
+Message: {!Apex_Debug_Log__c.Message__c}
+
+Link to the record:
+{!Apex_Debug_Log__c.Link}
+
+Please take care of this exception ASAP.
+
+Thanks.</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

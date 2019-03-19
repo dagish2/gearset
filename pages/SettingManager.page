@@ -1,0 +1,4 @@
+<apex:page showheader="false" sidebar="false" standardstylesheets="false" standardController="Setting__c">
+    <title>Setting Manager</title>
+    <c:LightningResource component="EnziSettingManager" parameters="settingId={!$CurrentPage.parameters.id}"></c:LightningResource>
+</apex:page>

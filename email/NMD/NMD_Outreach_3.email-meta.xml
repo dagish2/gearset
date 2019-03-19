@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>this is actually 3x</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>NMD Outreach 3</name>
+    <style>freeForm</style>
+    <subject>Thanks for reaching out to WeWork!</subject>
+    <textOnly>Hi {!Lead.Salutation_Name__c},
+
+
+Are you still in need of workspace?
+
+We would love to have you stop by for a tour and learn more about WeWork. Not only do we provide members with beautiful workspaces and an amazing network of 50,000+ other professionals, but also access to over 250 discounted perks and benefits like healthcare, web hosting, gym memberships, travel and more.
+
+Don&apos;t hesitate to email me back or give me a call at {!Lead.Location_Phone_Number__c}. I&apos;d love to learn more about how we can help with your business and workspace needs!
+
+
+Best,
+
+
+
+
+{!User.Name}
+{!Lead.Location_Phone_Number__c}
+wework.com</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

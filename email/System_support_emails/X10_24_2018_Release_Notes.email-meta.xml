@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Oct 24 2018 Release Notes</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>10-24-2018 Release Notes</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: October 26th 2018 Salesforce Updates</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+This week&apos;s release includes updates to Account segmentation, Closed Lost reasons and the Import Journey tool.
+
+
+Account Segmentation
+
+The medium Account Segment has been redefined from 20 to 249 full time employees to 10 to 249 full time employees.
+
+All newly generated Leads or Accounts with 10 - 19 full time employees will be designated as the &quot;Mid-Market&quot; record type and medium segment.
+
+
+Closed Lost Reasons
+
+Help text has been added to provide additional context when selecting a Lost Reason while closing out an Opportunity as Closed Lost.
+
+To view the help text:
+
+1. Select a lost reason
+
+2. Hover over the blue &apos;i&apos; icon
+
+
+Import Journey Tool
+
+The Import Journey tool has been updated to prevent row lock errors when uploading large numbers of leads/journeys.
+
+To access the Import Journey tool, click the + sign on the top right of the Salesforce window and click Import Journeys.
+
+Instructions on how to use the Import Journey Tool can be found on this Connect page: https://connect.we.co/pages/viewpage.action?pageId=140644887
+
+For any questions or concerns please contact Salesforce support via our Support Ticket page or reach out to your local Growth Operations team.
+
+
+Thanks,
+Salesforce Team</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

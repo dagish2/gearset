@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notify Previous Account Owner they has an account moved</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Notify Previous Account Owner</name>
+    <style>freeForm</style>
+    <subject>{!Account.Name} has been changed out of your name</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

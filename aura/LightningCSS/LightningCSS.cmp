@@ -1,0 +1,14 @@
+<aura:component >
+    <style>
+        #lightning {
+         background-image : url("/_slds/images/themes/lightning_blue/lightning_blue_background.png") !important;
+         background-position: center !important;
+         background-repeat: no-repeat !important;
+         background-size: cover !important;
+        } 
+        
+        body, html {
+        height: 100%;
+        }
+    </style>
+</aura:component>

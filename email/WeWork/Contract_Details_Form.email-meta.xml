@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Contract Details Form with link to WeWork Contract API</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Contract Details Form</name>
+    <style>none</style>
+    <subject>Your WeWork Membership Agreement</subject>
+    <textOnly>Hi {!Opportunity.Contract_Recipient_Firstname__c},
+
+We’re thrilled that you’re becoming a WeWork member. Please click here ({!Opportunity.Contract_Link__c}) to review and sign your membership agreement. This agreement will be available to you for the next 24 hours.
+
+Let us know if you have any questions!
+
+The WeWork Team</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

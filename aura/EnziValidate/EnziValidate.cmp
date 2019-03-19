@@ -1,0 +1,33 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="errorMessage" type="String" />
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="min" type="Integer" />
+    <aura:attribute name="max" type="Integer" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="length" type="Integer" />
+    <aura:attribute name="validations" type="Object" />
+    <aura:attribute name="errors" type="Object" />
+    <aura:attribute name="dirty" type="Boolean" />
+    <aura:attribute name="customValidate" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}"/>
+    <aura:handler name="change" value="{!v.name}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.required}" action="{!c.doInit}"/>
+    <!--<aura:handler name="change" value="{!v.required}" action="{!c.valueChange}"/>
+    <aura:handler name="change" value="{!v.min}" action="{!c.valueChange}"/>
+    <aura:handler name="change" value="{!v.max}" action="{!c.valueChange}"/>-->
+    <aura:method name="validate" action="{!c.validateByName}"/>
+    
+    <aura:method name="validateFromOtherComponent" action="{!c.validateFromOtherComponent}">    	
+        <aura:attribute name="typetoCheck" type="String" />
+        <aura:attribute name="stringtoCheck" type="String" />
+    </aura:method>
+    
+	<div class="slds-form-element__help" style="{!v.type=='textarea'?'margin-top:3px':''}">
+        {!v.dirty?v.errorMessage:''}
+    </div>
+</aura:component>

@@ -1,0 +1,112 @@
+<aura:component controller="JourneyImporterController" implements="force:lightningQuickAction" access="global">
+    <ltng:require scripts="{!$Resource.PapaParser + '/PapaParse-4.5.0/papaparse.min.js'}"/>
+    <aura:attribute name="generateJourney" type="Boolean" default="false" />
+    <aura:attribute name="selectCampaign" type="Boolean" default="false"/>
+    <aura:attribute name="campaignId" type="String" />
+    <aura:attribute name="mapFieldsMetadata" type="Map"/>
+    <aura:attribute name="mapErrors" type="Map"/>
+    <aura:attribute name="fileName" type="String" default="Upload CSV file for Lead/Journey import" />
+    <aura:attribute name="isInsertJourneys" type="Boolean" default="false" />
+    <aura:attribute name="recordToSend" type="Object" />
+    <aura:attribute name="templateURL" type="string" />
+    <aura:attribute name="instructions" type="Object" />
+    <aura:attribute name="campaignName" type="string" />
+    <aura:attribute name="successColumns" type="List" default="[]" />
+    <aura:attribute name="failColumns" type="List" default="[]" />
+    <aura:attribute name="apiNamesOfCSVColumns" type="List" default="[]" />
+    <aura:attribute name="requiredFields" type="List" default="[]" />
+    <aura:handler name="change" value="{!v.campaignId}" action="{!c.setCampaignName}"/>
+    <aura:handler name="change" value="{!v.isInsertJourneys}" action="{!c.insertJourneysForKickbox}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+         .slds-section.slds-is-open{ margin-left : 12px; }
+    </style>
+    <div class="slds-m-top_xxx-small">
+        <c:EnziHeader sObjectName="Importer" pageName="Lead/Journey Importer" iconName="custom:custom11"></c:EnziHeader>
+        <div style="width:99%">
+            <c:EnziSection label="Instructions" disableToggle="false" expanded="true" showTooltip="true" tooltipText="Instructions" showBorder="true" >
+                 <div class=" slds-wrap slds-grid slds-gutters slds-p-horizontal_small slds-scrollable_y" style="margin-top: -1%;margin-left:1.8%;height: 7rem;width:98.2%"> 
+                    <aura:if isTrue="{!v.instructions.listType == 'Unordered'}">
+                        <ul style="{! 'padding:10px;list-style-type :'+ ( v.instructions.listStyleType)+';color:'+(v.instructions.color) +';font-size:'+(v.instructions.fontSize)}">
+                            <aura:iteration items="{!v.instructions.instructions}" var="item">
+                                <li>{!item}</li>
+                            </aura:iteration>
+                        </ul>
+                        <aura:set attribute="else">
+                            <ol style="{! 'padding:10px;list-style-type :'+ ( v.instructions.listStyleType)+';color:'+(v.instructions.color) +';font-size:'+(v.instructions.fontSize)}">
+                                <aura:iteration items="{!v.instructions.instructions}" var="item">
+                                    <li>{!item}</li>
+                                </aura:iteration>
+                            </ol>
+                        </aura:set>
+                    </aura:if>
+                </div>
+            </c:EnziSection>
+        </div>
+        <div class="slds-grid slds-wrap" style="width: 65%;height:30%;padding: 1%;margin:auto;border: 1px solid #d9dbdd;border-radius: 7px 7px 0px 0px;margin-top:32px">
+            <div class="slds-col slds-size_12-of-12" style="margin-bottom:20px">
+                <div class="slds-form-element slds-file-selector_integrated">
+                    <span class="slds-form-element__label" id="file-selector-primary-label">Upload File <lightning:helptext content="Please upload a valid CSV file with size under 25 MB" /></span>
+                    <div class="slds-form-element__control" >
+                        <div class="slds-file-selector slds-file-selector_images">
+                            <div class="" style="height:50px">
+                                <div class="slds-file-selector__body">
+                                    <input type="file" class="slds-file-selector__input slds-assistive-text" selector="slds-has-drag " accept=".csv" id="file-upload-input-01" aria-labelledby="file-selector-primary-label file-selector-secondary-label" onchange="{! c.handleFilesChange }" />
+                                    <label class="slds-file-selector__body" for="file-upload-input-01" id="file-selector-secondary-label">
+                                        <span class="slds-file-selector__button">
+                                            <lightning:icon iconName="utility:upload" variant="brand" size="x-small"></lightning:icon>
+                                            &nbsp;<p id="name" style="margin:auto">{!v.fileName}</p>
+                                        </span>
+                                        <span class="slds-file-selector__text slds-medium-show" style="font-size: 80%;display: block;margin-left: 175px;margin-top: 1px;">
+                                            <c:EnziOutputUrl label="Download CSV Template" click="{!c.downloadTemplate}"/>                                    
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                <c:EnziField type="boolean" name="generateJourney"
+                             label="Generate Journey" varient="toggle" hideLabel="true"
+                             value="{!v.generateJourney}">
+                </c:EnziField>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">       
+                <c:EnziField type="boolean" varient="toggle" name="SelectCampaign"
+                             label="Select Campaign" hideLabel="true"
+                             value="{!v.selectCampaign}">
+                </c:EnziField>
+            </div>     
+            <div class="{!v.selectCampaign ? '':'slds-hide'}" style="animation: 1s ease-out 0s 1 slideInFromCenter;width:45%;margin:auto;margin-top:25px;">
+                <c:EnziField name="Campaign" type="reference" sObjectName="Campaign" value="{!v.campaignId}" label="Select Campaign" placeholder="Search or Select Campaign" reference="Campaign" icon="standard:campaign"/>
+            </div>
+        </div> 
+        <div class="slds-m-top_x-small" style="text-align:center">
+            <c:EnziButton label="Upload" disabled="{! (v.selectCampaign) ? (not(v.campaignId)):v.fileName=='Upload CSV file for Lead/Journey import'? true : false}" type="brand" click="{!c.validateCSV}" leftIcon="utility:upload"></c:EnziButton>            
+            <c:EnziButton label="Close" type="destructive" click="{!c.close}" leftIcon="utility:close"></c:EnziButton>  
+        </div>
+    </div>
+    <c:EnziModal aura:id="instructionModel" header="Follow instructions to upload CSV file" show="false" showFooter="false" >
+        <c:EnziModalContainer >
+            <div id="instruction-model" class="slds-wrap slds-grid slds-gutters slds-p-horizontal_small slds-scrollable_y" style="height: 10rem;">
+                <aura:if isTrue="{!v.instructions.listType == 'Unordered'}">
+                    <ul style="{! 'padding:10px;list-style-type :'+ ( v.instructions.listStyleType)+';color:'+(v.instructions.color) +';font-size:'+(v.instructions.fontSize)}">
+                        <aura:iteration items="{!v.instructions.instructions}" var="item">
+                            <li>{!item}</li>
+                        </aura:iteration>                        
+                    </ul>
+                    <aura:set attribute="else">
+                        <ol style="{! 'padding:10px;list-style-type :'+ ( v.instructions.listStyleType)+';color:'+(v.instructions.color) +';font-size:'+(v.instructions.fontSize)}">
+                            <aura:iteration items="{!v.instructions.instructions}" var="item">
+                                <li>{!item}</li>
+                            </aura:iteration>                            
+                        </ol>
+                    </aura:set>
+                </aura:if>
+            </div>
+        </c:EnziModalContainer>
+    </c:EnziModal>     
+</aura:component>

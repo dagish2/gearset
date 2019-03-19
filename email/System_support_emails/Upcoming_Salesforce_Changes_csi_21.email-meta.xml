@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User announcements for sprint CSI 21, Resend contract</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes csi 21</name>
+    <style>freeForm</style>
+    <subject>IMPORTANT PLEASE READ: New Feature Updates</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+This week&apos;s release contains a change to our paperwork process and tour booking features.
+
+Resend Paperwork
+You can now resend a contract from Salesforce. On the opportunity, you will find a button &quot;Resend Paperwork&quot; in the upper right corner.
+
+This feature is only available when the opportunity stage is &quot;Closing&quot; and the Contract stage is &quot;Contract Voided
+
+New Referral Information fields the on Tour Outcome and Manage/ Book a tour features
+We&apos;ve Added 2 new fields “Referrer Name” and “Referrer Email” on the pages for Tour Booking and Tour Outcome to capture the Referrer data. This information is not required.
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+Sincerely
+Tykira</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

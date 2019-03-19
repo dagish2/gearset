@@ -1,0 +1,10 @@
+.THIS .highlightRow {
+    background-color: rgb(233, 234, 236) !important;
+}
+.THIS .title-without-cursor{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.THIS .title-without-cursor h3{
+    pointer-events: none;
+}

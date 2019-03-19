@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User announcements update for CSI 19 release</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes CSI 19 sprint</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Update to commitments and office hold</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+This week&apos;s release includes bug fixes and performance improvements.
+In addition, this release contains changes to commitment terms and office holds.
+
+Commitment terms
+Commitment terms will now be updated on your opportunities from member agreements.
+
+Office hold
+You can now select offices to hold in salesforce.
+
+Please select custom hold, located in the drop-down in the right corner
+
+You will be brought to custom hold page. Please fill in your building, reservable, the date you would like to hold the office until and details for the hold.
+
+When the form is complete, click save to submit the hold request.
+
+
+Your office hold will notify the following team members for the building:
+
+Regional Sales Manager
+Territory Sales Manager
+Cluster Sales Manager
+Cluster Sales Lead
+Portfolio Sales Manager
+Opportunity Team Members
+Community Lead
+Community Manager
+
+
+If you have any questions or concerns, please reach out to salesforcesupport@wework.com
+
+Warmly,
+Susie</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

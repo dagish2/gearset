@@ -1,0 +1,296 @@
+<aura:component controller="RetroactiveReferralController">
+    <aura:attribute name="recordId" type="string" />
+    <aura:attribute name="referralType" type="List"/>
+    <aura:attribute name="referralTypeVal" type="String"/>
+    <aura:attribute name="ContactRecordType" type="String"/>
+    <aura:attribute name="AccountRecordType" type="String"/>
+    <aura:attribute name="APIUser" type="String"/>
+    <aura:attribute name="entity" type="Map" default="{}" />
+    <aura:attribute name="valid1" type="Boolean"/>
+    <aura:attribute name="valid2" type="Boolean"/> 
+    <aura:attribute name="valid3" type="Boolean"/>
+    <aura:attribute name="valid4" type="Boolean"/>
+    <aura:attribute name="valid5" type="Boolean"/>
+    <aura:attribute name="valid6" type="Boolean"/>
+    <aura:attribute name="referral" type="Boolean" default="false"/>
+    <aura:attribute name="confidential" type="Boolean" default="false"/>
+    <aura:attribute name="hide" type="Boolean" default="true"/>
+    <aura:attribute name="errors1" type="Object"/>
+    <aura:attribute name="errors2" type="Object"/>
+    <aura:attribute name="errors3" type="Object"/>
+    <aura:attribute name="errors4" type="Object"/>
+    <aura:attribute name="errors5" type="Object"/>
+    <aura:attribute name="errors6" type="Object"/>
+    <aura:attribute name="settingData" type="Object"/>
+    <aura:attribute name="referralObj" type="object" /> 
+    <aura:attribute name="accountObj" type="Object"/>
+    <aura:attribute name="accountRetroObj" type="Object"/>
+    <aura:attribute name="refObj" type="Object"/>
+    <aura:attribute name="contact" type="Object" />
+    <aura:attribute name="retroContact" type="Object" />
+    <aura:attribute name="confidentionalcontact" type="Object" />
+    <aura:attribute name="primaryContact" type="Object" />
+    <aura:attribute name="primaryRetroContact" type="Object" />
+    <aura:attribute name="opportunityData" type="Object" />
+    <aura:attribute name="referrType" type="List"/>
+    <aura:attribute name="existingEmail" type="String"/>
+    <aura:attribute name="existingRetroEmail" type="String"/>
+    <aura:attribute name="mapDisabledForPrimaryContact" type="map" default="{}"/>
+    <aura:attribute name="mapDisabledForPrimaryRetroContact" type="map" default="{}"/>
+    <aura:attribute name="mapDisabled" type="map" default="{}"/>
+    <aura:attribute name="mapDisabledForContactInRetro" type="map" default="{}"/>
+    <aura:attribute name="size" type="string" />
+    <aura:attribute name="utils" type="object" />
+    <aura:attribute name="retroactiveServices" type="object" />
+    <aura:attribute name="referrerServices" type="object" />
+    <aura:attribute name="updateReferrerHelper" type="object" />
+    <aura:attribute name="disabledRetroBill" type="Boolean" default="false" />
+    <aura:attribute name="disabledBill" type="Boolean" default="false" />
+    <aura:attribute name="keepBillAcc" type="Boolean" default="false" />
+    <aura:attribute name="keepReferrer" type="Boolean" default="false" />
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="marginFooter" type="String"/>
+    <aura:attribute name="retroCriteria" type="String" default=""/>
+    <aura:attribute name="confiBillCriteria" type="String" default=""/>
+    <aura:attribute name="isFromGlobalAction" type="Boolean" default="false" />
+    <aura:attribute name="orgId" type="String" />
+    <aura:attribute name="apiSetting" type="Map"/>
+    <aura:attribute name="back" type="object" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <c:EnziUtils aura:id="utils" />
+    <c:RetroactiveServices aura:id="retroactiveServices" retroContact="{!v.retroContact}" mapDisabledForContactInRetro="{!v.mapDisabledForContactInRetro}" existingRetroEmail="{!v.existingRetroEmail}" primaryRetroContact="{!v.primaryRetroContact}" mapDisabledForPrimaryRetroContact="{!v.mapDisabledForPrimaryRetroContact}" contact="{!v.contact}" mapDisabled="{!v.mapDisabled}" existingEmail="{!v.existingEmail}" primaryContact="{!v.primaryContact}" mapDisabledForPrimaryContact="{!v.mapDisabledForPrimaryContact}" accountRetroObj="{!v.accountRetroObj}" accountObj="{!v.accountObj}" refObj="{!v.refObj}" referralObj="{!v.referralObj}" />
+    <c:ReferrerServices aura:id="referrerServices" opportunityData="{!v.opportunityData}" disabledBill="{!v.disabledBill}" retroContact="{!v.retroContact}" mapDisabledForContactInRetro="{!v.mapDisabledForContactInRetro}" existingRetroEmail="{!v.existingRetroEmail}" primaryRetroContact="{!v.primaryRetroContact}" mapDisabledForPrimaryRetroContact="{!v.mapDisabledForPrimaryRetroContact}" contact="{!v.contact}" mapDisabled="{!v.mapDisabled}" existingEmail="{!v.existingEmail}" primaryContact="{!v.primaryContact}" mapDisabledForPrimaryContact="{!v.mapDisabledForPrimaryContact}" accountRetroObj="{!v.accountRetroObj}" accountObj="{!v.accountObj}" refObj="{!v.refObj}" referralObj="{!v.referralObj}" />
+    <c:UpdateReferrerHelper aura:id="updateReferrerHelper" ContactRecordType="{!v.ContactRecordType}" APIUser="{!v.APIUser}" apiSetting="{!v.apiSetting}"/>
+    
+    <div id="referrerBody" class="backgroundcolor slds-m-left_x-small slds-m-right_x-small" style="{! 'margin-bottom: '+(v.marginFooter)}">
+        <lightning:tabset variant="vertical">
+            <lightning:tab label="Retroactive Referral" id="retro" onactive="{!c.onRetroActive}">
+                <div class="stage-container slds-grid slds-wrap" >
+                    <div id="retroReferrer" class="fullWidth">
+                        <c:EnziFormValidator errors="{!v.errors1}" valid="{!v.valid1}">
+                           <c:EnziSection label="Billing Account" expanded="true" showBorder="true" showTooltip="true" tooltipText="Select the Billing Account of the Opportunity" disableToggle="true">
+                                <div class="slds-grid slds-wrap slds-p-bottom_small" >
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField name="Org Account" icon="standard:account" type="reference" sObjectName="Account"  label="Organization" reference="Account" criteria="{!v.retroCriteria}"  value="{!v.opportunityData.Account.Id}"  defaultDisabled="true" disabled="true"  helpText="Please select an billing account where you want to move this opportunity."/>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField name="Assign to Billing Account" icon="standard:account" type="reference" sObjectName="Billing_Account__c"  label="Billing Account" reference="Billing_Account__c" required="true" criteria="{!v.retroCriteria}"  addNew="{!c.createRetroNewBillAcc}"  value="{!v.accountRetroObj.Id}"  defaultDisabled="true" disabled="{!v.disabledBill}" helpText="Please select an billing account where you want to move this opportunity." errors="{!v.errors1}" change="{!c.getRetroBillAccount}" getFields='{"Primary_Member__r.Email":"Email"}' searchFields="['Primary_Member__r.Email']"/>
+                                    </div>
+                                    <div class="{! 'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.accountRetroObj.Primary_Member__r.Email) ? 'slds-hide' : '')}" >
+                                        <c:EnziField name="Primary Member" type="email" label="Primary Member" value="{!v.accountRetroObj.Primary_Member__r.Email}" defaultDisabled="true" helpText="Primary member Email for the selected billing account" disabled="true"  errors="{!v.errors1}"></c:EnziField>
+                                    </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.accountRetroObj.Parent_Account__c) ? 'slds-hide' : '')}" >
+                                        <c:EnziField name="Parent Account" type="reference" reference="Account" label="Parent Account" value="{!v.accountRetroObj.Parent_Account__c}" defaultDisabled="true" disabled="true" helpText="Parent Account for the selected billing account." errors="{!v.errors1}"></c:EnziField>
+                                    </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.accountRetroObj.ID_Status__c) ? 'slds-hide' : '')}" >
+                                        <c:EnziField name="Status" type="string" label="Status" value="{!v.accountRetroObj.ID_Status__c}" defaultDisabled="true" disabled="true" helpText="Status of Billing Account" errors="{!v.errors1}"></c:EnziField>
+                                    </div>
+                                </div>
+                            </c:EnziSection>
+                            <c:EnziSection label="Referring User" expanded="true" showBorder="true" showTooltip="true" tooltipText="Select the referrer of the Opportunity" disableToggle="true">
+                                <div class="slds-grid slds-wrap slds-p-bottom_small" >
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField name="Referrer" type="reference" sObjectName="Contact" label="Referrer" reference="Contact" required="true" value="{!v.referralObj.Id}" helpText="Select the user who is referring the Opportunity" errors="{!v.errors1}" change="{!c.getAllReferralContacts}" addNew="{!c.createRetroContact}"  getFields='{"Email":"Email"}' searchFields="['Email', 'Name']"/>
+                                    </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' + (empty(v.referralObj.Email) ? 'slds-hide': '')}">
+                                        <c:EnziField name="Email" defaultDisabled="true" disabled="true" type="email" label="Email" value="{!v.referralObj.Email}" addNew="{!c.createContactReferral}" helpText="Referrer Email" errors="{!v.errors1}"  />
+                                    </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' + (empty(v.referralObj.Phone) ? 'slds-hide': '')}">
+                                        <c:EnziField name="Phone" defaultDisabled="true" disabled="true" type="phone" label="Phone" value="{!v.referralObj.Phone}" helpText="Phone number of the referrer" errors="{!v.errors1}"  />
+                                    </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' + (empty(v.referralObj.Type__c) ? 'slds-hide': '')}">
+                                        <c:EnziField name="Type" defaultDisabled="true" disabled="true" type="string" label="Type" value="{!v.referralObj.Type__c}" helpText="Shows the referrer type" errors="{!v.errors1}"  />
+                                    </div>    
+                                </div>
+                            </c:EnziSection>
+                        </c:EnziFormValidator>
+                    </div>
+                    <div id="retroNewReferrer" class="fullWidth slds-hide">
+                        <c:EnziSection label="Create New Referrer" expanded="true" showBorder="true" showTooltip="true" tooltipText="Create new referrer for the Opportunity" disableToggle="true">
+                            <c:EnziFormValidator errors="{!v.errors2}" valid="{!v.valid2}">
+                                <div class="slds-grid slds-wrap slds-p-bottom_small" >
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField sObjectName="Contact" fieldName="Email" label="Referrer Email" value="{!v.retroContact.Email}" required="true" helpText="Enter Email address of the Referrer" errors="{!v.errors2}" change="{!c.searchContactRetro}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField type="string" name="firstName" label="First Name" value="{!v.retroContact.FirstName}" helpText="Enter First Name of the Referrer" errors="{!v.errors2}" defaultDisabled="true" disabled="{! v.mapDisabledForContactInRetro.FirstName}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField type="string" name="lastName" label="Last Name" value="{!v.retroContact.LastName}" required="true" helpText="Enter Last Name of the Referrer" errors="{!v.errors2}" defaultDisabled="true" disabled="{! v.mapDisabledForContactInRetro.LastName}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField type="string" name="CompanyName" label="Company Name" value="{!v.retroContact.Company__c}" helpText="Enter Company Name of the Referrer" errors="{!v.errors2}" defaultDisabled="true" disabled="{! v.mapDisabledForContactInRetro.Company__c}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField name="Referral Type" type="picklist" options="{!v.referrType}" labelField="" value="{!v.retroContact.Type__c}" label="Referral Type" required="true" helpText="Select type of the Referrer" errors="{!v.errors2}" defaultDisabled="true" disabled="{! v.mapDisabledForContactInRetro.Type__c}"/>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField name="Phone" type="phone" label="Phone" value="{!v.retroContact.Phone}" maxPhoneLength="15" helpText="Enter Phone number of the Referrer" errors="{!v.errors2}" defaultDisabled="true" disabled="{! v.mapDisabledForContactInRetro.Phone}"/>
+                                    </div>
+                                </div>
+                            </c:EnziFormValidator>
+                        </c:EnziSection>
+                    </div>
+                    <div id="retroNewBill" class="fullWidth slds-hide">
+                        <c:EnziFormValidator errors="{!v.errors6}" valid="{!v.valid6}">
+                        <c:EnziSection label="Create Bill Account" expanded="true" showBorder="true" showTooltip="true" tooltipText="Create the Billing Account for the Opportunity" disableToggle="true"> 
+                            <div class="slds-grid slds-wrap slds-p-bottom_small" >
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                    <c:EnziField name="Email" type="email" label="Primary Member Email" value="{!v.primaryRetroContact.Email}" required="true" errors="{!v.errors6}" change="{!c.searchPrimaryRetroContact}" helpText="Enter Primary member Email of the Billing Account"/>
+                                    <span><lightning:icon iconName="utility:copy" size="xx-small"/><a id="OppMainContact" value="OppMainContact" onclick="{! c.copyOppMainContactForRetro }">Copy Opportunity Main Contact</a>&nbsp;&nbsp;</span>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                    <c:EnziField type="string" name="Primary Member First Name" label="First Name" helpText="Enter First Name for the Primary Member" value="{!v.primaryRetroContact.FirstName}" errors="{!v.errors6}" defaultDisabled="true" disabled="{! v.mapDisabledForPrimaryRetroContact.FirstName}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                    <c:EnziField type="string" name="lastName" label="Last Name" value="{!v.primaryRetroContact.LastName}" required="true" errors="{!v.errors6}" defaultDisabled="true" helpText="Enter Last Name of the Primary Member" disabled="{! v.mapDisabledForPrimaryRetroContact.LastName}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                    <c:EnziField type="string" name="Company Name" label="Billing Account Name" value="{!v.primaryRetroContact.BillAccName}" required="true" errors="{!v.errors6}" defaultDisabled="true" helpText="Enter Name of the Billing Account" disabled="{! v.mapDisabledForPrimaryRetroContact.BillAccName}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >      
+                                    <c:EnziField name="Phone" type="phone" label="Phone" value="{!v.primaryRetroContact.Phone}" maxPhoneLength="15" errors="{!v.errors6}" defaultDisabled="true" helpText="Enter Phone Number of the Primary Member" disabled="{! v.mapDisabledForPrimaryRetroContact.Phone}" />
+                                </div>
+                            </div>
+                        </c:EnziSection>
+                        </c:EnziFormValidator>
+                    </div>
+                </div>
+            </lightning:tab>
+            <lightning:tab label="Confidential Referral" id="confidentional" onactive="{!c.onConfidentionalActive}">
+                <div class="stage-container slds-grid slds-wrap">  
+                    <div id="confindentionalReferrer" class="fullWidth" >
+                        <c:EnziFormValidator errors="{!v.errors5}" valid="{!v.valid5}">
+                            <c:EnziSection label="Billing Account" expanded="true" showBorder="true" showTooltip="true" tooltipText="Select the Billing Account of the Opportunity" disableToggle="true">
+                                <div class="slds-grid slds-wrap slds-p-bottom_small" >
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                        <c:EnziField name="organization" icon="standard:account" type="reference" label="Organization" reference="Account" required="true" value="{!v.accountObj.Ultimate_Parent_Org__c}" defaultDisabled="true" disabled="{!v.disabledBill}" helpText="Please select an Org account where you want to move this opportunity." errors="{!v.errors5}" change="{!c.changeInOrg}"/>
+                                    </div>
+                                    <div class="{! 'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.accountObj.Ultimate_Parent_Org__c) ? 'slds-hide' : '')}">
+                                        <c:EnziField name="Assign to Billing Account" icon="standard:account" type="reference" sObjectName="Billing_Account__c" label="Billing Account" reference="Billing_Account__c" required="true" criteria="{!v.confiBillCriteria}" addNew="{!c.createNewAccount}"  value="{!v.accountObj.Id}" defaultDisabled="true" disabled="{!v.disabledBill}" helpText="Please select an billing account where you want to move this opportunity." errors="{!v.errors5}" change="{!c.getAccounts}" getFields='{"Primary_Member__r.Email":"Email"}' searchFields="['Primary_Member__r.Email','Name']" />
+                                    </div>
+                                    <div class="{! 'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.accountObj.Primary_Member__r.Email) ? 'slds-hide' : '')}" >
+                                            <c:EnziField name="Primary Member" type="email" label="Primary Member" value="{!v.accountObj.Primary_Member__r.Email}" defaultDisabled="true" helpText="Primary member Email of the selected billing account" disabled="true"  errors="{!v.errors5}"></c:EnziField>
+                                        </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.accountObj.Parent_Account__c) ? 'slds-hide' : '')}" >
+                                            <c:EnziField name="Parent Account" type="reference" reference="Account" label="Parent Account" value="{!v.accountObj.Parent_Account__c}" defaultDisabled="true" disabled="true" helpText="Parent Account of the selected billing account." errors="{!v.errors5}"></c:EnziField>
+                                        </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.accountObj.ID_Status__c) ? 'slds-hide' : '')}" >
+                                            <c:EnziField name="Status" type="string" label="Status" value="{!v.accountObj.ID_Status__c}" defaultDisabled="true" disabled="true" helpText="Status of Billing Account" errors="{!v.errors5}"></c:EnziField>
+                                        </div>
+                                </div>
+                            </c:EnziSection>
+                            <c:EnziSection label="Referring User" expanded="true" showBorder="true" showTooltip="true" tooltipText="Select the referrer of the Opportunity" disableToggle="true">
+                                <div class="slds-grid slds-wrap slds-p-bottom_small">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                        <c:EnziField name="Referrer" type="reference" sObjectName="Contact" label="Referrer" reference="Contact" value="{!v.refObj.Id}" required="true" addNew="{!c.createContactReferral}" helpText="Select the referrer of the Opportunity"  errors="{!v.errors5}" change="{!c.getReferrals}" getFields='{"Email":"Email"}'/>
+                                    </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.refObj.Email) ? 'slds-hide' : '')}" >
+                                        <c:EnziField name="Email" defaultDisabled="true" disabled="true" type="email" label="Email" value="{!v.refObj.Email}" addNew="{!c.createContactReferral}" helpText="Shows the Referrer Email" errors="{!v.errors5}"  />
+                                    </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.refObj.Phone) ? 'slds-hide' : '')}" >
+                                        <c:EnziField name="Phone" defaultDisabled="true" disabled="true" type="phone" label="Phone" value="{!v.refObj.Phone}" helpText="Shows the Referrer Phone Number" errors="{!v.errors5}"  />
+                                    </div>
+                                    <div class="{!'slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ' +(empty(v.refObj.Type__c) ? 'slds-hide' : '')}" >
+                                        <c:EnziField name="Type" defaultDisabled="true" disabled="true" type="string" label="Type" value="{!v.refObj.Type__c}" helpText="Shows the Referrer Type" errors="{!v.errors5}"  />
+                                    </div>    
+                                </div>
+                            </c:EnziSection>
+                        </c:EnziFormValidator>
+                    </div>
+                    <div id="confidentionalNewBill" class="fullWidth slds-hide">
+                        <c:EnziFormValidator errors="{!v.errors3}" valid="{!v.valid3}">
+                        <c:EnziSection label="Create Bill Account" expanded="true" showBorder="true" showTooltip="true" tooltipText="Create the Billing Account for the Opportunity" disableToggle="true"> 
+                            <div class="slds-grid slds-wrap slds-p-bottom_small" >
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                    <c:EnziField name="Email" type="email" label="Primary Member Email" value="{!v.primaryContact.Email}" required="true" helpText="Enter Primary member Email of the Billing Account" errors="{!v.errors3}" change="{!c.searchPrimaryContact}"/>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                    <c:EnziField type="string" name="Primary Member First Name" label="First Name" value="{!v.primaryContact.FirstName}" errors="{!v.errors3}" helpText="Enter First Name of the Primary Member" defaultDisabled="true" disabled="{! v.mapDisabledForPrimaryContact.FirstName}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                    <c:EnziField type="string" name="lastName" label="Last Name" value="{!v.primaryContact.LastName}" required="true" errors="{!v.errors3}" helpText="Enter Last Name of the Primary Member" defaultDisabled="true" disabled="{! v.mapDisabledForPrimaryContact.LastName}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                    <c:EnziField type="string" name="Company Name" label="Billing Account Name" value="{!v.primaryContact.BillAccName}" required="true" errors="{!v.errors3}" helpText="Enter the Billing Account Name" defaultDisabled="true" disabled="{! v.mapDisabledForPrimaryContact.BillAccName}"></c:EnziField>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >      
+                                    <c:EnziField name="Phone" type="phone" label="Phone" value="{!v.primaryContact.Phone}" maxPhoneLength="15" errors="{!v.errors3}" helpText="Enter Phone Number of the Primary Member" defaultDisabled="true" disabled="{! v.mapDisabledForPrimaryContact.Phone}" />
+                                </div>
+                            </div>
+                        </c:EnziSection>
+                        </c:EnziFormValidator>
+                    </div>
+                    <div id="confidentionalNewReferrer" class="fullWidth slds-hide">
+                        <c:EnziSection label="Create New Referrer" expanded="true" showBorder="true" showTooltip="true" tooltipText="Create the Referrer for the Opportunity" disableToggle="true"> 
+                            <c:EnziFormValidator errors="{!v.errors4}" valid="{!v.valid4}">
+                                <div class="slds-grid slds-wrap slds-p-bottom_small fullWidth" >
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                        <c:EnziField sObjectName="Contact" fieldName="Email" label="Referrer Email" value="{!v.contact.Email}" required="true" errors="{!v.errors4}" helpText="Enter First Name of the Referrer" change="{!c.searchContact}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                        <c:EnziField type="string" name="firstName" label="First Name" value="{!v.contact.FirstName}" errors="{!v.errors4}" helpText="Enter First Name of the Referrer" defaultDisabled="true" disabled="{!v.mapDisabled.FirstName}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                        <c:EnziField type="string" name="lastName" label="Last Name" value="{!v.contact.LastName}" required="true" errors="{!v.errors4}" helpText="Enter Last Name of the Referrer" defaultDisabled="true" disabled="{!v.mapDisabled.LastName}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                        <c:EnziField type="string" name="CompanyName" label="Company Name" value="{!v.contact.Company__c}" errors="{!v.errors4}" helpText="Enter Company Name of the Referrer" defaultDisabled="true" disabled="{!v.mapDisabled.Company__c}"></c:EnziField>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                        <c:EnziField name="Referral Type" type="picklist" options="{!v.referrType}" labelField="" value="{!v.contact.Type__c}" label="Referral Type" required="true" errors="{!v.errors4}" helpText="Select the Referrer Type" defaultDisabled="true" disabled="{!v.mapDisabled.Type__c}"></c:EnziField> 
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                                        <c:EnziField name="Phone" type="phone" label="Phone" value="{!v.contact.Phone}" maxPhoneLength="15" errors="{!v.errors4}" helpText="Enter Phone Number of the Referrer" defaultDisabled="true" disabled="{!v.mapDisabled.Phone}" />
+                                    </div>
+                                </div>
+                            </c:EnziFormValidator>
+                        </c:EnziSection>
+                    </div>
+                </div> 
+            </lightning:tab>
+        </lightning:tabset>
+    </div>
+    <div id="updateReferrerFooter" class="slds-modal__footer fullWidth">
+        <div id="retroFooter" class="insideFooter">
+            <div id="retroReferrerFooter">
+                <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{!c.referralClose}"></c:EnziButton>
+                <c:EnziButton label="Back" type="brand" leftIcon="utility:chevronleft" click="{!v.back}" show="{! and(!empty(v.back),v.isFromGlobalAction)}"></c:EnziButton>
+                <c:EnziButton label="Convert To Referral" type="brand" leftIcon="utility:save" click="{!c.referralSave}" disabled="{!(!v.valid1)}"></c:EnziButton>
+            </div>
+            <div id="retroNewReferrerFooter" Class="insideFooter slds-hide">
+                <c:EnziButton label="Cancel" type="destructive" leftIcon="utility:close" click="{!c.searchRetro}"></c:EnziButton>
+                <c:EnziButton label="Search Referrer " type="brand" leftIcon="utility:search" click="{!c.searchRetro}"></c:EnziButton>
+                <c:EnziButton label="Create New Referrer" type="brand" leftIcon="utility:save" click="{!c.saveRetroReferrer}" disabled="{!(!v.valid2)}" show="{! empty(v.retroContact.Id)}"></c:EnziButton>
+                <c:EnziButton label="Use This Referrer" type="brand" leftIcon="utility:save" click="{!c.useThisReferrarForRetro}" disabled="{! empty(v.retroContact.Id)}" show="{! !empty(v.retroContact.Id)}"></c:EnziButton>
+            </div>
+            <div id="retroNewBillFooter" Class="insideFooter slds-hide">
+                <c:EnziButton label="Cancel" type="destructive" leftIcon="utility:close" click="{!c.searchRetro}"></c:EnziButton>
+                <c:EnziButton label="Search Billing Account" type="brand" leftIcon="utility:search" click="{!c.searchRetro}"></c:EnziButton>
+                <c:EnziButton label="Create New Billing Account" type="brand" leftIcon="utility:save" click="{!c.saveRetroBillAcc}" disabled="{!(!v.valid6)}" show="{! !v.mapDisabledForPrimaryRetroContact.useBillAcc}"></c:EnziButton>
+                <!--<c:EnziButton label="Use This Billing Account" type="brand" leftIcon="utility:save" click="{!c.useRetroBillAcc}" show="{!v.mapDisabledForPrimaryRetroContact.useBillAcc}"></c:EnziButton>-->
+            </div>
+        </div>
+        <div id="confidentionalFooter">
+            <div id="confidentionalReferrerFooter" Class="insideFooter slds-hide">
+                <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{!c.confidentialClose}"></c:EnziButton>
+                <c:EnziButton label="Back" type="brand" leftIcon="utility:chevronleft" click="{!v.back}" show="{! and(!empty(v.back),v.isFromGlobalAction)}"></c:EnziButton>
+                <c:EnziButton label="Convert To Referral" type="brand" leftIcon="utility:save" click="{!c.confidentialSave}" disabled="{!(!v.valid5)}"></c:EnziButton>
+            </div>
+            <div id="confidentionalNewBillFooter" Class="insideFooter slds-hide">
+                <c:EnziButton label="Cancel" type="destructive" leftIcon="utility:close" click="{!c.closeNewAccountConfidentional}"></c:EnziButton>
+                <c:EnziButton label="Search Billing Account" type="brand" leftIcon="utility:search" click="{!c.searchConfidentional}"></c:EnziButton>
+                <c:EnziButton label="Create New Billing Account" type="brand" leftIcon="utility:save" click="{!c.saveAccount}" disabled="{!(!v.valid3)}" show="{! !v.mapDisabledForPrimaryContact.useBillAcc}"></c:EnziButton>
+                <c:EnziButton label="Use This Billing Account" type="brand" leftIcon="utility:save" click="{!c.useBillAcc}" disabled="{!notequals(v.orgId,v.primaryContact.Ultimate_Parent_Org__c)}" show="{!v.mapDisabledForPrimaryContact.useBillAcc}"></c:EnziButton>
+            </div>
+            <div id="confidentionalNewReferrerFooter" Class="insideFooter slds-hide">
+                <c:EnziButton label="Cancel" type="destructive" leftIcon="utility:close" click="{!c.closeNewContactConfidentional}"></c:EnziButton>
+                <c:EnziButton label="Search Referrer " type="brand" leftIcon="utility:search" click="{!c.searchConfidentional}"></c:EnziButton>
+                <c:EnziButton label="Create New Referrer" type="brand" leftIcon="utility:save" click="{!c.saveConfidentioanlReferrer}" disabled="{!(!v.valid4)}" show="{! empty(v.contact.Id)}"></c:EnziButton>
+                <c:EnziButton label="Use This Referrer" type="brand" leftIcon="utility:save" click="{!c.useThisReferrar}" disabled="{! empty(v.contact.Id)}" show="{! !empty(v.contact.Id)}"></c:EnziButton>
+            </div>
+        </div>
+    </div>
+</aura:component>

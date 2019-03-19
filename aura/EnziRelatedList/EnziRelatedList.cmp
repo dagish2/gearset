@@ -1,0 +1,72 @@
+<aura:component >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="relatedList" type="Object" />
+    
+    <aura:attribute name="icon" type="String" />
+    <aura:attribute name="totalRecords" type="Integer" />
+    <aura:attribute name="records" type="Object" />
+    <aura:attribute name="metadata" type="Object" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:EnziFormSaveEvent" action="{!c.formSaved}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <lightning:icon iconName="{!v.icon}"></lightning:icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" style="display:block">
+                            <span class="slds-text-heading--small" data-apiname="{!v.relatedList.sobject}">{!v.relatedList.label} ({!v.records.length})</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+            <c:EnziDropdown size="xx-small">
+                <aura:iteration items="{!v.relatedList.buttons}" var="action">
+                	<c:EnziDropdownItem label="{!action.label}" id="{!action.name}" click="{!c.manageListActions}"></c:EnziDropdownItem>
+                </aura:iteration>
+            </c:EnziDropdown>
+        </div>
+        <div class="slds-card__body">
+            <div class="slds-card__body--inner slds-grid slds-wrap slds-grid--pull-padded">
+                <aura:iteration items="{!v.records}" var="record">
+                    <div class="slds-tile slds-media slds-card__tile slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-hint-parent">
+                        <div class="slds-media__figure">
+                            <div class="slds-icon_container slds-icon-standard-contact" title="if needed">
+                                <lightning:icon iconName="{!v.icon}"></lightning:icon>
+                                <span class="slds-assistive-text">{!v.relatedList.sobject}</span>
+                            </div>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-grid slds-grid--align-spread slds-has-flexi-truncate">
+                                <h3 class="slds-truncate"><a href="{!'/'+(record.Id)}"><c:EnziDynamicBinder obj="{!record}" col="{!v.relatedList.columns[0].name}"></c:EnziDynamicBinder></a></h3>
+                                <div class="slds-shrink-none">
+                                    <c:EnziDropdown size="xx-small">
+                                    	<c:EnziDropdownItem label="Edit" click="{!c.manageRecordActions}" id="{!'edit:'+record.Id}"></c:EnziDropdownItem>
+                                        <c:EnziDropdownItem label="View" click="{!c.manageRecordActions}"  id="{!'view:'+record.Id}"></c:EnziDropdownItem>
+                                        <c:EnziDropdownItem label="Delete" click="{!c.manageRecordActions}" id="{!'delete:'+record.Id}"></c:EnziDropdownItem>
+                                        <c:EnziDropdownItem label="Clone" click="{!c.manageRecordActions}" id="{!'clone:'+record.Id}"></c:EnziDropdownItem>
+                                    </c:EnziDropdown>
+                                </div>
+                            </div>
+                            <div class="slds-tile__detail slds-text-body--small">
+                                <dl class="slds-list--horizontal slds-wrap">
+                                    <aura:iteration items="{!v.relatedList.columns}" var="column">
+                                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="{!column.label}">{!column.label}</dt>
+                                        <dd class="slds-item--detail slds-truncate">
+                                            <c:EnziDynamicBinder obj="{!record}" col="{!column.name}" type="{!column.type}"></c:EnziDynamicBinder>
+                                        </dd>
+                                    </aura:iteration>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </aura:iteration>
+            </div>
+        </div>
+    </article>
+</aura:component>

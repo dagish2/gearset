@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Add</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>CurrencyIsoCode</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Default_Product_Category__c</fullName>
+        <externalId>false</externalId>
+        <label>Default Product Category</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Standard Office</fullName>
+                    <default>false</default>
+                    <label>Standard Office</label>
+                </value>
+                <value>
+                    <fullName>Large Office(WWLO)</fullName>
+                    <default>false</default>
+                    <label>Large Office(WWLO)</label>
+                </value>
+                <value>
+                    <fullName>Custom Office</fullName>
+                    <default>false</default>
+                    <label>Custom Office</label>
+                </value>
+                <value>
+                    <fullName>PxWe</fullName>
+                    <default>false</default>
+                    <label>PxWe</label>
+                </value>
+                <value>
+                    <fullName>Global Access</fullName>
+                    <default>false</default>
+                    <label>Global Access</label>
+                </value>
+                <value>
+                    <fullName>Dedicated Desk</fullName>
+                    <default>false</default>
+                    <label>Dedicated Desk</label>
+                </value>
+                <value>
+                    <fullName>Hot Desk</fullName>
+                    <default>false</default>
+                    <label>Hot Desk</label>
+                </value>
+                <value>
+                    <fullName>WeMembership</fullName>
+                    <default>false</default>
+                    <label>WeMembership</label>
+                </value>
+                <value>
+                    <fullName>Desk</fullName>
+                    <default>false</default>
+                    <label>Desk</label>
+                </value>
+                <value>
+                    <fullName>Private Office</fullName>
+                    <default>false</default>
+                    <label>Private Office</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>DisplayUrl</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>ExternalDataSourceId</fullName>
+        <trackHistory>true</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ExternalId</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Family</fullName>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>For_Manage_Product__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to show the selective products on manage product page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Used to show the selective products on manage product page.</inlineHelpText>
+        <label>For Manage Product</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsActive</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>ProductCode</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Product_Category__c</fullName>
+        <externalId>false</externalId>
+        <label>Product Category</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Standard Office</fullName>
+                    <default>false</default>
+                    <label>Standard Office</label>
+                </value>
+                <value>
+                    <fullName>Custom Office</fullName>
+                    <default>false</default>
+                    <label>Custom Office</label>
+                </value>
+                <value>
+                    <fullName>Large Office(WWLO)</fullName>
+                    <default>false</default>
+                    <label>Large Office (WWLO)</label>
+                </value>
+                <value>
+                    <fullName>PxWe</fullName>
+                    <default>false</default>
+                    <label>PxWe</label>
+                </value>
+                <value>
+                    <fullName>Global Access</fullName>
+                    <default>false</default>
+                    <label>Global Access</label>
+                </value>
+                <value>
+                    <fullName>Dedicated Desk</fullName>
+                    <default>false</default>
+                    <label>Dedicated Desk</label>
+                </value>
+                <value>
+                    <fullName>Hot Desk</fullName>
+                    <default>false</default>
+                    <label>Hot Desk</label>
+                </value>
+                <value>
+                    <fullName>WeMembership</fullName>
+                    <default>false</default>
+                    <label>WeMembership</label>
+                </value>
+                <value>
+                    <fullName>TEEM</fullName>
+                    <default>false</default>
+                    <label>TEEM</label>
+                </value>
+                <value>
+                    <fullName>Desk</fullName>
+                    <default>false</default>
+                    <label>Desk</label>
+                </value>
+                <value>
+                    <fullName>WeWork</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>WeWork</label>
+                </value>
+                <value>
+                    <fullName>WeWork Desks</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>WeWork Desks</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Product_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Product Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Enterprise</fullName>
+                    <default>false</default>
+                    <label>Enterprise</label>
+                </value>
+                <value>
+                    <fullName>Mid Market</fullName>
+                    <default>false</default>
+                    <label>Mid Market</label>
+                </value>
+                <value>
+                    <fullName>Consumer</fullName>
+                    <default>false</default>
+                    <label>Consumer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>QuantityUnitOfMeasure</fullName>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StockKeepingUnit</fullName>
+        <trackHistory>true</trackHistory>
+    </fields>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <searchLayouts>
+        <customTabListAdditionalFields>PRODUCT2.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>PRODUCT2.CUSTOMER_PRODUCT_ID</customTabListAdditionalFields>
+        <customTabListAdditionalFields>PRODUCT2.DESCRIPTION</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>PRODUCT2.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PRODUCT2.CUSTOMER_PRODUCT_ID</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PRODUCT2.DESCRIPTION</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PRODUCT2.FAMILY</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PRODUCT2.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PRODUCT2.CUSTOMER_PRODUCT_ID</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PRODUCT2.DESCRIPTION</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PRODUCT2.FAMILY</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.CUSTOMER_PRODUCT_ID</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.DESCRIPTION</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.FAMILY</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <listViews>
+        <fullName>AllProducts</fullName>
+        <columns>PRODUCT2.CUSTOMER_PRODUCT_ID</columns>
+        <columns>PRODUCT2.FAMILY</columns>
+        <columns>Product_Category__c</columns>
+        <columns>Default_Product_Category__c</columns>
+        <columns>PRODUCT2.NAME</columns>
+        <columns>PRODUCT2.DESCRIPTION</columns>
+        <columns>PRODUCT2.QTY_UNIT_OF_MEASURE</columns>
+        <columns>PRODUCT2.ACTIVE</columns>
+        <columns>For_Manage_Product__c</columns>
+        <columns>PRODUCT2.LAST_UPDATE</columns>
+        <columns>PRODUCT2.CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>PRODUCT2.NAME</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>All Products</label>
+    </listViews>
+</CustomObject>

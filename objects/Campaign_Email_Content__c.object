@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>Active_Content__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used as a flag to let Marketing Cloud know whether to use the content or not</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Flag to know the status to use the content or not</inlineHelpText>
+        <label>Active Content</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Audience__c</fullName>
+        <description>This is dependent pick list controlled by Campaign Target field</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is dependent pick list controlled by Campaign Target field</inlineHelpText>
+        <label>Audience</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>CEO</fullName>
+                    <default>false</default>
+                    <label>CEO</label>
+                </value>
+                <value>
+                    <fullName>COO</fullName>
+                    <default>false</default>
+                    <label>COO</label>
+                </value>
+                <value>
+                    <fullName>Lawyers</fullName>
+                    <default>false</default>
+                    <label>Lawyers</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Campaign_Cadence__c</fullName>
+        <description>Captures the information about the cadence of the campaign for which dynamic content is generated</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the information about the cadence of the campaign for which dynamic content is generated</inlineHelpText>
+        <label>Campaign Cadence</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1 Touch</fullName>
+                    <default>false</default>
+                    <label>1 Touch</label>
+                </value>
+                <value>
+                    <fullName>2 Touch</fullName>
+                    <default>false</default>
+                    <label>2 Touch</label>
+                </value>
+                <value>
+                    <fullName>3 Touch</fullName>
+                    <default>false</default>
+                    <label>3 Touch</label>
+                </value>
+                <value>
+                    <fullName>4 Touch</fullName>
+                    <default>false</default>
+                    <label>4 Touch</label>
+                </value>
+                <value>
+                    <fullName>5 Touch</fullName>
+                    <default>false</default>
+                    <label>5 Touch</label>
+                </value>
+                <value>
+                    <fullName>6 Touch</fullName>
+                    <default>false</default>
+                    <label>6 Touch</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Campaign_Name__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Field captures the name of the campaign to which this dynamic content is related to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field captures the name of the campaign to which this dynamic content is related to.</inlineHelpText>
+        <label>Campaign Name</label>
+        <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Campaign Email Contents</relationshipLabel>
+        <relationshipName>Campaign_Email_Contents</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Campaign_Target__c</fullName>
+        <description>This fields captures the target for the Campaign, to know whether the Campaign is specifically focused for Industry or for a Persona</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This fields captures the target for the Campaign, to know whether the Campaign is specifically focused for Industry or for a Persona</inlineHelpText>
+        <label>Campaign Target</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Industry</fullName>
+                    <default>false</default>
+                    <label>Industry</label>
+                </value>
+                <value>
+                    <fullName>Persona</fullName>
+                    <default>false</default>
+                    <label>Persona</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Content_Synced__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Flag to acknowledge whether the content is synced at the Marketing Cloud end</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Flag to acknowledge whether the content is synced at the Marketing Cloud end</inlineHelpText>
+        <label>Content Synced?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Default_Email_Template__c</fullName>
+        <description>Captures the name of the default email template for which the content is updated or edited by the Sales Users.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the name of the default email template for which the content is updated or edited by the Sales Users.</inlineHelpText>
+        <label>Default Email Template</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dynamic_Content__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This check box is checked when email template get edited</description>
+        <externalId>false</externalId>
+        <label>Dynamic Content</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Dynamic_Email_Content__c</fullName>
+        <description>Captures all the edited contents by the Sales User, for the Leads or Contacts</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures all the edited contents by the Sales User, for the Leads or Contacts</inlineHelpText>
+        <label>Dynamic Email Content</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Parent_Campaign__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Parent Campaign, the top in the hierarchy of the campaign</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Parent Campaign, the top in the hierarchy of the campaign</inlineHelpText>
+        <label>Parent Campaign</label>
+        <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Campaign Email Contents (Parent Campaign)</relationshipLabel>
+        <relationshipName>Campaign_Email_Contents1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Sales_User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>User who has edited the content of the email for the lead or contact</description>
+        <externalId>false</externalId>
+        <inlineHelpText>User who has edited the content of the email for the lead or contact</inlineHelpText>
+        <label>Sales User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Campaign_Email_Contents</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Save_As__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is checked only if email content name is changed by user manually</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is checked only if email content name is changed by user manually</inlineHelpText>
+        <label>Save As</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sequence__c</fullName>
+        <description>Determines what is the sequence of this email need to be sent to the Journeys</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines what is the sequence of this email need to be sent to the Journeys</inlineHelpText>
+        <label>Sequence</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>5</fullName>
+                    <default>false</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>6</fullName>
+                    <default>false</default>
+                    <label>6</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Subject_Line__c</fullName>
+        <description>Subject of email template</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Subject of email template</inlineHelpText>
+        <label>Subject Line</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unique_Key__c</fullName>
+        <description>This field is used to make sure that only unique dynamic content is available for the same type of Email from the Sales User for a Campaign</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is used to make sure that only unique dynamic content is available for the same type of Email from the Sales User for a Campaign</inlineHelpText>
+        <label>Unique Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object will capture all the information about the Outbound Campaigns and Events. Also stores all the dynamic content that Sales User will produce for sending it out to the end user.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Campaign Email Content</label>
+    <nameField>
+        <label>Campaign Email Content Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Campaign Email Contents</pluralLabel>
+    <searchLayouts />
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

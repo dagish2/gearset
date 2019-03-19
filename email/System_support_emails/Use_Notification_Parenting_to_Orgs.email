@@ -1,0 +1,70 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p class="MsoNormal" style="color: rgb(0, 0, 0);"><span style="color: rgb(34, 34, 34); font-family: Arial; font-size: 11pt; white-space: pre-wrap;">Hi {!Receiving_User.FirstName},</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0);"><span style="color: rgb(34, 34, 34); font-family: Arial; font-size: 11pt; white-space: pre-wrap;"><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0);"><span style="color: rgb(34, 34, 34); font-family: Arial; font-size: 11pt; white-space: pre-wrap;">Our recent release has introduced a new account hierarchy structure that should provide for a cleaner user experience. However, there are some changes to the Opportunity creation flow that we'd like to highlight to reduce some confusion that we have heard thus far. </span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><span style="color: black;"></span><b style="font-weight:normal;" id="docs-internal-guid-418c87c4-7fff-af4e-56ba-83e3554d9a2a"><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Opportunities should be created from Organization Accounts or Sales Accounts. In order to verify this, please review the following tips:</span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><b style="font-weight:normal;"><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:700;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Incorrect</span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><b style="font-weight:normal;"><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:700;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"><img src="https://lh6.googleusercontent.com/DjprHcQgvvSBp2dwu0_7sBs1DSO-KSiOHORgP27Q5YJFsuS873sdVnexMXVuHbza00psETMEjaY6OngLwMqeiMum-8JByxCxcesDeN82gVzM5YrGmAZ1yFOfIAE-1zNo9Mhc5I8w" width="624" height="236" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);"></span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><b style="font-weight:normal;"><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:700;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Correct</span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><b style="font-weight:normal;"><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:700;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"><img src="https://lh5.googleusercontent.com/w4W-ytAs2ZbkNnUU-79hkwXPclZ3eRbhYkyDcWRpZ5N24uiJhGLlVc8L0phtDna86QDdmPCMBU6KyLEWE_AHDQjci6qiiJ3uzwEEx2QL2d5f7oO0c2IOoQny3DUIrhMA24neY1CS" width="624" height="253" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);"></span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><b style="font-weight:normal;"><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">If you attempt to create an Opportunity or a Contact from an account with the Account Type of Bill or Blank (no value), you will receive an error message that looks like the following:</span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><b style="font-weight:normal;"><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"><img src="https://lh3.googleusercontent.com/GzNI4PuxhKOyFEd_KBW6BzwNJR6zbfR3htE_wOIVTd0s7G-Hzc3vFck1wkqSAMg3BEOls0p0JhKBj4W5djscr18QPRolpEjLFsnNBE7-GhUGg-JuDhEUSdJkJNaCweLMgXqpO_8k" width="624" height="104" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);"></span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><b style="font-weight:normal;"><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">If this occurs, simply navigate to the corresponding Org or Sales account (aka </span><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:400;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Parent Account</span><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">) and create the Opportunity from there.</span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><b style="font-weight:normal;"><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span id="docs-internal-guid-52a4e546-7fff-55a8-6691-adbe71e2d01d"><span style="font-size: 11pt; font-family: Arial; color: rgb(34, 34, 34); font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Please visit our </span><a href="https://connect.we.co/display/WWST/Account+Hierarchy" style="text-decoration-line: none;"><span style="font-size: 11pt; font-family: Arial; color: rgb(17, 85, 204); font-variant-numeric: normal; font-variant-east-asian: normal; text-decoration-line: underline; text-decoration-skip-ink: none; vertical-align: baseline; white-space: pre-wrap;">Connect page</span></a><span style="font-size: 11pt; font-family: Arial; color: rgb(34, 34, 34); font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;"> to learn more about Account Hierarchy, view other Frequently Asked Questions, and review training materials, including videos and gifs. Contact salesforcesupport@wework.com or your Growth Ops team with question</span></span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><b style="font-weight:normal;"><br><br></b></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Thanks, </span></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><br></p><p dir="ltr" style="font-family: arial; font-size: 12pt; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size:11pt;font-family:Arial;color:#222222;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Salesforce Team</span></p><style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Arial;
+	panose-1:2 11 6 4 2 2 2 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-536859905 -1073711037 9 0 511 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:1;
+	mso-generic-font-family:roman;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:0 0 0 0 0 0;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-536870145 1073786111 1 0 415 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Calibri",sans-serif;
+	mso-ascii-font-family:Calibri;
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:Calibri;
+	mso-fareast-theme-font:minor-latin;
+	mso-hansi-font-family:Calibri;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-family:"Calibri",sans-serif;
+	mso-ascii-font-family:Calibri;
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:Calibri;
+	mso-fareast-theme-font:minor-latin;
+	mso-hansi-font-family:Calibri;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>]]></td>
+</tr>
+</table>

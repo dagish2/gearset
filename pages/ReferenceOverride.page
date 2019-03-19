@@ -1,0 +1,26 @@
+<apex:page controller="WeworkEngine" standardstylesheets="false"
+           sidebar="false" showheader="false" cache="false">
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}"
+                       vendor_css=""
+                       vendor_js="jquery/moment.min.js,jquery/underscore-min.js,jquery/xdate.js"
+                       application_js="error-manager.js,salesforce.js,common-controls.js,referenceOverride.js,autocomplete.js"
+                       application_css="referenceOverride.css,autocomplete.css,applicationCSS.css" />
+    <apex:includeScript value="/support/console/30.0/integration.js"/>
+    <script type="text/javascript">
+        sforce.console.setTabTitle('Reference Override');
+    </script> 
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Reference Override</title>
+    </head>
+    <body>
+        <div id="spinnerContainer"></div>
+        <div id="wrapper" ng-app="referenceApp" ng-controller="referenceCtrl">
+            <div class="container-fluid">
+                <add-reference></add-reference>
+            </div>
+        </div>
+    </body>
+</apex:page>

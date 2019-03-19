@@ -1,0 +1,9 @@
+Hi {!Lead.Salutation_Name__c},
+
+Are you still interested in looking for shared or private office space in Boston? We have openings at our Fort Point and South Station locations. Our members have taken advantage of our collaborative spaces and network to grow their companies. We'd love to call your company a WeWork member! 
+ 
+Want to come by for a tour?
+ 
+Kind regards,
+{!User.FirstName}
++1-855-5WE-WORK

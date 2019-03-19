@@ -1,0 +1,50 @@
+<aura:component >
+    <aura:attribute name="fields" type="Object" />
+    <aura:attribute name="filterValue" type="Object" />
+    <aura:attribute name="filters" type="Object" />
+    <aura:attribute name="filterValueTemp" type="Object" />
+    <aura:attribute name="searchCriterias" type="Object" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.filterValueTemp}" action="{!c.filterFieldsChange}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+	<c:EnziModal aura:id="advancedSearchModal" header="Advanced Search" isLarge="true">
+    	<c:EnziModalContainer >
+        	<c:EnziField type="multipicklist" name="searchFields" label="Search Fields" options="{!v.fields}" labelField="label" valueField="name" value="{!v.filterValueTemp}"></c:EnziField>
+            <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col">
+                            <div class="slds-truncate" title="Field Name">Field Name</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Search Criteria">Search Criteria</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.filters}" var="filter">
+                        <tr>
+                            <td data-label="Field Name">
+                                <div class="slds-truncate" title="{!filter.fieldName}">{!filter.fieldName}</div>
+                            </td>
+                            <td data-label="Field Name">
+                                <div class="slds-truncate" title="{!filter.searchCriteria}">
+                                	<c:EnziField type="picklist" name="searchCriteria" label="Search Criteria" hideLabel="true" value="{!filter.searchCriteria}" options="{!v.searchCriterias}"></c:EnziField>
+                                </div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                    <tr style="{!'display:'+((v.filters.length==0 || v.filters==undefined)?'grid':'none')}">
+                        <td colspan="2">
+                            <div class="slds-truncate" title="No data">No Filters provided</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+            <c:EnziButton label="Apply" type="brand" click="{!c.save}"></c:EnziButton>
+            <c:EnziButton label="Cancel" type="brand" click="{!c.cancel}"></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

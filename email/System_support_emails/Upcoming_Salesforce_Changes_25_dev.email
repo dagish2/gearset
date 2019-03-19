@@ -1,0 +1,6 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<div style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" style=""><span style="background-color: rgb(255, 255, 255); color: rgb(34, 34, 34);">Hi&nbsp;</span><span style="background-color: rgb(255, 255, 255);">{!Receiving_User.FirstName}</span><span style="background-color: rgb(255, 255, 255);">,</span></font></div><div style="color: rgb(0, 0, 0);"><br></div><div style="color: rgb(0, 0, 0);">Due to our release on Monday, January 8th, some users are experiencing intermittent Salesforce issues. To fix this issue, p<span style="font-size: 12pt;">lease log out of your salesforce instance. When you log back in, the issue will be resolved.</span></div><div style="color: rgb(0, 0, 0);"><br></div><div style="color: rgb(0, 0, 0);">If you have any questions or concerns, please reach out to salesforcesupport@wework.com</div><div style="color: rgb(0, 0, 0);"><br></div><div style="color: rgb(0, 0, 0);">Warmly,</div><div style="color: rgb(0, 0, 0);">Susie</div><div style="color: rgb(0, 0, 0);"><br></div>]]></td>
+</tr>
+</table>

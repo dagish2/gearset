@@ -1,0 +1,53 @@
+<aura:component controller="HoldReservableController">
+    <aura:attribute name="recordId" type="string" default=""/>
+    <aura:attribute name="entity" type="Map" default="{}" />
+    <aura:attribute name="buildingsReservables" type="list" />
+    <aura:attribute name="currentDate" type="object"/>
+    <aura:attribute name="objHoldReservable" type="Object" /> 
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="settingData" type="Object"/>
+    <aura:attribute name="selectedBuilding" type="Object"/>
+    <aura:attribute name="LoggedInUser" type="String"/>
+    <aura:attribute name="headerMeta" type="List"/>
+    <aura:attribute name="mainContactInfo" type="Object"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <c:EnziHeader sObjectName="Opportunity" pageName="{!v.entity.Name}" iconName="custom:custom50"></c:EnziHeader>
+    <c:EnziDataHeader sObject="{!v.entity}" fieldMetaData="{!v.headerMeta}" />
+    <style>
+    #hold-reservable-container > div.slds-section{
+        border: 1px solid #d9dbdd;
+        border-radius:3px;
+        }
+    </style>
+    <div class="slds-p-around--small" id="hold-reservable-container">
+        <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+            <c:EnziSection label="Hold Information" showTooltip="true" tooltipText="Information Related to Reservable Hold.">
+                <div class="slds-p-around--small slds-grid slds-wrap slds-grid--pull-padded">
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="Building" type="reference" sObjectName="Building__c" value="{!v.objHoldReservable.building}" label="Building" helpText="Please select a building to fetch reservables." reference="Building__c" required="true" errors="{!v.errors}" change="{!c.getBuildingData}"/>
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="startDate" type="date" value="{!v.objHoldReservable.startsDate}" label="Hold Start" helpText="Start date of the hold." required="false" errors="{!v.errors}" defaultDisabled="true" upperBound="{!v.currentDate}" change="{!c.getReservablesOnStartDateChange}" disabled="{!empty(v.objHoldReservable.building)}"/>
+                    </div>  
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="Reservables" type="picklist" options="{!v.buildingsReservables}" labelField="label" valueField="uuid" value="{!v.objHoldReservable.reservable}" helpText="Reservables present for the selected building with move in date as hold start date." label="Reservables" required="true" errors="{!v.errors}" disabled="{!and(empty(v.objHoldReservable.building),empty(v.buildingsReservables))}" defaultDisabled="true"></c:EnziField>      
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:EnziField name="TillDate" type="date" value="{!v.objHoldReservable.tillDate}" label="Hold Until"  upperBound="{!v.currentDate}" helpText="Expiry date for this Hold." required="true" errors="{!v.errors}" disabled="{!empty(v.objHoldReservable.building)}" defaultDisabled="true" change="{!c.validateHoldDuration}"/>
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">                        
+                        <c:EnziField name="textarea" type="textarea" value="{!v.objHoldReservable.Notes}" label="Notes" helpText="Additional Notes" errors="{!v.errors}" />
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--1-of-1 slds-text-align--center slds-p-top_small" role="main">
+                        <c:EnziButton label="Save" type="brand" click="{!c.save}" disabled="{!(!v.valid)}" leftIcon="utility:save"></c:EnziButton>
+                        <c:EnziButton label="Close" type="destructive" click="{!c.close}" leftIcon="utility:close"></c:EnziButton>
+                    </div>                  
+                </div>
+            </c:EnziSection>  
+        </c:EnziFormValidator> 
+    </div>
+</aura:component>

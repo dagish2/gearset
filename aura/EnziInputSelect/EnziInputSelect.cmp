@@ -1,0 +1,26 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="unrestricted" type="boolean" default="true"/>
+    <aura:attribute name="options" type="Object" />
+    <aura:attribute name="sort" type="Object" />
+    
+    <aura:attribute name="isDependent" type="Boolean" default="false" />
+    <aura:attribute name="controllingValue" type="Object" />
+    
+    <aura:attribute name="filteredOptions" type="Object" />
+    <aura:attribute name="change" type="Object" default="{!c.defaultChange}" />
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.controllingValue}" action="{!c.controllerChange}"/>
+    <aura:handler name="change" value="{!v.options}" action="{!c.optionsChange}"/> 
+    <select aura:id="select" id="{!v.name}" onchange="{!v.change}" class="slds-select" value="{!v.value}" disabled="{!v.disabled?'disabled':''}" style="padding-left:10px;">
+        <option value="" selected="{!(v.value==undefined || v.value=='')?'selected':''}">{!v.disabled?'':'Select '+v.label}</option>
+        <aura:iteration items="{!v.filteredOptions}" var="option">
+            <option selected="{!v.value==option.value?'selected':''}" value="{!option.value}">{!option.label}</option>
+        </aura:iteration>
+    </select>
+</aura:component>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>Leads Insert_Failure</name>
+    <style>freeForm</style>
+    <subject>Leads Successfully Created</subject>
+    <textOnly>Hello {!User.FirstName}, 
+
+Your Lead Import job is completed successfully. Please find the attached list of leads which are failed while inserting. 
+
+Please contact your administrator, for any further help.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

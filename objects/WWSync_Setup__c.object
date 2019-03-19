@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Email_Catcher_Contact_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Email Catcher Contact ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>apex_notification_email__c</fullName>
+        <externalId>false</externalId>
+        <label>apex notification email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>endpoint__c</fullName>
+        <externalId>false</externalId>
+        <label>endpoint</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>payment_endpoint__c</fullName>
+        <externalId>false</externalId>
+        <label>payment_endpoint</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>token__c</fullName>
+        <externalId>false</externalId>
+        <label>token</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <customSettingsType>Hierarchy</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <label>WWSync Setup</label>
+    <visibility>Protected</visibility>
+</CustomObject>

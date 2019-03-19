@@ -1,0 +1,136 @@
+<aura:component controller="ApexDebugLogController">
+    <aura:attribute name="lstId" type="List" default="[]"/>
+    <aura:attribute name="selectedRecord" type="List" default="[]"/>
+    <aura:attribute name="startDate" type="Date" />
+    <aura:attribute name="endDate" type="Date" />
+    <aura:attribute name="endTime" type="time" />
+    <aura:attribute name="startTime" type="time" />
+    <aura:attribute name="objLog" type="Map" default="{'size':10}" />
+    <aura:attribute name="objupdate" type="Map" default="{'size':10}" />
+    <aura:attribute name="describedFields" type="List" default="[]}" />
+    <aura:attribute name="logs" type="List"  />
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="selectedUsers" type="String" />
+    <aura:attribute name="offset" type="String" />
+    <aura:attribute name="recordsErrorMessage" type="String" />
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="show" type="Boolean" default="false"/>
+    <aura:attribute name="status" type="Object"/>
+    <aura:attribute name="estimatedfix" type="Object"/>
+    <aura:attribute name="exceptioncategory" type="Object"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+   
+    <div class="slds-page-header slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 mobileMargin" style="border-top: 2px solid #0070D2;">
+        <div class="slds-media slds-no-space slds-grow">
+            <div class="slds-media__figure">
+                <lightning:icon iconName="custom:custom84" size="medium" alternativeText="Report"/>                        
+            </div>
+            <div class="slds-large__body">
+                <p class="slds-text-title--caps slds-line-height--reset">Apex Debug Log</p>
+                <h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate" title="Report Manager">Finder</h1>
+            </div>
+        </div>
+    </div> 
+    <div class="slds-align_absolute-center" style="width: 20%; position: relative;right: -22%;top: 1.1rem;background: #f3f2f2;font-weight: inherit;font-size: 14px;border: 1px solid rgb(217, 219, 221);">
+        <span style="padding-right:13px">Server Time</span>
+        <span><c:showServerTime /></span>
+    </div>
+    <div style="background:white">
+        <div class="stage-container slds-grid slds-wrap" style="width: 64%;margin: auto;">
+            <section class="stage slds-grid slds-grid--vertical slds-nowrap" style="">
+                <c:EnziSection label="Apex Debug Log" type="fieldset">
+                    <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}" aura:id="campaignForm">
+                        <div class="slds-col slds-size_1-of-4 slds-p-right_small">
+                            <c:EnziField type="date" errors="{!v.errors}"  name="startDate" label="Start Date" value="{!v.startDate}" required="true" ></c:EnziField>
+                        </div >
+                        <div class="slds-col slds-size_1-of-4 slds-p-right_medium" style="padding-top:3px">
+                            <lightning:input  type="time" value="{!v.startTime}" label="Start Time" name="time"  required="true" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-p-right_small">
+                            <c:EnziField type="date" errors="{!v.errors}"  name="endDate" label="End Date" value="{!v.endDate}" required="true" ></c:EnziField>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4" style="padding-top:3px">
+                            <lightning:input  type="time" value="{!v.endTime}"  label="End Time" name="time"  required="true" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-1" style="font-size: 1.1rem;background: #f3f2f2;margin-top:7px;margin-bottom:7px">
+                            <h3 class="slds-text-align_center">
+                                <span >Advance Search</span>
+                            </h3>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_large">
+                            <c:EnziField type="picklist" name="estimatedfix" label="Estimated Fix" options="{!v.estimatedfix}" errors="{!v.errors}" value="{!v.objLog.estimatedfix}" labelField="label" valueField="value" ></c:EnziField>
+                        </div >
+                        <div class="slds-col slds-size_1-of-2">
+                         <c:EnziField type="picklist" name="exceptioncategory" label="Exception Category" options="{!v.exceptioncategory}" errors="{!v.errors}" value="{!v.objLog.exceptioncategory}" labelField="label" valueField="value" ></c:EnziField>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_large">
+                            <c:EnziField type="string" errors="{!v.errors}" name="method" label="Method" value="{!v.objLog.method}" ></c:EnziField>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <c:EnziField type="picklist" name="status" label="Status" options="{!v.status}" errors="{!v.errors}" value="{!v.objLog.status}" labelField="label" valueField="value" ></c:EnziField>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_large">
+                            <c:EnziField type="string" errors="{!v.errors}" name="message" label="Message" value="{!v.objLog.message}" ></c:EnziField>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <c:EnziField type="string" errors="{!v.errors}" name="stackTrace" label="Stack Trace" value="{!v.objLog.stackTrace}" ></c:EnziField>
+                        </div>
+                    </c:EnziFormValidator>
+                </c:EnziSection>
+            </section>
+        </div>
+        <div class="relative slds-text-align_center" style="position: relative;top:-40px;">
+            <c:EnziButton label="Get Logs" disabled="{!not(v.valid)}" type="brand" click="{!c.getLogs}" leftIcon="utility:record_create"></c:EnziButton>
+        </div>
+        <aura:if isTrue="{!and(v.logs.length > 0,v.logs!=null,v.logs!=undefined)}">
+            <c:EnziButton label="Update Records" disabled="{!empty(v.selectedRecord)}" type="brand" click="{!c.UpdateRecord}" ></c:EnziButton> 
+            <c:WeTable meta="{!v.describedFields}"
+                       data="{!v.logs}"
+                       selectedRows="{!v.selectedRecord}" 
+                       showSelect="true" 
+                       height="500" 
+                       showSearch="false"
+                       resizeColumn="true"
+                       />
+        </aura:if>
+        <aura:if isTrue="{!and(v.recordsErrorMessage!=undefined,v.recordsErrorMessage!='')}" >
+            <div class="slds-box" style="animation: 1s ease-out 0s 1 slideInFromCenter; width: 555px;margin: auto;background-color: #f4f6f9;">
+                <div class="slds-inline_icon_text slds-grid">
+                    <div class=" slds-m-right--small slds-col slds-no-flex">
+                        <lightning:icon iconName="utility:info" size="small" alternativeText="Indicates approval"/>
+                    </div>
+                    <div class="slds-col slds-align-middle">
+                        <p>{!v.recordsErrorMessage}</p>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+    </div>
+    <c:EnziModal aura:id="UpdateRecordModel" header="Update Record" show="false" isLarge="true">
+        <c:EnziModalContainer >
+            <div class="slds-grid slds-wrap" style="padding-bottom:10px;">
+                <div class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2" >
+                    <c:EnziField type="picklist" name="estimatedfix" label="Estimated Fix" options="{!v.estimatedfix}" errors="{!v.errors}" value="{!v.objupdate.estimatedfix}" labelField="label" valueField="value" ></c:EnziField>
+                </div>
+                <div class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2" >
+                    <c:EnziField type="string" errors="{!v.errors}" name="findingsandobservations" label="Findings and Observations" value="{!v.objupdate.findingsandobservations}" ></c:EnziField>
+                </div>
+                <div class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2" >
+                    <c:EnziField type="picklist" name="exceptioncategory" label="Exception Category" options="{!v.exceptioncategory}" errors="{!v.errors}" value="{!v.objupdate.exceptioncategory}" labelField="label" valueField="value"  ></c:EnziField>
+                </div>
+                <div class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                    <c:EnziField type="picklist" name="status" label="Status" options="{!v.status}" errors="{!v.errors}" value="{!v.objupdate.status}" labelField="label" valueField="value" ></c:EnziField>
+                </div>
+                <div class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <c:EnziField type="string" errors="{!v.errors}" name="resolutionstepsanddetails" label="Resolution Steps and Details" value="{!v.objupdate.resolutionstepsanddetails}" ></c:EnziField>
+                </div >
+            </div>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter > 
+            <c:EnziButton label="Cancel" type="neutral" click="{!c.closeupdateModal}"></c:EnziButton>
+            <c:EnziButton label="Update" type="brand" leftIcon="utility:save" click="{!c.UpdateNewRecord}" disabled="{!(!v.valid)}"></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

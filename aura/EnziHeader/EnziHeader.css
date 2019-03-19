@@ -1,0 +1,52 @@
+.THIS .oneUserProfileCard {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.THIS .oneUserProfileCard {
+    width: 350px;
+}
+
+.THIS .oneUserProfileCard .avatar-holder {
+    padding-left: 1rem;
+    padding-top: 1rem;
+    float: left;
+}
+
+.THIS .oneUserProfileCard .profile-card-indent {
+    margin-left: 52px;
+    padding: 1rem;
+}
+
+.THIS .oneUserProfileCard .profile-link-label {
+    font-size: .8125rem;
+    color: rgb(0, 112, 210);
+}
+
+.THIS .oneUserProfileCard .profile-card-name {
+    margin: 0;
+    margin-bottom: .125rem;
+    margin-top: -3px;
+    font-size: 1rem;
+    color: rgb(22, 50, 92);
+    word-wrap: break-word;
+}
+
+.THIS .oneUserProfileCard .profile-card-domain {
+    margin-bottom: .125rem;
+    font-size: .8125rem;
+    color: rgb(84, 105, 141);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+}
+
+.THIS .oneUserProfileCard .profile-card-avatar {
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+}
+
+.THIS .oneUserProfileCard .profile-card-toplinks a {
+    margin-right: 1rem;
+}

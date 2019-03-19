@@ -1,0 +1,10 @@
+Hello,
+
+I have requested an ROE exception for my opportunity, {!Opportunity.Name}. Please review here: {!Opportunity.Link}
+
+ROE Exception Reason: {!Opportunity.ROE_Exception_Reason__c}
+Opp Creation Date: {!Opportunity.CreatedDate}
+Opp Close Date: {!Opportunity.CloseDate}
+
+Thank you in advance,
+{!Opportunity.OwnerFirstName}

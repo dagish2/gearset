@@ -1,0 +1,3 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" title="Manage Products"> 
+    <c:LightningResource component="ManageLineItems" parameters="recordId={!$CurrentPage.parameters.id};isFromCreateOpp={!$CurrentPage.parameters.isFromCreateOpp}"></c:LightningResource>
+</apex:page>

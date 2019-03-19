@@ -1,0 +1,6 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" title="Create Opportunity">  
+    <head>
+        <title>Create Opportunity</title> 
+    </head>
+    <c:LightningResource component="CreateOpportunity" parameters="recordId={!$CurrentPage.parameters.id}"></c:LightningResource>
+</apex:page>

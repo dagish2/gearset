@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>44.0</apiVersion>
+    <available>true</available>
+    <description>This Template is used to send notification to user when referral status is pending and opportunity has referrer present on it and its stage is changed to closed won.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Referral notification for pending approval on closed won opportunity</name>
+    <style>none</style>
+    <subject>Referral Approval Pending For</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

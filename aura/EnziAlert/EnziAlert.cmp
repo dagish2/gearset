@@ -1,0 +1,15 @@
+<aura:component >
+    <aura:attribute name="message" type="String" />
+	<c:EnziModal header="Alert" aura:id="alertModal">
+        <c:EnziModalContainer >
+            <div class="stage-main slds-grid slds-wrap slds-card" role="main" style="margin-bottom:10px;padding:10px">
+                <div class="slds-size--1-of-1">
+                    {!v.message}
+                </div>
+            </div>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+			<c:EnziButton label="Ok" type="brand" click="{!c.ok}"></c:EnziButton>        
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

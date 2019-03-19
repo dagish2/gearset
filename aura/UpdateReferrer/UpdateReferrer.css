@@ -1,0 +1,8 @@
+.THIS .slds-scope .slds-section{ border : 1px solid #d9dbdd !important; border-radius : 3px !important;}
+.THIS .slds-box { padding : 0rem;}
+.THIS .insideFooter{ padding-right : 5px;}
+.THIS.backgroundcolor { background : ghostwhite; border-radius : 5px;}
+.THIS .fullWidth { width : 100%; }
+.THIS#updateReferrerFooter{  width : 100%; position : fixed; bottom : 0; z-index: 1;}
+.THIS#referrerBody{  margin-bottom : 4.75rem !important;}
+.THIS .slds-section__content { padding-top : 0px !important; }

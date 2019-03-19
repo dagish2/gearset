@@ -1,0 +1,11 @@
+<aura:component >
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="component" type="Object" />
+    <aura:attribute name="name" type="String" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    
+    <lightning:tab id="{!empty(v.name) ? v.label : v.name}" label="{!v.label}">
+        {!v.body}
+    </lightning:tab>
+</aura:component>

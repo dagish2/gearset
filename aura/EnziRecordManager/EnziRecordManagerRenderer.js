@@ -1,0 +1,10 @@
+({
+    afterRender:function(component){
+        this.superAfterRender();
+        document.addEventListener("click",function(evt){
+            if(!document.getElementById("actionDropdown").contains(evt.target)){
+                $A.util.removeClass(document.getElementById('actionDropdown'),'slds-is-open');
+            }
+        })
+    }
+})

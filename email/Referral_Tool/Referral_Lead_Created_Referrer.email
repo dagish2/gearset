@@ -1,0 +1,8 @@
+Hey Matt,
+
+I'd like to introduce you to {!Lead.Salutation_Name__c}, who would be a great addition to the WeWork community in {!Lead.Quick_Quote_Location__c}. Please get in touch at {!Lead.Phone}.​
+
+{!Lead.Salutation_Name__c}, Matt is a part of the WeWork team and can help you with any questions you may have, feel free to reach out at any time.
+
+Best,
+{!Lead.Referrer_Name__c}

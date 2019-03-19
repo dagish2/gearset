@@ -1,0 +1,75 @@
+.THIS .span.slds-wizard__progress{
+     padding-top:9px;
+}
+.THIS .slds-card__body.slds-p-around_small.slds-m-around_x-small{
+    background: #ffffff;
+    border-radius: 6px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.THIS .slds-page-header{
+    margin-left:10px;margin-right:10px;border-radius:6px;margin-top:0.7rem;
+}
+.THIS .slds-wizard__link{
+   padding-bottom:6px; 
+}
+.THIS .slds-page-header.cEnziHeader {
+    border-radius:6px;
+}
+.THIS .slds-button_icon-bare{
+    display: none;
+}
+.THIS .container-footer{
+    bottom:0;
+    width:100%;
+    z-index: 2;
+    position: fixed;
+    text-align:right;
+    margin-top:20px;
+    background:ghostwhite;
+}
+.THIS .error-message{
+    width: 50%;
+    margin: auto;
+    margin-top: 12px;
+}
+.THIS .table-container{
+    border:1px solid #d9dbdd;
+    margin-bottom:60px;
+}
+.THIS .cEnziTable{
+    padding: 0px 1px 0px 0px !important;
+    margin-bottom: 3.5% !important;
+}
+
+.THIS .marginHeader{
+    margin-top:4px!important;
+    margin-left:8px!important;
+    margin-right:8px!important;
+}
+
+.THIS .hideScroll{
+    /*overflow-x: hidden !important;*/
+}
+
+.THIS .buttonSize{
+    width: 90px;
+}
+
+.THIS .buttonPosition{
+    float:right;
+    padding-right: 10px;
+}
+
+.THIS .buttonParentContainer{
+    width:100%;
+}
+.THIS  #split-opp-container{
+    height: 100% !important;
+    background-position: center !important;
+    background-repeat: repeat !important;
+    background-size: cover !important;
+    padding-bottom:112px;
+    width:100% !important;
+}

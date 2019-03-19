@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>Crece tu negocio</name>
+    <style>formalLetter</style>
+    <subject>Crece tu negocio, en WeWork te decimos como</subject>
+    <textOnly>Hola {!Journey__c.OwnerFirstName},
+
+Soy {!Journey__c.OwnerFirstName} del equipo de WeWork para Ciudad de México. Vimos que estás interesado en uno de nuestros espacios y me gustaría contarte un poco más de nosotros.
+
+
+
+En WeWork encuentras oficinas y salas de juntas totalmente amuebladas con diseños únicos y acabados modernos, además de trabajar en un espacio que te inspire, podrás formar parte de la red de miembros que cuenta con una comunidad de más de 70 mil emprendedores, una excelente opción para conseguir socios y aliados o clientes a nivel global.
+
+
+
+En esta presentación puedes ver más detalles sobre WeWork, estoy seguro que te va a encantar. .
+
+
+
+Cuéntame un poco más sobre lo que estás buscando, el tipo y tamaño de tu empresa y te comparto un par de opciones para que formes parte de la comunidad de WeWork.
+
+
+
+Esperamos tu respuesta.
+
+Gracias,
+
+
+{!Journey__c.OwnerFirstName}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

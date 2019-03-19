@@ -1,0 +1,6 @@
+<apex:page standardController="Account" showHeader="false">
+    <head>
+        <title>New Organization</title>
+    </head>
+    <c:LightningResource component="NewOrganization" parameters="isInLightningConsole=false"></c:LightningResource>
+</apex:page>

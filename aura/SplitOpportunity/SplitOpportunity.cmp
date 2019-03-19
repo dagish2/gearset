@@ -1,0 +1,63 @@
+<aura:component Controller="SplitOpportunityController" implements="flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id"  />
+    <aura:attribute name="header" type="Map" />
+    <aura:attribute name="opportunityColumns" type="List" default="[]" />
+    <aura:attribute name="opportunityLineItems" type="List" default="[]" />
+    <aura:attribute name="mapOpportunityLineItems" type="Map" />
+    <aura:attribute name="valid" type="Boolean" /> 
+    <aura:attribute name="message" type="String" /> 
+    <aura:attribute name="splitDisable" type="Boolean" />
+    <aura:attribute name="utility" type="String" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:LightningCSS/>
+    
+    <div id="split-opp-container">
+        <c:EnziHeader sObjectName="Split Opportunity" pageName="{!v.header.sObjectName+v.header.recordName}" iconName="{!v.header.iconName}" />
+        <div class="slds-card__body " style="margin-bottom:60px;">
+            <aura:renderIf isTrue="{!not(empty(v.splitDisable))}">
+                <aura:if isTrue="{!v.splitDisable}">
+                    <div class="slds-card error-message">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon slds-icon_container" title="sync icon">
+                                        <lightning:icon iconName="utility:info"/>
+                                    </span>
+                                </div>
+                                <div class="slds-media__body" style="overflow-wrap: break-word;">
+                                    <div class="slds-media__body slds-p-around_small">
+                                        <h2 class="slds-welcome-mat__tile-title">{!v.message}</h2>
+                                    </div>
+                                    <h2>
+                                        <span class="slds-text-heading_small slds-align_absolute-center"></span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div> 
+                        <footer class="slds-card__footer ">
+                            <c:EnziButton label="Close" leftIcon="utility:close" type="destructive" click="{!c.cancel}"></c:EnziButton>
+                        </footer>
+                    </div>
+                    <aura:set attribute="else">
+                        <div class="slds-card__body slds-p-around_small slds-m-around_x-small table-container">
+                            <c:EnziDataTable caption="Products"
+                                             icon="standard:product"
+                                             describedFields="{!v.opportunityColumns}"
+                                             records="{!v.opportunityLineItems}" 
+                                             keyField="Id"
+                                             pageSize="10"
+                                             setBorder="false"
+                                             showMultiselect="false">
+                            </c:EnziDataTable> 
+                        </div>
+                        <footer class="slds-modal__footer container-footer" >
+                            <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{!c.cancel}"></c:EnziButton>
+                        </footer>
+                    </aura:set>
+                </aura:if> 
+            </aura:renderIf>
+        </div>
+    </div>
+</aura:component>

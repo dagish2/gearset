@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Payment Details Form</name>
+    <style>none</style>
+    <subject>WeWork Membership: Payment Details</subject>
+    <textOnly>Dear {!Opportunity.Primary_Member_First_Name__c},  
+
+We are excited to have you as our new member. Please follow the link below to fill out your Payment Information. 
+
+Member Payment Details ({!Opportunity.Payment_Form_URL__c}) 
+
+Best Regards, 
+{!Opportunity.OwnerFullName}
+{!Opportunity.OwnerEmail}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

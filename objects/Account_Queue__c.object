@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>Account_Record_Type__c</fullName>
+        <description>This will filter out the account for which we need to force the account assignment rule.</description>
+        <externalId>false</externalId>
+        <label>Account Record Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Consumer</fullName>
+                    <default>false</default>
+                    <label>Consumer</label>
+                </value>
+                <value>
+                    <fullName>Mid Market</fullName>
+                    <default>true</default>
+                    <label>Mid Market</label>
+                </value>
+                <value>
+                    <fullName>Enterprise Solutions</fullName>
+                    <default>false</default>
+                    <label>Enterprise Solutions</label>
+                </value>
+                <value>
+                    <fullName>Referral</fullName>
+                    <default>false</default>
+                    <label>Referral</label>
+                </value>
+                <value>
+                    <fullName>Partnership</fullName>
+                    <default>false</default>
+                    <label>Partnership</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cluster__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Cluster</label>
+        <referenceTo>Cluster__c</referenceTo>
+        <relationshipLabel>Account Queues</relationshipLabel>
+        <relationshipName>Account_Queues</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Is_Member_Active__c</fullName>
+        <description>This field will ensure whether the member is active or not.</description>
+        <externalId>false</externalId>
+        <formula>Member__r.IsActive</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Member Active</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Queue_Active__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>This field will ensure that this record can be used for account assignment rule.</description>
+        <externalId>false</externalId>
+        <label>Is Queue Active</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Last_Account_Assigned__c</fullName>
+        <description>This field will be updated with current date/time when the member of current record assigned as the owner of any record.</description>
+        <externalId>false</externalId>
+        <label>Last Account Assigned</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Market__c</fullName>
+        <description>This field will hep us to match to account for Account assignment.</description>
+        <externalId>false</externalId>
+        <label>Market</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Amsterdam</fullName>
+                    <default>false</default>
+                    <label>Amsterdam</label>
+                </value>
+                <value>
+                    <fullName>Atlanta</fullName>
+                    <default>false</default>
+                    <label>Atlanta</label>
+                </value>
+                <value>
+                    <fullName>Austin</fullName>
+                    <default>false</default>
+                    <label>Austin</label>
+                </value>
+                <value>
+                    <fullName>Baltimore</fullName>
+                    <default>false</default>
+                    <label>Baltimore</label>
+                </value>
+                <value>
+                    <fullName>Bangkok</fullName>
+                    <default>false</default>
+                    <label>Bangkok</label>
+                </value>
+                <value>
+                    <fullName>Barranquilla</fullName>
+                    <default>false</default>
+                    <label>Barranquilla</label>
+                </value>
+                <value>
+                    <fullName>Be'er Sheva</fullName>
+                    <default>false</default>
+                    <label>Be'er Sheva</label>
+                </value>
+                <value>
+                    <fullName>Beijing</fullName>
+                    <default>false</default>
+                    <label>Beijing</label>
+                </value>
+                <value>
+                    <fullName>Bengaluru</fullName>
+                    <default>false</default>
+                    <label>Bengaluru</label>
+                </value>
+                <value>
+                    <fullName>Berkeley</fullName>
+                    <default>false</default>
+                    <label>Berkeley</label>
+                </value>
+                <value>
+                    <fullName>Berlin</fullName>
+                    <default>false</default>
+                    <label>Berlin</label>
+                </value>
+                <value>
+                    <fullName>Bogota</fullName>
+                    <default>false</default>
+                    <label>Bogota</label>
+                </value>
+                <value>
+                    <fullName>Boston</fullName>
+                    <default>false</default>
+                    <label>Boston</label>
+                </value>
+                <value>
+                    <fullName>Boulder</fullName>
+                    <default>false</default>
+                    <label>Boulder</label>
+                </value>
+                <value>
+                    <fullName>Buenos Aires</fullName>
+                    <default>false</default>
+                    <label>Buenos Aires</label>
+                </value>
+                <value>
+                    <fullName>Charlotte</fullName>
+                    <default>false</default>
+                    <label>Charlotte</label>
+                </value>
+                <value>
+                    <fullName>Chicago</fullName>
+                    <default>false</default>
+                    <label>Chicago</label>
+                </value>
+                <value>
+                    <fullName>Dallas</fullName>
+                    <default>false</default>
+                    <label>Dallas</label>
+                </value>
+                <value>
+                    <fullName>Delhi</fullName>
+                    <default>false</default>
+                    <label>Delhi</label>
+                </value>
+                <value>
+                    <fullName>Denver</fullName>
+                    <default>false</default>
+                    <label>Denver</label>
+                </value>
+                <value>
+                    <fullName>Detroit</fullName>
+                    <default>false</default>
+                    <label>Detroit</label>
+                </value>
+                <value>
+                    <fullName>Dublin</fullName>
+                    <default>false</default>
+                    <label>Dublin</label>
+                </value>
+                <value>
+                    <fullName>Fort Worth</fullName>
+                    <default>false</default>
+                    <label>Fort Worth</label>
+                </value>
+                <value>
+                    <fullName>Frankfurt</fullName>
+                    <default>false</default>
+                    <label>Frankfurt</label>
+                </value>
+                <value>
+                    <fullName>Guangzhou</fullName>
+                    <default>false</default>
+                    <label>Guangzhou</label>
+                </value>
+                <value>
+                    <fullName>Hamburg</fullName>
+                    <default>false</default>
+                    <label>Hamburg</label>
+                </value>
+                <value>
+                    <fullName>Herzliya</fullName>
+                    <default>false</default>
+                    <label>Herzliya</label>
+                </value>
+                <value>
+                    <fullName>Ho Chi Minh City</fullName>
+                    <default>false</default>
+                    <label>Ho Chi Minh City</label>
+                </value>
+                <value>
+                    <fullName>Hong Kong</fullName>
+                    <default>false</default>
+                    <label>Hong Kong</label>
+                </value>
+                <value>
+                    <fullName>Houston</fullName>
+                    <default>false</default>
+                    <label>Houston</label>
+                </value>
+                <value>
+                    <fullName>I don't know</fullName>
+                    <default>false</default>
+                    <label>I don't know</label>
+                </value>
+                <value>
+                    <fullName>Jakarta</fullName>
+                    <default>false</default>
+                    <label>Jakarta</label>
+                </value>
+                <value>
+                    <fullName>Jersey City</fullName>
+                    <default>false</default>
+                    <label>Jersey City</label>
+                </value>
+                <value>
+                    <fullName>Kansas City</fullName>
+                    <default>false</default>
+                    <label>Kansas City</label>
+                </value>
+                <value>
+                    <fullName>Kuala Lumpur</fullName>
+                    <default>false</default>
+                    <label>Kuala Lumpur</label>
+                </value>
+                <value>
+                    <fullName>Las Vegas</fullName>
+                    <default>false</default>
+                    <label>Las Vegas</label>
+                </value>
+                <value>
+                    <fullName>Lima</fullName>
+                    <default>false</default>
+                    <label>Lima</label>
+                </value>
+                <value>
+                    <fullName>London</fullName>
+                    <default>false</default>
+                    <label>London</label>
+                </value>
+                <value>
+                    <fullName>Los Angeles</fullName>
+                    <default>false</default>
+                    <label>Los Angeles</label>
+                </value>
+                <value>
+                    <fullName>Madrid</fullName>
+                    <default>false</default>
+                    <label>Madrid</label>
+                </value>
+                <value>
+                    <fullName>Manchester</fullName>
+                    <default>false</default>
+                    <label>Manchester</label>
+                </value>
+                <value>
+                    <fullName>Manila</fullName>
+                    <default>false</default>
+                    <label>Manila</label>
+                </value>
+                <value>
+                    <fullName>Melbourne</fullName>
+                    <default>false</default>
+                    <label>Melbourne</label>
+                </value>
+                <value>
+                    <fullName>Mexico City</fullName>
+                    <default>false</default>
+                    <label>Mexico City</label>
+                </value>
+                <value>
+                    <fullName>Miami</fullName>
+                    <default>false</default>
+                    <label>Miami</label>
+                </value>
+                <value>
+                    <fullName>Milan</fullName>
+                    <default>false</default>
+                    <label>Milan</label>
+                </value>
+                <value>
+                    <fullName>Minneapolis</fullName>
+                    <default>false</default>
+                    <label>Minneapolis</label>
+                </value>
+                <value>
+                    <fullName>Montreal</fullName>
+                    <default>false</default>
+                    <label>Montreal</label>
+                </value>
+                <value>
+                    <fullName>Moscow</fullName>
+                    <default>false</default>
+                    <label>Moscow</label>
+                </value>
+                <value>
+                    <fullName>Multiple cities</fullName>
+                    <default>false</default>
+                    <label>Multiple cities</label>
+                </value>
+                <value>
+                    <fullName>Mumbai</fullName>
+                    <default>false</default>
+                    <label>Mumbai</label>
+                </value>
+                <value>
+                    <fullName>Nashville</fullName>
+                    <default>false</default>
+                    <label>Nashville</label>
+                </value>
+                <value>
+                    <fullName>New in NYC</fullName>
+                    <default>false</default>
+                    <label>New in NYC</label>
+                </value>
+                <value>
+                    <fullName>New York City</fullName>
+                    <default>false</default>
+                    <label>New York City</label>
+                </value>
+                <value>
+                    <fullName>Oakland</fullName>
+                    <default>false</default>
+                    <label>Oakland</label>
+                </value>
+                <value>
+                    <fullName>Paris</fullName>
+                    <default>false</default>
+                    <label>Paris</label>
+                </value>
+                <value>
+                    <fullName>Philadelphia</fullName>
+                    <default>false</default>
+                    <label>Philadelphia</label>
+                </value>
+                <value>
+                    <fullName>Phoenix</fullName>
+                    <default>false</default>
+                    <label>Phoenix</label>
+                </value>
+                <value>
+                    <fullName>Pittsburgh</fullName>
+                    <default>false</default>
+                    <label>Pittsburgh</label>
+                </value>
+                <value>
+                    <fullName>Portland</fullName>
+                    <default>false</default>
+                    <label>Portland</label>
+                </value>
+                <value>
+                    <fullName>Raleigh-Durham</fullName>
+                    <default>false</default>
+                    <label>Raleigh-Durham</label>
+                </value>
+                <value>
+                    <fullName>Rio de Janeiro</fullName>
+                    <default>false</default>
+                    <label>Rio de Janeiro</label>
+                </value>
+                <value>
+                    <fullName>Salt Lake City</fullName>
+                    <default>false</default>
+                    <label>Salt Lake City</label>
+                </value>
+                <value>
+                    <fullName>San Diego</fullName>
+                    <default>false</default>
+                    <label>San Diego</label>
+                </value>
+                <value>
+                    <fullName>San Francisco</fullName>
+                    <default>false</default>
+                    <label>San Francisco</label>
+                </value>
+                <value>
+                    <fullName>San Jose</fullName>
+                    <default>false</default>
+                    <label>San Jose</label>
+                </value>
+                <value>
+                    <fullName>San Mateo</fullName>
+                    <default>false</default>
+                    <label>San Mateo</label>
+                </value>
+                <value>
+                    <fullName>Sao Paulo</fullName>
+                    <default>false</default>
+                    <label>Sao Paulo</label>
+                </value>
+                <value>
+                    <fullName>Seattle</fullName>
+                    <default>false</default>
+                    <label>Seattle</label>
+                </value>
+                <value>
+                    <fullName>Seoul</fullName>
+                    <default>false</default>
+                    <label>Seoul</label>
+                </value>
+                <value>
+                    <fullName>Shanghai</fullName>
+                    <default>false</default>
+                    <label>Shanghai</label>
+                </value>
+                <value>
+                    <fullName>Silicon Valley</fullName>
+                    <default>false</default>
+                    <label>Silicon Valley</label>
+                </value>
+                <value>
+                    <fullName>Singapore</fullName>
+                    <default>false</default>
+                    <label>Singapore</label>
+                </value>
+                <value>
+                    <fullName>Sydney</fullName>
+                    <default>false</default>
+                    <label>Sydney</label>
+                </value>
+                <value>
+                    <fullName>Tel Aviv</fullName>
+                    <default>false</default>
+                    <label>Tel Aviv</label>
+                </value>
+                <value>
+                    <fullName>Tokyo</fullName>
+                    <default>false</default>
+                    <label>Tokyo</label>
+                </value>
+                <value>
+                    <fullName>Toronto</fullName>
+                    <default>false</default>
+                    <label>Toronto</label>
+                </value>
+                <value>
+                    <fullName>Vancouver</fullName>
+                    <default>false</default>
+                    <label>Vancouver</label>
+                </value>
+                <value>
+                    <fullName>Warsaw</fullName>
+                    <default>false</default>
+                    <label>Warsaw</label>
+                </value>
+                <value>
+                    <fullName>Washington, D.C.</fullName>
+                    <default>false</default>
+                    <label>Washington, D.C.</label>
+                </value>
+                <value>
+                    <fullName>Brussels</fullName>
+                    <default>false</default>
+                    <label>Brussels</label>
+                </value>
+                <value>
+                    <fullName>Johannesburg</fullName>
+                    <default>false</default>
+                    <label>Johannesburg</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Member_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Member__r.Id</formula>
+        <label>Member ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Member__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This field is a lookup of the user and will be used in account assignment use case as an owner.</description>
+        <externalId>false</externalId>
+        <label>Member</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Account_Queues</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Portfolio__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Portfolio</label>
+        <referenceTo>Market__c</referenceTo>
+        <relationshipLabel>Account Queues</relationshipLabel>
+        <relationshipName>Account_Queues</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <description>Shows the region of related portfolio</description>
+        <externalId>false</externalId>
+        <formula>Portfolio__r.TerritoryID__r.RegionID__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Shows the region of related portfolio</inlineHelpText>
+        <label>Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Role__c</fullName>
+        <externalId>false</externalId>
+        <label>Role</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>SG</fullName>
+                    <default>false</default>
+                    <label>SG</label>
+                </value>
+                <value>
+                    <fullName>AM</fullName>
+                    <default>false</default>
+                    <label>AM</label>
+                </value>
+                <value>
+                    <fullName>Sales Lead</fullName>
+                    <default>false</default>
+                    <label>Sales Lead</label>
+                </value>
+                <value>
+                    <fullName>Pod Director</fullName>
+                    <default>false</default>
+                    <label>Pod Director</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Territory__c</fullName>
+        <description>Shows the territory of related portfolio.</description>
+        <externalId>false</externalId>
+        <formula>Portfolio__r.TerritoryID__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Shows the territory of related portfolio.</inlineHelpText>
+        <label>Territory</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object will be used in Account assignment use case.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Account Queue</label>
+    <nameField>
+        <displayFormat>Queue-{00000}</displayFormat>
+        <label>Queue Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Account Queues</pluralLabel>
+    <searchLayouts />
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>All_Teams</fullName>
+        <columns>NAME</columns>
+        <columns>Portfolio__c</columns>
+        <columns>Territory__c</columns>
+        <columns>Region__c</columns>
+        <columns>Account_Record_Type__c</columns>
+        <columns>Member__c</columns>
+        <columns>Role__c</columns>
+        <columns>Is_Queue_Active__c</columns>
+        <columns>Is_Member_Active__c</columns>
+        <columns>Last_Account_Assigned__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Portfolio__c</field>
+            <operation>equals</operation>
+            <value>Berlin</value>
+        </filters>
+        <filters>
+            <field>Account_Record_Type__c</field>
+            <operation>equals</operation>
+            <value>Mid Market</value>
+        </filters>
+        <label>All Teams</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Teams_w_Portfolios</fullName>
+        <columns>NAME</columns>
+        <columns>Portfolio__c</columns>
+        <columns>Account_Record_Type__c</columns>
+        <columns>Member__c</columns>
+        <columns>Is_Queue_Active__c</columns>
+        <columns>Is_Member_Active__c</columns>
+        <columns>Last_Account_Assigned__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Portfolio__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>All Teams w/Portfolios</label>
+    </listViews>
+    <listViews>
+        <fullName>Enterprise_Account_Queues</fullName>
+        <columns>Region__c</columns>
+        <columns>Territory__c</columns>
+        <columns>Portfolio__c</columns>
+        <columns>Member__c</columns>
+        <columns>Is_Queue_Active__c</columns>
+        <columns>Account_Record_Type__c</columns>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Is_Member_Active__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Account_Record_Type__c</field>
+            <operation>equals</operation>
+            <value>Enterprise Solutions</value>
+        </filters>
+        <filters>
+            <field>Is_Queue_Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Enterprise Account Queues</label>
+        <sharedTo>
+            <group>Growth_Ops_Enterprise</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>RR_Account_Assignment</fullName>
+        <columns>NAME</columns>
+        <columns>Account_Record_Type__c</columns>
+        <columns>Portfolio__c</columns>
+        <columns>Region__c</columns>
+        <columns>Territory__c</columns>
+        <columns>Member__c</columns>
+        <columns>Last_Account_Assigned__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Is_Member_Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Is_Queue_Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>RR Account Assignment</label>
+    </listViews>
+    <validationRules>
+        <fullName>Member_and_Market_required</fullName>
+        <active>true</active>
+        <description>Without Portfolio and Member you are not supposed to create records.</description>
+        <errorConditionFormula>OR( ISBLANK(Portfolio__c), LEN( Member__c ) = 0 )</errorConditionFormula>
+        <errorMessage>Without Portfolio and Member you are not supposed to create records.</errorMessage>
+    </validationRules>
+</CustomObject>

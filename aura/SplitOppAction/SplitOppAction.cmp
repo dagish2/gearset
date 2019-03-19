@@ -1,0 +1,13 @@
+<aura:component >
+    <aura:attribute name="isPrimaryProduct" type="Boolean" default="false"/>
+    <aura:attribute name="productId" type="String" />
+    <aura:attribute name="click" type="Object" />	
+    <aura:if isTrue="{!v.isPrimaryProduct}">
+        Primary Product
+        <aura:set attribute="else">
+            <!--<ui:outputURL label="Split" value="" title="{!v.productId}" click="{!v.click}" />-->
+            <!--Modifield By Nikhil Mehta on 09 May 2018 for The following changes are done because the aboue component is not properly accessable by using event.-->
+            <a href="javascript:void(0);" class="slds-text-link" value="{!v.productId}" onclick="{!v.click}">Split</a>
+        </aura:set>
+    </aura:if>    
+</aura:component>

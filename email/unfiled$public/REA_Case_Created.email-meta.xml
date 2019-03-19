@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>REA Case Created</name>
+    <style>freeForm</style>
+    <subject>New REA Case Created - {!disco__Form__c.disco__Form_Account__c}, {!disco__Form__c.00N0S000002L2dB}</subject>
+    <textOnly>Hi there!
+
+A new REA case creation request has been successfully submitted. Please standby while this case is assigned to the appropriate individual within the next 48 hours.
+
+Requested By
+{!disco__Form__c.CreatedBy}
+Account Name
+{!disco__Form__c.disco__Form_Account__c}
+Opportunity Name
+{!disco__Form__c.disco__Form_Opportunity__c}
+Opportunity Market
+{!disco__Form__c.00N0S000002L2dB}
+Opportunity Stage
+{!disco__Form__c.00N0S000002L2dG}
+Desired Premises
+Unweighted Desks
+{!disco__Form__c.00N0S000002L2dL}
+Summary Revenue (USD)
+{!disco__Form__c.00N0S000002L2fl}
+Product Group
+{!disco__Form__c.00N0S000002L2da}
+Projected Close Date
+{!disco__Form__c.00N0S000002L2dV}
+
+Helpful Links
+Opportunity Link
+Case Link
+Account Link</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

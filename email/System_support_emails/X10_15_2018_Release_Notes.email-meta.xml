@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Oct 15 2018 Release Notes</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>10-15-2018 Release Notes</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: October 16th 2018 Salesforce Updates</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+Our upcoming release includes updates to Billing Account management and Account selection on Lead &amp; Journey conversion. 
+
+
+Billing Account Management
+
+There are now two buttons that will allow you to seamlessly change or disassociate a Billing Account on an Opportunity. 
+
+Associate Billing Account: If you have selected an incorrect Billing Account on an Opportunity and want to swap it, you can click on the “Associate Billing Account” button. This will bring you to a secondary page giving you the option to select another associated Billing Account OR to create a new Billing Account. 
+
+Disassociate Billing Account: If you have selected the incorrect Billing Account and want to remove it entirely from the Opportunity, you can click on the “Disassociate Billing Account” button. 
+
+NOTE: These buttons will only work if the stage is not Closed Won and the Billing Account field is populated. To populate the Billing Account field, you will need to go through the paperwork sending process first by clicking the &quot;Send Paperwork&quot; button. 
+
+
+Account Selection (Journey &amp; Lead Conversion)
+
+The Journey &amp; Lead conversion process has been updated to allow the user to select existing Org and Sales Accounts or create a new Org Account to parent records under post-conversion.
+
+This updated page will automatically appear when a conversion event (adding an Opportunity or booking a Tour) is initiated against a Lead or Journey record.
+
+Upon entering the Account Selector page the best matched Org account will be pre-selected. To use this Account click the &quot;Use Selected Account&quot; button.
+
+To select another existing Account click the &quot;Search Other Account&quot; button. Alternatively, to create a new Org Account click the &quot;Create New Org&quot; button.
+
+
+Searching for alternative Accounts
+
+After clicking the &quot;Search Other Account&quot; button you will be brought to the Account search page.
+
+Designate if the Account search should be limited to Org Accounts, Sales Accounts or all Accounts. Then type in the name of the Account that you&apos;re searching for and click &quot;Search Account&quot;
+
+Once the results have populated, select the correct account and click the &quot;Use Selected Account&quot; button. To go back to the previous page click the &quot;Back&quot; button. If the Account you were looking for does not exist, click the &quot;Create New Org&quot; button to create a new Org Account.
+
+
+For any questions or concerns please contact Salesforce support via our Support Ticket page here or reach out to your local Growth Operations team.
+
+Thanks, 
+Salesforce Team</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,33 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="Name" type="String"/>
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="showMessage" type="Boolean" default="false"/>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <aura:if isTrue="{!v.message.length > 0}">
+        <div class="slds-card" style="width: 50%;margin: auto;margin-top: 20px;">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon slds-icon_container" title="sync icon">
+                            <lightning:icon iconName="utility:info"/>
+                        </span>
+                    </div>
+                    <div class="slds-media__body" style="overflow-wrap: break-word;">
+                        <div class="slds-media__body slds-p-around_small">
+                            <h2 class="slds-welcome-mat__tile-title">{!v.message}</h2>
+                        </div>
+                        <h2>
+                            <span class="slds-text-heading_small slds-align_absolute-center"></span>
+                        </h2>
+                    </div>
+                </header>
+            </div> 
+            <footer class="slds-card__footer slds-align_absolute-center">
+                <c:EnziButton label="Close" type="destructive" click="{!c.close}"></c:EnziButton>
+            </footer>
+        </div>
+    </aura:if>    
+</aura:component>

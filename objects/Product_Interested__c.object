@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <fields>
+        <fullName>Building__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup for buildings</description>
+        <externalId>false</externalId>
+        <label>Building</label>
+        <referenceTo>Building__c</referenceTo>
+        <relationshipLabel>Products Interested</relationshipLabel>
+        <relationshipName>Products_Interested</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Company_Size__c</fullName>
+        <externalId>false</externalId>
+        <label>Company Size</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1-5</fullName>
+                    <default>false</default>
+                    <label>1-5</label>
+                </value>
+                <value>
+                    <fullName>6-20</fullName>
+                    <default>false</default>
+                    <label>6-20</label>
+                </value>
+                <value>
+                    <fullName>21-50</fullName>
+                    <default>false</default>
+                    <label>21-50</label>
+                </value>
+                <value>
+                    <fullName>51-100</fullName>
+                    <default>false</default>
+                    <label>51-100</label>
+                </value>
+                <value>
+                    <fullName>101-200</fullName>
+                    <default>false</default>
+                    <label>101-200</label>
+                </value>
+                <value>
+                    <fullName>201+</fullName>
+                    <default>false</default>
+                    <label>201+</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup for contact</description>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Products Interested</relationshipLabel>
+        <relationshipName>Products_Interested</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Journey__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field for journey</description>
+        <externalId>false</externalId>
+        <label>Journey</label>
+        <referenceTo>Journey__c</referenceTo>
+        <relationshipLabel>Products Interested</relationshipLabel>
+        <relationshipName>Products_Interested</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Lead__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup for lead</description>
+        <externalId>false</externalId>
+        <label>Lead</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Products Interested</relationshipLabel>
+        <relationshipName>Products_Interested</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Desks__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Desks</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1-5</fullName>
+                    <default>false</default>
+                    <label>1-5</label>
+                </value>
+                <value>
+                    <fullName>6-20</fullName>
+                    <default>false</default>
+                    <label>6-20</label>
+                </value>
+                <value>
+                    <fullName>21-50</fullName>
+                    <default>false</default>
+                    <label>21-50</label>
+                </value>
+                <value>
+                    <fullName>51-100</fullName>
+                    <default>false</default>
+                    <label>51-100</label>
+                </value>
+                <value>
+                    <fullName>101-200</fullName>
+                    <default>false</default>
+                    <label>101-200</label>
+                </value>
+                <value>
+                    <fullName>201+</fullName>
+                    <default>false</default>
+                    <label>201+</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Product_Line__c</fullName>
+        <description>Store the value of product line for lead</description>
+        <externalId>false</externalId>
+        <label>Product Line</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Requested_Date__c</fullName>
+        <description>Set the date of record is created or updated</description>
+        <externalId>false</externalId>
+        <label>Requested Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(Journey__c == null,Journey__c == ""),"", TEXT(Journey__r.Status__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Journey Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unique_Key__c</fullName>
+        <externalId>false</externalId>
+        <formula>Product_Line__c &amp;"-"&amp; TEXT(Number_of_Desks__c)&amp;"-"&amp; IF(OR(Lead__c==null,Lead__c==""),Contact__c, Lead__c) &amp;"-"&amp; Building__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unique_Key</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object is use to store information related to space requirement of particular company in terms of desks</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Product Interested</label>
+    <nameField>
+        <displayFormat>PRDINT-{000000}</displayFormat>
+        <label>Product Interested Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Products Interested</pluralLabel>
+    <searchLayouts />
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+</CustomObject>

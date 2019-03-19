@@ -1,0 +1,22 @@
+.THIS .slds-file-selector__button{
+    border: 1px solid rgb(217, 219, 221);
+    -webkit-transition: border .15s linear;
+    transition: border .15s linear;
+    border-color: rgb(216, 221, 230);
+    background-color: rgb(255, 255, 255);
+    padding: 6px;
+    border-radius: .25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: rgb(0, 112, 210);
+}
+@media screen and (min-width: 475px) {
+    .THIS .slds-file-selector__button{
+        width : 19rem !important;
+    }
+}
+@keyframes slideInFromCenter {
+    0% {
+        transform: translateY(-18px);
+    }
+}

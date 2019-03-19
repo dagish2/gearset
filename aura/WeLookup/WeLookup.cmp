@@ -1,0 +1,62 @@
+<aura:component >
+	<aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="placeholder" type="String"/>
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="disabled" type="Boolean"/>
+    <aura:attribute name="readonly" type="Boolean" />
+    <aura:attribute name="variant" type="String"/>
+    <aura:attribute name="reference" type="String"/>
+    <aura:attribute name="options" type="List"/>
+    <aura:attribute name="value" type="String"/>
+    <aura:attribute name="keyword" type="String"/>
+    <aura:attribute name="show" type="Boolean" default="false"/>
+    <aura:attribute name="timeout" type="Object"/>
+    <aura:attribute name="searchResults" type="List" default="[]"/>
+    <aura:attribute name="onchange" type="Object"/>
+    <aura:attribute name="auraId" type="String" default="myInput" />
+    <aura:attribute name="errors" type="List" />
+    <aura:attribute name="validate" type="Boolean" default="false" />
+    <aura:attribute name="isSearching" type="Boolean" default="false" />
+    <aura:attribute name="index" type="Integer" />
+    <aura:attribute name="showOnlyActiveUsers" type="Boolean" default="false" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <span style="{!v.readonly ? 'pointer-events:none' : ''}">
+        <div role="status" class="slds-spinner slds-spinner_x-small slds-input__icon-group_right slds-spinner--brand" style="{!'position:relative !important;left:calc(100% - 42px);top: 37px;display:'+(v.isSearching?'':'none')}" >
+            <span class="slds-input__icon-group_right"> 
+                <span class="slds-assistive-text">Loading</span>
+                <span class="slds-spinner__dot-a"></span>
+                <span class="slds-spinner__dot-b"></span>
+            </span>
+        </div>
+        <lightning:input type="search" aura:id="myInput" disabled="{!v.disabled}" placeholder="{!v.placeholder}" required="{!v.required}" name="{!v.name}" label="{!v.label}" value="{!v.keyword}" onfocus="{!c.focus}"  onblur="{!c.blur}" onchange="{!c.search}"></lightning:input>
+    </span>
+   
+    <div class="{!v.show?'':'slds-hide'}" role="listbox" style="position: relative;">
+        <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid" role="presentation">
+            <aura:if isTrue="{!v.searchResults.length>0}">
+                <aura:iteration items="{!v.searchResults}" var="item">
+                    <li role="presentation" class="slds-listbox__item" id="{!item.value+':'+item.label}" onclick="{!c.select}">
+                        <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                            <span class="slds-media__body">
+                                <span class="slds-listbox__option-text slds-listbox__option-text_entity">{!item.label}</span>
+                            </span>
+                        </div>
+                    </li>
+                </aura:iteration>
+            	<aura:set attribute="else">
+                    <li role="presentation" class="slds-listbox__item">
+                        <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                            <span class="slds-media__body">
+                                <span class="slds-listbox__option-text slds-listbox__option-text_entity">No search results found.</span>
+                            </span>
+                        </div>
+                    </li>
+                </aura:set>
+            </aura:if>
+        </ul>
+    </div>
+</aura:component>

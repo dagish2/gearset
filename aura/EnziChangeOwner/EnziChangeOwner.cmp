@@ -1,0 +1,26 @@
+<aura:component >
+	<aura:attribute name="recordId" type="String" />
+    <aura:attribute name="ownerId" type="String" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>  
+    <style>
+        .cEnziInputReference .placeholderIcon svg {
+        left: 5px;}
+        
+    </style>
+    <c:EnziModal aura:id="enziOwnerModal" header="Change Owner">
+        <c:EnziModalContainer >
+            <div class="stage-main slds-grid slds-wrap slds-card" role="main" style="margin:20px;padding:10px">
+                <div class="slds-size--1-of-1" style="padding:10px;padding-bottom: 0px;">
+                    <c:EnziField type="reference" name="owner" label="Owner" value="{!v.ownerId}" reference="User" labelField="Name" valueField="Id"></c:EnziField>
+                </div>
+                <div style="padding-left:12px">
+            <a onclick="{!c.assignToMe}">Assign to me</a>
+            </div>
+            </div>           
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+            <c:EnziButton label="Save" type="brand" disabled="{!(!v.ownerId)}" click="{!c.save}"></c:EnziButton>
+            <c:EnziButton label="Cancel" type="destructive" click="{!c.cancel}"></c:EnziButton>
+        </c:EnziModalFooter>
+ </c:EnziModal>
+</aura:component>

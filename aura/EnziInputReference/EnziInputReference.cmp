@@ -1,0 +1,145 @@
+<aura:component >
+   	<aura:attribute name="name" type="String" />
+    <aura:attribute name="timezoneOffset" type="Integer" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="icon" type="String" />
+    <aura:attribute name="selectedIndex" type="Integer" default="0" />
+    <aura:attribute name="options" type="List" default="[]" />
+    <aura:attribute name="dirty" type="Boolean"/>
+    <aura:attribute name="addNew" type="Object" />
+	<aura:attribute name="onInput" type="Object" />
+    <aura:attribute name="keyword" type="String"/>
+    <aura:attribute name="dateAffected" type="String"/>
+    <aura:attribute name="reference" type="List" />
+    <aura:attribute name="search" type="Boolean" default="false" />
+    <aura:attribute name="searchResult" type="List" default="[]" />   
+    <aura:attribute name="searchResultMap" type="Map"/>
+    <aura:attribute name="change" type="Object"/>
+    <aura:attribute name="criteria" type="String"/>
+    <aura:attribute name="searchFields" type="List"/>
+    <aura:attribute name="fields" type="Object"/>
+    <aura:attribute name="placeholder" type="String" />
+    <aura:attribute name="createNew" type="Map" default='{"isShow":false,"label":"Create New"}'/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.value}" action="{!c.doInit}"/>
+    <!--<aura:handler name="change" value="{!v.value}" action="{!v.change}"/>-->
+    <aura:handler name="change" value="{!v.keyword}" action="{!c.valueClear}"/>
+    <aura:handler name="change" value="{!v.options}" action="{!c.optionsChange}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+        .slds-scope .slds-lookup__item-action .slds-icon {
+        	margin: 0px !important;
+        }
+        .slds-input-has-icon--left svg {
+            position: absolute;
+            top: 9px;
+            left: 6px;
+        }
+        .helpText {
+            white-space: nowrap; 
+            width: 100%; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <div class="slds-form-element slds-lookup slds-is-open" data-select="single">
+        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--left">
+            <lightning:icon iconName="{!v.icon}" class="placeholderIcon"/>
+            <div class="{!'slds-input viewField '+(v.disabled?'':'slds-hide')}"><a target="_new" href="{!'/'+v.value}">{!v.keyword}</a><span style="margin-left:10px">{!v.dateAffected}</span></div>
+            <input aura:id="lookupField" type="text" id="{!v.name}" class="{!'slds-input '+(v.disabled?'slds-hide':'')}" placeholder="{!v.disabled?'':( v.placeholder ? v.placeholder : 'Search '+v.label)}" value="{!v.keyword}" disabled="{!v.disabled?'disabled':''}" style="padding-left:40px"  onblur="{!c.blurReference}" onkeyup="{!c.keyupReference}" onfocus="{!c.focusReference}" onInput="{!v.onInput}"/>
+            <button id="{!v.name}" onclick="{!v.change}" class="slds-hide"></button>
+        </div>        
+        
+        <aura:renderIf isTrue="{!and(v.keyword.length gt 0, v.keyword.length lt 2)}">
+            <div class="slds-lookup__menu slds-scrollable--y" style="height: 5rem; padding-top: 0; padding-bottom: 0;" id="{!v.name+'list'}">
+                <ul class="slds-lookup__list" role="listbox">
+                    <li role="presentation">
+                        <span class="slds-lookup__item-action slds-lookup__item-action--label" id="lookup-option-2182" role="option">
+                            <span class="slds-truncate">Enter atleast 2 characters to search</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </aura:renderIf>
+  		<div class="slds-lookup__menu" id="{!v.name+'list'}" style="{!'display:'+(v.search?(v.keyword.length gt 1?'block':'none'):'none')}">
+        	<ul class="slds-lookup__list" role="listbox">
+                <li role="presentation">                      
+                    <span class="slds-lookup__item-action slds-lookup__item-action--label" id="lookup-option-2182" role="option">
+                        <span class="slds-truncate">Search results for &quot;{!v.keyword}&quot;</span>
+                        <c:EnziSpinner aura:id="referenceSpinner"></c:EnziSpinner>
+                    </span>
+                </li>
+            <aura:if isTrue="{!v.fields}">
+                    <aura:iteration items="{!v.searchResult}" var="data" indexVar="index">
+                        <li  role="presentation" class="{!'slds-listbox__item '+index==v.selectedIndex?'selected ':''}" onclick="{!c.selectOption}" data-index="{!index}" id="{!data.Id}">
+                            <span id="listbox-option-unique-id-01" class="slds-media slds-media--center slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                <span class="slds-media__figure" style="margin-right:0%;margin-left: 1%;">
+                                    <span class="slds-icon_container slds-icon-standard-account" title="{!v.sObjectName}">
+                                        <lightning:icon iconName="{!v.icon}" class="lookupIcon"></lightning:icon>
+                                        <span class="slds-assistive-text">{!v.sObjectName}</span>
+                                    </span>
+                                </span>
+                                <div class="slds-media__body slds-lookup__item-action" data-index="{!index}" style="padding-left: 1%;">
+                                    <div class="slds-lookup__result-text" data-index="{!index}">
+                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity"><mark data-index="{!index}">{!data.label}</mark></span>
+                                        <aura:if isTrue="{!data.fields}">
+                                            <div class="slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_8-of-12">
+                                                    <aura:iteration items="{!data.fields}" var="field" indexVar="index">
+                                                        <aura:if isTrue="{!field.value}">
+                                                            <span class="slds-listbox__option-meta slds-listbox__option-meta_entity"><span id="styleModifyforFieldName"><mark data-index="{!index}">{!field.name}</mark></span>:&nbsp;{!field.value}</span>
+                                                        </aura:if>
+                                                    </aura:iteration>
+                                                </div>
+                                            </div>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </span>
+                        </li>
+                    </aura:iteration>
+                    <aura:set attribute="else">
+                        <aura:iteration items="{!v.searchResult}" var="option" indexVar="index">
+                            <li class="{!index==v.selectedIndex?'selected':''}" role="presentation" title="{!option.label}" data-index="{!index}" onclick="{!c.selectOption}">
+                                <span class="slds-lookup__item-action slds-media" role="option">
+                                    <lightning:icon iconName="{!v.icon}" size="small" class="lookupIcon"></lightning:icon>
+                                    <div class="slds-media__body" data-index="{!index}" style="margin-left:10px">
+                                        <div class="slds-lookup__result-text" data-index="{!index}">
+                                            <mark data-index="{!index}">{!option.label}</mark>                                
+                                        </div>
+                                    </div>
+                                </span>
+                            </li>
+                        </aura:iteration>
+                    </aura:set>
+                </aura:if>
+            <li role="presentation" style="{!'display:'+(or(v.searchResult.length==0,v.createNew.isShow)?'block':'none')}">
+                <span class="slds-lookup__item-action slds-media" role="option">
+                    <div class="slds-media__body">
+                        <div class="slds-lookup__result-text">
+                            <aura:if isTrue="{!v.searchResult.length==0}">
+                            	<mark style="margin-right:10px">No results found.</mark>
+                            </aura:if>
+                            
+                            <aura:if isTrue="{!v.addNew}">
+                                <a title="{!v.createNew.label}" onclick="{!v.addNew}">
+                                    <lightning:icon class="result-vertical-align" iconName="utility:new" size="xx-small"></lightning:icon>&nbsp;
+                                    <span class="slds-assistive-text slds-m-left_x-small ">{!v.createNew.label}</span>
+                                    {!v.createNew.label}
+                                </a>
+                            </aura:if>
+                            
+                        </div>                        
+                    </div>
+                </span>
+           	</li>
+        </ul>
+  		</div>
+	</div>
+</aura:component>

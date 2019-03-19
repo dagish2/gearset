@@ -1,0 +1,18 @@
+.THIS .slds-spinner_container{ 
+    margin-top:46px; 
+    margin-bottom:46px;
+}
+.THIS lightning-helptext > div > button {
+    margin-bottom: 8px !important;
+    margin-left: 0px!important;
+}
+.THIS .slds-modal__footer {
+    border-top: 10px solid rgba(255, 255, 255, 1);
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+    padding: 0.75rem 1rem;
+    background-color: rgb(243, 242, 242);
+}
+.THIS #ActiveUsers{
+     padding-left: 32px !important;
+}

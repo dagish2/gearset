@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Letterhead xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <backgroundColor>#f5f5f5</backgroundColor>
+    <bodyColor>#FFFFFF</bodyColor>
+    <bottomLine>
+        <color>#AAAAFF</color>
+        <height>0</height>
+    </bottomLine>
+    <description>Letter Head for Deal Status Email Template</description>
+    <footer>
+        <backgroundColor>#FFFFFF</backgroundColor>
+        <height>100</height>
+        <horizontalAlignment>Left</horizontalAlignment>
+        <verticalAlignment>Top</verticalAlignment>
+    </footer>
+    <header>
+        <backgroundColor>#f5f5f5</backgroundColor>
+        <height>150</height>
+        <horizontalAlignment>Center</horizontalAlignment>
+        <verticalAlignment>Middle</verticalAlignment>
+    </header>
+    <middleLine>
+        <color>#AAAAFF</color>
+        <height>0</height>
+    </middleLine>
+    <name>Deals Status</name>
+    <topLine>
+        <color>#DCDCDC</color>
+        <height>0</height>
+    </topLine>
+</Letterhead>

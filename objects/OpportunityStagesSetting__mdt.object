@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>DefaultProductCode__c</fullName>
+        <description>This field contains default product code.</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>This field contains default product code.</inlineHelpText>
+        <label>DefaultProductCode</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Stages__c</fullName>
+        <description>This field will store the stages of the opportunity object</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>Enter the opportunity stage here</inlineHelpText>
+        <label>Stages</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <description>This custom metadata will be used to store the stages as per the scenarios like allowed stages to create products etc</description>
+    <label>OpportunityStagesSetting</label>
+    <pluralLabel>OpportunityStagesSettings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

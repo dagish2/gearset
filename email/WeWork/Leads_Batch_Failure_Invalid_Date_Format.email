@@ -1,0 +1,6 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<span style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; background-color: rgb(255, 255, 255);"><font color="#222222" face="arial, sans-serif"><span style="font-size: 12.8px;">Hello,&nbsp;</span></font></span><div style=""><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);"><font face="Arial, Helvetica, sans-serif"><span style="font-size: 12px;">Kickbox Verification Batch Run failed because of the invalid date format. The format should be "mm-dd-yyyy". Or check From Date and To Date. To Date should be greater than From Date.</span></font></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px;">Thank you.</span></div>]]></td>
+</tr>
+</table>

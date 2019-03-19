@@ -1,0 +1,20 @@
+<aura:component >
+    <aura:attribute name="iconName" type="String" default="utility:setup" description="This icon will shown in menu button" />
+    <aura:attribute name="onSelect" type="Object" description="This is reference of the method which calls when user selects the menu" />
+    <aura:attribute name="menuItems" type="List" description="This is a list of Object contains keys label,value,title,iconName,disabled, onactive method refrence etc"/>
+    <aura:attribute name="menuAlignment" type="String" default="center" description="This is the position of the menu options are: left,center,right" />
+    <aura:attribute name="iconSize" type="string" default="medium" description="Options include xx-small, x-small, medium, or large. This value defaults to medium." /> 
+    <aura:attribute name="name" type="String" default="Button Menu" />
+    <aura:attribute name="visible" type="boolean" default="false" />
+    <aura:attribute name="variant" type="String" description="The variant changes the look of the button. Accepted variants include bare, container, border, border-filled, bare-inverse, and border-inverse. This value defaults to border."/>
+    <aura:attribute name="onFocus" type="Object" />
+   <lightning:buttonMenu visible="{!v.visible}" name="{!v.name}" variant="{!v.variant}" menuAlignment="{!v.menuAlignment}" iconSize="{!v.iconSize}" iconName="{!v.iconName}" alternativeText="Menu Button" onselect="{!v.onSelect}">
+        <aura:if isTrue="{!or(v.menuItems,v.menuItems.length>0)}">
+            <aura:iteration items="{!v.menuItems}" var="item">
+                <aura:if isTrue="{!not(item.hideAction)}">
+                    <lightning:menuItem label="{!item.label}" title="{!item.title}" value="{!item.value}" iconName="{!item.iconName}" disabled="{!item.disabled}"/>
+                </aura:if>
+            </aura:iteration>
+        </aura:if>
+    </lightning:buttonMenu>
+</aura:component>

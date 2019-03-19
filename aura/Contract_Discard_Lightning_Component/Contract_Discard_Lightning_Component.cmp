@@ -1,0 +1,6 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId"  controller="ContractEventServices" >
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="contractUUID" type="String" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+</aura:component>

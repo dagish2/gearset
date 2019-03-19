@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User announcements for sprint 25 dev release</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes 25 A</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Updates to tour manage page and email notification</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+Happy New Year!
+This week&apos;s release includes bug fixes and performance improvements. In addition, this release contains a enhancement to the manage tour feature.
+
+Manage Tour feature - New UI
+
+When navigating to the manage/book a tour on top of the journey or opportunity record, the first change you will encounter is the account selector is now available before the tour booking feature.
+
+For a refresher on the Account selector, please click the links below.
+
+Click here for training guide
+Click here for Video
+
+Once on the manage/ book a tour feature, you will notice the &quot;Profile information&quot; is now a required section.
+
+If the Profile information section is greyed out, please fill in this information on the account records.
+
+Continuing to &quot;book tours&quot; section, you will notice that &quot;Tour by sales lead&quot; field is now available for all users.
+
+This feature allows users 3 important abilities once selecting the &quot;Yes&quot; option
+1. The tour will be assigned to you.
+2. The opportunity will be assigned to you
+3. The Account will be assigned to you (if it is a Consumer Account)
+
+Note, if you are not hosting the tour or don&apos;t wish to manage this account, please select &quot;No&quot;
+Note, Training video will be available early next week.
+
+
+
+
+
+Email notification for Consumer sales lead.
+
+If you are a consumer sales lead you will receive an email alert for every tour scheduled in their cluster.
+
+As always if you  have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+Warmly,
+Susie</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

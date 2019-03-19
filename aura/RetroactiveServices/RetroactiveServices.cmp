@@ -1,0 +1,82 @@
+<aura:component controller="RetroactiveServicesController">
+    <aura:attribute name="retroContact" type="Object" />
+    <aura:attribute name="primaryRetroContact" type="Object" />
+    <aura:attribute name="existingRetroEmail" type="String" />
+    <aura:attribute name="mapDisabledForContactInRetro" type="map" default="{}" />
+    <aura:attribute name="mapDisabledForPrimaryRetroContact" type="map" default="{}"/>
+    
+    <aura:attribute name="primaryContact" type="Object" />
+    <aura:attribute name="contact" type="Object" />
+    <aura:attribute name="existingEmail" type="String"/>
+    <aura:attribute name="mapDisabledForPrimaryContact" type="map" default="{}"/>
+    <aura:attribute name="mapDisabled" type="map" default="{}"/>
+    
+    <aura:attribute name="referralObj" type="object" /> 
+    <aura:attribute name="accountObj" type="Object"/>
+    <aura:attribute name="refObj" type="Object"/>
+    <aura:attribute name="accountRetroObj" type="Object"/>
+    
+    <aura:attribute name="utils" type="object" />
+    <aura:attribute name="referrerServices" type="object" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <c:EnziUtils aura:id="utils" />
+    <c:ReferrerServices aura:id="referrerServices" retroContact="{!v.retroContact}" mapDisabledForContactInRetro="{!v.mapDisabledForContactInRetro}" existingRetroEmail="{!v.existingRetroEmail}" primaryRetroContact="{!v.primaryRetroContact}" mapDisabledForPrimaryRetroContact="{!v.mapDisabledForPrimaryRetroContact}" contact="{!v.contact}" mapDisabled="{!v.mapDisabled}" existingEmail="{!v.existingEmail}" primaryContact="{!v.primaryContact}" mapDisabledForPrimaryContact="{!v.mapDisabledForPrimaryContact}" accountObj="{!v.accountObj}" refObj="{!v.refObj}" referralObj="{!v.referralObj}" />
+    
+    <aura:method name="checkContactEmail" action="{!c.checkContactEmail}">
+        <aura:attribute name="email" type="String"/>
+        <aura:attribute name="existingEmail" type="String"/>
+        <aura:attribute name="onsuccess" type="Object"/>
+    </aura:method>
+    <aura:method name="searchContact" action="{!c.searchContact}">
+        <aura:attribute name="id" type="String"/>
+        <aura:attribute name="email" type="String"/>
+        <aura:attribute name="isReferrer" type="Boolean"/>
+        <aura:attribute name="onsuccess" type="Object"/>
+    </aura:method>
+    <aura:method name="resetContact" action="{!c.resetContact}">
+        <aura:attribute name="email" type="String"/>
+    </aura:method>
+    <aura:method name="resetDisabled" action="{!c.resetDisabled}">
+    </aura:method>
+    <aura:method name="retroReferrerSearch" action="{!c.retroReferrerSearch}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+    <aura:method name="retroCreateNewReferrer" action="{!c.retroCreateNewReferrer}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+    <aura:method name="confidentionalReferrerSearch" action="{!c.confidentionalReferrerSearch}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+    <aura:method name="confidentionalCreateNewBillAcc" action="{!c.confidentionalCreateNewBillAcc}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+    <aura:method name="confidentionalCreateNewReferrer" action="{!c.confidentionalCreateNewReferrer}">
+        <aura:attribute name="show" type="Boolean"/>
+    </aura:method>
+    <aura:method name="checkContact" action="{!c.checkContact}">
+        <aura:attribute name="contactRec" type="object"/>
+        <aura:attribute name="onsuccess" type="Object"/>
+    </aura:method>
+    <aura:method name="selectReferrer" action="{!c.selectReferrer}">
+        <aura:attribute name="recordId" type="String"/>
+        <aura:attribute name="type" type="String"/>
+    </aura:method>
+    <aura:method name="selectBillAcc" action="{!c.selectBillAcc}">
+        <aura:attribute name="recordId" type="String"/>
+        <aura:attribute name="type" type="String"/>
+    </aura:method>
+    <aura:method name="searchReferrer" action="{!c.searchReferrer}">
+        <aura:attribute name="email" type="String"/>
+        <aura:attribute name="existingEmail" type="String"/>
+        <aura:attribute name="type" type="String"/>
+        <aura:attribute name="isPrimaryContact" type="Boolean"/>
+    </aura:method>
+    <aura:method name="getBillAcc" action="{!c.getBillAcc}">
+        <aura:attribute name="type" type="String"/>
+    </aura:method>
+    <aura:method name="getReferrer" action="{!c.getReferrer}">
+        <aura:attribute name="type" type="String"/>
+    </aura:method>
+</aura:component>

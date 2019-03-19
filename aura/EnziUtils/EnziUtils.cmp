@@ -1,0 +1,104 @@
+<aura:component controller="LightningComponentController" access="global">
+    <ltng:require scripts="/soap/ajax/41.0/apex.js"/>
+    <ltng:require scripts="/soap/ajax/41.0/connection.js"/>
+    <ltng:require scripts="/support/console/42.0/integration.js" afterScriptsLoaded="{!c.setTitle}"/>
+     
+    <aura:attribute name="spinnerType" type="String" default="application" />
+    <aura:attribute name="sessionId" type="String"/>
+    <aura:attribute name="tabTitle" type="String"/>
+	<c:EnziSpinner aura:id="spinner" isFixed="{!v.spinnerType=='application'}" size="large"></c:EnziSpinner>
+    <aura:attribute name="alerts" type="List" />
+    <c:EnziToaster aura:id="toaster"></c:EnziToaster>
+    <aura:method name="showProcessing" action="{!c.showProcessing}"/> 
+    <aura:method name="hideProcessing" action="{!c.hideProcessing}"/>
+    <aura:method name="showSuccess" action="{!c.showSuccess}">
+    	<aura:attribute name="message" type="String"/>
+    </aura:method>
+    <aura:method name="showError" action="{!c.showError}">
+        <aura:attribute name="message" type="String"/>
+        <aura:attribute name="setTimeout" type="String"/>
+        <aura:attribute name="timeout" type="String"/>
+    </aura:method>
+    <aura:method name="showWarning" action="{!c.showWarning}">
+    	<aura:attribute name="message" type="String"/>
+        <aura:attribute name="setTimeout" type="String"/>
+        <aura:attribute name="timeout" type="String"/>
+    </aura:method>
+    <aura:method name="showAlert" action="{!c.showAlert}">
+    	<aura:attribute name="message" type="String"/>
+    </aura:method>
+    <aura:method name="showConfirm" action="{!c.showConfirm}">
+    	<aura:attribute name="message" type="String"/>
+        <aura:attribute name="confirm" type="Object"/>
+        <aura:attribute name="decline" type="Object"/>
+        <aura:attribute name="button" type="Map"/>
+        <aura:attribute name="name" type="String"/>
+    </aura:method>
+    <aura:method name="execute" action="{!c.execute}">    	
+        <aura:attribute name="method" type="String"/>
+        <aura:attribute name="params" type="Object"/>
+        <aura:attribute name="success" type="Object"/>
+        <aura:attribute name="error" type="Object"/>
+        <aura:attribute name="component" type="Object" description="This attribute is used to pass the reference of other component so that the method in controller class of child component can be called from execute method"/>
+    </aura:method>
+    <aura:method name="addComponent" action="{!c.addComponent}">
+    	<aura:attribute name="component" type="String"/>
+        <aura:attribute name="attributes" type="Object"/>        
+    </aura:method>
+    <aura:method name="getIcons" action="{!c.getIcons}">
+    	 <aura:attribute name="success" type="Object"/>
+    </aura:method>
+    <aura:method name="getCustomAction" action="{!c.getCustomAction}">
+    	<aura:attribute name="recordId" type="String"/>
+        <aura:attribute name="actionId" type="String"/>
+        <aura:attribute name="success" type="Object"/>
+    </aura:method>
+    <aura:method name="getBulkQueryData" action="{!c.getBulkQuery}">
+    	<aura:attribute name="query" type="String"/>
+        <aura:attribute name="sObjectName" type="String"/>
+        <aura:attribute name="success" type="Object"/>
+    </aura:method>
+    <aura:method name="insertBulkData" action="{!c.insertBulkData}">
+    	<aura:attribute name="records" type="String"/>
+        <aura:attribute name="sObjectName" type="String"/>
+        <aura:attribute name="success" type="Object"/>
+    </aura:method>
+    <aura:method name="updateBulkData" action="{!c.updateBulkData}">
+    	<aura:attribute name="records" type="String"/>
+        <aura:attribute name="sObjectName" type="String"/>
+        <aura:attribute name="success" type="Object"/>
+    </aura:method>
+    <aura:method name="geturlParamByName" action="{!c.geturlParamByName}">
+    	<aura:attribute name="name" type="String"/>
+    </aura:method>
+    <aura:method name="redirectToUrl" action="{!c.redirectToUrl}">
+    	<aura:attribute name="url" type="String"/>
+        <aura:attribute name="title" type="String"/>
+        <aura:attribute name="openInNewTab" type="Boolean" default="true"/>
+        <aura:attribute name="openInNewTabClassic" type="Boolean"/>
+        <aura:attribute name="openInNewTabConsole" type="Boolean"/>
+    </aura:method>
+    <aura:method name="openTabByUrl" action="{!c.openTabByUrl}">
+    	<aura:attribute name="url" type="String"/>
+    </aura:method>
+    <aura:method name="openTabById" action="{!c.openTabById}">
+    	<aura:attribute name="id" type="String"/>
+    </aura:method>
+    <aura:method name="setTitle" action="{!c.setTitle}">
+    	<aura:attribute name="title" type="String"/>
+    </aura:method>
+    <aura:method name="removeSpecialCharacters" action="{!c.removeSpecialCharacters}">
+        <aura:attribute name="data" type="String"/>
+    </aura:method>
+    <aura:method name="addSlashes" action="{!c.addSlashes}">
+        <aura:attribute name="keyword" type="String"/>
+    </aura:method>
+    <aura:method name="closeTab" action="{!c.closeTab}"></aura:method>
+    <aura:method name="closeConsoleTab" action="{!c.closeConsoleTab}">
+    	<aura:attribute name="url" type="String"/>    </aura:method>
+    <aura:iteration items="{!v.body}" var="cmp">
+        <div>
+            {!cmp}
+        </div>
+    </aura:iteration>
+</aura:component>

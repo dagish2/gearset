@@ -1,0 +1,13 @@
+Hi,
+
+My name is {!User.FirstName} from WeWork, I just gave you a call, but wanted to follow up via email as well.
+
+I know you expressed interest in our Chicago locations, so I wanted to extend a limited time special offer to you: 50% off your first 3 months at our new Chicago  Grant Park building. 
+
+I would love to have you come by for a tour and experience the community in person.  Let me know a good date and time that works.
+
+I look forward to hearing from you.
+
+Regards,
+
+{!User.FirstName}

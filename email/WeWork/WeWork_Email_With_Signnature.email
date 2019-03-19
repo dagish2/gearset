@@ -1,0 +1,15 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<p class="p1" style="font-family: arial;"><font color="#666666" size="2">--&nbsp;</font></p>
+<p class="p2"><font color="#666666" face="arial" size="2">{!User.FirstName}</font><font color="#666666" size="2" style="font-family: arial;">&nbsp;</font><font color="#666666" face="arial" size="2">{!User.LastName}</font></p>
+<p class="p3"><font color="#666666" face="arial" size="2">{!User.Title}</font></p>
+<p class="p4" style="font-family: arial;"><font size="2" color="#666666"><b></b><br></font></p>
+<p class="p5"><b><font face="Times New Roman, Times, serif" size="4" color="#666666">wework</font></b></p>
+<p class="p6" style="font-family: arial;"><font color="#666666" size="1">115 W 18th St | New York, NY 10011</font></p>
+<p class="p7"><font color="#666666" size="1"><span class="s1" style="font-family: arial;">O:&nbsp;</span><font face="arial">{!User.Phone}&nbsp;ext.</font></font><font color="#666666" face="arial" size="1">{!User.Extension}</font></p>
+<p class="p8" style="font-family: arial;"><font color="#666666" size="1"><a href="https://www.wework.com/">wework.com</a>&nbsp;|&nbsp;<a href="https://www.facebook.com/WeWork">facebook</a>&nbsp;|&nbsp;<a href="https://twitter.com/wework">twitter</a></font></p>
+<p class="p9" style="font-family: arial;"><font color="#666666" size="1"><br></font></p>
+<p class="p6" style="font-family: arial;"><br></p>]]></td>
+</tr>
+</table>

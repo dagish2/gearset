@@ -1,0 +1,110 @@
+<aura:component >
+    <aura:attribute name="settingId" type="String"/>
+    <aura:attribute name="settingData" type="String"/>
+    <aura:attribute name="currentSetting" type="Object"/>
+    <aura:attribute name="triggers" type="List" default="[]"/>
+    <aura:attribute name="triggerStatus" type="List" default="['Active','Inactive']"/>
+    <aura:attribute name="trigger" type="Map" default="{}"/>
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="searchKeyword" type="String" default=""/>
+    <aura:attribute name="filterCriteria" type="String" default="all"/>
+    <aura:attribute name="refreshActivities" type="Object"/>
+    <aura:attribute name="screenHeight" type="Integer"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.currentSetting}" action="{!v.refreshActivities}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+        .leftIcon {
+        position: absolute;
+        top: 9px;
+        left: 12px;
+        }
+    </style> 
+    <div class="slds-grid slds-wrap">
+        <div class="slds-size--1-of-4" style="padding:5px">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size--1-of-3" style="padding:5px">
+                    <c:EnziButton label="New" leftIcon="utility:new" type="brand" click="{!c.openSettingModal}"></c:EnziButton>
+                </div>
+                <div class="slds-size--2-of-3" style="padding:5px">
+                    <div class="slds-form-element" style="display:inline">
+                        <div class="slds-form-element__control">
+                            <select class="slds-select" onchange="{!c.filter}">
+                                <option value="all">All</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-size--1-of-4" style="padding:5px;margin-left: 50%;">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+                    <lightning:icon class="leftIcon" iconName="utility:search" size="xx-small"></lightning:icon>
+                    <input type="text" class="slds-input" placeholder="Search" onkeyup="{!c.search}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="{!'height:'+(v.screenHeight-240)+'px;overflow-y:auto;margin-bottom:45px;'}">
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer" >
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col" style="width:60px">
+                        <div class="slds-truncate" title="#">#</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Opportunity Name">Trigger Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Opportunity Name">Status</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Action">Action</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.triggers}" var="trigger" indexVar="index">
+                    <tr>
+                        <td data-label="#">
+                            <div class="slds-truncate" title="{!index+1}">{!index+1}</div>
+                        </td>
+                        <td data-label="Trigger Name">
+                            <div class="slds-truncate" title="{!trigger.name}">{!trigger.name}</div>
+                        </td>
+                        <td data-label="Status">
+                            <c:EnziField type="boolean" name="{!'status:'+(trigger.name)}" label="Status" hideLabel="true" value="{!trigger.status}" varient="toggle"></c:EnziField>
+                        </td>
+                        <td>
+                            <c:EnziDropdown size="xx-small">
+                                <c:EnziDropdownItem id="{!'edit:'+trigger.name}" label="Edit" click="{!c.editSetting}"></c:EnziDropdownItem>
+                                <c:EnziDropdownItem id="{!'delete:'+trigger.name}" label="Delete" click="{!c.deleteSetting}"></c:EnziDropdownItem>
+                            </c:EnziDropdown>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div> 
+    <c:SettingManagerFooter settingId="{!v.settingId}" save="{!c.saveAll}" discard="{!c.cancel}"></c:SettingManagerFooter>
+    <!--  <footer class="slds-modal__footer" style="bottom:0;width:100%;z-index: 2;position: fixed;text-align:right;margin-top:20px">
+        <c:EnziButton label="Cancel" click="{!c.cancel}" type="destructive" leftIcon="utility:close"></c:EnziButton>
+        <c:EnziButton label="Save" click="{!c.saveAll}" type="brand" leftIcon="utility:save"></c:EnziButton>
+    </footer>  -->  
+    <c:EnziModal aura:id="saveSettingModal" header="{!v.trigger.oldName?('Edit '+v.trigger.oldName):'New Setting'}" show="false">
+        <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+            <c:EnziModalContainer >
+                <c:EnziField type="string" name="name" label="Name" value="{!v.trigger.name}"  required="true" errors="{!v.errors}" length="50"></c:EnziField>
+                <c:EnziField type="picklist" options="{!v.triggerStatus}" name="status" label="Status" value="{!v.trigger.status}"  required="true" errors="{!v.errors}"></c:EnziField>
+            </c:EnziModalContainer>
+        </c:EnziFormValidator>
+        <c:EnziModalFooter >  
+            <c:EnziButton id="close" label="Close" type="destructive" click="{!c.closeSettingModal}" leftIcon="utility:close"></c:EnziButton>
+            <c:EnziButton id="save" label="Save" type="brand" click="{!c.save}" disabled="{!(!v.valid)}" leftIcon="utility:save"></c:EnziButton>         
+        </c:EnziModalFooter>        
+    </c:EnziModal>
+</aura:component>

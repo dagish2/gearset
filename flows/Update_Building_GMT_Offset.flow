@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>myVariable_waitStartTimeAssignment</name>
+        <label>myVariable_waitStartTimeAssignment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>myVariable_waitStartTimeVariable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myDecision</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision</name>
+        <label>myDecision</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>Building Timezone Changed</label>
+        </rules>
+    </decisions>
+    <description>Updates GMT Offset field on Building</description>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>VALUE( 
+CASE([Building__c].Time_Zone__c, 
+&quot;Pacific/Kiritimati&quot;,&quot;+14&quot;,
+&quot;Pacific/Enderbury&quot;,&quot;+13&quot;,
+&quot;Pacific/Tongatapu&quot;,&quot;+13&quot;,
+&quot;Pacific/Chatham&quot;,&quot;+12.75&quot;,
+&quot;Pacific/Auckland&quot;,&quot;+12&quot;,
+&quot;Pacific/Fiji&quot;,&quot;+12&quot;,
+&quot;Asia/Kamchatka&quot;,&quot;+12&quot;,
+&quot;Pacific/Norfolk&quot;,&quot;+11.5&quot;,
+&quot;Australia/Lord_Howe&quot;,&quot;+11&quot;,
+&quot;Pacific/Guadalcanal&quot;,&quot;+11&quot;,
+&quot;Australia/Adelaide&quot;,&quot;+10.5&quot;,
+&quot;Australia/Sydney&quot;,&quot;+11&quot;,
+&quot;Australia/Brisbane&quot;,&quot;+10&quot;,
+&quot;Australia/Darwin&quot;,&quot;+9.5&quot;,
+&quot;Asia/Seoul&quot;,&quot;+9&quot;,
+&quot;Asia/Tokyo&quot;,&quot;+9&quot;,
+&quot;Asia/Hong_Kong&quot;,&quot;+8&quot;,
+&quot;Asia/Kuala_Lumpur&quot;,&quot;+8&quot;,
+&quot;Asia/Manila&quot;,&quot;+8&quot;,
+&quot;Asia/Shanghai&quot;,&quot;+8&quot;,
+&quot;Asia/Singapore&quot;,&quot;+8&quot;,
+&quot;Asia/Taipei&quot;,&quot;+8&quot;,
+&quot;Australia/Perth&quot;,&quot;+8&quot;,
+&quot;Asia/Bangkok&quot;,&quot;+7&quot;,
+&quot;Asia/Ho_Chi_Minh&quot;,&quot;+7&quot;,
+&quot;Asia/Jakarta&quot;,&quot;+7&quot;,
+&quot;Asia/Rangoon&quot;,&quot;+6.5&quot;,
+&quot;Asia/Dhaka&quot;,&quot;+6&quot;,
+&quot;Asia/Kathmandu&quot;,&quot;+5.75&quot;,
+&quot;Asia/Colombo&quot;,&quot;+5.5&quot;,
+&quot;Asia/Kolkata&quot;,&quot;+5.5&quot;,
+&quot;Asia/Karachi&quot;,&quot;+5&quot;,
+&quot;Asia/Tashkent&quot;,&quot;+5&quot;,
+&quot;Asia/Yekaterinburg&quot;,&quot;+5&quot;,
+&quot;Asia/Kabul&quot;,&quot;+4.5&quot;,
+&quot;Asia/Baku&quot;,&quot;+4&quot;,
+&quot;Asia/Dubai&quot;,&quot;+4&quot;,
+&quot;Asia/Tbilisi&quot;,&quot;+4&quot;,
+&quot;Asia/Yerevan&quot;,&quot;+4&quot;,
+&quot;Asia/Tehran&quot;,&quot;+3.5&quot;,
+&quot;Africa/Nairobi&quot;,&quot;+3&quot;,
+&quot;Asia/Baghdad&quot;,&quot;+3&quot;,
+&quot;Asia/Kuwait&quot;,&quot;+3&quot;,
+&quot;Asia/Riyadh&quot;,&quot;+3&quot;,
+&quot;Europe/Minsk&quot;,&quot;+3&quot;,
+&quot;Europe/Moscow&quot;,&quot;+3&quot;,
+&quot;Africa/Cairo&quot;,&quot;+3&quot;,
+&quot;Asia/Beirut&quot;,&quot;+3&quot;,
+&quot;Asia/Jerusalem&quot;,&quot;+2&quot;,
+&quot;Europe/Athens&quot;,&quot;+2&quot;,
+&quot;Europe/Bucharest&quot;,&quot;+2&quot;,
+&quot;Europe/Helsinki&quot;,&quot;+2&quot;,
+&quot;Europe/Istanbul&quot;,&quot;+3&quot;,
+&quot;Africa/Johannesburg&quot;,&quot;+2&quot;,
+&quot;Europe/Amsterdam&quot;,&quot;+1&quot;,
+&quot;Europe/Berlin&quot;,&quot;+1&quot;,
+&quot;Europe/Brussels&quot;,&quot;+1&quot;,
+&quot;Europe/Paris&quot;,&quot;+1&quot;,
+&quot;Europe/Prague&quot;,&quot;+1&quot;,
+&quot;Europe/Rome&quot;,&quot;+1&quot;,
+&quot;Europe/Madrid&quot;,&quot;+1&quot;,
+&quot;Europe/Lisbon&quot;,&quot;0&quot;,
+&quot;Africa/Algiers&quot;,&quot;+1&quot;,
+&quot;Europe/London&quot;,&quot;0&quot;,
+&quot;Atlantic/Cape_Verde&quot;,&quot;-1&quot;,
+&quot;Africa/Casablanca&quot;,&quot;0&quot;,
+&quot;Europe/Dublin&quot;,&quot;0&quot;,
+&quot;GMT&quot;,&quot;0&quot;,
+&quot;America/Scoresbysund&quot;,&quot;0&quot;,
+&quot;Atlantic/Azores&quot;,&quot;0&quot;,
+&quot;Atlantic/South_Georgia&quot;,&quot;-2&quot;,
+&quot;America/St_Johns&quot;,&quot;-2.5&quot;,
+&quot;America/Sao_Paulo&quot;,&quot;-2&quot;,
+&quot;America/Argentina/Buenos_Aires&quot;,&quot;-3&quot;,
+&quot;America/Santiago&quot;,&quot;-3&quot;,
+&quot;America/Halifax&quot;,&quot;-3&quot;,
+&quot;America/Puerto_Rico&quot;,&quot;-4&quot;,
+&quot;Atlantic/Bermuda&quot;,&quot;-4&quot;,
+&quot;America/Caracas&quot;,&quot;-4.5&quot;,
+&quot;America/Indiana/Indianapolis&quot;,&quot;-5&quot;,
+&quot;America/New_York&quot;,&quot;-5&quot;,
+&quot;America/Bogota&quot;,&quot;-5&quot;,
+&quot;America/Lima&quot;,&quot;-5&quot;,
+&quot;America/Panama&quot;,&quot;-5&quot;,
+&quot;America/Mexico_City&quot;,&quot;-6&quot;,
+&quot;America/Chicago&quot;,&quot;-6&quot;,
+&quot;America/El_Salvador&quot;,&quot;-6&quot;,
+&quot;America/Denver&quot;,&quot;-7&quot;,
+&quot;America/Mazatlan&quot;,&quot;-6&quot;,
+&quot;America/Phoenix&quot;,&quot;-7&quot;,
+&quot;America/Los_Angeles&quot;,&quot;-8&quot;,
+&quot;America/Tijuana&quot;,&quot;-8&quot;,
+&quot;Pacific/Pitcairn&quot;,&quot;-8&quot;,
+&quot;America/Anchorage&quot;,&quot;-9&quot;,
+&quot;Pacific/Gambier&quot;,&quot;-9&quot;,
+&quot;America/Adak&quot;,&quot;-9&quot;,
+&quot;Pacific/Marquesas&quot;,&quot;-9.5&quot;,
+&quot;Pacific/Honolulu&quot;,&quot;-10&quot;,
+&quot;Pacific/Niue&quot;,&quot;-11&quot;,
+&quot;Pacific/Pago_Pago&quot;,&quot;-11&quot;,&quot;0&quot;))</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_2_myRule_1_A1_0645709170</name>
+        <dataType>Number</dataType>
+        <expression>VALUE( 
+CASE({!myVariable_current.Time_Zone__c}, 
+&quot;Pacific/Kiritimati&quot;,&quot;+14&quot;,
+&quot;Pacific/Enderbury&quot;,&quot;+13&quot;,
+&quot;Pacific/Tongatapu&quot;,&quot;+13&quot;,
+&quot;Pacific/Chatham&quot;,&quot;+12.75&quot;,
+&quot;Pacific/Auckland&quot;,&quot;+12&quot;,
+&quot;Pacific/Fiji&quot;,&quot;+12&quot;,
+&quot;Asia/Kamchatka&quot;,&quot;+12&quot;,
+&quot;Pacific/Norfolk&quot;,&quot;+11.5&quot;,
+&quot;Australia/Lord_Howe&quot;,&quot;+11&quot;,
+&quot;Pacific/Guadalcanal&quot;,&quot;+11&quot;,
+&quot;Australia/Adelaide&quot;,&quot;+10.5&quot;,
+&quot;Australia/Sydney&quot;,&quot;+11&quot;,
+&quot;Australia/Brisbane&quot;,&quot;+10&quot;,
+&quot;Australia/Darwin&quot;,&quot;+9.5&quot;,
+&quot;Asia/Seoul&quot;,&quot;+9&quot;,
+&quot;Asia/Tokyo&quot;,&quot;+9&quot;,
+&quot;Asia/Hong_Kong&quot;,&quot;+8&quot;,
+&quot;Asia/Kuala_Lumpur&quot;,&quot;+8&quot;,
+&quot;Asia/Manila&quot;,&quot;+8&quot;,
+&quot;Asia/Shanghai&quot;,&quot;+8&quot;,
+&quot;Asia/Singapore&quot;,&quot;+8&quot;,
+&quot;Asia/Taipei&quot;,&quot;+8&quot;,
+&quot;Australia/Perth&quot;,&quot;+8&quot;,
+&quot;Asia/Bangkok&quot;,&quot;+7&quot;,
+&quot;Asia/Ho_Chi_Minh&quot;,&quot;+7&quot;,
+&quot;Asia/Jakarta&quot;,&quot;+7&quot;,
+&quot;Asia/Rangoon&quot;,&quot;+6.5&quot;,
+&quot;Asia/Dhaka&quot;,&quot;+6&quot;,
+&quot;Asia/Kathmandu&quot;,&quot;+5.75&quot;,
+&quot;Asia/Colombo&quot;,&quot;+5.5&quot;,
+&quot;Asia/Kolkata&quot;,&quot;+5.5&quot;,
+&quot;Asia/Karachi&quot;,&quot;+5&quot;,
+&quot;Asia/Tashkent&quot;,&quot;+5&quot;,
+&quot;Asia/Yekaterinburg&quot;,&quot;+5&quot;,
+&quot;Asia/Kabul&quot;,&quot;+4.5&quot;,
+&quot;Asia/Baku&quot;,&quot;+4&quot;,
+&quot;Asia/Dubai&quot;,&quot;+4&quot;,
+&quot;Asia/Tbilisi&quot;,&quot;+4&quot;,
+&quot;Asia/Yerevan&quot;,&quot;+4&quot;,
+&quot;Asia/Tehran&quot;,&quot;+3.5&quot;,
+&quot;Africa/Nairobi&quot;,&quot;+3&quot;,
+&quot;Asia/Baghdad&quot;,&quot;+3&quot;,
+&quot;Asia/Kuwait&quot;,&quot;+3&quot;,
+&quot;Asia/Riyadh&quot;,&quot;+3&quot;,
+&quot;Europe/Minsk&quot;,&quot;+3&quot;,
+&quot;Europe/Moscow&quot;,&quot;+3&quot;,
+&quot;Africa/Cairo&quot;,&quot;+3&quot;,
+&quot;Asia/Beirut&quot;,&quot;+3&quot;,
+&quot;Asia/Jerusalem&quot;,&quot;+2&quot;,
+&quot;Europe/Athens&quot;,&quot;+2&quot;,
+&quot;Europe/Bucharest&quot;,&quot;+2&quot;,
+&quot;Europe/Helsinki&quot;,&quot;+2&quot;,
+&quot;Europe/Istanbul&quot;,&quot;+3&quot;,
+&quot;Africa/Johannesburg&quot;,&quot;+2&quot;,
+&quot;Europe/Amsterdam&quot;,&quot;+1&quot;,
+&quot;Europe/Berlin&quot;,&quot;+1&quot;,
+&quot;Europe/Brussels&quot;,&quot;+1&quot;,
+&quot;Europe/Paris&quot;,&quot;+1&quot;,
+&quot;Europe/Prague&quot;,&quot;+1&quot;,
+&quot;Europe/Rome&quot;,&quot;+1&quot;,
+&quot;Europe/Madrid&quot;,&quot;+1&quot;,
+&quot;Europe/Lisbon&quot;,&quot;0&quot;,
+&quot;Africa/Algiers&quot;,&quot;+1&quot;,
+&quot;Europe/London&quot;,&quot;0&quot;,
+&quot;Atlantic/Cape_Verde&quot;,&quot;-1&quot;,
+&quot;Africa/Casablanca&quot;,&quot;0&quot;,
+&quot;Europe/Dublin&quot;,&quot;0&quot;,
+&quot;GMT&quot;,&quot;0&quot;,
+&quot;America/Scoresbysund&quot;,&quot;0&quot;,
+&quot;Atlantic/Azores&quot;,&quot;0&quot;,
+&quot;Atlantic/South_Georgia&quot;,&quot;-2&quot;,
+&quot;America/St_Johns&quot;,&quot;-2.5&quot;,
+&quot;America/Sao_Paulo&quot;,&quot;-2&quot;,
+&quot;America/Argentina/Buenos_Aires&quot;,&quot;-3&quot;,
+&quot;America/Santiago&quot;,&quot;-3&quot;,
+&quot;America/Halifax&quot;,&quot;-3&quot;,
+&quot;America/Puerto_Rico&quot;,&quot;-4&quot;,
+&quot;Atlantic/Bermuda&quot;,&quot;-4&quot;,
+&quot;America/Caracas&quot;,&quot;-4.5&quot;,
+&quot;America/Indiana/Indianapolis&quot;,&quot;-5&quot;,
+&quot;America/New_York&quot;,&quot;-5&quot;,
+&quot;America/Bogota&quot;,&quot;-5&quot;,
+&quot;America/Lima&quot;,&quot;-5&quot;,
+&quot;America/Panama&quot;,&quot;-5&quot;,
+&quot;America/Mexico_City&quot;,&quot;-6&quot;,
+&quot;America/Chicago&quot;,&quot;-6&quot;,
+&quot;America/El_Salvador&quot;,&quot;-6&quot;,
+&quot;America/Denver&quot;,&quot;-7&quot;,
+&quot;America/Mazatlan&quot;,&quot;-6&quot;,
+&quot;America/Phoenix&quot;,&quot;-7&quot;,
+&quot;America/Los_Angeles&quot;,&quot;-8&quot;,
+&quot;America/Tijuana&quot;,&quot;-8&quot;,
+&quot;Pacific/Pitcairn&quot;,&quot;-8&quot;,
+&quot;America/Anchorage&quot;,&quot;-9&quot;,
+&quot;Pacific/Gambier&quot;,&quot;-9&quot;,
+&quot;America/Adak&quot;,&quot;-9&quot;,
+&quot;Pacific/Marquesas&quot;,&quot;-9.5&quot;,
+&quot;Pacific/Honolulu&quot;,&quot;-10&quot;,
+&quot;Pacific/Niue&quot;,&quot;-11&quot;,
+&quot;Pacific/Pago_Pago&quot;,&quot;-11&quot;,&quot;0&quot;))</expression>
+        <scale>18</scale>
+    </formulas>
+    <formulas>
+        <name>formula_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>true</expression>
+    </formulas>
+    <interviewLabel>Update_Building_GMT_Offset-4_InterviewLabel</interviewLabel>
+    <label>Update Building GMT Offset</label>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value>
+            <stringValue>Building__c</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>ObjectVariable</name>
+        <value>
+            <elementReference>myVariable_current</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OldObjectVariable</name>
+        <value>
+            <elementReference>myVariable_old</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onAllChanges</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Workflow</processType>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Building__c]</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>Update GMT Offset</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>Number</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>GMT Offset</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue></stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Formula</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>GMT_Offset__c</field>
+            <value>
+                <elementReference>formula_2_myRule_1_A1_0645709170</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Building__c</object>
+    </recordUpdates>
+    <startElementReference>myVariable_waitStartTimeAssignment</startElementReference>
+    <status>Draft</status>
+    <variables>
+        <name>myVariable_current</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Building__c</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_old</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Building__c</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_waitStartTimeVariable</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <elementReference>$Flow.CurrentDateTime</elementReference>
+        </value>
+    </variables>
+</Flow>

@@ -1,0 +1,28 @@
+<aura:component >
+	<aura:attribute name="id" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="click" type="Object" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="show" type="Boolean" default="true" />
+    <aura:attribute name="leftIcon" type="String" default="" />
+    <aura:attribute name="rightIcon" type="String" default="" />
+    <style>
+    	.slds-scope .slds-button, .slds-button {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        	margin: 5px;
+        }
+    </style>
+    <button id="{!v.id}" class="{!'slds-button slds-button--'+v.type}" onclick="{!v.click}" disabled="{!v.disabled?'disabled':''}" title="{! !empty(v.title) ? v.title : v.label}" style="{!'display:'+(v.show?'inline-block':'none')}">
+        <aura:if isTrue="{!v.leftIcon!=''}">
+            <lightning:icon class="slds-button__icon_left" size="x-small" iconName="{!v.leftIcon}" variant="inverse"></lightning:icon>
+        </aura:if>
+        {!v.label}
+        <aura:if isTrue="{!v.rightIcon!=''}">
+            <lightning:icon class="slds-button__icon_right" size="x-small" iconName="{!v.rightIcon}" variant="inverse"></lightning:icon>
+        </aura:if>
+    </button>
+</aura:component>

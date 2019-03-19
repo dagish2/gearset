@@ -1,0 +1,57 @@
+<aura:component implements="lightning:actionOverride,force:lightningQuickActionWithoutHeader" controller="NewOrganizationController" >
+    <aura:attribute name="header" type="String" default="Instructions"/>
+    <aura:attribute name="instructions" type="List"/>
+    <aura:attribute name="canCreateOrg" type="Boolean" default='false' />
+    <aura:attribute name="canCreateEnterpriseOrg" type="Boolean" default="false"/>
+    <aura:attribute name="mapInstructions" type="Map"/>
+    <aura:attribute name="isInLightningConsole" type="Boolean" default="true"/>
+    <aura:attribute name="requestNewOrgSuccess" type="Boolean" default="false"/>
+    <aura:attribute name="previous" type="Object" />
+    
+    <aura:attribute name="orgRequestTabs" type="Object" />
+    <aura:attribute name="selectedOrgId" type="String" />
+    <aura:attribute name="requestedOrg" type="Object" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.requestNewOrgSuccess}" action="{!c.close}"/>
+    
+    <lightning:workspaceAPI aura:id="workspace"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0rem !important;
+        }
+        .modal-body {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        height:65% !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+        @media (min-width: 48em){
+        .slds-modal__container {
+        max-width: 70rem !important;
+        width:80% !important;
+        }
+        }
+    </aura:html>
+    <div id="accountHeader">
+    	<c:EnziHeader sObjectName="Account" pageName="{!v.header}" iconName="standard:account" />
+    </div>
+    <div id="content" class="slds-modal__content slds-p-around--medium">
+        <div id="accountinstructions" class="slds-p-bottom_small">
+            <c:WeInstructions instructions="{! v.instructions}" />
+        </div>
+        <div id="searchOrganization" class="slds-p-bottom_small">
+            <c:SearchOrganizations selectedOrgId="{!v.selectedOrgId}" useExistingOrg="{!c.useExistingOrg}" searchAllOrg='true' close="{!c.close}" next="{!c.next}"/>
+        </div>
+        <div id="requestNewOrganization" class="slds-p-bottom_small slds-hide" >
+            <c:RequestNewOrganization requestedOrg="{!v.requestedOrg}" previous="{!c.previous}" isInLightningConsole="{!v.isInLightningConsole}" close="{!c.close}"/>
+        </div>
+        <div id="createNewOrganization" class="slds-p-bottom_small slds-hide" >
+            <c:CreateNewOrganization canCreateEnterpriseOrg="{!v.canCreateEnterpriseOrg}" close="{!c.close}" previous="{!c.previous}" isInLightningConsole="{!v.isInLightningConsole}"/>
+        </div>
+    </div>
+</aura:component>

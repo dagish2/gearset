@@ -1,0 +1,6 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">  
+    <head>
+        <title>Associate Billing Account</title> 
+    </head>
+    <c:LightningResource component="AssociateBillingAccount" parameters="opportunityId={!$CurrentPage.parameters.id}"></c:LightningResource>
+</apex:page>

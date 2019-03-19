@@ -1,0 +1,10 @@
+<aura:component >
+	<aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="length" type="Integer" />
+
+   	<textarea id="{!v.name}" class="slds-textarea" placeholder="{!v.disabled?'':'Enter '+v.label}" value="{!v.value}" onkeyup="{!c.change}" maxlength="{!v.length}" disabled="{!v.disabled?'disabled':''}" rows="3" style="resize: none;"></textarea>
+</aura:component>

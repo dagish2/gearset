@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>email to users letting them know sfdc will be down for the weekend 061117</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>salesforce Down midmarket deployment</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Salesforce release this week</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+The salesforce team will be launching a global platform enhancement to our Sales Organization . Over the course of the weekend, there will be an interval of time when the application will become inaccessible to users, beginning Sunday June, 11th at 6am EDT through Sunday June 11th, 8PM EDT.
+
+
+A system alert will be sent when access to the application resumes.
+
+
+For any issues or support please contact salesforcesupport@wework.com
+
+Best,
+Salesforce Support</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

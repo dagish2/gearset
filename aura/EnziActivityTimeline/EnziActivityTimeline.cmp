@@ -1,0 +1,536 @@
+<aura:component >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="activityRecords" type="Object"/>
+    <aura:attribute name="sObjectName" type="String"/>
+    <aura:attribute name="userInfo" type="Object"/>
+    <aura:attribute name="openActivityLabel" type="string" default="Next Steps" />
+    <aura:attribute name="detailView" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.recordId}" action="{!c.doInit}"/>
+    <aura:method name="refreshComponent" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style type="text/css">.runtime_sales_activitiesActivityTimeline2Fragment{margin:.5rem 0}.runtime_sales_activitiesActivityTimeline2Fragment .slds-section__title{position:relative}.runtime_sales_activitiesActivityTimeline2Fragment .slds-section__title:before{position:absolute;right:0;top:50%;left:0;margin-top:-1px;border-bottom:1px dashed rgb(216, 221, 230);content:' '}.runtime_sales_activitiesActivityTimeline2Fragment .slds-section__title-action{padding:0 .5rem 0 0;background:rgb(255, 255, 255);z-index:1;display:inline-block;width:auto;position:relative;cursor:auto}.runtime_sales_activitiesActivityTimeline2Fragment .timeline__button-more--top{margin-top:-2.75rem;margin-bottom:.75rem}.runtime_sales_activitiesActivityTimeline2Fragment .showMoreButton{z-index:2} .strikethrough a{text-decoration:line-through}</style>
+    <style type="text/css">.runtime_sales_activitiesActivityTimeline2{padding:1rem 0 1.5rem;position:relative}.runtime_sales_activitiesActivityTimeline2 .hideEl{display:none}.runtime_sales_activitiesActivityTimeline2 .timelineError{color:rgb(194, 57, 52)}.runtime_sales_activitiesActivityTimeline2 .refresh{display:inline;float:right;color:rgb(84, 105, 141)}.runtime_sales_activitiesActivityTimeline2 .refreshIcon{line-height:30px}.runtime_sales_activitiesActivityTimeline2 ul{list-style:none;margin:0;padding:0}.runtime_sales_activitiesActivityTimeline2.NARROW .timeline__button-more,.runtime_sales_activitiesActivityTimeline2.NARROW .timeline__button-more--top{float:right}.runtime_sales_activitiesActivityTimeline2.NARROW .slds-section__title-action{max-width:70%}.runtime_sales_activitiesActivityTimeline2 .placeholder.activity_discussion .text-body{width:100%}.runtime_sales_activitiesActivityTimeline2.WIDE .bodyText{max-height:1.0rem;line-height:1.0rem}.runtime_sales_activitiesActivityTimeline2.NARROW .bodyText{max-height:2.0rem;line-height:1.0rem}.runtime_sales_activitiesActivityTimeline2 .filterMenuLink{color:rgb(22, 50, 92)}.runtime_sales_activitiesActivityTimeline2 .filterMenuLink:hover,.runtime_sales_activitiesActivityTimeline2 .filterMenuLink:focus,.runtime_sales_activitiesActivityTimeline2 .filterMenuLink:active{text-decoration:none}.runtime_sales_activitiesActivityTimeline2 .filterMenuIcon{font-size:.75rem}.runtime_sales_activitiesActivityTimeline2.WIDE .requestAccessSIQ{display:inline-block;margin-left:2.6rem}.runtime_sales_activitiesActivityTimeline2.NARROW .requestAccessSIQ{display:inline-block}</style>
+    <div class="slds-section slds-is-open runtime_sales_activitiesActivityTimeline2Fragment" data-aura-class="runtime_sales_activitiesActivityTimeline2Fragment">
+        <div class="slds-section__title slds-m-bottom--medium  pastActivityHeader" ><h2 class="slds-section__title-action slds-align-middle slds-truncate" >{!v.openActivityLabel}</h2></div>
+        <div class="timeline__button-more--top slds-text-align--center" style="float: right;margin-top: -52px;"><button class="slds-button slds-button--neutral showMoreButton uiButton" aria-live="off" type="button" data-aura-class="uiButton" onclick="{!c.getMoreSteps}"><span class=" label bBody truncate" dir="ltr" >More Steps</span></button></div>
+        <div class="slds-section__content">
+            <div class="slds-timeline uiAbstractList" data-aura-class="uiAbstractList">
+                <ul>
+                    <aura:iteration items="{!v.activityRecords.OpenActivities}" var="activity" indexVar="index">
+                        <aura:if isTrue="{!activity.ActivitySubtype == 'Task'}">
+                            <li>
+                                <span class="slds-assistive-text">Task</span>
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-media slds-media--timeline slds-timeline__media--task" style="z-index: 999;">
+                                            <div class="slds-media__figure slds-timeline__icon" style="padding-top: 8px;">
+                                                <div class="slds-icon_container">
+                                                    <lightning:icon iconName="standard:task" size="small" alternativeText="Task"/>                        
+                                                </div>
+                                            </div>
+                                            <div class="slds-media__body" >
+                                                <div class="slds-media">
+                                                    <div class="slds-media__figure">
+                                                        <label class="slds-checkbox" for="{!v.sObjectName+'mark-complete'+index}">
+                                                            <input type="checkbox" name="checkbox" id="{!v.sObjectName+'mark-complete'+index}" onclick="{!c.makeComplete}" data-recordid="{!activity.Id}"/>
+                                                            <span class="slds-checkbox--faux"></span>
+                                                            <span class="slds-form-element__label slds-assistive-text">mark-complete</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="slds-media__body">
+                                                        <h3 class="slds-truncate" title="{!activity.Subject}"><a href="{!'/'+activity.Id}"> {!activity.Subject} </a></h3>
+                                                        <ul class="slds-list--horizontal slds-wrap">
+                                                            <aura:if isTrue="{!v.detailView}">
+                                                                <li class="slds-m-right--large">
+                                                                    <span class="slds-text-title">Created Date :</span>
+                                                                    <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.CreatedDate}" format="MM/dd/yyyy h:mm a"/></span>
+                                                                </li>
+                                                                <aura:if isTrue="{!!empty(activity.CallDisposition)}">
+                                                                    <li class="slds-m-right--large">
+                                                                        <span class="slds-text-title">Notes :</span>
+                                                                        <span class="slds-text-body--small">&nbsp;{!activity.CallDisposition}</span>
+                                                                    </li>
+                                                                </aura:if>
+                                                            </aura:if>
+                                                            <li class="slds-m-right--large">
+                                                                <span class="slds-text-title">Related To :</span>
+                                                                <span class="slds-text-body--small">
+                                                                    <aura:if isTrue="{!!empty(activity.What)}">
+                                                                        <a href="{!'/'+activity.What.Id}">&nbsp;{!activity.What.Name}</a>
+                                                                        <aura:set attribute="else">
+                                                                            NA
+                                                                        </aura:set>
+                                                                    </aura:if>
+                                                                </span>
+                                                            </li>
+                                                            <li class="slds-m-right--large">
+                                                                <span class="slds-text-title">Assigned to :</span>
+                                                                <span class="slds-text-body--small"><a href="{!'/'+activity.Owner.Id}">&nbsp;{!activity.Owner.Name}</a></span>
+                                                            </li>
+                                                            <li class="slds-m-right--large">
+                                                                <aura:if isTrue="{!and(v.sObjectName == 'Journey__c')}"> 
+                                                                    <span class="slds-text-title">Description : </span>
+                                                                    <span class="slds-text-body--small">{!activity.Description__c}</span>
+                                                                </aura:if>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__figure slds-media__figure--reverse">
+                                        <div class="slds-timeline__actions">
+                                            <p class="slds-timeline__date">
+                                                <aura:if isTrue="{!activity.ActivityDate != undefined}">
+                                                    <ui:outputDate value="{!activity.ActivityDate}" format="MMM DD"/>
+                                                    <aura:set attribute="else">
+                                                        No due date
+                                                    </aura:set>
+                                                </aura:if>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </aura:if>
+                        <aura:if isTrue="{!activity.ActivitySubtype == 'Event'}">
+                            <li>
+                                <span class="slds-assistive-text">Event</span>
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-media slds-media--timeline slds-timeline__media--event" style="z-index: 999;">
+                                            <div class="slds-media__figure slds-timeline__icon" style="padding-top: 12px;">
+                                                <div class="slds-icon_container">
+                                                    <lightning:icon iconName="standard:event" size="small" alternativeText="Event"/>                        
+                                                </div>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h3 class="slds-truncate" title="{!activity.Subject}"><a href="{!'/'+activity.Id}"> {!activity.Subject} </a></h3>
+                                                <p class="slds-truncate">{!activity.Description}</p>
+                                                <ul class="slds-list--horizontal slds-wrap">
+                                                    <aura:if isTrue="{!v.detailView}">
+                                                        <li class="slds-m-right--large">
+                                                            <span class="slds-text-title">Created Date :</span>
+                                                            <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.CreatedDate}" format="MM/dd/yyyy h:mm a"/></span>
+                                                        </li>
+                                                        <aura:if isTrue="{!!empty(activity.CallDisposition)}">
+                                                            <li class="slds-m-right--large">
+                                                                <span class="slds-text-title">Notes :</span>
+                                                                <span class="slds-text-body--small">&nbsp;{!activity.CallDisposition}</span>
+                                                            </li>
+                                                        </aura:if>
+                                                    </aura:if>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Start :</span>
+                                                        <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.StartDateTime}" format="MM/dd/yyyy h:mm a"/></span>
+                                                    </li>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">End :</span>
+                                                        <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.EndDateTime}" format="MM/dd/yyyy h:mm a"/></span>
+                                                    </li>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Related To :</span>
+                                                        <span class="slds-text-body--small">
+                                                            <aura:if isTrue="{!!empty(activity.What)}">
+                                                                <a href="{!'/'+activity.What.Id}">&nbsp;{!activity.What.Name}</a>
+                                                                <aura:set attribute="else">
+                                                                    NA
+                                                                </aura:set>
+                                                            </aura:if>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__figure slds-media__figure--reverse">
+                                        <div class="slds-timeline__actions">
+                                            <p class="slds-timeline__date">
+                                                <aura:if isTrue="{!activity.ActivityDate != undefined}">
+                                                    <ui:outputDate value="{!activity.ActivityDate}" format="MMM DD"/>
+                                                    <aura:set attribute="else">
+                                                        No due date
+                                                    </aura:set>
+                                                </aura:if>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </aura:if>
+                        <aura:if isTrue="{!or(activity.ActivitySubtype == 'Call',activity.ActivitySubtype == 'call')}">
+                            <li>
+                                <span class="slds-assistive-text">Call</span>
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-media slds-media--timeline slds-timeline__media--call" style="z-index: 999;">
+                                            <div class="slds-media__figure slds-timeline__icon" style="padding-top: 12px;">
+                                                <div class="slds-icon_container">
+                                                    <lightning:icon iconName="standard:log_a_call" size="small" alternativeText="Task"/>                        
+                                                </div>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h3 class="slds-truncate" title="{!activity.Subject}"><a href="{!'/'+activity.Id}">{!activity.Subject}</a></h3>
+                                                <p class="slds-truncate">{!activity.Description}</p>
+                                                <ul class="slds-list--horizontal slds-wrap">
+                                                    <aura:if isTrue="{!v.detailView}">
+                                                        <li class="slds-m-right--large">
+                                                            <span class="slds-text-title">Created Date :</span>
+                                                            <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.CreatedDate}" format="MM/dd/yyyy h:mm a"/></span>
+                                                        </li>
+                                                        <aura:if isTrue="{!!empty(activity.CallDisposition)}">
+                                                            <li class="slds-m-right--large">
+                                                                <span class="slds-text-title">Notes :</span>
+                                                                <span class="slds-text-body--small">&nbsp;{!activity.CallDisposition}</span>
+                                                            </li>
+                                                        </aura:if>
+                                                    </aura:if>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Related To :</span>
+                                                        <span class="slds-text-body--small">
+                                                            <aura:if isTrue="{!!empty(activity.What)}">
+                                                                <a href="{!'/'+activity.What.Id}">&nbsp;{!activity.What.Name}</a>
+                                                                <aura:set attribute="else">
+                                                                    NA
+                                                                </aura:set>
+                                                            </aura:if>
+                                                        </span>
+                                                    </li>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Assigned to :</span>
+                                                        <span class="slds-text-body--small"><a href="{!'/'+activity.Owner.Id}">&nbsp;{!activity.Owner.Name}</a></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__figure slds-media__figure--reverse">
+                                        <div class="slds-timeline__actions">
+                                            <p class="slds-timeline__date">
+                                                <aura:if isTrue="{!activity.ActivityDate != undefined}">
+                                                    <ui:outputDate value="{!activity.ActivityDate}" format="MMM DD"/>
+                                                    <aura:set attribute="else">
+                                                        No due date
+                                                    </aura:set>
+                                                </aura:if>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </aura:if>
+                        <aura:if isTrue="{!activity.ActivitySubtype == 'Email'}">
+                            <li>
+                                <span class="slds-assistive-text">Email</span>
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-media slds-media--timeline slds-timeline__media--email" style="z-index: 999;">
+                                            <div class="slds-media__figure slds-timeline__icon" style="padding-top: 12px;">
+                                                <div class="slds-icon_container">
+                                                    <lightning:icon iconName="standard:email" size="small" alternativeText="Email"/>                        
+                                                </div>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h3 class="slds-truncate" title="Mobile conversation on Monday"><a href="javascript:void(0);">Mobile conversation on Monday</a></h3>
+                                                <p class="slds-truncate">Hi guys, Thanks for meeting with the team today and going through the proposals we saw. This goes on until it’s truncated.</p>
+                                                <ul class="slds-list--horizontal slds-wrap">
+                                                    <aura:if isTrue="{!v.detailView}">
+                                                        <li class="slds-m-right--large">
+                                                            <span class="slds-text-title">Created Date :</span>
+                                                            <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.CreatedDate}" format="MM/dd/yyyy h:mm a"/></span>
+                                                        </li>
+                                                        <aura:if isTrue="{!!empty(activity.CallDisposition)}">
+                                                            <li class="slds-m-right--large">
+                                                                <span class="slds-text-title">Notes :</span>
+                                                                <span class="slds-text-body--small">&nbsp;{!activity.CallDisposition}</span>
+                                                            </li>
+                                                        </aura:if>
+                                                    </aura:if>
+                                                    <li class="slds-truncate_container--50 slds-m-right--large slds-grid">
+                                                        <span class="slds-text-title">To:</span>
+                                                        <span class="slds-text-body--small slds-m-left--xx-small slds-truncate" title="Lei Chan with Long Name that might go on for quite some distance futher than you might expect"><a href="javascript:void(0);">Lei Chan with Long Name that might go on for quite some distance futher than you might expect</a></span>
+                                                        <span class="slds-no-flex slds-text-body--small"> + 44 more</span>
+                                                    </li>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">From:</span>
+                                                        <span class="slds-text-body--small"><a href="javascript:void(0);">Jason Dewar</a></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__figure slds-media__figure--reverse">
+                                        <div class="slds-timeline__actions">
+                                            <p class="slds-timeline__date">
+                                                <aura:if isTrue="{!activity.ActivityDate != undefined}">
+                                                    <ui:outputDate value="{!activity.ActivityDate}" format="MMM DD"/>
+                                                    <aura:set attribute="else">
+                                                        No due date
+                                                    </aura:set>
+                                                </aura:if>
+                                            </p>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </aura:if>
+                    </aura:iteration>
+                </ul>
+            </div>
+        </div>
+        <div class="slds-section__title slds-m-bottom--medium  pastActivityHeader" ><h2 class="slds-section__title-action slds-align-middle slds-truncate" >Past Activity</h2></div>
+        <div class="timeline__button-more--top slds-text-align--center" style="float: right;margin-top:-53px;"><button class="slds-button slds-button--neutral showMoreButton uiButton" aria-live="off" type="button" data-aura-class="uiButton" onclick="{!c.getPastActivities}"><span class=" label bBody truncate" dir="ltr" >Past Activity</span></button></div>
+        <div class="slds-section__content">
+            <div class="slds-timeline uiAbstractList" data-aura-class="uiAbstractList">
+                <ul>
+                    <aura:iteration items="{!v.activityRecords.ActivityHistories}" var="activity" indexVar="index">
+                        <aura:if isTrue="{!activity.ActivitySubtype == 'Task'}">
+                            <li>
+                                <span class="slds-assistive-text">Task</span>
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-media slds-media--timeline slds-timeline__media--task" style="z-index: 999;">
+                                            <div class="slds-media__figure slds-timeline__icon" style="padding-top: 12px;">
+                                                <div class="slds-icon_container">
+                                                    <lightning:icon iconName="standard:task" size="small" alternativeText="Task"/>                        
+                                                </div>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h3 class="slds-truncate" title="{!activity.Subject}"><a href="{!'/'+activity.Id}"> {!activity.Subject} </a></h3>
+                                                <ul class="slds-list--horizontal slds-wrap">
+                                                    <aura:if isTrue="{!v.detailView}">
+                                                        <li class="slds-m-right--large">
+                                                            <span class="slds-text-title">Created Date :</span>
+                                                            <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.CreatedDate}" format="MM/dd/yyyy h:mm a"/></span>
+                                                        </li>
+                                                        <aura:if isTrue="{!!empty(activity.CallDisposition)}">
+                                                            <li class="slds-m-right--large">
+                                                                <span class="slds-text-title">Notes :</span>
+                                                                <span class="slds-text-body--small">&nbsp;{!activity.CallDisposition}</span>
+                                                            </li>
+                                                        </aura:if>
+                                                    </aura:if>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Related To :</span>
+                                                        <span class="slds-text-body--small">
+                                                            <aura:if isTrue="{!!empty(activity.What)}">
+                                                                <a href="{!'/'+activity.What.Id}">&nbsp;{!activity.What.Name}</a>
+                                                                <aura:set attribute="else">
+                                                                    NA
+                                                                </aura:set>
+                                                            </aura:if>
+                                                        </span>
+                                                    </li>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Assigned to :</span>
+                                                        <span class="slds-text-body--small"><a href="{!'/'+activity.Owner.Id}">&nbsp;{!activity.Owner.Name}</a></span>
+                                                    </li>
+                                                    <li class="slds-m-right--large">
+                                                        <aura:if isTrue="{!and(v.sObjectName == 'Journey__c')}"> 
+                                                            <span class="slds-text-title">Description : </span>
+                                                            <span class="slds-text-body--small">{!activity.Description__c}</span>
+                                                        </aura:if>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__figure slds-media__figure--reverse">
+                                        <div class="slds-timeline__actions">
+                                            <p class="slds-timeline__date">
+                                                <aura:if isTrue="{!activity.ActivityDate != undefined}">
+                                                    <ui:outputDate value="{!activity.ActivityDate}" format="MMM DD"/>
+                                                    <aura:set attribute="else">
+                                                        No due date
+                                                    </aura:set>                                                    
+                                                </aura:if>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </aura:if>
+                        <aura:if isTrue="{!activity.ActivitySubtype == 'Event'}">
+                            <li>
+                                <span class="slds-assistive-text">Event</span>
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-media slds-media--timeline slds-timeline__media--event" style="z-index: 999;">
+                                            <div class="slds-media__figure slds-timeline__icon" style="padding-top: 12px;">
+                                                <div class="slds-icon_container">
+                                                    <lightning:icon iconName="standard:event" size="small" alternativeText="Event"/>                        
+                                                </div>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h3 class="slds-truncate" title="{!activity.Subject}"><a href="{!'/'+activity.Id}"> {!activity.Subject} </a></h3>
+                                                <p class="slds-truncate">{!activity.Description}</p>
+                                                <ul class="slds-list--horizontal slds-wrap">
+                                                    <aura:if isTrue="{!v.detailView}">
+                                                        <li class="slds-m-right--large">
+                                                            <span class="slds-text-title">Created Date :</span>
+                                                            <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.CreatedDate}" format="MM/dd/yyyy h:mm a"/></span>
+                                                        </li>
+                                                        <aura:if isTrue="{!!empty(activity.CallDisposition)}">
+                                                            <li class="slds-m-right--large">
+                                                                <span class="slds-text-title">Notes :</span>
+                                                                <span class="slds-text-body--small">&nbsp;{!activity.CallDisposition}</span>
+                                                            </li>
+                                                        </aura:if>
+                                                    </aura:if>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Start :</span>
+                                                        <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.StartDateTime}" format="MM/dd/yyyy h:mm a"/></span>
+                                                    </li>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">End :</span>
+                                                        <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.EndDateTime}" format="MM/dd/yyyy h:mm a"/></span>
+                                                    </li>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Related To :</span>
+                                                        <span class="slds-text-body--small">
+                                                            <aura:if isTrue="{!!empty(activity.What)}">
+                                                                <a href="{!'/'+activity.What.Id}">&nbsp;{!activity.What.Name}</a>
+                                                                <aura:set attribute="else">
+                                                                    NA
+                                                                </aura:set>
+                                                            </aura:if>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__figure slds-media__figure--reverse">
+                                        <div class="slds-timeline__actions">
+                                            <p class="slds-timeline__date">
+                                                <aura:if isTrue="{!activity.ActivityDate != undefined}">
+                                                    <ui:outputDate value="{!activity.ActivityDate}" format="MMM DD"/>
+                                                    <aura:set attribute="else">
+                                                        No due date
+                                                    </aura:set>
+                                                </aura:if>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </aura:if>
+                        <aura:if isTrue="{!activity.ActivitySubtype == 'Call'}">
+                            <li>
+                                <span class="slds-assistive-text">Call</span>
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-media slds-media--timeline slds-timeline__media--call" style="z-index: 999;">
+                                            <div class="slds-media__figure slds-timeline__icon" style="padding-top: 12px;">
+                                                <div class="slds-icon_container">
+                                                    <lightning:icon iconName="standard:log_a_call" size="small" alternativeText="Task"/>                        
+                                                </div>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h3 class="slds-truncate" title="{!activity.Subject}"><a href="{!'/'+activity.Id}">{!activity.Subject}</a></h3>
+                                                <p class="slds-truncate">{!activity.Description}</p>
+                                                <ul class="slds-list--horizontal slds-wrap">
+                                                    <aura:if isTrue="{!v.detailView}">
+                                                        <li class="slds-m-right--large">
+                                                            <span class="slds-text-title">Created Date :</span>
+                                                            <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.CreatedDate}" format="MM/dd/yyyy h:mm a"/></span>
+                                                        </li>
+                                                        <aura:if isTrue="{!!empty(activity.CallDisposition)}">
+                                                            <li class="slds-m-right--large">
+                                                                <span class="slds-text-title">Notes :</span>
+                                                                <span class="slds-text-body--small">&nbsp;{!activity.CallDisposition}</span>
+                                                            </li>
+                                                        </aura:if>
+                                                    </aura:if>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Related To :</span>
+                                                        <span class="slds-text-body--small">
+                                                            <aura:if isTrue="{!!empty(activity.What)}">
+                                                                <a href="{!'/'+activity.What.Id}">&nbsp;{!activity.What.Name}</a>
+                                                                <aura:set attribute="else">
+                                                                    NA
+                                                                </aura:set>
+                                                            </aura:if>
+                                                        </span>
+                                                    </li>
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Assigned to :</span>
+                                                        <span class="slds-text-body--small"><a href="{!'/'+activity.Owner.Id}">&nbsp;{!activity.Owner.Name}</a></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__figure slds-media__figure--reverse">
+                                        <div class="slds-timeline__actions">
+                                            <p class="slds-timeline__date">
+                                                <aura:if isTrue="{!activity.ActivityDate != undefined}">
+                                                    <ui:outputDate value="{!activity.ActivityDate}" format="MMM DD"/>
+                                                    <aura:set attribute="else">
+                                                        No due date
+                                                    </aura:set>
+                                                </aura:if>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </aura:if>
+                        <aura:if isTrue="{!activity.ActivitySubtype == 'Email'}">
+                            <li>
+                                <span class="slds-assistive-text">Email</span>
+                                <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-media slds-media--timeline slds-timeline__media--email" style="z-index: 999;">
+                                            <div class="slds-media__figure slds-timeline__icon" style="padding-top: 12px;">
+                                                <div class="slds-icon_container">
+                                                    <lightning:icon iconName="standard:email" size="small" alternativeText="Email"/>                        
+                                                </div>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h3 class="slds-truncate" title="{!activity.Subject}"><a href="{!'/'+activity.Id}">{!activity.Subject}</a></h3>
+                                                <p class="slds-truncate">{!activity.Description}</p>
+                                                <aura:if isTrue="{!v.detailView}">
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Created Date :</span>
+                                                        <span class="slds-text-body--small">&nbsp;<ui:outputDate value="{!activity.CreatedDate}" format="MM/dd/yyyy h:mm a"/></span>
+                                                    </li>
+                                                    <aura:if isTrue="{!!empty(activity.CallDisposition)}">
+                                                        <li class="slds-m-right--large">
+                                                            <span class="slds-text-title">Notes :</span>
+                                                            <span class="slds-text-body--small">&nbsp;{!activity.CallDisposition}</span>
+                                                        </li>
+                                                    </aura:if>
+                                                </aura:if>
+                                                <ul class="slds-list--horizontal slds-wrap">
+                                                    <li class="slds-m-right--large">
+                                                        <span class="slds-text-title">Owner :</span>
+                                                        <span class="slds-text-body--small"><a href="{!'/'+activity.Owner.Id}">&nbsp;{!activity.Owner.Name}</a></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__figure slds-media__figure--reverse">
+                                        <div class="slds-timeline__actions">
+                                            <p class="slds-timeline__date">
+                                                <aura:if isTrue="{!activity.ActivityDate != undefined}">
+                                                    <ui:outputDate value="{!activity.ActivityDate}" format="MMM DD"/>
+                                                    <aura:set attribute="else">
+                                                        No due date
+                                                    </aura:set>
+                                                </aura:if>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </aura:if>
+                    </aura:iteration>
+                </ul>
+            </div>
+        </div>
+    </div>
+</aura:component>

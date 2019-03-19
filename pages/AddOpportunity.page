@@ -1,0 +1,13 @@
+<apex:page showheader="false" sidebar="false" standardstylesheets="false">
+    <apex:includescript value="/support/console/31.0/integration.js" />
+    <head>
+        <title>Add Opportunity</title>
+        <script type="text/javascript">
+            function testSetTabTitle() {
+               sforce.console.setTabTitle('Add Opportunity');
+            }
+        </script>
+    </head>
+    <!--<c:LightningResource component="AddOpportunity" parameters="journeyId={!$CurrentPage.parameters.journeyId}"></c:LightningResource>-->
+    <c:LightningResource component="AddOpportunity" parameters="journeyId={!$CurrentPage.parameters.journeyId};accountId={!$CurrentPage.parameters.accountId};hasAccess={!$CurrentPage.parameters.hasAccess};allowMerge={!$CurrentPage.parameters.allowMerge}"></c:LightningResource>
+</apex:page>

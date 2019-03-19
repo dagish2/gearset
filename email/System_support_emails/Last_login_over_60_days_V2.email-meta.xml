@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to be sent to users who&apos;s last login is over 60 days</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Deals_Status</letterhead>
+    <name>Last login over 60 days</name>
+    <style>freeForm</style>
+    <subject>Alert: Salesforce Access Deactivation</subject>
+    <textOnly>Dear {!Receiving_User.FirstName},
+
+Your salesforce account has been inactive for the past 60 days. Because Salesforce licenses are premium licenses, we need to ensure WeWork&apos;s continued optimized utilization and ROI.
+
+
+
+We have begun the process of inactivating any users that have not logged into the application in the past 60 days. Deactivation of licenses will take place this Friday by noon (EST), unless you log into your account before then.
+
+
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+
+
+Warmly,
+
+The Salesforce team</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

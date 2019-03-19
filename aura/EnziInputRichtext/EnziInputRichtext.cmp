@@ -1,0 +1,109 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="sObjectName" type="String" />
+    
+    <aura:attribute name="displayText" type="Object" />
+    <aura:attribute name="isContenteditable" type="Boolean" default="true" />
+    <aura:attribute name="isApplied" type="Map" default="{ bold: false, italic: false, underline: false, insertUnorderedList: false, insertOrderedList: false, indent: false, outdent: false, justifyLeft: false, justifyCenter: false, justifyRight: false}" />
+  	
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="fieldSelector" event="c:EnziFieldSelectorSelectEvent" action="{!c.onFieldSelect}"/>
+    
+    <style>
+        .slds-has-applied {
+        	background-color: rgb(224, 227, 232);
+        }
+    </style>
+    
+    <c:EnziSpinner aura:id="spinner" isFixed="true" size="large"></c:EnziSpinner>
+    <c:EnziToaster aura:id="toaster"></c:EnziToaster>
+    
+    <div class="{!'slds-rich-text-editor slds-grid slds-grid--vertical slds-nowrap '+(v.dirty?(v.valid?'':'slds-has-error'):'')}">
+        <div role="toolbar" class="slds-rich-text-editor__toolbar slds-is-relative slds-shrink-none slds-p-around--x-small slds-grid slds-theme--shade">
+            <ul aria-label="Format text" class="slds-button-group-list">
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.bold?'slds-has-applied':'')}" aria-describedby="bold" tabindex="0" title="Bold" onclick="{!c.doBold}">
+                        <lightning:icon iconName="utility:bold" size="x-small" alternativeText="Bold"/>                        
+                    </button>
+                </li>
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.italic?'slds-has-applied':'')}" aria-describedby="italic" tabindex="-1" title="Italic" onclick="{!c.doItalic}">
+                        <lightning:icon iconName="utility:italic" size="x-small" alternativeText="Italic"/>                        
+                    </button>
+                </li>
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.underline?'slds-has-applied':'')}" aria-describedby="underline" tabindex="-1" title="Underline" onclick="{!c.doUnderline}">
+                        <lightning:icon iconName="utility:underline" size="x-small" alternativeText="Underline"/>                        
+                    </button>
+                </li>
+            </ul>
+            <ul aria-label="Format body" class="slds-button-group-list">
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.insertUnorderedList?'slds-has-applied':'')}" aria-describedby="richtextbulletedlist" tabindex="-1" title="Bulleted List" onclick="{!c.doUnorderedList}">
+                        <lightning:icon iconName="utility:richtextbulletedlist" size="x-small" alternativeText="Bulleted List"/>                        
+                    </button>
+                </li>
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.insertOrderedList?'slds-has-applied':'')}" aria-describedby="richtextnumberedlist" tabindex="-1" title="Numbered List" onclick="{!c.doOrderedList}">
+                        <lightning:icon iconName="utility:richtextnumberedlist" size="x-small" alternativeText="Numbered List"/>                        
+                    </button>
+                </li>
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.indent?'slds-has-applied':'')}" aria-describedby="indent" tabindex="-1" title="Indent" onclick="{!c.doIndent}">
+                        <lightning:icon iconName="utility:richtextindent" size="x-small" alternativeText="Indent"/>                        
+                    </button>
+                </li>
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.outdent?'slds-has-applied':'')}" aria-describedby="outdent" tabindex="-1" title="Outdent" onclick="{!c.doOutdent}">
+                        <lightning:icon iconName="utility:richtextoutdent" size="x-small" alternativeText="Outdent"/>                        
+                    </button>
+                </li>
+            </ul>
+            <ul aria-label="Align text" class="slds-button-group-list">
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.justifyLeft?'slds-has-applied':'')}" aria-describedby="left_align_text" tabindex="-1" title="Left Align Text" onclick="{!c.doLeftAlign}">
+                        <lightning:icon iconName="utility:left_align_text" size="x-small" alternativeText="Left Align Text"/>                        
+                    </button>
+                </li>
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.justifyCenter?'slds-has-applied':'')}" aria-describedby="center_align_text" tabindex="-1" title="Center Align Text" onclick="{!c.doCenterAlign}">
+                        <lightning:icon iconName="utility:center_align_text" size="x-small" alternativeText="Center Align Text"/>                        
+                    </button>
+                </li>
+                <li>
+                    <button class="{!'slds-button slds-button--icon-border-filled '+(v.isApplied.justifyRight?'slds-has-applied':'')}" aria-describedby="right_align_text" tabindex="-1" title="Right Align Text" onclick="{!c.doRightAlign}">
+                        <lightning:icon iconName="utility:right_align_text" size="x-small" alternativeText="Right Align Text"/>                        
+                    </button>
+                </li>
+            </ul>
+            <ul aria-label="Insert content" class="slds-button-group-list">
+                <li>
+                    <button class="slds-button slds-button--icon-border-filled" aria-describedby="image" tabindex="-1" title="Add Image" onclick="{!c.doAddImage}">
+                        <lightning:icon iconName="utility:image" size="x-small" alternativeText="Add Image"/>                        
+                    </button>
+                </li>
+                <li>
+                    <button class="slds-button slds-button--icon-border-filled" aria-describedby="link" tabindex="-1" title="Add Link" onclick="{!c.doAddLink}">
+                        <lightning:icon iconName="utility:link" size="x-small" alternativeText="Add Link"/>                        
+                    </button>
+                </li>
+                <li>
+                    <button class="slds-button slds-button--icon-border-filled" aria-describedby="link" tabindex="-1" title="Add Merge Field" onclick="{!c.getFieldSelector}">
+                        <lightning:icon iconName="utility:insert_tag_field" size="x-small" alternativeText="Add Merge Field"/>                        
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="slds-rich-text-editor__textarea">
+            <label class="slds-assistive-text" for="{!'textarea_'+v.name}">{!v.label}</label>
+            <textarea id="{!'textarea_'+v.name}" class="slds-assistive-text" aria-describedby="rte-error-01"></textarea>
+            <div tabindex="0" class="slds-scrollable--x slds-textarea slds-p-around--medium slds-text-longform slds-grid slds-grow" style="overflow-y: scroll;max-height: 200Px;">
+                <div id="{!'text_'+v.name}" contenteditable="{!v.isContenteditable}" onclick="{!c.makeContenteditable}" onselect="{!c.makeContenteditable}" onkeyup="{!c.change}" class="slds-text-color--weak slds-grow" > {!v.displayText} </div>
+            </div>
+        </div>
+    </div>
+    {!v.body}
+</aura:component>

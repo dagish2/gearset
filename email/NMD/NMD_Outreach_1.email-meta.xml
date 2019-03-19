@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Thi is actually 1x</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>NMD Outreach 1</name>
+    <style>freeForm</style>
+    <subject>Thanks for reaching out to WeWork!</subject>
+    <textOnly>Hi {!Lead.Salutation_Name__c},
+
+
+
+Thanks for your interest in WeWork! We&apos;re thrilled you&apos;re thinking of joining our community.
+
+I&apos;m here to provide more information on our beautiful workspaces, learn more about your specific business needs, and schedule a tour at your preferred location(s).
+
+Just reply directly to this email or give me a call at {!Lead.Location_Phone_Number__c} with any questions you might have.
+
+Thanks, and talk soon!
+
+
+{!User.Name}
+{!Lead.Location_Phone_Number__c}
+wework.com</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

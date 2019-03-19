@@ -1,0 +1,3 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" title="ApexDebugLog">
+    <c:LightningResource component="ApexDebugLog" parameters=""></c:LightningResource> 
+</apex:page>

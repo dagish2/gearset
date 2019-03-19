@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User announcements for sprint 26 Dev release ( Account Hierarchy)</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes 26 A</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Updates to Accounts</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+This week&apos;s release contains the new account hierarchy structure.
+
+What is Account Hierarchy?
+Account hierarchy is the linking of an account to another account. Creating this relationship helps sales reps manage accounts.
+We have created 3 account types. Billing accounts, Sales accounts and Organization accounts.
+
+Check out this overview video
+https://drive.google.com/file/d/1Z76VyT1g0tAM16mRbOfWcdgOpH-w8rAj/view?usp=sharing
+
+Billing Account: An account that represents a billing entity
+
+Contains UUID
+Contains Primary Member
+Syncs with Billing systems and Spacestation
+Can send paperwork
+Billing accounts can also be represented by blank values, which indicates no previously signed contract
+
+Sales Account: An account that represents an entity  that exists as a regional, business division, or subsidiary
+
+Can not send paperwork
+Does not sync with billing systems and space station
+Created and managed by sales operation leads
+Generally owned enterprise and member success reps
+
+Organization Account:  An account that represents the top of the hierarchy. This is the senior parent account and controls the relationship of the structure.
+
+Can not send paperwork
+Does not sync with billing systems and space station
+Auto Parented based on Unomy enrichment
+Manually Parented through the account selector or account record
+
+Check out our other feature videos related to this release
+How to create a billing account for an opportunity
+https://drive.google.com/file/d/1hD69gdwarZTRLd1f8uaiRVEJ2IF-THTy/view?usp=sharing
+How to search and identify different accounts relationships in Salesforce
+https://drive.google.com/file/d/1SgNh4r_VwuGvmS1raPIzplPUbdd7U6El/view?usp=sharing
+
+If you have any questions or concerns, please contact us at salesforcesupport@wework.com
+
+Sincerely
+Tykira</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

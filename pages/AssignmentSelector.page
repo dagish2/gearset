@@ -1,0 +1,4 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false">
+    <title>Assignment Selector</title>
+    <c:LightningResource component="BuildingSelector" ></c:LightningResource>
+</apex:page>

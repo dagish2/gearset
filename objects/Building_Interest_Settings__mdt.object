@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Unique_key_for_validation__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Unique key for validation</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Building Interest Settings</label>
+    <pluralLabel>Building Interest Settings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

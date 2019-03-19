@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>To notify users the kickbox importer is live and instruct them to use it</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>New Importer feature is now live</name>
+    <style>freeForm</style>
+    <subject>PLEASE READ: Changes to salesforce Lead/Journey importer</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+We are proud to announce an enhancement to our Lead/ Journey importer. This new tool allows us to reliably generate journeys against new or existing records, ensure that existing contact/lead data is not overwritten and provides Email addresses verification.
+
+Here is the criteria necessary for a Journey to be created for a record
+
+Existing Leads/Contacts cannot have a last activity date within 90 days, have a member status of &quot;Not active&quot; or have an existing open journey on the record.
+
+Using the Journey Uploader
+
+1. Click the Plus &quot;+&quot; icon at the top right of the Salesforce window and select &quot;Kickbox Verification&quot;
+
+2. Download the CVS upload temple by clicking the &quot;Download CSV Template&quot; link.
+
+3. Fill out the upload template in Excel.
+
+For a list of field values please refer to this Google Doc.
+Please note that the Lead Owner field must be in ID form. For a list of User IDs refer to this Salesforce Report.
+For a description of each field please refer to this Google Doc. If left blank journeys/leads will automatically be assigned to the running user. (You)
+
+4. Click &quot;Browse&quot; to select your CSV upload template. Then click Upload to generate the leads.
+
+Note that checking &quot;Generate Journey&quot; will attempt to generate a journey regardless of whether the Generate Journey field is set to TRUE or FALSE in the upload file.
+
+5. Once the job is processed you should receive an email confirming that the job has been completed. (This is often caught in your spam folder to please make sure to check).
+
+6. After the lead has been generated Salesforce will test the email address for validity. Once tested the &quot;Email Quality&quot; field on the lead/contact record will be updated with one of the following values:
+
+Undeliverable: Invalid Email address with an invalid domain
+Deliverable: Valid Email address
+Risky: Valid Domain but the email may not exist
+Pending: Has not yet completed testing. (Testing runs in batches every 2 hours)
+
+
+
+
+
+
+Please email salesforcesupport@wework.com if you are experiencing any issues or have any concerns.
+
+Best,
+WeWork Sales Products Team</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

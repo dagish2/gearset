@@ -1,0 +1,16 @@
+Hello,
+
+A broker is involved on my opportunity, {!Opportunity.Name}. Please see here: {!Opportunity.Link}.
+
+PNM / Member Account: {!Opportunity.Account}
+Referrer: {!Opportunity.Referrer__c}
+Referrer Account: {!Opportunity.Referrer_Account__c}
+Referrer Email: {!Opportunity.Referrer_Email__c}
+Lead Source: {!Opportunity.LeadSource}
+Referral Type: {!Opportunity.Opportunity_Referral_Type__c}
+No. of Desks (unweighted): {!Opportunity.No_of_Desks_unweighted__c}
+Opp Portfolio: {!Opportunity.Territory__c}
+Opp Territory:  {!Opportunity.Territory_Name__c}
+
+Best,
+{!Opportunity.OwnerFullName}

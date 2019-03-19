@@ -1,0 +1,18 @@
+<aura:component >
+    <aura:attribute name="size" type="String" />
+    <aura:attribute name="show" type="String" />
+    <aura:attribute name="position" type="String" default="left" />
+    <div role="group" style="display: inline-block;">
+        <div class="{!'slds-dropdown-trigger slds-dropdown-trigger--click '+(v.show?'slds-is-open':'')}" aria-expanded="false" style="margin-left : 6px;">
+            <button class="slds-button slds-button--icon-border-filled slds-button--icon-x-small dropDownTrigger" aria-haspopup="true" title="Show More" onclick="{!c.toggleAction}">
+                <lightning:icon iconName="utility:down" size="{!v.size}"/>                
+                <span class="slds-assistive-text">Show More</span>
+            </button>
+            <div class="{!'slds-dropdown slds-dropdown--'+(v.position=='left'?'right':'left')+' slds-nubbin--top-'+(v.position=='left'?'right':'left')}" style="{!(v.position=='left'?'right:-15px':'left:-13px')}">
+                <ul class="slds-dropdown__list" role="menu" >
+                    {!v.body}
+                </ul>
+            </div>
+        </div>
+    </div>
+</aura:component>

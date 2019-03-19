@@ -1,0 +1,11 @@
+<aura:component >
+	<aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="length" type="Integer" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="onInput" type="Object" />
+
+    <input type="text" id="{!v.name}" class="slds-input" placeholder="{!v.disabled?'':'Enter '+v.label}" onkeyup="{!c.change}" maxlength="{!v.length}" disabled="{!v.disabled?'disabled':''}" style="border:1px solid rgb(217, 219, 221) !important;border-radius:0.25rem!important" value="{!v.value}" oninput="{!v.onInput}"/>
+</aura:component>

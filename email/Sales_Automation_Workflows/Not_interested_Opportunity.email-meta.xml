@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Not interested - Opportunity</name>
+    <style>none</style>
+    <subject>Not interested in WeWork?</subject>
+    <textOnly>Not interested in WeWork anymore?
+
+Seems like you are no longer interested in WeWork. Please confirm by clicking the link below:
+
+https://welcome.wework.com/forms/notinterested.php?oppId= {!Opportunity.Id}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

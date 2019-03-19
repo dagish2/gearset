@@ -1,0 +1,157 @@
+<aura:component controller="ConvertBrokerLeadController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="releatedRecordId" type="String" />
+    <aura:attribute name="record" type="Map" />
+    <aura:attribute name="utils" type="Object"/>
+    <aura:attribute name="relatedRecord" type="Map" />
+    <aura:attribute name="relatedLeadRecord" type="Map" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="valid1" type="Boolean" />
+    <aura:attribute name="mode" type="String" default="VIEW" />
+    <aura:attribute name="relatedMode" type="String" default="VIEW" />
+    <aura:attribute name="phase" type="String" default="phase1" />
+    <aura:attribute name="icon" type="String" default="custom:custom20"/>
+    <aura:attribute name="journeyLayout" type="Object" /> 
+    <aura:attribute name="journeyLayoutDetails" type="Object" /> 
+    <aura:attribute name="relatedLayoutDetails" type="Object" /> 
+    <aura:attribute name="relatedLayout" type="Object" /> 
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="relatedSobjectName" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="recordTypeId" type="String" />
+    <aura:attribute name="recordTypeName" type="String" />
+    <aura:attribute name="recordName" type="String" />
+    <aura:attribute name="warningMessage" type="String" />
+    <aura:attribute name="customActions" type="Object"/>
+    <aura:attribute name="standardActions" type="Object"/>
+    <aura:attribute name="topActions" type="List" default="Manage_Tours,Add_Opportunity"/>
+    <aura:attribute name="topActionsObj" type="Object"/>
+    <aura:attribute name="predefinedStandardActions" type="List" default='["Edit","Delete","ChangeOwnerOne","ChangeRecordType"]'/>
+    <aura:attribute name="showConvertBrokerModal" type="Boolean" default="false" />
+    <aura:attribute name="spinnerWithoutContainer" type="Boolean" default="false" />
+    <aura:attribute name="showAccountSelector" type="Boolean" default="false" />
+    <aura:attribute name="selectedAccount" type="Object" />
+    <aura:attribute name="updateJourneyStatusId" type="String" default="" />
+    <aura:attribute name="isNewAccountCreated" type="Boolean" />
+    <aura:attribute name="closedJourneyStages" type="List" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:EnziCustomAction aura:id="customActions" recordId="{!v.recordId}"></c:EnziCustomAction>
+    <aura:if isTrue="{!v.spinnerWithoutContainer}">
+        <aura:html tag="style"> 
+            .slds-spinner_container {
+            background-color: transparent !important;
+            }
+        </aura:html>
+    </aura:if>
+
+    <div class="slds-page-header">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 mobileMargin">
+                <div class="slds-media slds-no-space slds-grow">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="{!v.icon}"/>
+                    </div>
+                    <div class="slds-media__body">
+                        <p class="slds-text-title--caps slds-line-height--reset">{!v.recordTypeName}</p>
+                        <h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate" title="this should match the Record Title">{!v.recordName}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 mobileCenter" style="text-align:right">
+                <div class="slds-button-group" role="group" style="display:inline-block">
+                    <aura:iteration items="{!v.standardActions}" var="btn" indexVar="index">
+                        <button class="slds-button topactions slds-button--neutral" id="{!'saction:'+index}" onclick="{!c.manageStandardActions}">{!btn.label}</button>
+                    </aura:iteration>
+                    <aura:iteration items="{!v.topActionsObj}" var="action" indexVar="index">
+                        <button class="slds-button topactions slds-button--neutral" id="{!'taction:'+index}" onclick="{!c.manageTopAction}">{!action.label}</button>
+                    </aura:iteration>
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger--click slds-button--last" aria-expanded="false" id="actionDropdown">
+                        <button class="slds-button slds-button--icon-border-filled" id="{!'actionTrigger'+v.recordId}" aria-haspopup="true" title="More Actions" onclick="{!c.toggleAction}">
+                            <lightning:icon iconName="utility:down" size="x-small"/>
+                            <span class="slds-assistive-text">More Actions</span>
+                        </button>
+                        <div class="slds-dropdown slds-dropdown--right slds-nubbin--top-right">
+                            <ul class="slds-dropdown__list" role="menu">
+                                <aura:iteration items="{!v.customActions}" var="action" indexVar="index">
+                                    <li class="slds-dropdown__item" role="presentation" id="{!'action:'+index}" onclick="{!c.manageCustomAction}">
+                                        <a href="javascript:void(0);" role="menuitem" tabindex="0" >
+                                            <span class="slds-truncate">
+                                                {!action.label}
+                                            </span>
+                                        </a>
+                                    </li>                                  
+                                </aura:iteration>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    <div class="{! (v.phase=='phase1') ?  (v.mode=='EDIT' ? 'slds-show' : 'slds-hide') : (v.relatedMode=='EDIT' ? 'slds-show' : 'slds-hide')}" >
+        <div class="footer active slds-text-align_center"  style="position: fixed;background: rgba(255, 255, 255, 0.6); padding: 8px; z-index: 3; width: 100%; bottom: 0px;border-top: 3px solid rgb(240, 241, 243);">
+            <span style=""><c:EnziButton leftIcon="utility:close" type="destructive" label="Close" click="{!c.close}"></c:EnziButton></span>
+            <span style=""><c:EnziButton leftIcon="utility:save" type="brand" disabled="{! (v.phase=='phase1') ? (not(v.valid)) : not(v.valid1) }" label="Save" click="{!c.saveRecord}"></c:EnziButton></span>
+        </div>
+    </div>
+   
+    <div style="padding:0px 20px;padding-top:10px">
+        <lightning:tabset >
+            <lightning:tab aura:id="journeyDetail" label="Details" onactive="{!c.changePhase }">
+                <aura:if isTrue="{!v.journeyLayout}">
+                    <c:WeForm aura:id="weform" recordId="{!v.recordId}" valid="{!v.valid}" mode="{!v.mode}" record="{!v.record}" layout="{!v.journeyLayout}" sObjectName="Journey__c"></c:WeForm>
+                </aura:if>
+            </lightning:tab>
+            <aura:if isTrue="{!and(v.record!=undefined,or(v.record.Primary_Lead__c,v.record.Primary_Contact__c))}">
+                <lightning:tab aura:id="releated" label="{!'Related '+(v.record.Primary_Lead__c?'Lead':'Contact')}" id="phase2"  onactive="{!c.changePhase }" >
+                    <lightning:tabset >
+                        <lightning:tab label="Details" id="relatedDetails" onactive="{!c.handleActive }" />
+                        <lightning:tab label="Related Lists" id="relatedRecordLists" onactive="{!c.handleActive }"/>
+                        <lightning:tab label="Activity" id="releatedActivity" onactive="{!c.handleActive }"/>
+                    </lightning:tabset>
+                </lightning:tab>
+            </aura:if>
+            <lightning:tab label="Related Lists" id="relatedLists" onactive="{!c.handleActive }"/>
+            <lightning:tab label="Activity" id="activity" onactive="{!c.handleActive }"/>
+        </lightning:tabset>
+    </div> 
+    
+    <aura:if isTrue="{!v.showConvertBrokerModal}">
+        <div class="modal-glass slds-backdrop fadein slds-backdrop--open" tabindex="-1" style="opacity: 0.8;"></div>
+        <div class="panel slds-modal slds-fade-in-open"  tabindex="-1" role="dialog" aria-modal="true" style="opacity: 1;">
+            <div class="modal-container slds-modal__container" >
+                <div class="modal-header slds-modal__header empty slds-modal__header--empty">
+                    <button class="slds-button slds-modal__close closeIcon slds-button_icon-bare slds-button_icon-inverse" type="button" title="Close this window" onclick="{!c.closeAction}">
+                        <lightning:icon iconName="utility:close" size="xx-small"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body scrollable slds-modal__content slds-p-around--medium"  data-scoped-scroll="true" style="height: 250px; max-height: 250px;">
+                    <aura:if isTrue="{!v.warningMessage}">
+                        <ui:message title="{!v.warningMessage}" severity="warning" />
+                        <aura:set attribute="else">
+                            <header class="slds-modal__header">
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirmation</h2>
+                            </header>
+                            <div class="slds-modal__content" style="font-size: 17px;text-align: center;padding-top: 31px;">
+                                Are you sure you want to Convert/Handoff Journey ?
+                            </div>    
+                            <footer class="slds-modal__footer slds-text-align_right" style="margin-top:40px;padding: 6px 6px 6px 0px;">
+                                <c:EnziButton leftIcon="utility:close" type="destructive" label="Cancel" click="{! c.closeAction }"></c:EnziButton>
+                                <c:EnziButton leftIcon="utility:check" type="brand" label="Convert" click="{! c.verifyAndShowAccountSelector }"></c:EnziButton>
+                            </footer>
+                        </aura:set>
+                    </aura:if>
+                </div>
+            </div> 
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.showAccountSelector}">
+        <c:EnziModal aura:id="AccountSelector" header="Account Selector" showFooter="false" isLarge="true" show="true" showCloseButton="true">
+            <c:AccountSelector leadId="{!v.record.Primary_Lead__c}" isNewAccountCreated="{!v.isNewAccountCreated}" selectedOrg="{!v.selectedAccount}" useSelectedAccount="{!c.convertBrokerLead}" isFromConverBrokerFunctionality="true" redirectIdAfterRequestNewOrg="{!v.record.Id}" />
+        </c:EnziModal>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,57 @@
+<!-- header -->
+		<table bgcolor="#24272a" border="0" cellpadding="0" cellspacing="0" width="720">
+			<tbody>
+				<tr>
+					<td>
+						<a href="http://www.wework.com"><img alt="WeWork" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwk/37722/4854/wework_header01.jpg" style="display:block;" width="130" /></a></td>
+					<td>
+						<img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwf/37722/4850/wework_header02.jpg" style="display:block;" width="463" /></td>
+					<td pardot-region="facebook">
+						<a href="https://www.facebook.com/WeWork"><img alt="" border="0" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwp/37722/4856/wework_header03.jpg" style="display:block;" width="29" /></a></td>
+					<td pardot-region="twitter">
+						<a href="https://twitter.com/wework"><img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwm/37722/4858/wework_header04.jpg" style="display:block;" width="27" /></a></td>
+					<td pardot-region="instagram">
+						<a href="http://instagram.com/wework"><img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwr/37722/4860/wework_header05.jpg" style="display:block;" width="27" /></a></td>
+					<td pardot-region="pineterest">
+						<a href="http://www.pinterest.com/pinterest/"><img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rwy/37722/4864/wework_header06.jpg" style="display:block;" width="28" /></a></td>
+					<td>
+						<img alt="" height="55" src="http://e.wework.com/l/37722/2014-03-26/2rww/37722/4866/wework_header07.jpg" style="display:block;" width="16" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- end title big --><!-- text 1 -->
+		<table border="0" cellpadding="0" cellspacing="0" style="margin-top:15px" width="720">
+			<tbody>
+				<tr>
+					<td style="width:70px;">
+						<span id="cke_bm_230S" style="display: none;">&nbsp;</span><span id="cke_bm_231S" style="display: none;">&nbsp;</span></td>
+					<td pardot-region="main-text">
+						<p style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 22px; color: rgb(61, 61, 61); text-align: left;">
+							<span style="color: rgb(36, 39, 42); font-size: 30px; text-align: center;"><span style="font-size: 22px;">Not interested in WeWork anymore?&nbsp;<span id="cke_bm_231E" style="display: none;">&nbsp;</span><span id="cke_bm_230E" style="display: none;">&nbsp;</span></span></span></p>
+						<p style="font-family:Helvetica, Arial, sans-serif; font-size:14px; line-height:22px; color:#3d3d3d; text-align:left; font-weight:normal">
+							Seems like you are no longer interested in WeWork. Please confirm by clicking the link below:</p>
+						<p style="font-family:Helvetica, Arial, sans-serif; font-size:14px; line-height:22px; color:#3d3d3d; text-align:left; font-weight:normal">
+							<a href="https://welcome.wework.com/forms/notinterested.php?leadId={!Lead.Id}"><span style="font-size:16px;">I&#39;m not inetesretd in wework</span></a><br />
+							&nbsp;</p>
+						<p style="font-family:Helvetica, Arial, sans-serif; font-size:14px; line-height:22px; color:#3d3d3d; text-align:left; font-weight:normal">
+							&nbsp;</p>
+					</td>
+					<td style="width:70px;">
+						<p>
+							&nbsp;</p>
+						<p>
+							&nbsp;</p>
+					</td>
+				</tr>
+				<tr>
+					<td style="width:70px;">
+						&nbsp;</td>
+					<td pardot-region="main-text">
+						&nbsp;</td>
+					<td style="width:70px;">
+						&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>
+			<!-- end text 1 --></p>

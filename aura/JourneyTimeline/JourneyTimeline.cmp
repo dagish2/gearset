@@ -1,0 +1,309 @@
+<aura:component >
+    <aura:attribute name="userInfo" type="map" />
+    <aura:attribute name="journeyId" type="String"></aura:attribute>
+    <aura:attribute name="phone" type="String"></aura:attribute>
+    <aura:attribute name="memberId" type="String"></aura:attribute>
+    <aura:attribute name="contact" type="object"></aura:attribute>
+    <aura:attribute name="lead" type="object"></aura:attribute>
+    <aura:attribute name="leadFormData" type="object" default="{Phone:''}"></aura:attribute>
+    <aura:attribute name="objActivity" type="map" default="{}"></aura:attribute>
+    <aura:attribute name="TempobjActivity" type="map" default="{}"></aura:attribute>
+    <aura:attribute name="recentActivity" type="map" default="{}"></aura:attribute>
+    <aura:attribute name="journeys" type="List" default="[]"></aura:attribute>
+    <aura:attribute name="journeyMeta" type="List" default="[]"></aura:attribute>
+    <aura:attribute name="lstCallDisposition" type="List"></aura:attribute>
+    <aura:attribute name="lstPauseReasons" type="List"></aura:attribute>
+    <aura:attribute name="settingData" type="Map" />
+    <aura:attribute name="currentDate" type="Object" />
+    <aura:attribute name="showNFD" type="Boolean" default="true" />
+    <aura:attribute name="showNFT" type="Boolean" default="false" />
+    <aura:attribute name="showMessage" type="boolean" default="false"></aura:attribute>
+    <aura:attribute name="errors" type="Object" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:attribute name="errors2" type="Object"/>
+    <aura:attribute name="valid2" type="Boolean"/>
+    <aura:attribute name="errors3" type="Object"/>
+    <aura:attribute name="valid3" type="Boolean"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <style>
+        .info-header{
+        background:#54698c;
+        color:#ffffff;
+        text-align:left;
+        }
+        .slds-modal__content::-webkit-scrollbar-track
+        {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+        }
+        .slds-modal__content::-webkit-scrollbar
+        {
+        width: 6px;
+        background-color: #F5F5F5;
+        }
+        .slds-modal__content::-webkit-scrollbar-thumb
+        {
+        background-color: #8d8b8a;	
+        background-image: -webkit-linear-gradient(45deg,
+        rgba(255, 255, 255, .2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, .2) 50%,
+        rgba(255, 255, 255, .2) 75%,
+        transparent 75%,
+        transparent)
+        }
+        #record-description{
+        overflow-y:auto;
+        overflow-x:none;
+        height:420px;
+        }
+        .slds-scope::-webkit-scrollbar-track .slds-scope::-webkit-scrollbar-track
+        {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+        }
+        .slds-scope::-webkit-scrollbar
+        {
+        width: 6px;
+        background-color: #F5F5F5;
+        }
+        .slds-scope::-webkit-scrollbar-thumb
+        {
+        background-color: #8d8b8a;	
+        background-image: -webkit-linear-gradient(45deg,
+        rgba(255, 255, 255, .2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, .2) 50%,
+        rgba(255, 255, 255, .2) 75%,
+        transparent 75%,
+        transparent)
+        }
+        
+        #record-description::-webkit-scrollbar-track
+        {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+        }
+        
+        #record-description::-webkit-scrollbar
+        {
+        width: 5px;
+        background-color: #F5F5F5;
+        }
+        
+        #record-description::-webkit-scrollbar-thumb
+        {
+        background-color: #54698c;
+        background-image: -webkit-gradient(linear, 0 0, 0 100%,
+        color-stop(.5, rgba(255, 255, 255, .2)),
+        color-stop(.5, transparent), to(transparent));
+        }
+        
+        h1[class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate"]{
+        font-size: 26px !important;
+        }
+    </style>
+    <title>Journey Timeline Page</title>
+    <!--<c:EnziHeader sObjectName="Journey" pageName="Journey Timeline" iconName="standard:task"></c:EnziHeader>-->
+    <c:EnziHeader sObjectName="Journey" pageName="{!v.contact?(v.contact.Name):(v.lead?(v.lead.Name):'Journey Timeline')}" iconName="{!v.contact?'standard:contact':(v.lead?'standard:lead':'custom:custom20')}"></c:EnziHeader>
+    
+    <aura:if isTrue="{!or(v.contact,v.lead)}">
+        <div style="border:1px solid #d9dbdd;">
+            <c:EnziDataHeader sObject="{!v.contact?v.contact:v.lead}" 
+                              fieldMetaData="{!v.contact?(v.settingData.contactDisplayFields):(v.settingData.leadDisplayFields)}" >
+            </c:EnziDataHeader>
+        </div>
+        <div class="slds-grid slds-wrap slds-grid_pull-padded slds-m-around_xxx-small">
+            <div class="slds-size_2-of-3 slds-small-size_1-of-1 slds-medium-size_2-of-3 slds-large-size_2-of-3">
+                <div class="slds-card slds-m-around_xx-small" style="margin-top:0px;margin-right:0px;">
+                    <div class="info-header slds-p-around_x-small" role="alert">
+                        <span class="slds-text-heading_x-small">
+                            <lightning:icon size="x-small" iconName="utility:description" variant="inverse"></lightning:icon>
+                            &nbsp;&nbsp;Timeline</span>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <div class="slds-grid slds-wrap slds-grid_pull-padded">
+                            <div class="slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                <lightning:tabset >
+                                    <aura:if isTrue="{!!v.showMessage}">
+                                        <lightning:tab >
+                                            <aura:set attribute="label">
+                                                <span style="font-size: 14px;">Activities</span>
+                                            </aura:set>
+                                            <div id="record-description" class="slds-p-around_medium" style="margin-bottom:30px;"> 
+                                                <c:EnziActivityTimeline aura:id="activityComponent" recordId="{!v.memberId}" detailView="true" openActivityLabel="Open Activities"></c:EnziActivityTimeline>
+                                            </div>
+                                        </lightning:tab>
+                                    </aura:if>
+                                    <aura:if isTrue="{!or(v.contact,v.lead)}">
+                                        <lightning:tab >
+                                            <aura:set attribute="label">
+                                                <span style="font-size: 14px;">Journeys</span>
+                                            </aura:set>
+                                            <aura:if isTrue="{!v.journeys.length>0}">
+                                                <div id="record-description" style="height:450px">
+                                                    <c:EnziDataTable records="{!v.journeys}" describedFields="{!v.journeyMeta}"
+                                                                     showMultiselect="false" setBorder="true"
+                                                                     caption="Open Journeys" icon="custom:custom20" 
+                                                                     currentPage="1" showPagination="true">
+                                                    </c:EnziDataTable>
+                                                </div>
+                                                <aura:set attribute="else">
+                                                    <article class="slds-card">
+                                                        <div class="slds-card__body slds-p-around_small" style="letter-spacing:2px;">
+                                                            <span>
+                                                                <lightning:icon size="small" iconName="utility:info_alt"></lightning:icon>
+                                                                &nbsp;&nbsp;No records found !
+                                                            </span>
+                                                        </div>
+                                                    </article>
+                                                </aura:set>
+                                            </aura:if>
+                                        </lightning:tab>       
+                                    </aura:if>
+                                </lightning:tabset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-size_1-of-3 slds-small-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3" style="margin-bottom:60px;">
+                <div class="slds-card slds-m-around_xx-small" style="border-bottom:0px;margin-top:0px;margin-right:0px;">
+                    <div class="info-header slds-p-around_x-small" role="alert">
+                        <span class="slds-text-heading_x-small">
+                            <lightning:icon size="xx-small" iconName="utility:call" variant="inverse"></lightning:icon>
+                            &nbsp;&nbsp;Call Result
+                        </span>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <div class="slds-grid slds-wrap slds-grid_pull-padded">
+                            <div class="slds-small-size_1-of-1" style="letter-spacing:2px;">
+                                <div class="slds-form-element slds-p-around_medium">
+                                    <c:EnziFormValidator errors="{!v.errors2}" valid="{!v.valid2}" aura:id="activity-form">
+                                    <aura:if isTrue="{!v.recentActivity}">
+                                        <c:EnziField type="string" name="subject-recent" label="Subject" value="{!v.recentActivity.Subject}" required="true" disabled="true" />
+                                        <aura:set attribute="else">
+                                            <c:EnziField sObjectName="Task" fieldName="Subject" label="Subject" value="{!v.objActivity.Subject}" required="true" disabled="{!v.recentActivity}" errors="{!v.errors2}"></c:EnziField>
+                                        </aura:set>
+                                    </aura:if>
+                                    <c:EnziField type="picklist" name="Disposition1" label="Disposition" options="{!v.lstCallDisposition}" value="{!v.objActivity.CallDisposition}" labelField="Name" valueField="Value" required="true" change="{!c.selectSubject}" errors="{!v.errors2}"></c:EnziField>
+                                    <aura:if isTrue="{!v.showNFD}">
+                                        <c:EnziField type="date" name="followUpDate" label="Next Follow Up" upperBound="{!v.currentDate}" value="{!v.objActivity.NextActivityDate}" required="false" />
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.showNFT}">
+                                        <lightning:input type="time" label="Next Follow Up Time" name="followupTime" value="{!v.objActivity.Next_Followup_Time__c}" aura:id="required" />
+                                    </aura:if>
+                                    <c:EnziField type="textarea" name="summary" label="Remarks/Notes" value="{!v.objActivity.Description}" length="80" />
+                                    <c:EnziField type="boolean" name="pauseCall"
+                                                 label="Pause Call ?" hideLabel="true"
+                                                 value="{!v.objActivity.showPauseReason}">
+                                        </c:EnziField>
+                                        <aura:if isTrue="{!v.objActivity.showPauseReason}">
+                                        <c:EnziField type="picklist" name="pauseReason" label="Choose Pause Reason" options="{!v.lstPauseReasons}" value="{!v.objActivity.PauseReason}" labelField="Name" valueField="Value" required="{!v.objActivity.showPauseReason}" errors="{!v.errors2}"></c:EnziField>
+                                        </aura:if>
+                                        <div class="slds-float_right slds-p-around_small">
+                                        <!--<c:EnziButton id="saveActivity" leftIcon="utility:save" label="Save" type="brand" click="{!c.createActivity}" disabled="{!!v.valid2}"></c:EnziButton>-->
+                                        <c:EnziButton id="saveAndClose" leftIcon="utility:save" label="Save &amp; Dispose" type="brand" click="{!c.saveAndClose}" disabled="{!!v.valid2}"></c:EnziButton>
+                                        <c:EnziButton id="justClose" leftIcon="utility:end_call" label="Dispose" type="destructive" click="{!c.disposeCall}"></c:EnziButton>
+                                    </div>
+                                    </c:EnziFormValidator>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.showMessage}"> 
+        <div class="slds-card" style="width:50%;margin:auto;position:relative;top:20%;">
+            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+                <span class="slds-text-heading_xxsmall">
+                    <lightning:icon size="small" iconName="utility:info_alt" variant="inverse"></lightning:icon>
+                    &nbsp;&nbsp;No Record found !</span>
+            </div>
+            <div class="slds-card__body slds-card__body_inner slds-m-around_medium ">
+                <div class="slds-grid slds-wrap slds-grid_pull-padded slds-text-align_center">
+                    <div class="slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1" style="letter-spacing:2px;">
+                        <span>
+                            No record found with the phone "{!v.phone}" !
+                        </span>
+                    </div>
+                    
+                </div>
+                <div class="slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-text-align_center">
+                    <c:EnziButton id="createLeadBtn" label="New Lead"
+                                  leftIcon="utility:add" type="brand"
+                                  click="{!c.showLeadModal}" disabled="">
+                    </c:EnziButton>
+                    <c:EnziButton id="wrongNumber" leftIcon="utility:end_call"
+                                  label="Dispose Call" type="destructive"
+                                  click="{!c.showDispositionForm}">
+                    </c:EnziButton>
+                </div>
+            </div>
+        </div>
+        <c:EnziModal aura:id="NewLeadModal" header="New Lead" show="false">
+            <c:EnziModalContainer >
+                <div class="slds-size--1-of-1" style="padding:5px">
+                    <c:EnziField sObjectName="Lead" fieldName="FirstName" label="First Name" value="{!v.leadFormData.FirstName}" required="false" errors="{!v.errors}" disabled=""></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:5px">
+                    <c:EnziField sObjectName="Lead" fieldName="LastName" label="Last Name" value="{!v.leadFormData.LastName}" required="true" errors="{!v.errors}" disabled=""></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:5px">
+                    <c:EnziField sObjectName="Lead" fieldName="Email" label="Email" value="{!v.leadFormData.Email}" required="true" errors="{!v.errors}" disabled=""></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:5px">
+                    <c:EnziField sObjectName="Lead" fieldName="Phone" label="Phone" value="{!v.leadFormData.Phone}" required="true" errors="{!v.errors}" disabled=""></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:5px">
+                    <c:EnziField sObjectName="Lead" fieldName="Company" label="Company" value="{!v.leadFormData.Company}" required="true" errors="{!v.errors}" disabled=""></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:5px">
+                    <c:EnziField type="string" label="Full Time Employees" length="255" errors="{!v.errors}" value="{!v.leadFormData.Number_of_Full_Time_Employees__c}"></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:5px">
+                    <c:EnziField sObjectName="Lead" fieldName="Interested_in_Number_of_Desks__c" label="Number of Desks" value="{!v.leadFormData.Interested_in_Number_of_Desks__c}" required="false" errors="{!v.errors}" disabled=""></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:5px">
+                    <c:EnziField sObjectName="Lead" fieldName="LeadSource" label="Lead Source" value="{!v.leadFormData.LeadSource}" required="false" errors="{!v.errors}" disabled=""></c:EnziField>
+                </div>
+                <div class="slds-size--1-of-1" style="padding:5px">
+                    <c:EnziField sObjectName="Lead" fieldName="Building_Interested_In__c" label="Building Interested" value="{!v.leadFormData.Building_Interested_In__c}" required="false" errors="{!v.errors}" disabled=""></c:EnziField>
+                </div>                
+            </c:EnziModalContainer>
+            <c:EnziModalFooter >
+                <c:EnziButton label="Create" type="brand" click="{!c.createNewLead}" disabled="{!(!v.valid)}"></c:EnziButton>
+                <c:EnziButton label="Cancel" type="brand" click="{!c.closeLeadModal}"></c:EnziButton>
+            </c:EnziModalFooter>
+            <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}"></c:EnziFormValidator>
+        </c:EnziModal>  
+    </aura:if>
+    <div class="slds-align_absolute-center slds-page-header" style="bottom:0;left:0;border-top:1px solid lightgray;z-index:2;position:fixed;width:99.9%;" >
+        <div class="slds-media slds-no-space slds-grow">
+            <div class="slds-media__body slds-align_absolute-center">
+                <!--<button class="slds-button slds-button_brand" style="height:30px" onclick="{!c.close}" disabled="">Close</button>-->
+            </div>
+        </div>
+    </div>
+    <!--Disposition Form on call when no record found-->
+    <c:EnziModal aura:id="DisposeCallModal" header="Disposition Information" show="false">
+        <c:EnziModalContainer >
+            <c:EnziFormValidator errors="{!v.errors3}" valid="{!v.valid3}" aura:id="disposition-form">
+                <c:EnziField type="picklist" name="Disposition1" label="Disposition" options="{!v.lstCallDisposition}" value="{!v.TempobjActivity.CallDisposition}" labelField="Name" valueField="Value" required="true" change="{!c.selectSubject}" errors="{!v.errors3}"></c:EnziField>
+                <c:EnziField type="textarea" name="summary" label="Remarks/Notes" value="{!v.TempobjActivity.Description}" length="80" required="true" errors="{!v.errors3}"/>
+            </c:EnziFormValidator>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+            <c:EnziButton id="Dispose" leftIcon="utility:end_call"
+                          label="Dispose" type="destructive"
+                          click="{!c.disposeCall}" disabled="{!(!v.valid3)}">
+            </c:EnziButton>
+        </c:EnziModalFooter>
+        <c:EnziFormValidator errors="{!v.errors3}" valid="{!v.valid3}"></c:EnziFormValidator>
+    </c:EnziModal>
+</aura:component>

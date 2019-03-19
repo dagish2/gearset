@@ -1,0 +1,61 @@
+<apex:component controller="LightningComponentController">
+    <apex:attribute name="component" type="String" required="true" description="Name of lightning component to be loaded." />
+    <apex:attribute name="parameters" type="String" required="false" description="Parameters for lightning component to be loaded." />
+    <apex:attribute name="showHeader" type="Boolean" required="false" default="false" description="Specifies that page header is showing or not."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <apex:slds />
+    <apex:includeLightning />
+    <body style="margin:0px">
+        <div id="lightning" name="{!parameters}" style="overflow-x:hidden;overflow-y:auto;background-color:white">
+            <div class="slds-spinner_container slds-is-fixed" id="vfSpinner">
+                <div role="status" class="slds-spinner slds-spinner--large slds-spinner--brand">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+        var width,height;
+        if(width){
+        	document.getElementById('lightning').style.height = window.innerHeight+"px";
+        	document.getElementById('lightning').style.width = window.innerWidth+"px";
+        }else{
+        	document.getElementById('lightning').style.height = window.innerHeight+"px";
+        	document.getElementById('lightning').style.width = window.innerWidth+"px";
+        }
+        window.addEventListener("resize", function(){
+            if(width){
+                document.getElementById('lightning').style.height = window.innerHeight+"px";
+        		document.getElementById('lightning').style.width = window.innerWidth+"px";
+            }else{
+                document.getElementById('lightning').style.height = window.innerHeight+"px";
+                document.getElementById('lightning').style.width = window.innerWidth+"px";
+            }
+        });
+
+        if({!showHeader} && '{!$User.UITheme}'=="Theme4t"){
+            document.getElementById('lightning').style.marginLeft = "-20px";
+            document.getElementById('lightning').style.marginTop = "-10px";
+            var style = document.createElement("style");
+            var rule = document.createTextNode(".slds-scope .slds-fade-in-open {margin-left:-20px}");
+            style.appendChild(rule);
+            var head = document.getElementsByTagName('head')[0];
+            head.appendChild(style);
+        }
+        var params = {};
+        var strParams = document.getElementById("lightning").getAttribute("name");
+        for(var i=0;i<strParams.split(";").length;i++){
+            var arrParams = strParams.split(";")[i].split("=");
+            if(arrParams.length==2){
+                params[arrParams[0]] = arrParams[1].split(",").length>1?arrParams[1].split(","):arrParams[1];
+            }
+        }
+        $Lightning.use("c:LightningComponents", function() {
+            $Lightning.createComponent("c:{!component}",params,"lightning",function(cmp) {
+                document.getElementById("vfSpinner").remove();
+            });
+        });
+        </script>
+    </body>
+</apex:component>

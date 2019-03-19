@@ -1,0 +1,7 @@
+<apex:page standardController="Opportunity" standardStylesheets="false" sidebar="false" showHeader="false" title="Merge Opportunities">
+    <head>
+        <title>Merge Opportunities</title>
+    </head>
+    <apex:includescript value="/support/console/31.0/integration.js" />
+    <c:LightningResource component="MergeOpportunities" parameters="type={!$CurrentPage.parameters.type}"></c:LightningResource>
+</apex:page>

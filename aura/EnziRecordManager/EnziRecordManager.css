@@ -1,0 +1,12 @@
+@media (max-width: 47em){
+    .THIS .mobileCenter{
+        text-align:left !important;
+    }
+    .THIS .mobileMargin{
+        margin-bottom:20px !important;
+    }
+}
+.THIS .sWrapTest {
+    height:100px;
+    width:100px;
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>41.0</apiVersion>
+    <available>true</available>
+    <description>This email template is used to notify the users when a new record of the exception is created in the Apex Debug Log object.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Exception Notify Apex Debug Log object</name>
+    <style>none</style>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

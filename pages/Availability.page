@@ -1,0 +1,4 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+    <apex:includescript value="/support/console/31.0/integration.js" />
+    <c:LightningResource component="ReservableAvailability"></c:LightningResource>     
+</apex:page>

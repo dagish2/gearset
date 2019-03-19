@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:attribute name="errors" type="List" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:handler name="change" value="{!v.errors}" action="{!c.validate}"/>    
+</aura:component>

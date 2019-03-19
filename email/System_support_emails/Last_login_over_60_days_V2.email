@@ -1,0 +1,14 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[Dear&nbsp;<span style="font-size: 12pt;">{!Receiving_User.FirstName}</span>,<div><br></div><div>
+
+
+
+
+
+
+
+<p class="p1"><span class="s1">Your salesforce account has been inactive for the past 60 days. Because Salesforce licenses are premium licenses, we need to ensure WeWork's continued optimized utilization and ROI.&nbsp;</span></p><p class="p1"><span class="s1"><br></span></p><p class="p1"><span class="s1">We have begun the process of inactivating any users that have not logged into the application in the past 60 days. Deactivation of licenses will take place&nbsp;this Friday by&nbsp;noon (EST), unless&nbsp;you log into your account before then.&nbsp;</span></p><p class="p1"><span class="s1"><br></span></p><p class="p1"><span class="s1">If you have any questions or concerns, please contact us at salesforcesupport@wework.com</span></p><p class="p1"><span class="s1"><br></span></p><p class="p1"><span class="s1">Warmly,</span></p><p class="p1">The Salesforce team</p><p class="p1"><span class="s1"><br></span></p></div>]]></td>
+</tr>
+</table>

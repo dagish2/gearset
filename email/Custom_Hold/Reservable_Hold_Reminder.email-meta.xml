@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>41.0</apiVersion>
+    <available>true</available>
+    <description>Mail will be sent 2 days before Hold Expiration</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Reservable Hold Reminder</name>
+    <style>none</style>
+    <subject>REMINDER: Inventory is still on hold for</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

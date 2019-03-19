@@ -1,0 +1,6 @@
+Hey {!Lead.Referrer_Name__c}, 
+
+{!Lead.Salutation_Name__c} just scheduled a tour at one of our locations, we will keep you updated on their progress. Thanks for using WeWork Referral. 
+
+Best, 
+The WeWork Team

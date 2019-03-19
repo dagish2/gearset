@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <interviewLabel>Paperwork sending update message {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Paperwork sending update messagev2</label>
+    <processType>Flow</processType>
+    <screens>
+        <name>Papwework_flow_notice</name>
+        <label>Papwework flow notice</label>
+        <locationX>228</locationX>
+        <locationY>161</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>paperworkflowmessage</name>
+            <fieldText>Hey!,
+
+We made some changes to the paperwork feature in salesforce. We also made it alot easier to convert a journey into an opportunity. 
+
+Check out the link below for a quick video quide on both features. 
+
+https://drive.google.com/open?id=0BxnEtTaM6arTTnZoNEdwY1FOUTQ
+
+If you have any questions or concerns, please contact salesforcesupport@wework.com</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Papwework_flow_notice</startElementReference>
+    <status>Active</status>
+</Flow>

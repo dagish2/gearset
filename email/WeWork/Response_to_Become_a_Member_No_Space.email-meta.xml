@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_General</letterhead>
+    <name>Response to Become a Member (No Space)</name>
+    <style>freeForm</style>
+    <subject>Thanks for your interest in WeWork!</subject>
+    <textOnly>Hi {!Contact.Salutation_Name__c},
+
+Thanks for getting in touch with us. We&apos;re excited for the opportunity to welcome you to the WeWork community.
+
+While we do have waitlists for many of our spaces, if you&apos;d like to book a tour directly, just click the link below, choose the city you&apos;d like and select the most convenient time for you. Otherwise, we&apos;ll call you back as soon as we can.
+
+https://www.wework.com/locations?lid={!Lead.Id}&amp;utm_source=email&amp;utm_medium=become_a_member_email&amp;utm_campaign=become_a_member&amp;utm_content=book_a_tour_and_commons
+
+If you&apos;d like to join the community right away, you could take a look at our WeWork Commons plans. With WeWork Commons, you&apos;ll gain immediate access to our member network, our events and our benefits and you&apos;ll be able to book space on demand at many of our buildings. You can find out more by following the link below.
+
+https://signup.wework.com/?utm_source=email&amp;utm_medium=become_a_member&amp;utm_campaign=become_a_member&amp;utm_content=book_a_tour_and_commons
+
+Have questions? Just reply to this email or write to us at joinus@wework.com.
+
+Best,
+WeWork | {!User.Name}
++1.855.593.9675
+wework.com
+
+Create Your Life&apos;s Work</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

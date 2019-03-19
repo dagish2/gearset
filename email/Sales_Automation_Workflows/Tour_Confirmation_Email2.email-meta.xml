@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Tour Confirmation Email2</name>
+    <style>none</style>
+    <subject>We can’t wait to meet you</subject>
+    <textOnly>www.wework.com 
+
+http://facebook.com/wework 
+
+http://twitter.com/wework 
+
+http://instagram.com/wework 
+
+http://www.pinterest.com/wework 
+
+
+Hi {!Tour_Outcome__c.Tour_With_First_Name__c},
+
+Thanks for your interest in WeWork, the community for creators.
+
+We&apos;re thrilled that you&apos;re thinking about becoming a member and look forward to showing you around.
+
+You&apos;re all set for a tour at {!Tour_Outcome__c.Building_No_City__c} on {!Tour_Outcome__c.Tour_Date__c} at {!Tour_Outcome__c.Start_Time__c}! You can find us at {!Tour_Outcome__c.Location_Address__c}.
+
+See you soon!
+
+
+
+VALERIE BATISTA 
+Director of Sales 
+joinus@wework.com 
+855.593.9675</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

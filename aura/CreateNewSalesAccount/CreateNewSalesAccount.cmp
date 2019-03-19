@@ -1,0 +1,83 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" Controller="SalesAccountController">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="parentAccountId" type="String"/>
+    <aura:attribute name="mapParentAccount" type="Map" default="{}" />
+    <aura:attribute name="mapSalesAccount" type="Map" default="{'Nickname__c':'','Account_Type__c':'Sales',sobjectType:'Account'}" />
+    <aura:attribute name="isValidUser" type="Boolean" default="false" />
+    <aura:attribute name="headerMeta" type="List"/>
+    <aura:attribute name="errors1" type="Object"/>
+    <aura:attribute name="valid1" type="Boolean"/>
+    <aura:attribute name="instructions" type="List"/>
+    <aura:attribute name="mapInstructions" type="Object" />
+    <aura:attribute name="confirmationForSave" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <ltng:require scripts="/soap/ajax/41.0/connection.js"/>
+    <ltng:require scripts="/soap/ajax/41.0/apex.js"/>
+    <ltng:require scripts="/support/console/42.0/integration.js" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils> 
+   
+    <aura:html tag="style">
+        .slds-rise-from-ground{ z-index: 10000 !Important; }
+    </aura:html>
+    <style>
+        .modal-body { padding: 0rem !important; } 
+        .cuf-content { padding: 0rem !important; }
+        .slds-modal__container { margin: 0 auto; width: 80%; max-width: 100rem; min-width: 20rem; margin-top: 5px;}
+        .slds-spinner_container{ margin-top:46px; margin-bottom:46px; }
+    	.slds-page-header {padding-bottom:19px !important; padding-top:19px !important; }
+    </style>
+    <aura:if isTrue="{!v.isValidUser}">
+        <c:EnziHeader sObjectName="Account" alternateText="{!v.mapParentAccount.Name}" pageName="{!v.mapParentAccount.Name}" iconName="standard:account"></c:EnziHeader>
+        <c:EnziDataHeader headerColor="#ffffff" sObject="{!v.mapParentAccount}" fieldMetaData="{!v.headerMeta}" />
+        <aura:if isTrue="{!or(v.mapParentAccount.Account_Type__c=='Org',v.mapParentAccount.Account_Type__c=='Sales')}">
+            <div class="slds-grid slds-grid--vertical slds-nowrap" >
+                <div class="slds-grid slds-wrap slds-grid--pull-padded slds-p-horizontal_large slds-p-vertical_small " role="main">
+                    <c:EnziFormValidator errors="{! v.errors}" valid="{! v.valid}">
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding-left:15px" id="account-Owner">
+                            <c:EnziField type="reference" name="ActiveUsers" label="Account Owner" reference="User" value="{!v.mapSalesAccount.OwnerId}" required="true" labelField="Name" valueField="Id" helpText="Enter the user name to set Account Owner for the Sales Account" criteria="IsActive = true"></c:EnziField>
+                        </div>
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding-left:15px">
+                            <c:EnziField type="string" name="Nickname" label="Nickname" value="{!v.mapSalesAccount.Nickname__c}" required="true" helpText="Enter the nick name for the Sales Account(Maximum length: 40)" length="40"></c:EnziField>
+                        </div>   
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding-left:15px">
+                            <c:EnziField type="string" name="Website" label="Website" sObjectName="Account" fieldName="Website" value="{!v.mapSalesAccount.Website}" required="false" errors="{! v.errors1}" helpText="Enter the website of Sales Account" length="40"></c:EnziField>
+                        </div>  
+                    </c:EnziFormValidator>
+                </div>  
+                <footer class="slds-modal__footer" style="text-align:right;box-shadow:none;width:100%;margin: 0px -15px -15px 0px;">
+                    <c:EnziButton type="destructive" leftIcon="utility:close" label="Cancel" click="{!c.cancelSalesAccount}"></c:EnziButton>
+                    <c:EnziButton type="brand" leftIcon="utility:save" label="Save" click="{!c.showModal}"  disabled="{!or(v.mapSalesAccount.Nickname__c=='',or(v.mapSalesAccount.OwnerId=='',v.mapSalesAccount.OwnerId==undefined))}"></c:EnziButton>
+                </footer>
+            </div>
+        </aura:if>
+        <!-- Modal For Confirmation of Website-->
+        <div id ="confirm-salesAccount"  >
+            <c:EnziModal aura:id="confirmation" header="Confirmation Message" isLarge="false" show="false">
+                <c:EnziModalContainer >
+                    <c:EnziFormValidator errors="{! v.errors1}" valid="{! v.valid1}">
+                        <c:WeInstructions instructions="{! v.instructions}" />
+                            <div class="slds-p-horizontal_medium slds-size--1-of-1 slds-medium-size--9-of-12 slds-large-size--9-of-12">
+                                <c:EnziField name="Website" label="Website" sObjectName="Account" fieldName="Website" value="{! v.mapSalesAccount.Website}" required="false" errors="{! v.errors1}" helpText="Enter the website of Sales Account"/>
+                            </div>
+                    </c:EnziFormValidator>
+                </c:EnziModalContainer>   
+                <c:EnziModalFooter>
+                    <c:EnziButton label="Close" leftIcon="utility:close" type="destructive" click="{! c.closeModal}"></c:EnziButton>
+                    <c:EnziButton label="Save" leftIcon="utility:save" type="brand"  click="{!c.createNewSalesAccount}"></c:EnziButton>
+                </c:EnziModalFooter>
+            </c:EnziModal>
+        </div>
+        <aura:if isTrue="{!or(not(v.mapParentAccount.Account_Type__c),v.mapParentAccount.Account_Type__c=='Bill')}">
+            <article class="slds-card" style="text-align:center">
+                <div class="slds-card__body slds-p-around_small" style="width:auto;letter-spacing:2px;">
+                    <span>&nbsp;&nbsp;Sales account can only be created under Org or Sales accounts.</span>
+                </div>
+            </article>
+        </aura:if>
+        <aura:set attribute="else">
+            <div aura:id="errorMessage">
+                {!v.body}
+            </div>
+        </aura:set>
+    </aura:if>
+</aura:component>

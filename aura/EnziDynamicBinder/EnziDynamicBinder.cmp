@@ -1,0 +1,40 @@
+<aura:component >
+    <aura:attribute name="obj" type="Object" />
+    <aura:attribute name="col" type="Object" />
+    <aura:attribute name="objVal" type="Object" />
+    <aura:attribute name="val" type="Object" />
+    <aura:attribute name="type" type="String" default="string" />
+    <aura:attribute name="isNameField" type="Boolean" default="false" />
+    <aura:attribute name="field" type="Object" />
+    <aura:attribute name="list" type="Object" />
+    <aura:attribute name="index" type="Integer" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+  	<aura:handler name="change" value="{!v.body}" action="{!c.setDataAttributes}"/>
+    <aura:handler name="change" value="{!v.obj}" action="{!c.recordChanged}"/>
+    <aura:if isTrue="{!v.type=='date'}">
+    	<ui:outputDate format="MM/dd/yyyy" value="{!v.val}"></ui:outputDate>
+    </aura:if>
+    <aura:if isTrue="{!v.type=='datetime'}">
+        <ui:outputDateTime format="MM/dd/yyyy hh:mm a" value="{!v.val}"></ui:outputDateTime>
+    </aura:if>
+    <aura:if isTrue="{!v.type=='email'}">
+        <ui:outputEmail value="{!v.val}"></ui:outputEmail>
+    </aura:if>
+    <aura:if isTrue="{!v.type=='phone'}">
+        <ui:outputPhone value="{!v.val}"></ui:outputPhone>
+    </aura:if>
+    <aura:if isTrue="{!v.type=='component'}">
+        {!v.body}
+    </aura:if>
+    <aura:if isTrue="{!and(v.type!='date',and(v.type!='datetime',and(v.type!='email',and(v.type!='phone',v.type!='component'))))}">
+        <aura:if isTrue="{!v.isNameField}">
+            <a href="{!'/'+v.objVal.Id}" target="_blank">{!v.val}</a>
+        	<aura:set attribute="else">
+                <div title="{!v.val}">
+                    {!v.val}
+                </div>
+            </aura:set>
+        </aura:if>
+    </aura:if>
+</aura:component>

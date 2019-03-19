@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>42 Floors</fullName>
+        <default>false</default>
+        <label>42 Floors</label>
+    </standardValue>
+    <standardValue>
+        <fullName>ads-twitter</fullName>
+        <default>false</default>
+        <label>ads-twitter</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Adwords</fullName>
+        <default>false</default>
+        <label>Adwords</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Affiliate Referral</fullName>
+        <default>false</default>
+        <label>Affiliate Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Broker Referral</fullName>
+        <default>false</default>
+        <label>Broker Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Cold Call</fullName>
+        <default>false</default>
+        <label>Cold Call</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Cold Email</fullName>
+        <default>false</default>
+        <label>Cold Email</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Community Team Referral</fullName>
+        <default>false</default>
+        <label>Community Team Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Craigslist Ad</fullName>
+        <default>false</default>
+        <label>Craigslist Ad</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Creator Awards</fullName>
+        <default>false</default>
+        <label>Creator Awards</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Employee Referral</fullName>
+        <default>false</default>
+        <label>Employee Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Event</fullName>
+        <default>false</default>
+        <label>Event</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Existing Member</fullName>
+        <default>false</default>
+        <label>Existing Member</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Facebook</fullName>
+        <default>false</default>
+        <label>Facebook</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Google</fullName>
+        <default>false</default>
+        <label>Google</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Guest</fullName>
+        <default>false</default>
+        <label>Guest</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Guest Wifi</fullName>
+        <default>false</default>
+        <label>Guest Wifi</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Id</fullName>
+        <default>false</default>
+        <label>Id</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Inbound Call</fullName>
+        <default>false</default>
+        <label>Inbound Call</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Inbound Email</fullName>
+        <default>false</default>
+        <label>Inbound Email</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Landing Page Campaign</fullName>
+        <default>false</default>
+        <label>Landing Page Campaign</label>
+    </standardValue>
+    <standardValue>
+        <fullName>LinkedIn Paid</fullName>
+        <default>false</default>
+        <label>LinkedIn Paid</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Marketing Ads</fullName>
+        <default>false</default>
+        <label>Marketing Ads</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Member Referral</fullName>
+        <default>false</default>
+        <label>Member Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Newsletter</fullName>
+        <default>false</default>
+        <label>Newsletter</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Newsletter Campaign</fullName>
+        <default>false</default>
+        <label>Newsletter Campaign</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Olark Chat</fullName>
+        <default>false</default>
+        <label>Olark Chat</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other Referral</fullName>
+        <default>false</default>
+        <label>Other Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Outbound Email/Cold Call</fullName>
+        <default>false</default>
+        <label>Outbound Email/Cold Call</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Partner Referral</fullName>
+        <default>false</default>
+        <label>Partner Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Phone Call</fullName>
+        <default>false</default>
+        <label>Phone Call</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Press Campaign</fullName>
+        <default>false</default>
+        <label>Press Campaign</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Real Estate Website</fullName>
+        <default>false</default>
+        <label>Real Estate Website</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Referral</fullName>
+        <default>false</default>
+        <label>Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Referral Tool</fullName>
+        <default>false</default>
+        <label>Referral Tool</label>
+    </standardValue>
+    <standardValue>
+        <fullName>servicefriendz</fullName>
+        <default>false</default>
+        <label>servicefriendz</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Twitter</fullName>
+        <default>false</default>
+        <label>Twitter</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Unomy</fullName>
+        <default>false</default>
+        <label>Unomy</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Walk In</fullName>
+        <default>false</default>
+        <label>Walk In</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeLive</fullName>
+        <default>false</default>
+        <label>WeLive</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeLive.com</fullName>
+        <default>false</default>
+        <label>WeLive.com</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeWork.cn</fullName>
+        <default>false</default>
+        <label>WeWork.cn</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeWork.com</fullName>
+        <default>false</default>
+        <label>WeWork.com</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeWork.com Health Form</fullName>
+        <default>false</default>
+        <label>WeWork.com Health Form</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeWorkLabs.com Application</fullName>
+        <default>false</default>
+        <label>WeWorkLabs.com Application</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeWork Magazine</fullName>
+        <default>false</default>
+        <label>WeWork Magazine</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Yelp</fullName>
+        <default>false</default>
+        <label>Yelp</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Outbound</fullName>
+        <default>false</default>
+        <label>Outbound</label>
+    </standardValue>
+    <standardValue>
+        <fullName>WeWork.co.in</fullName>
+        <default>false</default>
+        <label>WeWork.co.in</label>
+    </standardValue>
+</StandardValueSet>

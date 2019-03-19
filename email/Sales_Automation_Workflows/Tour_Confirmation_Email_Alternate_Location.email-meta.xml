@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Tour Confirmation Email Alternate Location</name>
+    <style>none</style>
+    <subject>We can’t wait to meet you</subject>
+    <textOnly>Hi {!Tour_Outcome__c.Tour_With__c},
+
+Thanks for your interest in WeWork, the platform for creators.
+
+We&apos;re thrilled that you&apos;re thinking about becoming a member and look forward to showing you around.
+
+You&apos;re all set for a tour on {!Tour_Outcome__c.Tour_Date__c} at {!Tour_Outcome__c.Start_Time__c}! While we&apos;re currently reserving desks for {!Tour_Outcome__c.Building_No_City__c}, this space is still being completed. In the meantime, please meet us at WeWork River North at 111 W Illinois Street.
+
+If you have any questions, feel free to reach out to westloop@wework.com.
+
+See you soon!
+
+The WeWork Team
+
+joinus@wework.com
+855.593.9675</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

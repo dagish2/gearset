@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>44.0</apiVersion>
+    <available>true</available>
+    <description>Email Notification on Tour Booked for TODAY or TOMORROW</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Email Sent on Tour Booked for TODAY or TOMORROW</name>
+    <style>none</style>
+    <subject>Wall-In Tour</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

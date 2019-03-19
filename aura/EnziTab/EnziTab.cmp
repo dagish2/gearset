@@ -1,0 +1,13 @@
+<aura:component >
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="allowDelete" type="Boolean" />
+    <aura:attribute name="delete" type="Object" />
+    <aura:attribute name="tabId" type="String" />
+    <aura:attribute name="tabHeight" type="String" />
+    <aura:handler name="change" value="{!v.label}" action="{!c.valueChange}"/>
+    <aura:handler name="change" value="{!v.allowDelete}" action="{!c.valueChange}"/>
+    <aura:registerEvent name="tabChange" type="c:EnziTabsChangeEvent"/>
+	<div id="{!v.tabId+'$!!$container'}" class="slds-tabs--default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-1__item" style="padding:0px;overflow:auto;">
+        {!v.body}
+    </div>
+</aura:component>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Co-Owner</fullName>
+        <default>false</default>
+        <label>Opp: Co-Owner</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Enterprise Member Success</fullName>
+        <default>false</default>
+        <label>Opp: Enterprise Account Management</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Business Development</fullName>
+        <default>false</default>
+        <label>Opp: Enterprise Business Development</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Client Solutions</fullName>
+        <default>false</default>
+        <label>Opp: Client Solutions</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Real Estate Advisory</fullName>
+        <default>false</default>
+        <label>Opp: Real Estate Advisory</label>
+    </standardValue>
+    <standardValue>
+        <fullName>NMD</fullName>
+        <default>false</default>
+        <label>Opp: NMD</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Regional Member Success - Primary</fullName>
+        <default>false</default>
+        <label>Opp: Regional Account Management - Primary</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Regional Member Success - Support</fullName>
+        <default>false</default>
+        <label>Opp: Regional Account Management - Support</label>
+    </standardValue>
+    <standardValue>
+        <fullName>BDM</fullName>
+        <default>false</default>
+        <label>Opp: BDM</label>
+    </standardValue>
+    <standardValue>
+        <fullName>MLB-Hold</fullName>
+        <default>false</default>
+        <label>Opp: MLB-Hold</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Opp: Labs Partnership</fullName>
+        <default>false</default>
+        <label>Opp: Labs Partnership</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: MLB-Hold</fullName>
+        <default>false</default>
+        <label>Acct: MLB-Hold</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Regional Co-Prime China</fullName>
+        <default>false</default>
+        <label>Acct: Regional Co-Prime China</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Regional Co-Prime Europe, Israel &amp; Australia</fullName>
+        <default>false</default>
+        <label>Acct: Regional Co-Prime Europe, Israel &amp; Australia</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Regional Co-Prime India</fullName>
+        <default>false</default>
+        <label>Acct: Regional Co-Prime India</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Regional Co-Prime Japan</fullName>
+        <default>false</default>
+        <label>Acct: Regional Co-Prime Japan</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Regional Co-Prime Latin America</fullName>
+        <default>false</default>
+        <label>Acct: Regional Co-Prime Latin America</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Regional Co-Prime Pacific</fullName>
+        <default>false</default>
+        <label>Acct: Regional Co-Prime Pacific</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Regional Co-Prime North America</fullName>
+        <default>false</default>
+        <label>Acct: Regional Co-Prime North America</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime West China</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime West China</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime North China</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime North China</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime South China</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime South China</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime East China</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime East China</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Australia</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Australia</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime France &amp; Southern Europe</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime France &amp; Southern Europe</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Germany &amp; Northern Europe</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Germany &amp; Northern Europe</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Israel</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Israel</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime UK &amp; Ireland</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime UK &amp; Ireland</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Russia and Central Eastern Europe</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Russia and Central Eastern Europe</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Northern India</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Northern India</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Southern India</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Southern India</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Tokyo</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Tokyo</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Japan East</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Japan East</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Japan West</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Japan West</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Argentina, Peru &amp; Chile</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Argentina, Peru &amp; Chile</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Brazil</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Brazil</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Mexico &amp; Colombia</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Mexico &amp; Colombia</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Singapore</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Singapore</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime Korea</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime Korea</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime South-East Asia</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime South-East Asia</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime North America - East</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime North America - East</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Acct: Territory Co-Prime North America - West</fullName>
+        <default>false</default>
+        <label>Acct: Territory Co-Prime North America - West</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Assist</fullName>
+        <default>false</default>
+        <label>Opp: Assist</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Opp: Originating Rep</fullName>
+        <default>false</default>
+        <label>Opp: Originating Rep</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Opp: Override</fullName>
+        <default>false</default>
+        <label>Opp: Override</label>
+    </standardValue>
+</StandardValueSet>

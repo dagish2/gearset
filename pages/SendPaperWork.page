@@ -1,0 +1,27 @@
+<apex:page standardstylesheets="false" sidebar="false" showheader="false" cache="false">
+    <!--<c:GlobalResources local="{!$CurrentPage.parameters.local}"
+                       vendor_css="bootstrap/js/ui-bootstrap-tpls.js"
+                       vendor_js="jquery/moment.min.js,jquery/xdate.js"
+                       application_js="error-manager.js,sendPaperWork.js,salesforce.js,common-controls.js,autocomplete.js,reservableJunction.js,opportunityDiscount.js,createContact.js"
+                       application_css="sendPaperWork.css,controlsFactory.css,autocomplete.css" />
+    <apex:includescript value="/support/console/25.0/integration.js" />
+    <script type="text/javascript">
+        sforce.console.setTabTitle('Send Paperwork');
+    </script>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Send Paper Work</title>
+    </head>
+    <body id="sendPaper">
+        <div id="spinnerContainer"></div>
+        <div id="wrapper" class="scroll-window" ng-app="sendPaperWorkApp" ng-controller="sendPaperWorkCtrl">
+            <div class="container-fluid" style="margin-top: 25px">
+                <send-paper-work>
+                </send-paper-work>
+            </div>
+        </div>
+    </body>-->
+    <c:LightningResource component="Sendpaperwork_Opportunity_Action" parameters="recordId={!$CurrentPage.parameters.id}"></c:LightningResource>
+</apex:page>

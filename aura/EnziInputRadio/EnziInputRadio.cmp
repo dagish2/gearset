@@ -1,0 +1,33 @@
+<aura:component >
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="text" type="Object" />
+    <aura:attribute name="options" type="Object" />
+    <aura:attribute name="change" type="Object" default="{!c.defaultChange}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:if isTrue="{!v.options}">
+            <legend class="slds-form-element__legend slds-form-element__label">{!v.label}</legend>
+            <div class="slds-form-element__control">
+                <aura:iteration items="{!v.options}" var="option" indexVar="index">
+                    <span class="slds-radio">
+                        <input type="radio" name="{!v.name}" id="{!v.name+':'+index}" value="{!option.value}" onclick="{!c.change}" onchange="{!v.change}" checked="{!if(option.checked ,option.checked,and(v.value==option.value,not(option.disabled)))}" disabled="{!option.disabled}"/>
+                        <label class="slds-radio__label" for="{!v.name+':'+index}">
+                            <span class="slds-radio_faux" style="border:1px solid #0070d2"></span>
+                            <span class="slds-form-element__label">{!option.label}</span>
+                        </label>
+                    </span>   
+                </aura:iteration>
+            </div>
+        <aura:set attribute="else">
+            <span class="slds-radio">
+                <input type="radio" id="{!v.name}" value="{!v.text}" onclick="{!c.change}" onchange="{!v.change}" checked="{!v.value==v.text}"/>
+                <label class="slds-radio__label" for="{!v.name}">
+                    <span class="slds-radio_faux" style="border:1px solid #0070d2"></span>
+                    <span class="slds-form-element__label">{!v.label}</span>
+                </label>
+            </span>
+        </aura:set> 
+    </aura:if>
+</aura:component>

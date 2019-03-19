@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+	<aura:attribute name="value" type="Id"  />
+    <aura:attribute name="label" type="String"  />
+    <aura:attribute name="click" type="Object" />
+    <aura:attribute name="isWebsite" type="Boolean" default="false" />
+    <lightning:workspaceAPI aura:id="workspace" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <a href="javascript:void(0);" class="slds-text-link" value="{!v.value}" onmousedown="{!not(empty(v.click))?v.click :c.click}">{!v.label}</a>
+</aura:component>

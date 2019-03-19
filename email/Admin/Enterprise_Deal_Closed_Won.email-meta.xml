@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>When an Enterprise Deal is closed, this is triggered</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Enterprise Deal Closed Won</name>
+    <style>none</style>
+    <subject>{!Opportunity.Account} has been closed for {!Opportunity.Quantity__c} Desks!</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

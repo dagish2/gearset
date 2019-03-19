@@ -1,0 +1,7 @@
+<aura:component >
+    <aura:attribute name="offset" type="String" />
+    <aura:handler name="change" value="{!v.offset}" action="{!c.showClock}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <span id="clock"></span>
+</aura:component>

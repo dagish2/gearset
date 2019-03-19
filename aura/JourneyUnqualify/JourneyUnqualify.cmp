@@ -1,0 +1,33 @@
+<aura:component>
+	<aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="journey" type="Map" />
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="save" type="Object"/>
+    <aura:attribute name="close" type="Object"/>    
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    
+    <c:WeInstructions instructions="['You are about to unqualify this person and update journey and lead status as unqualify']" />
+    
+    <div class="slds-grid slds-grid--vertical slds-nowrap" >
+        <div class="slds-grid slds-wrap slds-grid--pull-padded slds-p-horizontal_large slds-p-vertical_small " role="main"> 
+            <c:EnziFormValidator errors="{! v.errors}" valid="{! v.valid}">
+                <div class="slds-grid slds-wrap slds-grid--pull-padded" role="main" style="width:100%">
+                    <div class="slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                        <c:EnziField name="Lost_Reason__c" sObjectName="Journey__c" fieldName="Lost_Reason__c" required="true" label="Reason for Unqualifying" value="{!v.journey.Lost_Reason__c}" errors="{!v.errors}" />                
+                    </div>
+                    <aura:if isTrue="{!v.journey.Lost_Reason__c == 'Other'}">
+                        <div class="slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                            <c:EnziField name="Other_Reason__c" sObjectName="Journey__c" fieldName="Other_Reason__c" required="{!v.journey.Lost_Reason__c == 'Other'}" value="{!v.journey.Other_Reason__c}" errors="{!v.errors}" />                    
+                        </div>
+                    </aura:if>
+                </div>                
+            </c:EnziFormValidator>
+        </div>        
+    </div>
+    <div class="slds-text-align--center" role="main" style="width:100%">
+        <c:EnziButton label="Save" type="brand" click="{!v.save}" disabled="{! not(v.valid)}" leftIcon="utility:save" />            
+        <c:EnziButton label="Close" type="destructive" click="{!v.close}" leftIcon="utility:close" />
+    </div>
+</aura:component>

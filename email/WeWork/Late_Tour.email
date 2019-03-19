@@ -1,0 +1,13 @@
+Hello friends, 
+
+This email is to alert you to a tour scheduled before 10am or after 6pm on {!Tour_Outcome__c.Tour_Date__c}.
+
+Here are the details: 
+Location: {!Tour_Outcome__c.Building_No_City__c}
+Time: {!Tour_Outcome__c.Start_Time__c}
+Tour with: {!Tour_Outcome__c.Tour_With__c}
+Notes: {!Tour_Outcome__c.Tour_Notes__c}
+{!Tour_Outcome__c.Lead__c}
+{!Tour_Outcome__c.Opportunity__c}
+
+<33333

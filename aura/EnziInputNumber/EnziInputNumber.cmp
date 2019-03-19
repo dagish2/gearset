@@ -1,0 +1,12 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="min" type="Integer" />
+    <aura:attribute name="max" type="Integer" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="disabled" type="Boolean" />
+    <aura:attribute name="allowDecimal" type="Boolean" />
+    <aura:attribute name="onInput" type="Object" />
+	<input id="{!v.name}" type="number" step="1" max="{!v.max}" min="{!v.min}" class="slds-input" placeholder="{!v.disabled?'':'Enter '+v.label}" value="{!v.value}" onchange="{!c.change}" maxlength="10" disabled="{!v.disabled?'disabled':''}" style="padding-right:0px" onkeyup="{!c.change}" oninput="{!v.onInput}" />
+</aura:component>

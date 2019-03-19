@@ -1,0 +1,120 @@
+<aura:component >
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="type" type="String"/>
+    <aura:attribute name="placeholder" type="String"/>
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="disabled" type="Boolean"/>
+    <aura:attribute name="readonly" type="Boolean" />
+    <aura:attribute name="variant" type="String"/>
+    <aura:attribute name="value" type="String"/>
+    <aura:attribute name="keyword" type="String"/>
+    <aura:attribute name="show" type="Boolean" default="false"/>
+    
+    <aura:attribute name="months" type="List" default="['January','February','March','April','May','June','July','August','September','Octomber','November','December']"/>
+    <aura:attribute name="years" type="List" default="[]"/>
+    <aura:attribute name="today" type="Object"/>
+    <aura:attribute name="currentMonth" type="String"/>
+    <aura:attribute name="currentYear" type="Integer"/>
+    <aura:attribute name="calenderData" type="List" default="[]"/>
+     <aura:attribute name="onchange" type="Object"/>
+    <aura:attribute name="errors" type="List" />
+    <aura:attribute name="validate" type="Boolean" default="false" />
+    <aura:attribute name="auraId" type="String" default="myInput" />
+    <aura:attribute name="index" type="Integer" />
+    <aura:handler name="change" value="{!v.value}" action="{!c.valueChange}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <div class="{!'slds-dropdown-trigger slds-dropdown-trigger_click '+(v.show?'slds-is-open':'')}">
+        <label class="slds-form-element__label" for="date-input-id">{!v.label}</label>
+        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+            <span style="{!v.readonly ? 'pointer-events:none' : ''}">
+                <aura:if isTrue="{!v.type=='date'}">
+                    <lightning:input aura:id="myInput" name="{!v.name}" disabled="{!v.disabled}" label="{!v.label}" value="{!v.keyword}" onfocus="{!c.focus}" variant="label-hidden" class="fullwidth"></lightning:input>
+                    <aura:set attribute="else">
+                        <lightning:input aura:id="myInput" type="datetime" name="{!v.name}" disabled="{!v.disabled}"  label="{!v.label}" value="{!v.keyword}" onfocus="{!c.focus}" variant="label-hidden" class="fullwidth"></lightning:input>
+                    </aura:set>
+                </aura:if>
+            </span>
+            <button class="{! (v.readonly ? 'slds-hide':'')+ ' slds-button slds-button_icon slds-input__icon slds-input__icon_right'}" title="Select a date">
+                <lightning:icon iconName="utility:event" size="x-small"></lightning:icon>
+                <span class="slds-assistive-text">Select a date</span>
+            </button>
+        </div>
+        <div aria-hidden="false" aria-label="Date picker: June" class="slds-datepicker slds-dropdown slds-dropdown_left" role="dialog">
+        <div class="slds-datepicker__filter slds-grid">
+            <div class="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
+                <div class="slds-align-middle">
+                    <button class="slds-button slds-button_icon slds-button_icon-container" title="Previous Month">
+                       	<lightning:icon iconName="utility:left" size="x-small"></lightning:icon>
+                        <span class="slds-assistive-text">Previous Month</span>
+                    </button>
+                </div>
+                <h2 aria-atomic="true" aria-live="assertive" class="slds-align-middle" id="month">{!v.currentMonth}</h2>
+                <div class="slds-align-middle">
+                    <button class="slds-button slds-button_icon slds-button_icon-container" title="Next Month">
+                        <lightning:icon iconName="utility:right" size="x-small"></lightning:icon>
+                        <span class="slds-assistive-text">Next Month</span>
+                    </button>
+                </div>
+            </div>
+            <div class="slds-shrink-none">
+                <label class="slds-assistive-text" for="select-01">Pick a Year</label>
+                <div class="slds-select_container">
+                    <select id="select-01" class="slds-select year" onchange="{!c.yearChange}">
+                        <aura:iteration items="{!v.years}" var="year">
+                            <option selected="{!v.currentYear==year?'selected':''}">{!year}</option>
+                        </aura:iteration>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <table aria-labelledby="month" aria-multiselectable="true" class="slds-datepicker__month" role="grid">
+            <thead>
+                <tr id="weekdays">
+                    <th id="Sunday" scope="col">
+                        <abbr title="Sunday">Sun</abbr>
+                    </th>
+                    <th id="Monday" scope="col">
+                        <abbr title="Monday">Mon</abbr>
+                    </th>
+                    <th id="Tuesday" scope="col">
+                        <abbr title="Tuesday">Tue</abbr>
+                    </th>
+                    <th id="Wednesday" scope="col">
+                        <abbr title="Wednesday">Wed</abbr>
+                    </th>
+                    <th id="Thursday" scope="col">
+                        <abbr title="Thursday">Thu</abbr>
+                    </th>
+                    <th id="Friday" scope="col">
+                        <abbr title="Friday">Fri</abbr>
+                    </th>
+                    <th id="Saturday" scope="col">
+                        <abbr title="Saturday">Sat</abbr>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.calenderData}" var="week" >
+                    <tr>
+                        <aura:iteration items="{!week}" var="day" >
+                            <td class="{!day.disabled?'slds-disabled-text':(day.selected?'slds-is-selected':(day.today?'slds-is-today':''))}" headers="Sunday week11" role="gridcell" aria-disabled="true" aria-selected="false" >
+                                <span class="slds-day" onclick="{!c.setDate}" id="{!day.disabled?'':day.value}">{!day.label}</span>
+                            </td>
+                        </aura:iteration>
+                    </tr>
+                </aura:iteration>
+                <tr>
+                    <td colspan="7" role="gridcell">
+                        <a class="slds-show--inline-block slds-p-bottom--x-small" style="margin-right:10px" onclick="{!c.setToday}">Today</a>
+                        <a class="slds-show--inline-block slds-p-bottom--x-small" style="margin-right:10px" onclick="{!c.clear}">Clear</a> 
+                        <a class="slds-show--inline-block slds-p-bottom--x-small" onclick="{!c.close}">Close</a> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    
+</aura:component>

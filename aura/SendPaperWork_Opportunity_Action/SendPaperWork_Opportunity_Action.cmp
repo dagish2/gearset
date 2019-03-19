@@ -1,0 +1,12 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" controller="SendPaperWorkController">
+    <title> Billing Account Selector </title>
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="result" type="Map" />
+    <aura:attribute name="billingAccountUUID" type="String" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.billingAccountUUID}" action="{!c.getBillingAccountUUID}" />
+    <div aura:id="div1">
+        {!v.body}
+    </div> 
+</aura:component>

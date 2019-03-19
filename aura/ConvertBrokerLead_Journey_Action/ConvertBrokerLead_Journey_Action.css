@@ -1,0 +1,7 @@
+.THIS .modal-container {
+     display:none !important;
+}
+.THIS.slds-spinner_container{
+   margin-top:270px;
+   margin-bottom:270px;
+}

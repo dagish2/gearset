@@ -1,0 +1,116 @@
+<aura:component >
+    <aura:attribute name="objLog" type="Map" default="{'size':10}" />
+    <aura:attribute name="describedFields" type="List" default="[]}" />
+    <aura:attribute name="logs" type="List"  />
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="selectedUsers" type="String" />
+    <aura:attribute name="offset" type="String" />
+    <aura:attribute name="recordsErrorMessage" type="String" />
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="operations" type="List" default="['/aura','InboundCall']" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>
+    <!--<aura:handler name="change" value="{!v.objLog}" action="{!c.onLogChange}"/> -->
+    <style>
+        @keyframes slideInFromCenter {
+        0% {
+        transform: translateY(-18px);
+        width: 555px;
+        margin: auto;
+        background-color: #f4f6f9;
+        }
+        body{
+        background:white !important;
+        }
+    </style>
+    
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <div class="slds-page-header slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 mobileMargin" style="border-top: 2px solid #0070D2;">
+        <div class="slds-media slds-no-space slds-grow">
+            <div class="slds-media__figure">
+                <lightning:icon iconName="custom:custom84" size="medium" alternativeText="Report"/>                        
+            </div>
+            <div class="slds-media__body">
+                <p class="slds-text-title--caps slds-line-height--reset">Apex Debugger</p>
+                <h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate" title="Report Manager">Log Finder</h1>
+            </div>
+            <div>
+                <c:EnziButton label="Delete All Logs" type="destructive" click="{!c.DeleteAllLogs}" leftIcon="utility:record_create" ></c:EnziButton>
+            </div>
+        </div>
+        
+    </div> 
+    <div class="slds-align_absolute-center" style="width: 20%; position: relative;right: -22%;top: 1.1rem;background: #f3f2f2;font-weight: inherit;font-size: 14px;border: 1px solid rgb(217, 219, 221);">
+        <span style="padding-right:13px">Server Time</span>
+        <span><c:showServerTime /></span>
+    </div>
+    <div style="background:white">
+        <div class="stage-container slds-grid slds-wrap" style="width: 64%;margin: auto;">
+            <section class="stage slds-grid slds-grid--vertical slds-nowrap" style="">
+                <c:EnziSection label="Log Finder" type="fieldset">
+                    <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}" aura:id="campaignForm">
+                        <div class="slds-col slds-size_2-of-3">
+                            <c:EnziField type="reference" name="user" errors="{!v.errors}" label="User" reference="User" value="{!v.objLog.logUser}" required="true" ></c:EnziField>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3" style="padding-top:19px">
+                            <span class="slds-float_right"><c:EnziButton label="Delete Logs" type="destructive" click="{!c.DeleteLogs}" leftIcon="utility:record_create" disabled="{!(v.objLog.logUser==undefined)}"></c:EnziButton></span>
+                        </div>
+                        <div class="slds-col slds-size_2-of-6 slds-p-right_small">
+                            <c:EnziField type="date" errors="{!v.errors}" disabled="{! and(v.objLog.lastNRecords!=undefined,v.objLog.lastNRecords!='')}" name="startDate" label="Start Date" value="{!v.objLog.startDate}" required="{! or(v.objLog.lastNRecords==undefined,v.objLog.lastNRecords=='')}" ></c:EnziField>
+                        </div >
+                        <div class="slds-col slds-size_1-of-6 slds-p-right_medium" style="padding-top:3px">
+                            <lightning:input type="time" value="{!v.objLog.startTime}" label="Start Time" name="time" required="true" />
+                        </div>
+                        <div class="slds-col slds-size_2-of-6 slds-p-right_small">
+                            <c:EnziField type="date" errors="{!v.errors}" disabled="{! and(v.objLog.lastNRecords!=undefined,v.objLog.lastNRecords!='')}" name="endDate" label="End Date" value="{!v.objLog.endDate}" required="{! or(v.objLog.lastNRecords==undefined,v.objLog.lastNRecords=='')}" ></c:EnziField>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6" style="padding-top:3px">
+                            <lightning:input type="time" value="{!v.objLog.endTime}"  label="End Time" name="time" required="true" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-1">
+                            <c:EnziField type="number" errors="{!v.errors}" name="size" label="Size" value="{!v.objLog.size}" required="{! or(v.objLog.lastNRecords==undefined,v.objLog.lastNRecords=='')}"  disabled="{! and(v.objLog.lastNRecords!=undefined,v.objLog.lastNRecords!='')}" ></c:EnziField>
+                        </div>
+                        <!--<div class="slds-col slds-size_1-of-1">
+                            <c:EnziField type="number" errors="{!v.errors}" disabled="{! and(v.objLog.startDate!=undefined,v.objLog.startDate!='') }" required="{! or(v.objLog.startDate==undefined,v.objLog.startDate=='') }" name="LastRecords" label="Last N Records" value="{!v.objLog.lastNRecords}"></c:EnziField>
+                        </div>-->
+                        <div class="slds-col slds-size_1-of-1" style="font-size: 1.1rem;background: #f3f2f2;margin-top:7px;margin-bottom:7px">
+                            <h3 class="slds-text-align_center">
+                                <span >Advance Search</span>
+                            </h3>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1">
+                            <c:EnziField type="string" errors="{!v.errors}" name="searchTerm" label="Search In Logs" value="{!v.objLog.searchTerm}"  ></c:EnziField>
+                        </div >
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_large">
+                            <c:EnziField type="string" errors="{!v.errors}" name="specific Operations" label="Specific Operations" value="{!v.objLog.specificOperation}"  ></c:EnziField>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <c:EnziField type="multipicklist" name="Operations" label="Operations" options="{!v.operations}" errors="{!v.errors}" value="{!v.objLog.operations}" labelField="label" valueField="value" ></c:EnziField>
+                        </div>
+                    </c:EnziFormValidator>
+                </c:EnziSection>
+            </section>
+        </div>
+        <div class="relative slds-text-align_center" style="position: relative;top:-40px;">
+            <c:EnziButton label="Get Logs" disabled="{!not(v.valid)}" type="brand" click="{!c.getLogs}" leftIcon="utility:record_create"></c:EnziButton>
+        </div>
+        <aura:if isTrue="{! and(v.logs.length > 0,v.logs!=null,v.logs!=undefined)}">
+            <div id="dataTable">
+                <c:EnziDataTable describedFields="{!v.describedFields}" pageSize="20" caption="User Logs" records="{!v.logs}" showMultiselect="false" showPagination="true" showSearch="false"></c:EnziDataTable>
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!and(v.recordsErrorMessage!=undefined,v.recordsErrorMessage!='')}" >
+            <div class="slds-box" style="animation: 1s ease-out 0s 1 slideInFromCenter; width: 555px;margin: auto;background-color: #f4f6f9;">
+                <div class="slds-inline_icon_text slds-grid">
+                    <div class=" slds-m-right--small slds-col slds-no-flex">
+                        <lightning:icon iconName="utility:info" size="small" alternativeText="Indicates approval"/>
+                    </div>
+                    <div class="slds-col slds-align-middle">
+                        <p>{!v.recordsErrorMessage}</p>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>

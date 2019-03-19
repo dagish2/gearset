@@ -1,0 +1,51 @@
+<aura:component >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="mode" type="String" default="VIEW" />
+    <aura:attribute name="layout" type="Object" />
+    <aura:attribute name="targetRecord" type="Object"/>
+    <aura:attribute name="record" type="Map"/>
+    <aura:attribute name="errors" type="List" default="[]" />
+    <aura:attribute name="valid" type="Boolean" />
+    <aura:handler event="force:navigateToSObject" action="{!c.navigateToRecord}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>
+    
+    <aura:method name="reloadRecord" action="{!c.reloadRecord}" />
+    <aura:method name="saveRecord" action="{!c.saveRecord}">
+        <aura:attribute name="success" type="Object"/>
+        <aura:attribute name="error" type="Object"/>
+    </aura:method>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <aura:if isTrue="{!v.recordId}">
+        <force:recordData aura:id="recordEditor"
+                          layoutType="FULL"
+                          recordId="{!v.recordId}"
+                          targetFields="{!v.record}"
+                          mode="EDIT" />
+    </aura:if>
+    <div style="border-radius:3px;">
+        <aura:if isTrue="{!v.mode=='VIEW'}">
+           <force:recordView recordId="{!v.recordId}" /> 
+        </aura:if> 
+        
+        <aura:if isTrue="{!v.mode=='EDIT'}">
+            <c:WeFormValidator errors="{!v.errors}" valid="{!v.valid}" />
+            <aura:iteration items="{!v.layout.editLayoutSections}" var="section">
+                <c:EnziSection label="{!section.heading}">
+                    <aura:iteration items="{!section.layoutRows}" var="row">
+                        <aura:iteration items="{!row.layoutItems}" var="item">
+                            <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" style="padding:10px;display:inline-grid">
+                                <aura:iteration items="{!item.layoutComponents}" var="cmp">
+                                    <aura:if isTrue="{!and(cmp.details,!cmp.details.autoNumber)}">
+                                        <c:WeField aura:id="wefield" sObjectName="{!v.sObjectName}" errors="{!v.errors}" validate="true" fieldName="{!cmp.value}" record="{!v.record}" disabled="false" dynamicBinding="true" metadata="{!cmp.details}"></c:WeField>
+                                    </aura:if>
+                                </aura:iteration>
+                            </div>
+                        </aura:iteration>
+                    </aura:iteration>
+                </c:EnziSection>
+            </aura:iteration>
+        </aura:if>
+    </div>
+</aura:component>

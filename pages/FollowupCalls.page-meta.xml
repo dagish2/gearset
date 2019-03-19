@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>37.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Page will only contain a next follow up day calendar and as per selected follow up date do following activity:
+    Add follow up task, and this should automatically close any earlier follow up task.
+    This should also update the &quot;NMD Next Contact Date&quot; field to latest task being created.</description>
+    <label>FollowupCalls</label>
+</ApexPage>

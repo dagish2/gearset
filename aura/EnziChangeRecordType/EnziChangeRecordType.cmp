@@ -1,0 +1,20 @@
+<aura:component >
+	<aura:attribute name="recordId" type="String" />
+    <aura:attribute name="recordTypeId" type="String" />
+    <aura:attribute name="recordTypes" type="Object" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:EnziModal aura:id="enziRecordTypeModal" header="Change Record Type">
+        <c:EnziModalContainer >
+            <div class="stage-main slds-grid slds-wrap slds-card" role="main" style="margin:20px;padding:10px">
+                <div class="slds-size--1-of-1" style="padding:10px">
+                    <c:EnziField type="picklist" name="recordType" label="Record Type" value="{!v.recordTypeId}" options="{!v.recordTypes}" labelField="Name" valueField="Id"></c:EnziField>
+                </div>
+            </div>
+        </c:EnziModalContainer>
+        <c:EnziModalFooter >
+            <c:EnziButton label="Save" type="brand" disabled="{!(!v.recordTypeId)}" click="{!c.save}"></c:EnziButton>
+            <c:EnziButton label="Cancel" type="brand" click="{!c.cancel}"></c:EnziButton>
+        </c:EnziModalFooter>
+    </c:EnziModal>
+</aura:component>

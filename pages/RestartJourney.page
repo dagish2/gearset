@@ -1,0 +1,151 @@
+<apex:page controller="WeworkEngine" standardstylesheets="false" sidebar="false" showheader="false" cache="false">
+    <apex:includescript value="/support/console/31.0/integration.js" />
+    <c:GlobalResources local="{!$CurrentPage.parameters.local}" vendor_css="" vendor_js="enz-table/enz-table.js" application_js="error-manager.js,common-controls.js,restartjourney.js" application_css="applicationCSS.css" />
+    <apex:includescript value="{!URLFOR($Resource.vendor_js, 'jquery/jquery.js')}" />
+    <apex:includescript value="{!URLFOR($Resource.vendor_js, 'jquery/jquery-ui.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.vendor_css, 'jquery/jquery-ui.css')}" />
+    <head>
+        <title>Restart Journey</title>
+        <script>
+            Visualforce.remoting.timeout = 120000;
+            $( function() {
+                setTimeout(function(){
+                	$( "#menu" ).menu();
+                }, 4000);
+            } );
+        </script>
+        <style>
+            body {
+                background-color: #f3f3f3;
+            	padding: 10px;
+            }
+
+            .email_Button {
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-color: #0070d2;
+                background-color: #0070d2;
+                color: #fff;
+                margin: 0 5px 0px 0;
+                background-image: none;
+                border: 1px solid #e0e5ee;
+                padding: 7px 10px;
+                border-radius: 4px;
+                font-family: 'SalesforceSans-Regular',Helvetica,Arial,sans-serif;
+                font-size: 12.5px;
+                font-weight: normal;
+                height: 30px;
+            }
+
+                .email_Button:hover {
+                    background-color: #005fb2;
+                    cursor: pointer;
+                }
+
+            a:-webkit-any-link {
+                text-decoration: none !important;
+            }
+
+            .subMenu {
+                max-height: 250px !important;
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+            }
+
+            .ui-autocomplete {
+                height: 200px;
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+
+            #MyMenuMenu ul {
+                width: 400px;
+            }
+
+            #MyMenu {
+                display: inline-block;
+            }
+
+            .ui-state-active a {
+                color: #333333 !important;
+            }
+
+            ul#sub-menu {
+                width: 100%;
+            	max-height: 300px;
+            	overflow: auto;
+            }
+
+            .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+                background-color: #ccc;
+                border-color: #ccc;
+            }
+
+            .menuButton .menuButtonMenu {
+                position: absolute;
+                left: 0;
+                z-index: 50;
+                white-space: nowrap;
+                border-bottom: 1px solid #333;
+                margin-top: -2px;
+            }
+
+            .process-icon {
+                text-align: center;
+            }
+
+            .page-btn {
+                border-color: #0070d2;
+                background-color: #0070d2;
+                border: 1px solid #e0e5ee;
+                height: 30px;
+                border-radius: 3px;
+                color: white;
+                height: 30px;
+            }
+        </style>
+    </head>
+    <apex:pageblock mode="detail" id="journeyDetails">
+        <div id="spinnerContainer"></div>
+        <div ng-app="restartJourneyApp" ng-controller="restartJourneyAppController">
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="menuButton" id="MyMenu">
+                        <div class="menuButtonButton" id="MyMenuButton"><span id="menuLabel" class="btn btn-primary" tabindex="0">Select Report   &#9660;</span></div>
+                        <div class="menuButtonMenu" id="MyMenuMenu" style="display:none; width:30% !important">
+                            <ul id="menu">
+                                <div ng-repeat="(folder, reports) in mapOfFolder" id="theRepeatMenu" class="ui-menu-item-wrapper">
+                                    <li class="ui-menu-item">
+                                        <div><a href="#">{{folder}}</a> </div>
+                                        <ul id="sub-menu">
+                                            <div ng-repeat="report in reports" id="theRepeatSubMenu">
+                                                <li ng-click="runReport(report)">
+                                                    <div><a ng-click="showAllRecord(report.Id)">{{report.Name}}</a></div>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <label for="tags"><b>&nbsp;&nbsp;&nbsp; Search : </b></label>
+                    <input id="tags" tabindex="0" class="form-control" placeholder="Search Report" ng-model="filterText" ng-model-options="{debounce: 800}" />
+                    <button ng-click="createJourney()" class="btn btn-primary">Create Journey</button>
+                    <button class="btn btn-primary" onclick="window.close()">Close</button>
+                </div>
+            </div>
+            <!--<div ng-show="showSelectAll" class="checkbox">
+                <label>
+                	<input type="checkbox" ng-model="selectAllRecords" ng-change="selectAll()" /> Select All
+                </label>
+            </div>-->
+            <div id="enzi-tbl-block"></div>
+        </div>
+        <script type="text/javascript">
+          new MenuButton('MyMenu', false);
+        </script>
+    </apex:pageblock>
+</apex:page>

@@ -1,0 +1,3 @@
+Account: {!Account.Link}
+Journey: {!Journey__c.Link}
+Lead: {!Lead.Link}

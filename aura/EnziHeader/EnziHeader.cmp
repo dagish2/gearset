@@ -1,0 +1,29 @@
+<aura:component >
+    <aura:attribute name="sObjectName" type="String"/>
+    <aura:attribute name="pageName" type="String"/>
+    <aura:attribute name="iconName" type="String"/>
+    <aura:attribute name="alternateText" type="String"/>
+    <aura:attribute name="actions" type="List"/>
+    <aura:attribute name="showActions" type="boolean" default="true"/>
+    <aura:attribute name="showBorder" type="boolean" default="true"/>
+    <div class="{!v.showBorder?'slds-page-header':''}" style="1px solid;">
+        <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate">
+                <div class="slds-media slds-no-space slds-grow">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="{!v.iconName}"/>
+                    </div>
+                    <div class="slds-media__body">
+                        <p class="slds-text-title--caps slds-line-height--reset">{!v.sObjectName}</p>
+                        <h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate" title="{! v.alternateText?v.alternateText:''}">{!v.pageName}</h1>
+                    </div>
+                </div>
+            </div>
+            <aura:if isTrue="{!v.showActions}">
+                <aura:if isTrue ="{!v.actions.length>0}">
+                    <c:EnziButtonGroup actions="{!v.actions}"></c:EnziButtonGroup>
+                </aura:if>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

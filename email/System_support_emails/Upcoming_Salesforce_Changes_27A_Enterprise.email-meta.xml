@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>User Announcements for Sprint 27A - Changes to Opportunities and Tour Booking</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>WeWork_Black</letterhead>
+    <name>Upcoming Salesforce Changes 27A Enterprise</name>
+    <style>freeForm</style>
+    <subject>IMPORTANT PLEASE READ: Feature Updates in Salesforce - 5/10/18</subject>
+    <textOnly>Hi {!Receiving_User.FirstName},
+
+
+
+This week&apos;s release contains changes to Opportunity management and Tour Booking.
+
+
+Managing Products
+
+
+We&apos;ve modified the &quot;Manage Products&quot; and &quot;Split Opportunity&quot; pages within Opportunities for improved clarity.
+
+
+Now, users may designate an added product as a &quot;Primary Product&quot;.
+
+
+
+For multi-product Opportunities, the product line item marked as the &quot;Primary Product&quot; determine which Building/Nearest Building and Geography that the Opportunity has and which product line items that can be split.
+
+
+
+
+
+Updated Opportunity Names
+
+
+Opportunity Names will update based on the products associated with it to provide additional clarity.
+
+
+
+
+
+Rescheduling a Tour updates the &quot;Booked by&quot; Assignment Field
+
+
+Pre-populating Line Items when Booking Multiple Tours</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

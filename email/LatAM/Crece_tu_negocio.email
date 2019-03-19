@@ -1,0 +1,47 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[Hola&nbsp;{!Journey__c.OwnerFirstName},]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Arial; -webkit-text-stroke: #000000}
+p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000; min-height: 14.0px}
+span.s1 {font-kerning: none}
+span.s2 {text-decoration: underline ; font-kerning: none; color: #4787ff; -webkit-text-stroke: 0px #4787ff}
+</style>
+
+
+<p class="p1"><span class="s1">Soy {!Journey__c.OwnerFirstName} del equipo de WeWork para Ciudad de México. Vimos que estás interesado en uno de nuestros espacios y me gustaría contarte un poco más de nosotros.&nbsp;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">En WeWork encuentras oficinas y salas de juntas totalmente amuebladas con diseños únicos y acabados modernos, además de trabajar en un espacio que te inspire, podrás formar parte de la r<b>ed de miembros que cuenta con una comunidad de más de 70 mil emprendedores</b>, una excelente opción para conseguir socios y aliados o clientes a nivel global.</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">En esta <a href="http://e.wework.com/e/37722/es-MX-/55flw4/507960725"><span class="s2">presentación</span></a> puedes ver más detalles sobre WeWork, estoy seguro que te va a encantar. .</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Cuéntame un poco más sobre lo que estás buscando, el tipo y tamaño de tu empresa y te comparto un par de opciones para que formes parte de la comunidad de WeWork.</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Esperamos tu respuesta.</span></p>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Arial; -webkit-text-stroke: #000000}
+span.s1 {font-kerning: none}
+</style>
+
+
+<p class="p1" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span class="s1">Gracias,&nbsp;</span></p><p class="p1" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span class="s1">
+
+
+
+
+<style type="text/css">
+p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Arial; -webkit-text-stroke: #000000}
+span.s1 {font-kerning: none}
+</style>
+
+
+</span></p><p class="p1">{!Journey__c.OwnerFirstName}</p>]]></td>
+</tr>
+</table>

@@ -1,0 +1,4 @@
+<aura:component implements="lightning:actionOverride,force:hasRecordId,force:hasSObjectName">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<c:EnziUtils aura:id="utils"></c:EnziUtils>
+</aura:component>

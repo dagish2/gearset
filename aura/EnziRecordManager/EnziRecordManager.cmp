@@ -1,0 +1,97 @@
+<aura:component >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="evalUrl" type="String" />
+    <aura:attribute name="icons" type="Object" />
+    <aura:attribute name="icon" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="mode" type="String" default="view" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="layout" type="Object" />
+    <aura:attribute name="recordTypeId" type="String" />
+    <aura:attribute name="recordTypeName" type="String" />
+    <aura:attribute name="recordName" type="String" />
+    <aura:attribute name="record" type="Object" />
+    <aura:attribute name="relatedRecord" type="Object" />
+    <aura:attribute name="customActions" type="Object"/>
+    <aura:attribute name="standardActions" type="Object"/>
+    <aura:attribute name="relatedDetails" type="List" />
+    <aura:attribute name="showHeader" type="Boolean" default="true" />
+    <aura:attribute name="relatedDetailsComponent" type="List" default="[]" />
+    <aura:attribute name="openActivityFields" type="Object"/>
+    <aura:attribute name="activityHistoryFields" type="Object"/>
+    <aura:attribute name="topActions" type="List" default="Manage_Tours,Add_Opportunity"/>
+    <aura:attribute name="topActionsObj" type="Object"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:EnziFormSaveEvent" action="{!c.formSaved}"/>
+    <aura:attribute name="formComponent" type="Object" />
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:EnziCustomAction aura:id="customActions" recordId="{!v.recordId}"></c:EnziCustomAction>
+    <div class="slds-page-header" style="{!'display:'+(v.showHeader?'block':'none')}">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 mobileMargin">
+                <div class="slds-media slds-no-space slds-grow">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="{!v.icon}"/>
+                    </div>
+                    <div class="slds-media__body">
+                        <p class="slds-text-title--caps slds-line-height--reset">{!v.recordTypeName}</p>
+                        <h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate" title="this should match the Record Title">{!v.recordName}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 mobileCenter" style="text-align:right">
+                <div class="slds-button-group" role="group" style="display:inline-block">
+                    <aura:iteration items="{!v.standardActions}" var="btn" indexVar="index">
+                        <button class="slds-button slds-button--neutral" id="{!'saction:'+index}" onclick="{!c.manageStandardActions}">{!btn.label}</button>
+                    </aura:iteration>
+                    <aura:iteration items="{!v.topActionsObj}" var="action" indexVar="index">
+                        <button class="slds-button slds-button--neutral" id="{!'taction:'+index}" onclick="{!c.manageTopAction}">{!action.label}</button>
+                    </aura:iteration>
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger--click slds-button--last" aria-expanded="false" id="actionDropdown">
+                        <button class="slds-button slds-button--icon-border-filled" id="{!'actionTrigger'+v.recordId}" aria-haspopup="true" title="More Actions" onclick="{!c.toggleAction}">
+                            <lightning:icon iconName="utility:down" size="x-small"/>
+                            <span class="slds-assistive-text">More Actions</span>
+                        </button>
+                        <div class="slds-dropdown slds-dropdown--right slds-nubbin--top-right">
+                            <ul class="slds-dropdown__list" role="menu">
+                                <aura:iteration items="{!v.customActions}" var="action" indexVar="index">
+                                    <li class="slds-dropdown__item" role="presentation" id="{!'action:'+index}" onclick="{!c.manageCustomAction}">
+                                        <a href="javascript:void(0);" role="menuitem" tabindex="0" >
+                                            <span class="slds-truncate">
+                                                {!action.label}
+                                            </span>
+                                        </a>
+                                    </li>                                  
+                                </aura:iteration>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:0px 20px;background-color:white">
+        <lightning:tabset >
+          alert("Hello! I am an alert box!!");
+            <lightning:tab label="Record Details">
+                <div style="padding-top:10px">
+                    <c:EnziForm recordId="{!v.recordId}" useLayout="true" mode="{!v.mode}" record="{!v.record}"></c:EnziForm>
+                </div>
+            </lightning:tab>
+           <aura:iteration items="{!v.relatedDetailsComponent}" var="related">
+                <lightning:tab label="{!related.label+' Details1'}">
+                   <c:EnziRecordManager recordId="{!related.id}" showHeader="false"></c:EnziRecordManager>
+                </lightning:tab>
+            </aura:iteration>
+            <lightning:tab label="Related Lists">
+                <c:EnziRelatedLists sObjectName="{!v.sObjectName}" recordId="{!v.recordId}" exclude="OpenActivities,ActivityHistories,Activities__r"></c:EnziRelatedLists>
+            </lightning:tab>
+            <lightning:tab label="Activity Timeline">
+                <div style="padding-top:20px">
+                    <c:EnziActivityTimeline recordId="{!v.recordId}"></c:EnziActivityTimeline>
+                </div>
+            </lightning:tab>
+        </lightning:tabset>
+    </div>
+</aura:component>

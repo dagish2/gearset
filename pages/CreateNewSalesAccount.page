@@ -1,0 +1,17 @@
+<apex:page showHeader="false" standardStylesheets="false" >
+    <head>
+        <title>Sales Account</title>
+        <script type="text/javascript">
+            sforce.console.setTabTitle('Sales Account');
+        </script>
+        <style>
+            .sidebarCollapsible {
+            	padding: 0px !important
+            }
+            .outer td.oRight {
+            	padding:0px !important
+            }
+        </style>
+    </head>
+    <c:LightningResource component="CreateNewSalesAccount" parameters="recordId={!$CurrentPage.parameters.ParentId}" showHeader="true"></c:LightningResource>
+</apex:page>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Advertising</fullName>
+        <default>false</default>
+        <label>Advertising</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Analytics</fullName>
+        <default>false</default>
+        <label>Analytics</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Art, Fashion, and Design</fullName>
+        <default>false</default>
+        <label>Art, Fashion, and Design</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Business Consulting</fullName>
+        <default>false</default>
+        <label>Business Consulting</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Business Services - General</fullName>
+        <default>false</default>
+        <label>Business Services - General</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Career &amp; Hiring</fullName>
+        <default>false</default>
+        <label>Career &amp; Hiring</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Conglomerate</fullName>
+        <default>false</default>
+        <label>Conglomerate</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Consumer Goods &amp; Products</fullName>
+        <default>false</default>
+        <label>Consumer Goods &amp; Products</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Developer Tools</fullName>
+        <default>false</default>
+        <label>Developer Tools</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Domain Management</fullName>
+        <default>false</default>
+        <label>Domain Management</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Education</fullName>
+        <default>false</default>
+        <label>Education</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Email Marketing</fullName>
+        <default>false</default>
+        <label>Email Marketing</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Energy</fullName>
+        <default>false</default>
+        <label>Energy</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Event Planning</fullName>
+        <default>false</default>
+        <label>Event Planning</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Financial Management</fullName>
+        <default>false</default>
+        <label>Financial Management</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Financial Services and Insurance</fullName>
+        <default>false</default>
+        <label>Financial Services and Insurance</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Food &amp; Beverage</fullName>
+        <default>false</default>
+        <label>Food &amp; Beverage</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Food &amp; Drink - General</fullName>
+        <default>false</default>
+        <label>Food &amp; Drink - General</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Government</fullName>
+        <default>false</default>
+        <label>Government</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Health/Beauty/Wellness</fullName>
+        <default>false</default>
+        <label>Health/Beauty/Wellness</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Health &amp; Wellness</fullName>
+        <default>false</default>
+        <label>Health &amp; Wellness</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Healthcare &amp; Pharmaceutical</fullName>
+        <default>false</default>
+        <label>Healthcare &amp; Pharmaceutical</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Hospitality, Travel, Transportation &amp; Entertainment</fullName>
+        <default>false</default>
+        <label>Hospitality, Travel, Transportation &amp; Entertainment</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Hospitality &amp; Lodging</fullName>
+        <default>false</default>
+        <label>Hospitality &amp; Lodging</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Human Resources / Recruiting</fullName>
+        <default>false</default>
+        <label>Human Resources / Recruiting</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Legal</fullName>
+        <default>false</default>
+        <label>Legal</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Lifestyle &amp; Convenience</fullName>
+        <default>false</default>
+        <label>Lifestyle &amp; Convenience</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Manufacturing / Industrial</fullName>
+        <default>false</default>
+        <label>Manufacturing / Industrial</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Marketing</fullName>
+        <default>false</default>
+        <label>Marketing</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Marketing, Social Media, and/or PR</fullName>
+        <default>false</default>
+        <label>Marketing, Social Media, and/or PR</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Media &amp; Publications</fullName>
+        <default>false</default>
+        <label>Media &amp; Publications</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Media and Entertainment</fullName>
+        <default>false</default>
+        <label>Media and Entertainment</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Non-Profit/Causes</fullName>
+        <default>false</default>
+        <label>Non-Profit/Causes</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Nonprofits</fullName>
+        <default>false</default>
+        <label>Nonprofits</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Pharmaceuticals</fullName>
+        <default>false</default>
+        <label>Pharmaceuticals</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Productivity</fullName>
+        <default>false</default>
+        <label>Productivity</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Professional Services</fullName>
+        <default>false</default>
+        <label>Professional Services</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Prototyping</fullName>
+        <default>false</default>
+        <label>Prototyping</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Real Estate</fullName>
+        <default>false</default>
+        <label>Real Estate</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Retail / Apparel</fullName>
+        <default>false</default>
+        <label>Retail / Apparel</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Retail &amp; Shopping</fullName>
+        <default>false</default>
+        <label>Retail &amp; Shopping</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Sports</fullName>
+        <default>false</default>
+        <label>Sports</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Technology - E-commerce</fullName>
+        <default>false</default>
+        <label>Technology - E-commerce</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Technology - IT Products and Services</fullName>
+        <default>false</default>
+        <label>Technology - IT Products and Services</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Technology - Software/App Development</fullName>
+        <default>false</default>
+        <label>Technology - Software/App Development</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Technology - Web Design</fullName>
+        <default>false</default>
+        <label>Technology - Web Design</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Telecommunications</fullName>
+        <default>false</default>
+        <label>Telecommunications</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Transportation Services</fullName>
+        <default>false</default>
+        <label>Transportation Services</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Travel, Hospitality, and Lodging</fullName>
+        <default>false</default>
+        <label>Travel, Hospitality, and Lodging</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Travel &amp; Transportation</fullName>
+        <default>false</default>
+        <label>Travel &amp; Transportation</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Utilities</fullName>
+        <default>false</default>
+        <label>Utilities</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Virtual Assistance</fullName>
+        <default>false</default>
+        <label>Virtual Assistance</label>
+    </standardValue>
+</StandardValueSet>

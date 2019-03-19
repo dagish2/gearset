@@ -1,0 +1,134 @@
+<aura:component controller="ManageLineItemController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="opportunity" type="Map" />
+    <aura:attribute name="grid" type="Map" default="{'default':'1-of-1','mobile':'1-of-1','tab':'1-of-3','desktop':'1-of-5'}"/>
+    <aura:attribute name="products" type="List" default="[]" />
+    <aura:attribute name="productsCount" type="Integer"/>
+    <aura:attribute name="activeFamilies" type="List" default="[]" />
+    <aura:attribute name="relatedCategories" type="Object"/>
+    <aura:attribute name="relatedProducts" type="Object"/>
+    <aura:attribute name="errors" type="Map"/>
+    <aura:attribute name="valid" type="Boolean"/>
+    <aura:attribute name="defaultValues" type="Map" />
+    <aura:attribute name="selectedBuildingOption" type="String" default="Building"/>
+    <aura:attribute name="isPrimaryProduct" type="boolean" default="true"/>
+    <aura:attribute name="globalAccessBuilding" type="Object"/>
+    <aura:attribute name="allowManageProduct" type="Boolean" />
+    <aura:attribute name="isFromCreateOpp" type="boolean" default="false"/>
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="availableCurrencies" type="List"/>
+    <aura:attribute name="opportunityCurrency" type="string"/>
+    <aura:attribute name="DesiredTermLength" type="Integer" default="1"/> 
+    <aura:attribute name="mapConversionRates" type="object"/>
+    <aura:attribute name="showConfirmProduct" type="Boolean" default="false"/>
+    <aura:attribute name="mapUnitPrice" type="object"/>
+    <aura:attribute name="dataFields" type="List"/>    
+    <aura:attribute name="utils" type="string"/>
+    <aura:attribute name="isValidUnitPrice" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.close}"/>
+    <aura:method name="callManageProduct" action="{!c.manageProducts}"> 
+        <aura:attribute name="confirmProduct" type="Boolean"/> 
+    </aura:method>
+    <c:EnziUtils aura:id="utils"></c:EnziUtils>
+    <c:LightningCSS />
+    <div id="manage-lineitem-container">
+        <div class="pageHeader">
+            <c:PageHeader sObjectName="OPPORTUNITY" pageName="Manage Product" iconName="standard:product" dataFields="{!v.dataFields}" />
+        </div>
+        <aura:renderIf isTrue="{! and(not(empty(v.allowManageProduct)),not(v.allowManageProduct))}">        
+            <aura:set attribute="else">
+                <div class="slds-card__body slds-p-around_small slds-m-around_x-small table-container">
+                    <div class="slds-grid slds-wrap slds-p-left_small">
+                        <div class="slds-small-size_2-of-5 slds-medium-size_2-of-12 slds-large-size_2-of-12 " id="currency">
+                            <span>
+                                <c:EnziField type="picklist" label="Currency" name="selected-currency" options="{!v.availableCurrencies}" labelField="label" valueField="value" value="{!v.opportunityCurrency}" change="{!c.getPriceAccordingToConversion}" helpText="The exchange rates for these currencies will not fluctuate in real time and will only update periodically."></c:EnziField>   
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <c:EnziFormValidator errors="{!v.errors}" valid="{!v.valid}">
+                    <aura:iteration items="{!v.products}" var="product" indexVar="index">
+                        <aura:if isTrue="{!product.removed!=true}">
+                            <div class="slds-card__body slds-p-around_small slds-m-around_x-small table-container slds-scrollable_none" style="{!product.isLast ? 'margin-bottom:80px;': ''}" id="{!'product-'+(product.isLast ? 'focus':'')}">
+                                <div class="slds-grid slds-wrap slds-border_bottom slds-p-vertical_small">
+                                    <div class="slds-size_1-of-2 slds-medium-size--5-of-6 slds-large-size--8-of-12" style="width:calc(96% - 100px)">
+                                        <div class="slds-grid slds-wrap" style="width: 100%;">
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}">
+                                                <c:EnziField aura:id="{!'Family:'+index}" type="picklist" label="Product Family" name="{!'Family:'+index}" options="{!v.activeFamilies}" value="{!product.Family__c}" required="true" change="{!c.getProductFamilyChange}" errors="{!v.errors}"></c:EnziField>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}">
+                                                <c:EnziField type="picklist" label="Product Category" name="{!'Product_Category__c:'+index}" options="{!product.productCategories}" value="{!product.Product_Category__c}" change="{!c.getProductCategoryChange}" required="{!and(product.productCategories,product.productCategories.length>0)}" disabled="{! lessthan(product.productCategories.length, 2)}" defaultDisabled="true" errors="{!v.errors}"></c:EnziField>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}">
+                                                <c:EnziField aura:id="Product:" type="picklist" label="Product" name="{!'Product2Id:'+index}" value="{!product.Product2Id}" required="true" options="{!product.relatedProducts}" change="{!c.getProductChange}" labelField="Name" valueField="Id" errors="{!v.errors}" disabled="{! lessthan(product.relatedProducts.length, 2)}" defaultDisabled="true"  errorMessage="{!if(product.invalidProduct,'Pricebook Entry for this product is not available. Please contact Administrator','')}" customValidate="{!product.invalidProduct}"></c:EnziField>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}" id="unitOfMeasurement">
+                                                <c:EnziField type="string" label="Unit of Measurement" name="{!'QuantityUnitOfMeasure__c:'+index}" value="{!product.QuantityUnitOfMeasure__c}" disabled="true" defaultDisabled="true" errors="{!v.errors}" helpText="Unit on which each quantity is measured"></c:EnziField>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}" id="firstRow">
+                                                <c:EnziField sObjectName="OpportunityLineItem" fieldName="Quantity" name="{!'Quantity:'+index}" value="{!product.Quantity}" required="true" errors="{!v.errors}" min="1"></c:EnziField>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}" >
+                                                <div class="slds-grid slds-box " style="padding-top: 5px;padding-bottom: 5px;padding-right: 2px;padding-left: 10px;margin-top: 4px !important;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                    <div class="slds-form-element__control" Style=" margin-top:9px; margin-right:5px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        Select one:
+                                                    </div>
+                                                    <div >
+                                                        <c:EnziField type="radio" hideLabel="true" name="{!'BuildingOption:'+index}" options="{!product.option}" value="{!product.selectedBuildingOption}" change="{!c.changeBuildingOption}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(equals('Building',product.selectedBuildingOption)?'':'slds-hide')+' '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}" id= "Building">
+                                                <c:EnziField aura:id="Building__c:" label="Building" sObjectName="OpportunityLineItem" fieldName="Building__c" name="{!'Building__c:'+index}" value="{!product.Building__c}" required="{!if(product.Family__c=='Global Access' || product.Family__c == 'PxWe',false,or(product.Building__c,not(product.Geography__c)))}" disabled="{!product.Family__c=='Global Access' || product.Family__c == 'PxWe'}" defaultDisabled="true" errors="{!v.errors}" ></c:EnziField>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(equals('Building',product.selectedBuildingOption)?'slds-hide':'')+' '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}" id= "geography">
+                                                <c:EnziField aura:id="Geography__c:" sObjectName="OpportunityLineItem" fieldName="Geography__c" name="{!'Geography__c:'+index}" value="{!product.Geography__c}" required="{!if(product.Family__c=='Global Access',false,or(product.Geography__c,not(product.Building__c)))}" defaultDisabled="true" errors="{!v.errors}"></c:EnziField>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}" id="desiredlength">
+                                                <c:EnziField sObjectName="OpportunityLineItem" fieldName="Desired_Term_Length__c" label="Commitment Term (in months)" name="{!'DesiredTermLength:'+index}" value="{!product.Desired_Term_Length__c}" min="1" required="true" errors="{!v.errors}" ></c:EnziField>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}" id="unitPrice">
+                                                <lightning:input type="number" name="UnitPrice" label="Sales Price (Per Unit)" value="{!product.UnitPrice}" min="0.1" step="0.01" onchange="{!c.checkUnitPrice}" required="true"/>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}" id="totalPrice">
+                                                <lightning:input type="number" name="Total Product Value" label="Total Product Value " value="{!((not(empty(product.Desired_Term_Length__c)) ? product.Desired_Term_Length__c : 1 ) * (product.Quantity * product.UnitPrice)) ? ((not(empty(product.Desired_Term_Length__c)) ? product.Desired_Term_Length__c : 1 ) * (product.Quantity * product.UnitPrice)) : ''}" step="0.01" disabled="true"/>
+                                                <lightning:helptext content="Total product value based on currency specified above" iconName="utility:info" class="popover"/>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}">
+                                                <c:EnziField sObjectName="OpportunityLineItem" fieldName="Description" name="{!'Description:'+index}" value="{!product.Description}" defaultDisabled="true" errors="{!v.errors}"></c:EnziField>
+                                            </div>
+                                            <div class="{!'slds-col slds-p-horizontal_x-small '+(v.grid.default?'slds-size_'+v.grid.default:'')+' '+(v.grid.mobile?'slds-small-size_'+v.grid.mobile:'')+' '+(v.grid.tab?'slds-medium-size_'+v.grid.tab:'')+' '+(v.grid.desktop?'slds-large-size_'+v.grid.desktop:'')}" id="area">
+                                                <c:EnziField sObjectName="OpportunityLineItem" fieldName="Sq_Feet__c" label="Area (Square Feet)" name="{!'Sq_Feet__c:'+index}" value="{!product.Sq_Feet__c}" disabled="{!product.Family__c=='Global Access' || product.Family__c == 'PxWe'}" defaultDisabled="true" errors="{!v.errors}"></c:EnziField>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_1-of-2 actionButtons">
+                                        <div id="primary-button">
+                                            <c:EnziField sObjectName="OpportunityLineItem" label="Primary Product" fieldName="Is_Primary_Product__c" name="{!'Is_Primary_Product__c:'+index}" value="{!product.Is_Primary_Product__c}" defaultDisabled="true" required="{!v.isPrimaryProduct}" change="{!c.changePrimaryProduct}" hideLabel="true" ></c:EnziField>
+                                        </div>
+                                        <div id="action-button">
+                                            <div class="{!product.isLast ? 'visible' : 'invisible'}" style="display:inline-block;padding-bottom:0px;">
+                                                <span style="cursor:pointer;" onclick="{!c.addProduct}"><lightning:icon iconName="action:new" size="xx-small"></lightning:icon></span>
+                                            </div>
+                                            <div class="{!v.productsCount >1 ? 'visible' : 'invisible'}" style="padding-left:5px;display:inline-block">
+                                                <span id="{!'product:'+index}" style="cursor:pointer" onclick="{!c.removeProduct}"><lightning:icon iconName="action:close" size="xx-small"></lightning:icon></span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </aura:if>
+                    </aura:iteration>
+                </c:EnziFormValidator>
+                <footer class="standardButtons slds-modal__footer container-footer" >
+                    <c:EnziButton label="Close" type="destructive" leftIcon="utility:close" click="{!c.close}"></c:EnziButton>
+                    <aura:if isTrue="{!v.showConfirmProduct}">
+                    <c:EnziButton label="Confirm Product" type="brand" click="{!c.confirmProduct}" leftIcon="utility:check" disabled="{!or(v.isValidUnitPrice, not(v.valid))}"></c:EnziButton>
+                    </aura:if>
+                    <c:EnziButton label="Save Products" type="brand" click="{!c.manageProducts}" leftIcon="utility:save" disabled="{!or(v.isValidUnitPrice, not(v.valid))}" id="saveProducts"></c:EnziButton>
+                </footer>
+            </aura:set>
+        </aura:renderIf>
+    </div>
+</aura:component>
