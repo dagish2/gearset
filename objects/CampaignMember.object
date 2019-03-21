@@ -193,6 +193,61 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>SharpenCTI__Callback_date_time__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Callback date/time</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>SharpenCTI__Imported_Q_Time__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Imported Q Time</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>SharpenCTI__fathomQImportError__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>fathomQImportError</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SharpenCTI__importedFathomQ__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>importedFathomQ</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>et4ae5__Activity__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Activity</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sent</fullName>
+                    <default>false</default>
+                    <label>Sent</label>
+                </value>
+                <value>
+                    <fullName>Unsubscribed</fullName>
+                    <default>false</default>
+                    <label>Unsubscribed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>false</enableFeeds>
     <sharingModel>ControlledByCampaign</sharingModel>

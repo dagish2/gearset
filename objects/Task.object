@@ -17700,4 +17700,86 @@ Growth Consultation</inlineHelpText>
             </values>
         </picklistValues>
     </recordTypes>
+    <validationRules>
+        <fullName>LID__cannot_edit_Priority_on_Linkedin_Tasks</fullName>
+        <active>false</active>
+        <description>Validation Rule not in use</description>
+        <errorConditionFormula>false</errorConditionFormula>
+        <errorDisplayField>Priority</errorDisplayField>
+        <errorMessage>You cannot edit the Priority field on LInkedin Tasks</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>LID__cannot_edit_assigned_on_Linkedin_Tasks</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(RecordType.Name = "inMail", RecordType.Name = "Messages", RecordType.Name = "PointDrive Presentation Created", RecordType.Name = "PointDrive Presentation Viewed" )
+&amp;&amp; (ISCHANGED( OwnerId ))</errorConditionFormula>
+        <errorDisplayField>Status</errorDisplayField>
+        <errorMessage>You cannot edit the Assigned To field on LinkedIn Tasks</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>LID__cannot_edit_status_on_Linkedin_Tasks</fullName>
+        <active>false</active>
+        <errorConditionFormula>OR(RecordType.Name = "inMail", RecordType.Name = "Messages", RecordType.Name = "PointDrive Presentation Created", RecordType.Name = "PointDrive Presentation Viewed" )
+&amp;&amp; (ISCHANGED( Status ))</errorConditionFormula>
+        <errorDisplayField>OwnerId</errorDisplayField>
+        <errorMessage>You cannot edit the Assigned To field on LinkedIn Tasks</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>FastCall__Assign_Task</fullName>
+        <availability>online</availability>
+        <description>Assign task to sobject based on phone number</description>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Assign Call</masterLabel>
+        <openType>newWindow</openType>
+        <page>FastCall__TaskAssign</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+    <webLinks>
+        <fullName>FastCall__Billing_Info</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Billing Info</masterLabel>
+        <openType>newWindow</openType>
+        <page>FastCall__TaskCallBillingInfo</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+    <webLinks>
+        <fullName>FastCall__Call_Details</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Call Details</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!IF(ISNULL(Task.CallObject), "alert('This Task is not a Call')", "window.open('https://www.twilio.com/console/voice/logs/calls?sid=" &amp; Task.CallObject &amp; "')")}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>FastCall__Delete_Recording</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Delete Recording</masterLabel>
+        <openType>sidebar</openType>
+        <page>FastCall__TaskCallRecordingDelete</page>
+        <protected>false</protected>
+    </webLinks>
 </CustomObject>

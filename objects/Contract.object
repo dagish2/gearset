@@ -220,4 +220,16 @@
         </filters>
         <label>My In Approval Contracts</label>
     </listViews>
+    <webLinks>
+        <fullName>dsfs__Send_with_DocuSign</fullName>
+        <availability>online</availability>
+        <description>This button will initiate a DocuSign Envelope that is linked to the Contract</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send with DocuSign</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT("/apex/dsfs__DocuSign_JavaScript")}
+DocuSign_CreateEnvelope();</url>
+    </webLinks>
 </CustomObject>

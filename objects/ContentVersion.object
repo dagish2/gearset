@@ -51,6 +51,19 @@
         <fullName>Title</fullName>
         <trackHistory>false</trackHistory>
     </fields>
+    <fields>
+        <fullName>disco__Mobile_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>mobile Id</description>
+        <externalId>false</externalId>
+        <inlineHelpText>mobile Id</inlineHelpText>
+        <label>Mobile Id</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>false</enableFeeds>
     <searchLayouts>

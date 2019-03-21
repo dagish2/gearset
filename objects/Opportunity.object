@@ -14393,6 +14393,156 @@ LEFT(TEXT(Actual_Start_Date__c),4)</formula>
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>LID__Is_Influenced__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Opportunity was influenced by activities on LinkedIn Sales Navigator</description>
+        <externalId>false</externalId>
+        <label>Is_Influenced</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LID__LinkedIn_Company_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>LinkedIn Id of the company</description>
+        <externalId>false</externalId>
+        <label>LinkedIn Company Id</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Days_In_Stage__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Days in Stage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Days_To_Close__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>CloseDate - DATEVALUE( CreatedDate )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days To Close</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__OrderNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Order Number</label>
+        <length>8</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Last_Run_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Last Run Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Opportunity_Source__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Opportunity Source</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Marketing Sourced</fullName>
+                    <default>false</default>
+                    <label>Marketing Sourced</label>
+                </value>
+                <value>
+                    <fullName>Marketing Influenced</fullName>
+                    <default>false</default>
+                    <label>Marketing Influenced</label>
+                </value>
+                <value>
+                    <fullName>Sales Only</fullName>
+                    <default>false</default>
+                    <label>Sales Only</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Total_Marketing_Touches__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>true</externalId>
+        <label>Reporting Total Marketing Touches</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Won_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Won Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Routing_Action__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Routing Action</label>
+        <length>32</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <compactLayoutAssignment>Sales_process_header</compactLayoutAssignment>
     <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
@@ -77806,6 +77956,17 @@ Premier Support User=00eF0000001V5G8
         <errorDisplayField>Old_Opportunity__c</errorDisplayField>
         <errorMessage>You can not change the from opportunity field once a contract has been sent or opportunity is closed</errorMessage>
     </validationRules>
+    <validationRules>
+        <fullName>LID__Check_CompanyId_Value</fullName>
+        <active>true</active>
+        <description>Throws an exception message if the company id contains non-numerics</description>
+        <errorConditionFormula>AND(
+	(LID__LinkedIn_Company_Id__c &lt;&gt; NULL),
+	NOT(ISNUMBER(LID__LinkedIn_Company_Id__c))
+)</errorConditionFormula>
+        <errorDisplayField>LID__LinkedIn_Company_Id__c</errorDisplayField>
+        <errorMessage>CompanyId should be a numeric value</errorMessage>
+    </validationRules>
     <webLinks>
         <fullName>Associate_Billing_Account</fullName>
         <availability>online</availability>
@@ -79003,5 +79164,107 @@ else {
 var newWindow = PopupCenterDual(url,'newPaperwork',900,500); 
 //window.location.href = url; 
 }</url>
+    </webLinks>
+    <webLinks>
+        <fullName>FastCall__Dial_with_FastCall</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Dial with Fastcall</masterLabel>
+        <openType>replace</openType>
+        <page>FastCall__DialerOpportunity</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>dsfs__Send_with_DocuSign</fullName>
+        <availability>online</availability>
+        <description>This button will initiate a DocuSign Envelope that is linked to the Opportunity</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send with DocuSign</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT("/apex/dsfs__DocuSign_JavaScript")}
+DocuSign_CreateEnvelope();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>dsfs__Verify_with_DNB</fullName>
+        <availability>online</availability>
+        <description>This button will initiate DnBs Pre-Contract Risk Screening linked to the Opportunity</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Verify with D&amp;B</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT("/apex/dsfs__DocuSign_JavaScript")}
+        
+{!REQUIRESCRIPT('//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')} 
+{!REQUIRESCRIPT('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js')} 
+
+var html = '&lt;div id="dialog" style="display: none;"&gt;&lt;/div&gt;';
+
+var $g = jQuery.noConflict();
+
+var address = '&lt;iframe id="dnbContent" width="700" height="730" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" src="'+DocuSign_GetVerifyWithDnb('opportunity')+'"&gt;&lt;/iframe&gt;';
+		
+$g(function() { 
+
+	$g('head').append('&lt;link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/redmond/jquery-ui.css"/&gt;');
+
+	if($g('#dialog').length == 0) {
+		$g('body').append(html); 
+	}
+	$g("#dialog").dialog({ 
+		autoOpen: true, 
+		modal: true, 
+		width: 700,
+		height: 783,
+		open: function(event, ui) {
+		  if($g('#myNewImage').length == 0) {
+		     $g(".ui-dialog-titlebar").append("&lt;img src='"+getDnbLogo()+"' id='myNewImage' /&gt;");
+		  }
+		  $g('.ui-widget-overlay').bind('click',function(){
+    			$g('#dialog').dialog("close");
+		  });
+		}
+	})
+	if($g('#dnbContent').length == 0) {
+		$g('#dialog').append(address); 
+	}
+
+
+	$g(".ui-dialog-title").hide();
+	$g("#dialog").css('padding', '0px');
+	$g(".ui-widget-header").attr('style', 'padding-top:5px; padding-right:5px; padding-left:10px;padding-bottom:5px; border-radius:0px; background: #005172;border:0px;margin:auto;');
+	$g(".ui-button-text").css('padding', '0');
+	$g(".ui-icon-closethick").attr('style', 'background-color:#005172; width:19px; height:19px; margin-top:-10px; margin-left:-10px;');
+	$g(".ui-dialog-titlebar-close").attr('style', 'border-radius:0px; padding:0px; width:18px; height:18px; border:0px;');
+	$g(".ui-dialog").css('z-index', '10000');
+	$g(".ui-dialog").css('border-radius', '0px');
+});</url>
+    </webLinks>
+    <webLinks>
+        <fullName>pi__Send_Pardot_Emails</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send Engage Email</masterLabel>
+        <openType>sidebar</openType>
+        <page>pi__MicroCampaignOpportunity</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>pi__Send_Single_Pardot_Email</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send Engage Email</masterLabel>
+        <openType>sidebar</openType>
+        <page>pi__MicroCampaignSingleOpportunity</page>
+        <protected>false</protected>
     </webLinks>
 </CustomObject>

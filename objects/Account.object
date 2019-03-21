@@ -5940,6 +5940,189 @@ IF(AND(Account_FTE__c &gt;= 251 , Account_FTE__c &lt;= 999), 'Large',
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>JBCXM__CustomerInfo__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Customer Info</label>
+        <referenceTo>JBCXM__CustomerInfo__c</referenceTo>
+        <relationshipLabel>Accounts</relationshipLabel>
+        <relationshipName>JBCXM_Account_CustInfo</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LID__LinkedIn_Company_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>LinkedIn Id of the company/Account</description>
+        <externalId>false</externalId>
+        <label>LinkedIn Company Id</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__LD_EmailDomains__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>Derived Email Domains from contact emails</description>
+        <externalId>false</externalId>
+        <label>LD_EmailDomains</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Customer__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Customer</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Has_Opportunity__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Has Opportunity</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Last_Marketing_Touch_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Last Marketing Touch Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Last_Sales_Touch_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Last Sales Touch Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Recent_Marketing_Touches__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Recent Marketing Touches</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Target_Account_Number__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF( LeanData__Reporting_Target_Account__c, 1, 0 )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reporting Target Account Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Target_Account__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Target Account</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Total_Leads_and_Contacts__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Total Leads and Contacts</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Total_Marketing_Touches__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Total Marketing Touches</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Total_Sales_Touches__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Total Sales Touches</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Routing_Action__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Routing Action</label>
+        <length>32</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Search__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>LeanData search field</description>
+        <externalId>false</externalId>
+        <label>LeanData Search</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
@@ -29446,6 +29629,17 @@ GrowthOps = 00e0G000001Mjh0
         <errorDisplayField>ParentId</errorDisplayField>
         <errorMessage>Parent Account is mandatory for Sales Account.</errorMessage>
     </validationRules>
+    <validationRules>
+        <fullName>LID__Check_CompanyId_Value</fullName>
+        <active>true</active>
+        <description>Throws an exception message if the company id contains non-numerics</description>
+        <errorConditionFormula>AND(
+	(LID__LinkedIn_Company_Id__c &lt;&gt; NULL),
+	NOT(ISNUMBER(LID__LinkedIn_Company_Id__c))
+)</errorConditionFormula>
+        <errorDisplayField>LID__LinkedIn_Company_Id__c</errorDisplayField>
+        <errorMessage>CompanyId should be a numeric value</errorMessage>
+    </validationRules>
     <webLinks>
         <fullName>AltavistaNews</fullName>
         <availability>online</availability>
@@ -30004,5 +30198,170 @@ function showErrorDialog(msg, showButton, title) {
         <showsLocation>true</showsLocation>
         <showsStatus>true</showsStatus>
         <url>http://maps.yahoo.com/py/maps.py?cn={!Account_BillingCountry}&amp;csz={!Account_BillingCity}+{!Account_BillingState}+{!Account_BillingPostalCode}+&amp;addr={!Account_BillingAddress}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>FastCall__Dial_with_FastCall</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Dial with Fastcall</masterLabel>
+        <openType>replace</openType>
+        <page>FastCall__DialerAccount</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>LeanData__Reassign_Account</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Reassign Account</masterLabel>
+        <openType>noSidebar</openType>
+        <page>LeanData__ReassignAccountAndChildren</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>dsfs__Send_with_DocuSign</fullName>
+        <availability>online</availability>
+        <description>This button will initiate a DocuSign Envelope that will be linked to the Account.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send with DocuSign</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT("/apex/dsfs__DocuSign_JavaScript")}
+DocuSign_CreateEnvelope();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>dsfs__Verify_with_DNB</fullName>
+        <availability>online</availability>
+        <description>This button will initiate DnBs Pre-Contract Risk Screening linked to the Opportunity</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Verify with D&amp;B</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT("/apex/dsfs__DocuSign_JavaScript")}
+        
+{!REQUIRESCRIPT('//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')} 
+{!REQUIRESCRIPT('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js')} 
+
+var html = '&lt;div id="dialog" style="display: none;"&gt;&lt;/div&gt;';
+
+var $g = jQuery.noConflict();
+
+var address = '&lt;iframe id="dnbContent" width="700" height="730" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" src="'+DocuSign_GetVerifyWithDnb('account')+'"&gt;&lt;/iframe&gt;';
+		
+$g(function() { 
+
+	$g('head').append('&lt;link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/redmond/jquery-ui.css"/&gt;');
+
+	if($g('#dialog').length == 0) {
+		$g('body').append(html); 
+	}
+	$g("#dialog").dialog({ 
+		autoOpen: true, 
+		modal: true, 
+		width: 700,
+		height: 783,
+		open: function(event, ui) {
+		  if($g('#myNewImage').length == 0) {
+		     $g(".ui-dialog-titlebar").append("&lt;img src='"+getDnbLogo()+"' id='myNewImage' /&gt;");
+		  }
+		  $g('.ui-widget-overlay').bind('click',function(){
+    			$g('#dialog').dialog("close");
+		  });
+		}
+	})
+	if($g('#dnbContent').length == 0) {
+		$g('#dialog').append(address); 
+	}
+
+
+	$g(".ui-dialog-title").hide();
+	$g("#dialog").css('padding', '0px');
+	$g(".ui-widget-header").attr('style', 'padding-top:5px; padding-right:5px; padding-left:10px;padding-bottom:5px; border-radius:0px; background: #005172;border:0px;margin:auto;');
+	$g(".ui-button-text").css('padding', '0');
+	$g(".ui-icon-closethick").attr('style', 'background-color:#005172; width:19px; height:19px; margin-top:-10px; margin-left:-10px;');
+	$g(".ui-dialog-titlebar-close").attr('style', 'border-radius:0px; padding:0px; width:18px; height:18px; border:0px;');
+	$g(".ui-dialog").css('z-index', '10000');
+	$g(".ui-dialog").css('border-radius', '0px');
+});</url>
+    </webLinks>
+    <webLinks>
+        <fullName>et4ae5__ExactTarget_Resubscribe</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Marketing Cloud Resubscribe</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>alert("{!$Label.et4ae5__deprecateaccountjscomponents}");</url>
+    </webLinks>
+    <webLinks>
+        <fullName>et4ae5__ExactTarget_Unsubscribe</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Marketing Cloud Unsubscribe</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>alert("{!$Label.et4ae5__deprecateaccountjscomponents}");</url>
+    </webLinks>
+    <webLinks>
+        <fullName>et4ae5__Send_ExactTarget_Email</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send Marketing Cloud Email</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>alert("{!$Label.et4ae5__deprecateaccountjscomponents}");</url>
+    </webLinks>
+    <webLinks>
+        <fullName>et4ae5__View_ExactTarget_Analytics</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>View Marketing Cloud Analytics</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>alert("{!$Label.et4ae5__deprecateaccountjscomponents}");</url>
+    </webLinks>
+    <webLinks>
+        <fullName>pi__Send_Pardot_Emails</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send Engage Email</masterLabel>
+        <openType>sidebar</openType>
+        <page>pi__MicroCampaignPersonAccount</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>pi__Send_Single_Pardot_Email</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send Engage Email</masterLabel>
+        <openType>sidebar</openType>
+        <page>pi__MicroCampaignSinglePersonAccount</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>pi__Send_To_Prospect_Insight</fullName>
+        <availability>online</availability>
+        <description>Send this Person Account to Pardot</description>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send To Pardot</masterLabel>
+        <openType>sidebar</openType>
+        <page>pi__PardotAccountSendToPardot</page>
+        <protected>false</protected>
     </webLinks>
 </CustomObject>

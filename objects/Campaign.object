@@ -1617,6 +1617,284 @@ Broker</inlineHelpText>
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>LeanData__Back_Dated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Back-Dated</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Rep_LT_Attribution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD LT Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Rep_LT_Bookings_Attribution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD LT Bookings Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Rep_LT_Generated_Attribution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD LT Generated Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Rep_LT_Generated_Bookings_Attribution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD LT Generated Bookings Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Rep_MT_Accelerated_Attribution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD MT Accelerated Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Rep_MT_Accelerated_Bookings_Attr__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD MT Accelerated Bookings Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Rep_MT_Generated_Attribution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD MT Generated Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Rep_MT_Generated_Bookings_Attribution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD MT Generated Bookings Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Average_Days_To_Close__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Average Days to Close</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Bookings_Attribution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD MT Bookings Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Campaign_Member_Totals__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting CM Totals (Deprecated)</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Cost__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_FT_Attribution_Amount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD FT Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_FT_Bookings_Attribution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD FT Bookings Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Lift__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Lift</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_MT_Attribution_Amount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LD MT Attribution</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Num_Target_Campaign_Members__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Num Target CM (Deprecated)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Number_Of_Campaign_Members__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Num CM (Deprecated)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Number_Of_Opportunities__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Number of Opportunities</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Number_Of_Touches__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Number of Touches</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_On_Target__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting On-Target (Deprecated)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>LeanData__Reporting_Opportunity_Close_Rate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reporting Opportunity Close Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>pi__Pardot_Campaign_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>The Pardot identifier for the connected campaign record</description>
+        <externalId>true</externalId>
+        <label>Pardot Campaign Id</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>pi__Pardot_Has_Dependencies__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Determines if Pardot has marketing assets using this campaign</description>
+        <externalId>false</externalId>
+        <label>Pardot Has Dependencies</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
     <compactLayoutAssignment>Campaign_Compact_Layout</compactLayoutAssignment>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
@@ -1884,5 +2162,100 @@ Broker</inlineHelpText>
         <showsStatus>false</showsStatus>
         <url>/00O?rt=117&amp;break0=CAN&amp;scope=1&amp;scopeid_lkid={!Campaign.Id}&amp;scopeid={!Campaign_Name}&amp;c=CAN&amp;c=MR&amp;c=PCS&amp;c=CFN&amp;c=RN&amp;c=ON&amp;c=OA&amp;c=OS&amp;c=OCD&amp;c=AN&amp;s=OA&amp;duel0=CAN%2CMR%2CCFN%2CRN%2CAN%2CON%2CPCS%2COS%2COCD%2COA&amp;details=yes&amp;format=t</url>
         <width>500</width>
+    </webLinks>
+    <webLinks>
+        <fullName>ET4AE__SendExactTargetEmail</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Send ExactTarget Email</masterLabel>
+        <openType>sidebar</openType>
+        <protected>false</protected>
+        <url>/apex/exacttargetswitchboard?campaignId={!Campaign.Id}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>ET4AE__ViewEmailTracking</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Email Tracking</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/apex/viewemailtracking?id={!Campaign.Id}</url>
+        <width>500</width>
+    </webLinks>
+    <webLinks>
+        <fullName>FastCall__Dial_with_Fastcall</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Dial with Fastcall</masterLabel>
+        <openType>sidebar</openType>
+        <page>FastCall__DialerCampaign</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>LeanData__Campaign_Influence</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Campaign Influence</masterLabel>
+        <openType>noSidebar</openType>
+        <page>LeanData__CampaignToOpportunity</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>et4ae5__Send_ExactTarget_Email</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send Marketing Cloud Email</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>alert("{!$Label.et4ae5__deprecatecampaignjscomponents}");</url>
+    </webLinks>
+    <webLinks>
+        <fullName>et4ae5__ViewCampaignInfluenceReport</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>500</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Campaign Influence Report</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/00O?rt=117&amp;break0=CAN&amp;scope=1&amp;scopeid_lkid={!Campaign.Id}&amp;scopeid={!Campaign.Name}&amp;c=CAN&amp;c=MR&amp;c=PCS&amp;c=CFN&amp;c=RN&amp;c=ON&amp;c=OA&amp;c=OS&amp;c=OCD&amp;c=AN&amp;s=OA&amp;duel0=CAN%2CMR%2CCFN%2CRN%2CAN%2CON%2CPCS%2COS%2COCD%2COA&amp;details=yes&amp;format=t</url>
+        <width>500</width>
+    </webLinks>
+    <webLinks>
+        <fullName>pi__Send_Single_Pardot_Email</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send Engage Email</masterLabel>
+        <openType>sidebar</openType>
+        <page>pi__MicroCampaignSingleCampaign</page>
+        <protected>false</protected>
     </webLinks>
 </CustomObject>

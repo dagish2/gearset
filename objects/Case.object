@@ -1452,6 +1452,32 @@ Category 3 - Fully Custom Project</inlineHelpText>
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>IBP__IfbyphoneCallId__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Ifbyphone_Call</label>
+        <referenceTo>IBP__Ifbyphone_Call__c</referenceTo>
+        <relationshipLabel>Cases</relationshipLabel>
+        <relationshipName>Cases</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SharpenCTI__Created_by_Sharpen__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Created by Sharpen</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>true</enableFeeds>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
@@ -2374,4 +2400,58 @@ Cash Margin (%)</description>
 )</errorConditionFormula>
         <errorMessage>The following fields must be completed before Case can be closed: TCV, Commitment Term, RSF, USF, and Configuration Fee</errorMessage>
     </validationRules>
+    <webLinks>
+        <fullName>SharpenCTI__Case_Respond_btn</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Respond via Sharpen</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var organizationID = '{!$Organization.Id}';
+if (organizationID != null &amp;&amp; organizationID != "") {
+	var caseID = "{!Case.Id}";
+	var contactFirstName = '{!Contact.FirstName}';
+	var contactLastName = '{!Contact.LastName}';
+	var contactPhone = '{!Contact.Phone}';
+	var contactEmail = '{!Contact.Email}';
+	var contactMailingCity = '{!Contact.MailingCity}';
+	var contactMailingState = '{!Contact.MailingState}';
+	var contactCompanyName = '{!Account.Name}';
+	var externalCRMID = '{!Case.ContactId}';
+	var externalCRMUserID = '{!User.Id}';
+	var externalCRMAccountID = '{!Case.AccountId}';
+	var sharpenData = "organizationID="+organizationID+"&amp;caseID="+encodeURIComponent(caseID)+"&amp;firstName="+encodeURIComponent(contactFirstName)+"&amp;lastName="+encodeURIComponent(contactLastName)+"&amp;phoneNumber="+encodeURIComponent(contactPhone)+"&amp;email="+encodeURIComponent(contactEmail)+"&amp;city="+encodeURIComponent(contactMailingCity)+"&amp;state="+encodeURIComponent(contactMailingState)+"&amp;companyName="+encodeURIComponent(contactCompanyName)+"&amp;externalCRMID="+encodeURIComponent(externalCRMID)+"&amp;externalCRMAccountID="+externalCRMAccountID+"&amp;externalCRMUserID="+externalCRMUserID;
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("POST", "https://api.fathomvoice.com/V2/queues/addCaseToQ/", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.onreadystatechange = function() {//Call a function when the state changes.
+		if (xhttp.readyState == 4 &amp;&amp; xhttp.status == 200) {
+			if (xhttp.responseText != null &amp;&amp; xhttp.responseText != '') { 
+				var response = JSON.parse(xhttp.responseText);
+				if (response.status == "Error") {
+					var errorResponse = 'Error: '+response.description;
+					console.error(errorResponse);
+					alert(errorResponse);
+				}
+			}
+		}
+	}
+	xhttp.send(sharpenData);
+} else {
+	console.error('organizationID is required');
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>dsfs__Send_with_DocuSign</fullName>
+        <availability>online</availability>
+        <description>This button will initiate a DocuSign Envelope that is linked to the Case</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send with DocuSign</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT("/apex/dsfs__DocuSign_JavaScript")}
+DocuSign_CreateEnvelope();</url>
+    </webLinks>
 </CustomObject>
