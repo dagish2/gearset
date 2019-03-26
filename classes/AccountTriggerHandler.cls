@@ -23,6 +23,7 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
         Last Modified Date  :   06 June 2018
     **************************************************************************************************************************************/
     public override void BeforeInsert(List<SObject> listNewItems){
+        system.debug('gad_cb__c');
         if(TriggerSettings.mappedField.Account_SetAccountPrimaryMember){
             setAccountPrimaryMember(listNewItems,null);
         }
@@ -927,7 +928,7 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
             }
         }
         if(setAccountIds.size() > 0){
-            handleSendEmailOnOwnershipChange(setAccountIds, 'Email_on_Account_Owner_Change', mapNewItems, mapOldItems);	
+            handleSendEmailOnOwnershipChange(setAccountIds, 'Email_on_Account_Owner_Change', mapNewItems, mapOldItems); 
         }
     }
     public static Map<Id, Opportunity> mapOpportunityWithOwner = new Map<Id, Opportunity>();
