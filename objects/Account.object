@@ -6123,15 +6123,6 @@ IF(AND(Account_FTE__c &gt;= 251 , Account_FTE__c &lt;= 999), 'Large',
         <type>Text</type>
         <unique>true</unique>
     </fields>
-    <fields>
-        <fullName>gad_cb__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>gad cb</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Checkbox</type>
-    </fields>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>

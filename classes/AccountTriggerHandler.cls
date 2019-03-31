@@ -181,6 +181,7 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
         Last Modified Date  :   06 June 2018
     **************************************************************************************************************************************/
     public static void setAccountPrimaryMember(List<Account> listNewItems, Map<Id, SObject> mapNewItems) {
+        //system.debug('Account.gad_cb__c' + Account.gad_cb__c);
         Set<Id> accsToProcessIds;
         for(Account acc : listNewItems){
             if(string.isBlank(acc.Primary_Member__c)){
