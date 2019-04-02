@@ -6132,6 +6132,17 @@ IF(AND(Account_FTE__c &gt;= 251 , Account_FTE__c &lt;= 999), 'Large',
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
+    <fields>
+        <fullName>FB1_text__c</fullName>
+        <externalId>false</externalId>
+        <label>FB1 text</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
@@ -29654,6 +29665,12 @@ GrowthOps = 00e0G000001Mjh0
         <active>true</active>
         <errorConditionFormula>false</errorConditionFormula>
         <errorMessage>FB2 test</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>FB1_validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>false</errorConditionFormula>
+        <errorMessage>does nothing</errorMessage>
     </validationRules>
     <webLinks>
         <fullName>AltavistaNews</fullName>
