@@ -23,7 +23,10 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
         Last Modified Date  :   06 June 2018
     **************************************************************************************************************************************/
     public override void BeforeInsert(List<SObject> listNewItems){
-        system.debug(listNewItems[0].get('gad_cb__c'));
+
+        system.debug('fb1 change line 1');
+        system.debug('fb1 change line 2');
+      
         if(TriggerSettings.mappedField.Account_SetAccountPrimaryMember){
             setAccountPrimaryMember(listNewItems,null);
         }
@@ -66,8 +69,8 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
         Last Modified Date  :   06 June 2018
     **************************************************************************************************************************************/
     public override void BeforeUpdate(List<SObject> listNewItems, Map<Id, SObject> mapNewItems, List<SObject> listOldItems, Map<Id, SObject> mapOldItems){
-        Debug.Log('listNewItems---'+Trigger.new);
-        Debug.Log('listOldItems---'+Trigger.old);
+        system.debug('fb1 change line 3');
+        system.debug('fb1 change line 4');
         if(TriggerSettings.mappedField.Account_SetAccountPrimaryMember){
             setAccountPrimaryMember(listNewItems, mapNewItems);
         }

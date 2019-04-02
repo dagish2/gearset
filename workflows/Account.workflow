@@ -227,6 +227,16 @@
         <description>Updates the Named account time stamp field when Named Account checkbox is checked</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
+    <rules>
+        <fullName>fb workflowrule</fullName>
+        <actions>
+            <name>Account_Checkup_from_Growth_Team</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <formula>true</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
     <tasks>
         <fullName>Account_Checkup_from_Growth_Team</fullName>
         <assignedToType>owner</assignedToType>
