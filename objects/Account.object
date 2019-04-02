@@ -6134,6 +6134,15 @@ IF(AND(Account_FTE__c &gt;= 251 , Account_FTE__c &lt;= 999), 'Large',
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>FB2_checkbox__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>FB2 checkbox</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
@@ -29656,6 +29665,12 @@ GrowthOps = 00e0G000001Mjh0
         <active>true</active>
         <errorConditionFormula>false</errorConditionFormula>
         <errorMessage>does nothing</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>FB2_validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>false</errorConditionFormula>
+        <errorMessage>FB2 test</errorMessage>
     </validationRules>
     <webLinks>
         <fullName>AltavistaNews</fullName>
