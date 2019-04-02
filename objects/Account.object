@@ -6124,15 +6124,6 @@ IF(AND(Account_FTE__c &gt;= 251 , Account_FTE__c &lt;= 999), 'Large',
         <unique>true</unique>
     </fields>
     <fields>
-        <fullName>FB2_checkbox__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>FB2 checkbox</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>FB1_text__c</fullName>
         <externalId>false</externalId>
         <label>FB1 text</label>
@@ -29659,12 +29650,6 @@ GrowthOps = 00e0G000001Mjh0
 )</errorConditionFormula>
         <errorDisplayField>LID__LinkedIn_Company_Id__c</errorDisplayField>
         <errorMessage>CompanyId should be a numeric value</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>FB2_validation</fullName>
-        <active>true</active>
-        <errorConditionFormula>false</errorConditionFormula>
-        <errorMessage>FB2 test</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>FB1_validation</fullName>
