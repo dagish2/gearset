@@ -23,8 +23,10 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
         Last Modified Date  :   06 June 2018
     **************************************************************************************************************************************/
     public override void BeforeInsert(List<SObject> listNewItems){
+
         system.debug('fb1 change line 1');
         system.debug('fb1 change line 2');
+      
         if(TriggerSettings.mappedField.Account_SetAccountPrimaryMember){
             setAccountPrimaryMember(listNewItems,null);
         }
