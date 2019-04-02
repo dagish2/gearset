@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <custom>false</custom>
     <userLicense>Salesforce</userLicense>
     <classAccesses>
@@ -12742,11 +12742,7 @@
         <field>Workplace_Stats__c.of_Sqft_Under_Management__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Account.FB1_text__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    
     <recordTypeVisibilities>
         <default>true</default>
         <recordType>Account.Consumer</recordType>
