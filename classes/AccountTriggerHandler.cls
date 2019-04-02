@@ -23,6 +23,8 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
         Last Modified Date  :   06 June 2018
     **************************************************************************************************************************************/
     public override void BeforeInsert(List<SObject> listNewItems){
+        system.debug('fb1 change line 1');
+        system.debug('fb1 change line 2');
         if(TriggerSettings.mappedField.Account_SetAccountPrimaryMember){
             setAccountPrimaryMember(listNewItems,null);
         }
@@ -65,8 +67,8 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
         Last Modified Date  :   06 June 2018
     **************************************************************************************************************************************/
     public override void BeforeUpdate(List<SObject> listNewItems, Map<Id, SObject> mapNewItems, List<SObject> listOldItems, Map<Id, SObject> mapOldItems){
-        Debug.Log('listNewItems---'+Trigger.new);
-        Debug.Log('listOldItems---'+Trigger.old);
+        system.debug('fb1 change line 3');
+        system.debug('fb1 change line 4');
         if(TriggerSettings.mappedField.Account_SetAccountPrimaryMember){
             setAccountPrimaryMember(listNewItems, mapNewItems);
         }
@@ -180,6 +182,7 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
         Last Modified Date  :   06 June 2018
     **************************************************************************************************************************************/
     public static void setAccountPrimaryMember(List<Account> listNewItems, Map<Id, SObject> mapNewItems) {
+        //system.debug('Account.gad_cb__c' + Account.gad_cb__c);
         Set<Id> accsToProcessIds;
         for(Account acc : listNewItems){
             if(string.isBlank(acc.Primary_Member__c)){
@@ -927,7 +930,7 @@ public with sharing class AccountTriggerHandler extends ITriggerHandler{
             }
         }
         if(setAccountIds.size() > 0){
-            handleSendEmailOnOwnershipChange(setAccountIds, 'Email_on_Account_Owner_Change', mapNewItems, mapOldItems);	
+            handleSendEmailOnOwnershipChange(setAccountIds, 'Email_on_Account_Owner_Change', mapNewItems, mapOldItems); 
         }
     }
     public static Map<Id, Opportunity> mapOpportunityWithOwner = new Map<Id, Opportunity>();
